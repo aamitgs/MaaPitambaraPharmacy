@@ -1,0 +1,184 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --color-brand-maroon: var(--brand-maroon);
+    --color-brand-maroon-light: var(--brand-maroon-light);
+    --color-brand-gold: var(--brand-gold);
+    --color-brand-gold-light: var(--brand-gold-light);
+    --color-brand-gold-tint: var(--brand-gold-tint);
+    --color-brand-cream: var(--brand-cream);
+    --font-heading: var(--font-sans);
+    --font-sans: var(--font-sans);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --color-success-foreground: var(--success-foreground);
+    --color-success: var(--success);
+    --color-warning-foreground: var(--warning-foreground);
+    --color-warning: var(--warning);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    /* Maa Pitambara Pharmacy brand palette, exact values from the brand
+       sheet (hex kept in the comments; oklch is what ships).
+         maroon        #6E1B3A   wordmark, cross, headers, primary CTAs
+         maroon light  #8A2447   secondary maroon
+         gold          #D98E2B   tagline, accents, hover/highlight
+         gold light    #F4B942   gradients, secondary accents
+         gold tint     #FDEBC7   hover fills, active surfaces
+         cream         #FFF8EF   page background
+         white         #FFFFFF   cards
+         body text     #2A2A2A
+
+       Contrast note that shapes the mapping below: gold on cream is only
+       2.5:1, so gold is a *surface and accent* colour here, never text —
+       the one exception is the logo tagline, which is a logotype. Maroon on
+       cream is 10.6:1 and white on maroon 11.2:1, so type and buttons both
+       lead with maroon, which also keeps the brand sheet's 70:30
+       maroon:gold ratio. */
+    --brand-maroon: oklch(0.369 0.119 2.4);
+    --brand-maroon-light: oklch(0.433 0.139 4.4);
+    --brand-gold: oklch(0.707 0.14 68.3);
+    --brand-gold-light: oklch(0.82 0.147 81.2);
+    --brand-gold-tint: oklch(0.945 0.051 84.5);
+    --brand-cream: oklch(0.982 0.014 74.4);
+
+    --background: oklch(0.982 0.014 74.4);
+    --foreground: oklch(0.285 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.285 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.285 0 0);
+    --primary: oklch(0.369 0.119 2.4);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.955 0.016 76);
+    --secondary-foreground: oklch(0.369 0.119 2.4);
+    --muted: oklch(0.955 0.014 76);
+    --muted-foreground: oklch(0.5 0.014 60);
+    --accent: oklch(0.945 0.051 84.5);
+    --accent-foreground: oklch(0.369 0.119 2.4);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.905 0.016 75);
+    --input: oklch(0.905 0.016 75);
+    --ring: oklch(0.369 0.119 2.4);
+    --success: oklch(0.58 0.14 150);
+    --success-foreground: oklch(1 0 0);
+    /* Always used as a 10% wash behind `text-warning-foreground`, so the
+       foreground is a dark amber that reads on cream, not white. Pushed off
+       the brand gold hue so an expiry alert can't be mistaken for chrome. */
+    --warning: oklch(0.72 0.17 55);
+    --warning-foreground: oklch(0.38 0.09 58);
+    --chart-1: oklch(0.369 0.119 2.4);
+    --chart-2: oklch(0.707 0.14 68.3);
+    --chart-3: oklch(0.433 0.139 4.4);
+    --chart-4: oklch(0.82 0.147 81.2);
+    --chart-5: oklch(0.6 0.08 30);
+    --radius: 0.625rem;
+    --sidebar: oklch(1 0 0);
+    --sidebar-foreground: oklch(0.285 0 0);
+    --sidebar-primary: oklch(0.369 0.119 2.4);
+    --sidebar-primary-foreground: oklch(1 0 0);
+    --sidebar-accent: oklch(0.945 0.051 84.5);
+    --sidebar-accent-foreground: oklch(0.369 0.119 2.4);
+    --sidebar-border: oklch(0.905 0.016 75);
+    --sidebar-ring: oklch(0.369 0.119 2.4);
+}
+
+.dark {
+    /* The brand sheet is a light-mode spec; dark mode lifts maroon until
+       it carries on a dark ground (the sheet's own maroon is too dark to
+       read as a surface here) and promotes Gold Light for accents. */
+    --brand-maroon: oklch(0.62 0.16 6);
+    --brand-maroon-light: oklch(0.7 0.14 8);
+    --brand-gold: oklch(0.82 0.147 81.2);
+    --brand-gold-light: oklch(0.88 0.11 85);
+    --brand-gold-tint: oklch(0.32 0.03 70);
+    --brand-cream: oklch(0.3 0.02 70);
+
+    --background: oklch(0.17 0.005 60);
+    --foreground: oklch(0.96 0.008 80);
+    --card: oklch(0.22 0.006 55);
+    --card-foreground: oklch(0.96 0.008 80);
+    --popover: oklch(0.22 0.006 55);
+    --popover-foreground: oklch(0.96 0.008 80);
+    --primary: oklch(0.5 0.15 4);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.28 0.008 55);
+    --secondary-foreground: oklch(0.96 0.008 80);
+    --muted: oklch(0.28 0.008 55);
+    --muted-foreground: oklch(0.72 0.015 70);
+    --accent: oklch(0.3 0.035 60);
+    --accent-foreground: oklch(0.96 0.008 80);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 12%);
+    --input: oklch(1 0 0 / 16%);
+    --ring: oklch(0.5 0.15 4);
+    --success: oklch(0.66 0.15 150);
+    --success-foreground: oklch(0.16 0 0);
+    --warning: oklch(0.78 0.15 60);
+    --warning-foreground: oklch(0.85 0.1 70);
+    --chart-1: oklch(0.62 0.16 6);
+    --chart-2: oklch(0.82 0.147 81.2);
+    --chart-3: oklch(0.7 0.14 8);
+    --chart-4: oklch(0.88 0.11 85);
+    --chart-5: oklch(0.55 0.09 30);
+    --sidebar: oklch(0.205 0.006 55);
+    --sidebar-foreground: oklch(0.96 0.008 80);
+    --sidebar-primary: oklch(0.5 0.15 4);
+    --sidebar-primary-foreground: oklch(1 0 0);
+    --sidebar-accent: oklch(0.3 0.04 40);
+    --sidebar-accent-foreground: oklch(0.96 0.008 80);
+    --sidebar-border: oklch(1 0 0 / 12%);
+    --sidebar-ring: oklch(0.5 0.15 4);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+}

@@ -1,0 +1,18 @@
+node_modules/
+.next/
+out/
+build/
+
+# Secrets — .env.example is the tracked template
+.env
+.env.*
+!.env.example
+
+# Runtime data written by the app (see README: backups, prescription images)
+/backups/
+/storage/
+
+.DS_Store
+*.log
+*.tsbuildinfo
+next-env.d.ts
