@@ -24,6 +24,17 @@ class InvalidTotpError extends CredentialsSignin {
   code = "INVALID_TOTP";
 }
 /**
+ * A sign-in that never reached the database is not a failed sign-in.
+ *
+ * Without this it is indistinguishable from a wrong password on screen, and
+ * staff retype a correct password at a till that cannot possibly accept it.
+ * Saying so is not a disclosure risk here: /api/health already reports the
+ * database state without a session, on purpose.
+ */
+class DatabaseUnavailableError extends CredentialsSignin {
+  code = "DB_UNAVAILABLE";
+}
+/**
  * Carries the remaining wait in the code so the sign-in screen can say how
  * long, rather than leaving someone retrying blind. This does reveal that
  * the account exists — accepted deliberately: this is a shop-floor till on
@@ -69,7 +80,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         if (!email || !password) return null;
 
-        const user = await prisma.user.findFirst({ where: { email } });
+        let user: Awaited<ReturnType<typeof prisma.user.findFirst>>;
+        try {
+          user = await prisma.user.findFirst({ where: { email } });
+        } catch (e) {
+          // Logged in full server-side; the screen gets only the fact that
+          // the lookup could not run.
+          console.error(
+            "[auth] Could not look up the user — the database is unreachable " +
+              "or misconfigured:",
+            e instanceof Error ? e.message : e
+          );
+          throw new DatabaseUnavailableError();
+        }
         if (!user) {
           // Same work as a real comparison, so an unknown email cannot be
           // told apart from a wrong password by how long the reply takes.

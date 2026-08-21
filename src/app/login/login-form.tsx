@@ -20,6 +20,12 @@ const ERROR_MESSAGES: Record<string, string> = {
   MFA_REQUIRED: "Enter the 6-digit code from your authenticator app.",
   INVALID_TOTP: "That code is invalid or expired. Try again.",
   credentials: "Incorrect email or password.",
+  // Deliberately explicit that this is not the password. Otherwise a server
+  // that cannot reach its database looks exactly like a typo, and whoever is
+  // on the counter keeps retyping a password that was right the first time.
+  DB_UNAVAILABLE:
+    "The server cannot reach its database, so it could not check your sign-in. " +
+    "This is not your password. Ask whoever runs the server to check it.",
 };
 
 export function LoginForm({
