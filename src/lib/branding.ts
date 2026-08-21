@@ -60,9 +60,31 @@ export const getBranding = cache(async (): Promise<Branding> => {
   // machine, which is how the first deploy failed.
   await connection();
 
-  const tenant = await prisma.tenant.findFirst({
-    orderBy: { createdAt: "asc" },
-  });
+  // A failed lookup must not take the app down with it.
+  //
+  // This runs in the root layout's metadata, so it is on the path of every
+  // single page — including /login. Letting the error propagate means an
+  // unreachable or misconfigured database turns the whole app into a fatal
+  // error screen, with no way in and nothing on screen to say why. Branding
+  // is decorative: the honest fallback is the bundled identity, which is
+  // exactly what an install that has never opened /branding already shows.
+  //
+  // Pages that genuinely need data still fail in their own boundaries, where
+  // the failure is localised and legible, and /api/health still reports the
+  // database as down. Logged rather than swallowed, and deliberately not via
+  // recordError — that writes to the database this just failed to reach.
+  let tenant: Awaited<ReturnType<typeof prisma.tenant.findFirst>> = null;
+  try {
+    tenant = await prisma.tenant.findFirst({
+      orderBy: { createdAt: "asc" },
+    });
+  } catch (error) {
+    console.error(
+      "[branding] Could not read tenant branding; falling back to bundled " +
+        "defaults. The database is unreachable or misconfigured:",
+      error instanceof Error ? error.message : error
+    );
+  }
 
   // The cache-buster rides on every uploaded-logo URL. Without it a browser
   // that fetched the old logo keeps showing it after a swap, which reads as
