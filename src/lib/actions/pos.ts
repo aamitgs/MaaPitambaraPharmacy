@@ -1,5 +1,6 @@
 "use server";
 
+import { nextDocumentNumber } from "@/lib/document-number";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
@@ -578,13 +579,9 @@ export async function completeSale(input: CompleteSaleInput) {
   await checkDiscountCap(tenantId, session.user.role, billDiscountPercent, parsed.managerPin);
 
   const now = new Date();
-  const monthKey = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}`;
 
   const result = await prisma.$transaction(async (tx) => {
-    const countThisMonth = await tx.salesInvoice.count({
-      where: { tenantId, invoiceNo: { startsWith: `INV-${monthKey}-` } },
-    });
-    const invoiceNo = `INV-${monthKey}-${String(countThisMonth + 1).padStart(4, "0")}`;
+    const invoiceNo = await nextDocumentNumber(tx, tenantId, "INV", now);
 
     const invoice = await tx.salesInvoice.create({
       data: {

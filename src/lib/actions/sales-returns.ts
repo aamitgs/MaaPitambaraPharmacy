@@ -1,5 +1,6 @@
 "use server";
 
+import { nextDocumentNumber } from "@/lib/document-number";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
@@ -203,11 +204,7 @@ export async function createSalesReturn(input: z.infer<typeof createSchema>) {
   }
 
   const returnId = await prisma.$transaction(async (tx) => {
-    const monthKey = new Date().toISOString().slice(0, 7).replace("-", "");
-    const countThisMonth = await tx.salesReturn.count({
-      where: { tenantId: session.user.tenantId, returnNo: { startsWith: `CN-${monthKey}-` } },
-    });
-    const returnNo = `CN-${monthKey}-${String(countThisMonth + 1).padStart(4, "0")}`;
+    const returnNo = await nextDocumentNumber(tx, session.user.tenantId, "CN");
 
     const created = await tx.salesReturn.create({
       data: {

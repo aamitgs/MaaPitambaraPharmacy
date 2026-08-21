@@ -342,6 +342,15 @@ reads them yet — per-tenant white-labelling is still out of scope (see
   platform before the app sees them; lifting that needs presigned
   direct-to-bucket uploads, which is not built yet.
 
+- **Server timezone.** The app pins the process to `PHARMACY_TIMEZONE`
+  (default `Asia/Kolkata`) in `src/instrumentation.ts`, before the first
+  request is served. This is not cosmetic: business dates, GST periods and the
+  month inside every document number are computed with local-time methods, so
+  a server running on UTC would date a bill rung up at 02:00 IST to the
+  previous day and file it into the previous month. Pinning it in code rather
+  than relying on the host means a deployment cannot land in the wrong zone by
+  omission; a wrong or unrecognised zone name is reported at startup.
+
   To use a different backend entirely, swap `src/lib/attachment-storage.ts`
   for an S3-compatible client if that ever changes. Each kind has its own
   root rather than sharing one with subdirectories: stored paths are

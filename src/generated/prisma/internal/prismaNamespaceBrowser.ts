@@ -100,7 +100,8 @@ export const ModelName = {
   ErrorLog: 'ErrorLog',
   UserSession: 'UserSession',
   SaltAlias: 'SaltAlias',
-  TrustedDevice: 'TrustedDevice'
+  TrustedDevice: 'TrustedDevice',
+  DocumentSequence: 'DocumentSequence'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -951,6 +952,18 @@ export const TrustedDeviceScalarFieldEnum = {
 } as const
 
 export type TrustedDeviceScalarFieldEnum = (typeof TrustedDeviceScalarFieldEnum)[keyof typeof TrustedDeviceScalarFieldEnum]
+
+
+export const DocumentSequenceScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  prefix: 'prefix',
+  periodKey: 'periodKey',
+  lastNumber: 'lastNumber',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DocumentSequenceScalarFieldEnum = (typeof DocumentSequenceScalarFieldEnum)[keyof typeof DocumentSequenceScalarFieldEnum]
 
 
 export const SortOrder = {

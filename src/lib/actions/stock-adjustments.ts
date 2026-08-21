@@ -1,5 +1,6 @@
 "use server";
 
+import { nextDocumentNumber } from "@/lib/document-number";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
@@ -30,18 +31,6 @@ const schema = z.object({
 });
 
 export type StockAdjustmentInput = z.infer<typeof schema>;
-
-/** ADJ-YYYYMM-NNNN, matching how GRNs and credit notes are numbered. */
-async function nextAdjustmentNo(tenantId: string) {
-  const prefix = `ADJ-${new Date().toISOString().slice(0, 7).replace("-", "")}`;
-  const last = await prisma.stockAdjustment.findFirst({
-    where: { tenantId, adjustmentNo: { startsWith: prefix } },
-    orderBy: { adjustmentNo: "desc" },
-    select: { adjustmentNo: true },
-  });
-  const n = last ? Number(last.adjustmentNo.split("-").pop()) + 1 : 1;
-  return `${prefix}-${String(n).padStart(4, "0")}`;
-}
 
 export async function createStockAdjustment(input: StockAdjustmentInput) {
   const session = await requirePermission("stock.adjust");
@@ -78,9 +67,11 @@ export async function createStockAdjustment(input: StockAdjustmentInput) {
     }
   }
 
-  const adjustmentNo = await nextAdjustmentNo(tenantId);
-
   const created = await prisma.$transaction(async (tx) => {
+    // Allocated inside the transaction: outside it, two adjustments posted
+    // together would be handed the same number.
+    const adjustmentNo = await nextDocumentNumber(tx, tenantId, "ADJ");
+
     const adjustment = await tx.stockAdjustment.create({
       data: {
         tenantId,
@@ -126,7 +117,7 @@ export async function createStockAdjustment(input: StockAdjustmentInput) {
     entity: "StockAdjustment",
     entityId: created.id,
     after: {
-      adjustmentNo,
+      adjustmentNo: created.adjustmentNo,
       reason: parsed.reason,
       disposalRef: parsed.disposalRef ?? null,
       lines: parsed.items.length,
@@ -137,7 +128,7 @@ export async function createStockAdjustment(input: StockAdjustmentInput) {
   revalidatePath("/stock-adjustments");
   revalidatePath("/alerts");
   revalidatePath("/items");
-  return { id: created.id, adjustmentNo };
+  return { id: created.id, adjustmentNo: created.adjustmentNo };
 }
 
 export async function listStockAdjustments() {

@@ -1,5 +1,6 @@
 "use server";
 
+import { nextDocumentNumber } from "@/lib/document-number";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
@@ -22,17 +23,6 @@ import { resolveConcreteBranch } from "@/lib/branch-scope";
  * write-off, with reason `recount`, so the stock ledger has one story about
  * why quantities moved rather than two.
  */
-
-async function nextCountNo(tenantId: string) {
-  const prefix = `CNT-${new Date().toISOString().slice(0, 7).replace("-", "")}`;
-  const last = await prisma.stockCount.findFirst({
-    where: { tenantId, countNo: { startsWith: prefix } },
-    orderBy: { countNo: "desc" },
-    select: { countNo: true },
-  });
-  const n = last ? Number(last.countNo.split("-").pop()) + 1 : 1;
-  return `${prefix}-${String(n).padStart(4, "0")}`;
-}
 
 const openSchema = z.object({
   note: z.string().trim().max(300).optional(),
@@ -72,8 +62,9 @@ export async function openStockCount(input: z.infer<typeof openSchema>) {
 
   if (batches.length === 0) throw new Error("There is nothing to count at this branch");
 
-  const countNo = await nextCountNo(tenantId);
-  const count = await prisma.stockCount.create({
+  const { count, countNo } = await prisma.$transaction(async (tx) => {
+    const countNo = await nextDocumentNumber(tx, tenantId, "CNT");
+    const count = await tx.stockCount.create({
     data: {
       tenantId,
       branchId,
@@ -89,6 +80,8 @@ export async function openStockCount(input: z.infer<typeof openSchema>) {
         })),
       },
     },
+  });
+    return { count, countNo };
   });
 
   revalidatePath("/stock-counts");
@@ -240,21 +233,16 @@ export async function postStockCount(input: z.infer<typeof postSchema>) {
     }))
     .filter((c) => c.delta !== 0);
 
-  const adjustmentNo = await (async () => {
-    const prefix = `ADJ-${new Date().toISOString().slice(0, 7).replace("-", "")}`;
-    const last = await prisma.stockAdjustment.findFirst({
-      where: { tenantId, adjustmentNo: { startsWith: prefix } },
-      orderBy: { adjustmentNo: "desc" },
-      select: { adjustmentNo: true },
-    });
-    const n = last ? Number(last.adjustmentNo.split("-").pop()) + 1 : 1;
-    return `${prefix}-${String(n).padStart(4, "0")}`;
-  })();
-
   const result = await prisma.$transaction(async (tx) => {
     let adjustmentId: string | null = null;
+    let adjustmentNo: string | null = null;
 
     if (corrections.length > 0) {
+      // Allocated here rather than before the transaction, and only when a
+      // correction is actually raised — a count that matches stock exactly
+      // should not consume an adjustment number.
+      adjustmentNo = await nextDocumentNumber(tx, tenantId, "ADJ");
+
       const adjustment = await tx.stockAdjustment.create({
         data: {
           tenantId,
@@ -295,7 +283,7 @@ export async function postStockCount(input: z.infer<typeof postSchema>) {
       },
     });
 
-    return { adjustmentId };
+    return { adjustmentId, adjustmentNo };
   });
 
   // Two different numbers, and conflating them is how a stocktake starts
@@ -326,7 +314,7 @@ export async function postStockCount(input: z.infer<typeof postSchema>) {
       correctionValue: Math.round(correctionValue * 100) / 100,
       discrepancyValue: Math.round(discrepancyValue * 100) / 100,
       linesThatMovedDuringCount: drifted,
-      adjustmentNo: result.adjustmentId ? adjustmentNo : null,
+      adjustmentNo: result.adjustmentNo,
     },
   });
 

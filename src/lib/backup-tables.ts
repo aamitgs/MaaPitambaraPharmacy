@@ -32,6 +32,7 @@ export const TABLE_SPECS: Record<BackupTable, TableSpec> = {
   doctors: { model: "doctor", where: (t) => ({ tenantId: t }) },
   loyaltyTiers: { model: "loyaltyTier", where: (t) => ({ tenantId: t }) },
   saltAliases: { model: "saltAlias", where: (t) => ({ tenantId: t }) },
+  documentSequences: { model: "documentSequence", where: (t) => ({ tenantId: t }) },
   schemes: { model: "scheme", where: (t) => ({ tenantId: t }) },
   coupons: { model: "coupon", where: (t) => ({ tenantId: t }) },
   purchaseOrders: { model: "purchaseOrder", where: (t) => ({ tenantId: t }) },

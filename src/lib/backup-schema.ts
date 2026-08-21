@@ -30,6 +30,11 @@ export const BACKUP_TABLES = [
   // silently change which medicines the app offers as substitutes for one
   // another, which is a clinical decision the pharmacy made deliberately.
   "saltAliases",
+  // Restored with everything else, and it has to be: these counters say
+  // which invoice and credit-note numbers have already been issued. Restore
+  // without them and the next sale reuses a number that is already on a
+  // customer's bill and in a filed return.
+  "documentSequences",
   "customers",
   "doctors",
   "schemes",

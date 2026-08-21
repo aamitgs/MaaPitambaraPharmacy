@@ -476,6 +476,7 @@ export type TenantWhereInput = {
   notes?: Prisma.NoteListRelationFilter
   roles?: Prisma.RoleListRelationFilter
   saltAliases?: Prisma.SaltAliasListRelationFilter
+  documentSequences?: Prisma.DocumentSequenceListRelationFilter
 }
 
 export type TenantOrderByWithRelationInput = {
@@ -546,6 +547,7 @@ export type TenantOrderByWithRelationInput = {
   notes?: Prisma.NoteOrderByRelationAggregateInput
   roles?: Prisma.RoleOrderByRelationAggregateInput
   saltAliases?: Prisma.SaltAliasOrderByRelationAggregateInput
+  documentSequences?: Prisma.DocumentSequenceOrderByRelationAggregateInput
 }
 
 export type TenantWhereUniqueInput = Prisma.AtLeast<{
@@ -619,6 +621,7 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   notes?: Prisma.NoteListRelationFilter
   roles?: Prisma.RoleListRelationFilter
   saltAliases?: Prisma.SaltAliasListRelationFilter
+  documentSequences?: Prisma.DocumentSequenceListRelationFilter
 }, "id">
 
 export type TenantOrderByWithAggregationInput = {
@@ -765,6 +768,7 @@ export type TenantCreateInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateInput = {
@@ -835,6 +839,7 @@ export type TenantUncheckedCreateInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUpdateInput = {
@@ -905,6 +910,7 @@ export type TenantUpdateInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateInput = {
@@ -975,6 +981,7 @@ export type TenantUncheckedUpdateInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateManyInput = {
@@ -1742,6 +1749,20 @@ export type TenantUpdateOneRequiredWithoutSaltAliasesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutSaltAliasesInput, Prisma.TenantUpdateWithoutSaltAliasesInput>, Prisma.TenantUncheckedUpdateWithoutSaltAliasesInput>
 }
 
+export type TenantCreateNestedOneWithoutDocumentSequencesInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutDocumentSequencesInput, Prisma.TenantUncheckedCreateWithoutDocumentSequencesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutDocumentSequencesInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutDocumentSequencesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutDocumentSequencesInput, Prisma.TenantUncheckedCreateWithoutDocumentSequencesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutDocumentSequencesInput
+  upsert?: Prisma.TenantUpsertWithoutDocumentSequencesInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutDocumentSequencesInput, Prisma.TenantUpdateWithoutDocumentSequencesInput>, Prisma.TenantUncheckedUpdateWithoutDocumentSequencesInput>
+}
+
 export type TenantCreateWithoutBranchesInput = {
   id?: string
   pharmacyName: string
@@ -1809,6 +1830,7 @@ export type TenantCreateWithoutBranchesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutBranchesInput = {
@@ -1878,6 +1900,7 @@ export type TenantUncheckedCreateWithoutBranchesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutBranchesInput = {
@@ -1963,6 +1986,7 @@ export type TenantUpdateWithoutBranchesInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutBranchesInput = {
@@ -2032,6 +2056,7 @@ export type TenantUncheckedUpdateWithoutBranchesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutItemsInput = {
@@ -2101,6 +2126,7 @@ export type TenantCreateWithoutItemsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutItemsInput = {
@@ -2170,6 +2196,7 @@ export type TenantUncheckedCreateWithoutItemsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutItemsInput = {
@@ -2255,6 +2282,7 @@ export type TenantUpdateWithoutItemsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutItemsInput = {
@@ -2324,6 +2352,7 @@ export type TenantUncheckedUpdateWithoutItemsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutCustomersInput = {
@@ -2393,6 +2422,7 @@ export type TenantCreateWithoutCustomersInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutCustomersInput = {
@@ -2462,6 +2492,7 @@ export type TenantUncheckedCreateWithoutCustomersInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutCustomersInput = {
@@ -2547,6 +2578,7 @@ export type TenantUpdateWithoutCustomersInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutCustomersInput = {
@@ -2616,6 +2648,7 @@ export type TenantUncheckedUpdateWithoutCustomersInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutPromiseOrdersInput = {
@@ -2685,6 +2718,7 @@ export type TenantCreateWithoutPromiseOrdersInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutPromiseOrdersInput = {
@@ -2754,6 +2788,7 @@ export type TenantUncheckedCreateWithoutPromiseOrdersInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutPromiseOrdersInput = {
@@ -2839,6 +2874,7 @@ export type TenantUpdateWithoutPromiseOrdersInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutPromiseOrdersInput = {
@@ -2908,6 +2944,7 @@ export type TenantUncheckedUpdateWithoutPromiseOrdersInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutExpenseCategoriesInput = {
@@ -2977,6 +3014,7 @@ export type TenantCreateWithoutExpenseCategoriesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutExpenseCategoriesInput = {
@@ -3046,6 +3084,7 @@ export type TenantUncheckedCreateWithoutExpenseCategoriesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutExpenseCategoriesInput = {
@@ -3131,6 +3170,7 @@ export type TenantUpdateWithoutExpenseCategoriesInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutExpenseCategoriesInput = {
@@ -3200,6 +3240,7 @@ export type TenantUncheckedUpdateWithoutExpenseCategoriesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutExpensesInput = {
@@ -3269,6 +3310,7 @@ export type TenantCreateWithoutExpensesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutExpensesInput = {
@@ -3338,6 +3380,7 @@ export type TenantUncheckedCreateWithoutExpensesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutExpensesInput = {
@@ -3423,6 +3466,7 @@ export type TenantUpdateWithoutExpensesInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutExpensesInput = {
@@ -3492,6 +3536,7 @@ export type TenantUncheckedUpdateWithoutExpensesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutTaxSlabsInput = {
@@ -3561,6 +3606,7 @@ export type TenantCreateWithoutTaxSlabsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutTaxSlabsInput = {
@@ -3630,6 +3676,7 @@ export type TenantUncheckedCreateWithoutTaxSlabsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutTaxSlabsInput = {
@@ -3715,6 +3762,7 @@ export type TenantUpdateWithoutTaxSlabsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutTaxSlabsInput = {
@@ -3784,6 +3832,7 @@ export type TenantUncheckedUpdateWithoutTaxSlabsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutHsnTaxMappingsInput = {
@@ -3853,6 +3902,7 @@ export type TenantCreateWithoutHsnTaxMappingsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutHsnTaxMappingsInput = {
@@ -3922,6 +3972,7 @@ export type TenantUncheckedCreateWithoutHsnTaxMappingsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutHsnTaxMappingsInput = {
@@ -4007,6 +4058,7 @@ export type TenantUpdateWithoutHsnTaxMappingsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutHsnTaxMappingsInput = {
@@ -4076,6 +4128,7 @@ export type TenantUncheckedUpdateWithoutHsnTaxMappingsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSmsLogsInput = {
@@ -4145,6 +4198,7 @@ export type TenantCreateWithoutSmsLogsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutSmsLogsInput = {
@@ -4214,6 +4268,7 @@ export type TenantUncheckedCreateWithoutSmsLogsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutSmsLogsInput = {
@@ -4299,6 +4354,7 @@ export type TenantUpdateWithoutSmsLogsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutSmsLogsInput = {
@@ -4368,6 +4424,7 @@ export type TenantUncheckedUpdateWithoutSmsLogsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutEmailLogsInput = {
@@ -4437,6 +4494,7 @@ export type TenantCreateWithoutEmailLogsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutEmailLogsInput = {
@@ -4506,6 +4564,7 @@ export type TenantUncheckedCreateWithoutEmailLogsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutEmailLogsInput = {
@@ -4591,6 +4650,7 @@ export type TenantUpdateWithoutEmailLogsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutEmailLogsInput = {
@@ -4660,6 +4720,7 @@ export type TenantUncheckedUpdateWithoutEmailLogsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutNotesInput = {
@@ -4729,6 +4790,7 @@ export type TenantCreateWithoutNotesInput = {
   stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutNotesInput = {
@@ -4798,6 +4860,7 @@ export type TenantUncheckedCreateWithoutNotesInput = {
   stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutNotesInput = {
@@ -4883,6 +4946,7 @@ export type TenantUpdateWithoutNotesInput = {
   stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutNotesInput = {
@@ -4952,6 +5016,7 @@ export type TenantUncheckedUpdateWithoutNotesInput = {
   stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSalesReturnsInput = {
@@ -5021,6 +5086,7 @@ export type TenantCreateWithoutSalesReturnsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutSalesReturnsInput = {
@@ -5090,6 +5156,7 @@ export type TenantUncheckedCreateWithoutSalesReturnsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutSalesReturnsInput = {
@@ -5175,6 +5242,7 @@ export type TenantUpdateWithoutSalesReturnsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutSalesReturnsInput = {
@@ -5244,6 +5312,7 @@ export type TenantUncheckedUpdateWithoutSalesReturnsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutStockCountsInput = {
@@ -5313,6 +5382,7 @@ export type TenantCreateWithoutStockCountsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutStockCountsInput = {
@@ -5382,6 +5452,7 @@ export type TenantUncheckedCreateWithoutStockCountsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutStockCountsInput = {
@@ -5467,6 +5538,7 @@ export type TenantUpdateWithoutStockCountsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutStockCountsInput = {
@@ -5536,6 +5608,7 @@ export type TenantUncheckedUpdateWithoutStockCountsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutHeldSalesInput = {
@@ -5605,6 +5678,7 @@ export type TenantCreateWithoutHeldSalesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutHeldSalesInput = {
@@ -5674,6 +5748,7 @@ export type TenantUncheckedCreateWithoutHeldSalesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutHeldSalesInput = {
@@ -5759,6 +5834,7 @@ export type TenantUpdateWithoutHeldSalesInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutHeldSalesInput = {
@@ -5828,6 +5904,7 @@ export type TenantUncheckedUpdateWithoutHeldSalesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutStockAdjustmentsInput = {
@@ -5897,6 +5974,7 @@ export type TenantCreateWithoutStockAdjustmentsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutStockAdjustmentsInput = {
@@ -5966,6 +6044,7 @@ export type TenantUncheckedCreateWithoutStockAdjustmentsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutStockAdjustmentsInput = {
@@ -6051,6 +6130,7 @@ export type TenantUpdateWithoutStockAdjustmentsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutStockAdjustmentsInput = {
@@ -6120,6 +6200,7 @@ export type TenantUncheckedUpdateWithoutStockAdjustmentsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutCashUpsInput = {
@@ -6189,6 +6270,7 @@ export type TenantCreateWithoutCashUpsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutCashUpsInput = {
@@ -6258,6 +6340,7 @@ export type TenantUncheckedCreateWithoutCashUpsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutCashUpsInput = {
@@ -6343,6 +6426,7 @@ export type TenantUpdateWithoutCashUpsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutCashUpsInput = {
@@ -6412,6 +6496,7 @@ export type TenantUncheckedUpdateWithoutCashUpsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutWhatsappLogsInput = {
@@ -6481,6 +6566,7 @@ export type TenantCreateWithoutWhatsappLogsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutWhatsappLogsInput = {
@@ -6550,6 +6636,7 @@ export type TenantUncheckedCreateWithoutWhatsappLogsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutWhatsappLogsInput = {
@@ -6635,6 +6722,7 @@ export type TenantUpdateWithoutWhatsappLogsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutWhatsappLogsInput = {
@@ -6704,6 +6792,7 @@ export type TenantUncheckedUpdateWithoutWhatsappLogsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutCustomerLedgerEntriesInput = {
@@ -6773,6 +6862,7 @@ export type TenantCreateWithoutCustomerLedgerEntriesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutCustomerLedgerEntriesInput = {
@@ -6842,6 +6932,7 @@ export type TenantUncheckedCreateWithoutCustomerLedgerEntriesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutCustomerLedgerEntriesInput = {
@@ -6927,6 +7018,7 @@ export type TenantUpdateWithoutCustomerLedgerEntriesInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutCustomerLedgerEntriesInput = {
@@ -6996,6 +7088,7 @@ export type TenantUncheckedUpdateWithoutCustomerLedgerEntriesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSchemesInput = {
@@ -7065,6 +7158,7 @@ export type TenantCreateWithoutSchemesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutSchemesInput = {
@@ -7134,6 +7228,7 @@ export type TenantUncheckedCreateWithoutSchemesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutSchemesInput = {
@@ -7219,6 +7314,7 @@ export type TenantUpdateWithoutSchemesInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutSchemesInput = {
@@ -7288,6 +7384,7 @@ export type TenantUncheckedUpdateWithoutSchemesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutLoyaltyTiersInput = {
@@ -7357,6 +7454,7 @@ export type TenantCreateWithoutLoyaltyTiersInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutLoyaltyTiersInput = {
@@ -7426,6 +7524,7 @@ export type TenantUncheckedCreateWithoutLoyaltyTiersInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutLoyaltyTiersInput = {
@@ -7511,6 +7610,7 @@ export type TenantUpdateWithoutLoyaltyTiersInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutLoyaltyTiersInput = {
@@ -7580,6 +7680,7 @@ export type TenantUncheckedUpdateWithoutLoyaltyTiersInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutCouponsInput = {
@@ -7649,6 +7750,7 @@ export type TenantCreateWithoutCouponsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutCouponsInput = {
@@ -7718,6 +7820,7 @@ export type TenantUncheckedCreateWithoutCouponsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutCouponsInput = {
@@ -7803,6 +7906,7 @@ export type TenantUpdateWithoutCouponsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutCouponsInput = {
@@ -7872,6 +7976,7 @@ export type TenantUncheckedUpdateWithoutCouponsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutDoctorsInput = {
@@ -7941,6 +8046,7 @@ export type TenantCreateWithoutDoctorsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutDoctorsInput = {
@@ -8010,6 +8116,7 @@ export type TenantUncheckedCreateWithoutDoctorsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutDoctorsInput = {
@@ -8095,6 +8202,7 @@ export type TenantUpdateWithoutDoctorsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutDoctorsInput = {
@@ -8164,6 +8272,7 @@ export type TenantUncheckedUpdateWithoutDoctorsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSalesInvoicesInput = {
@@ -8233,6 +8342,7 @@ export type TenantCreateWithoutSalesInvoicesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutSalesInvoicesInput = {
@@ -8302,6 +8412,7 @@ export type TenantUncheckedCreateWithoutSalesInvoicesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutSalesInvoicesInput = {
@@ -8387,6 +8498,7 @@ export type TenantUpdateWithoutSalesInvoicesInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutSalesInvoicesInput = {
@@ -8456,6 +8568,7 @@ export type TenantUncheckedUpdateWithoutSalesInvoicesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutDiscountsInput = {
@@ -8525,6 +8638,7 @@ export type TenantCreateWithoutDiscountsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutDiscountsInput = {
@@ -8594,6 +8708,7 @@ export type TenantUncheckedCreateWithoutDiscountsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutDiscountsInput = {
@@ -8679,6 +8794,7 @@ export type TenantUpdateWithoutDiscountsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutDiscountsInput = {
@@ -8748,6 +8864,7 @@ export type TenantUncheckedUpdateWithoutDiscountsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutRolesInput = {
@@ -8817,6 +8934,7 @@ export type TenantCreateWithoutRolesInput = {
   stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutRolesInput = {
@@ -8886,6 +9004,7 @@ export type TenantUncheckedCreateWithoutRolesInput = {
   stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutRolesInput = {
@@ -8971,6 +9090,7 @@ export type TenantUpdateWithoutRolesInput = {
   stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutRolesInput = {
@@ -9040,6 +9160,7 @@ export type TenantUncheckedUpdateWithoutRolesInput = {
   stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutUsersInput = {
@@ -9109,6 +9230,7 @@ export type TenantCreateWithoutUsersInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutUsersInput = {
@@ -9178,6 +9300,7 @@ export type TenantUncheckedCreateWithoutUsersInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutUsersInput = {
@@ -9263,6 +9386,7 @@ export type TenantUpdateWithoutUsersInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutUsersInput = {
@@ -9332,6 +9456,7 @@ export type TenantUncheckedUpdateWithoutUsersInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutAuditLogsInput = {
@@ -9401,6 +9526,7 @@ export type TenantCreateWithoutAuditLogsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutAuditLogsInput = {
@@ -9470,6 +9596,7 @@ export type TenantUncheckedCreateWithoutAuditLogsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutAuditLogsInput = {
@@ -9555,6 +9682,7 @@ export type TenantUpdateWithoutAuditLogsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutAuditLogsInput = {
@@ -9624,6 +9752,7 @@ export type TenantUncheckedUpdateWithoutAuditLogsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutBackupLogsInput = {
@@ -9693,6 +9822,7 @@ export type TenantCreateWithoutBackupLogsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutBackupLogsInput = {
@@ -9762,6 +9892,7 @@ export type TenantUncheckedCreateWithoutBackupLogsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutBackupLogsInput = {
@@ -9847,6 +9978,7 @@ export type TenantUpdateWithoutBackupLogsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutBackupLogsInput = {
@@ -9916,6 +10048,7 @@ export type TenantUncheckedUpdateWithoutBackupLogsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSuppliersInput = {
@@ -9985,6 +10118,7 @@ export type TenantCreateWithoutSuppliersInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutSuppliersInput = {
@@ -10054,6 +10188,7 @@ export type TenantUncheckedCreateWithoutSuppliersInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutSuppliersInput = {
@@ -10139,6 +10274,7 @@ export type TenantUpdateWithoutSuppliersInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutSuppliersInput = {
@@ -10208,6 +10344,7 @@ export type TenantUncheckedUpdateWithoutSuppliersInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutPurchaseOrdersInput = {
@@ -10277,6 +10414,7 @@ export type TenantCreateWithoutPurchaseOrdersInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutPurchaseOrdersInput = {
@@ -10346,6 +10484,7 @@ export type TenantUncheckedCreateWithoutPurchaseOrdersInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutPurchaseOrdersInput = {
@@ -10431,6 +10570,7 @@ export type TenantUpdateWithoutPurchaseOrdersInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutPurchaseOrdersInput = {
@@ -10500,6 +10640,7 @@ export type TenantUncheckedUpdateWithoutPurchaseOrdersInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutGrnsInput = {
@@ -10569,6 +10710,7 @@ export type TenantCreateWithoutGrnsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutGrnsInput = {
@@ -10638,6 +10780,7 @@ export type TenantUncheckedCreateWithoutGrnsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutGrnsInput = {
@@ -10723,6 +10866,7 @@ export type TenantUpdateWithoutGrnsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutGrnsInput = {
@@ -10792,6 +10936,7 @@ export type TenantUncheckedUpdateWithoutGrnsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutPurchaseReturnsInput = {
@@ -10861,6 +11006,7 @@ export type TenantCreateWithoutPurchaseReturnsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutPurchaseReturnsInput = {
@@ -10930,6 +11076,7 @@ export type TenantUncheckedCreateWithoutPurchaseReturnsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutPurchaseReturnsInput = {
@@ -11015,6 +11162,7 @@ export type TenantUpdateWithoutPurchaseReturnsInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutPurchaseReturnsInput = {
@@ -11084,6 +11232,7 @@ export type TenantUncheckedUpdateWithoutPurchaseReturnsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSupplierLedgerEntriesInput = {
@@ -11153,6 +11302,7 @@ export type TenantCreateWithoutSupplierLedgerEntriesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutSupplierLedgerEntriesInput = {
@@ -11222,6 +11372,7 @@ export type TenantUncheckedCreateWithoutSupplierLedgerEntriesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutSupplierLedgerEntriesInput = {
@@ -11307,6 +11458,7 @@ export type TenantUpdateWithoutSupplierLedgerEntriesInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutSupplierLedgerEntriesInput = {
@@ -11376,6 +11528,7 @@ export type TenantUncheckedUpdateWithoutSupplierLedgerEntriesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutStockTransfersInput = {
@@ -11445,6 +11598,7 @@ export type TenantCreateWithoutStockTransfersInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutStockTransfersInput = {
@@ -11514,6 +11668,7 @@ export type TenantUncheckedCreateWithoutStockTransfersInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutStockTransfersInput = {
@@ -11599,6 +11754,7 @@ export type TenantUpdateWithoutStockTransfersInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutStockTransfersInput = {
@@ -11668,6 +11824,7 @@ export type TenantUncheckedUpdateWithoutStockTransfersInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutNarcoticRegisterEntriesInput = {
@@ -11737,6 +11894,7 @@ export type TenantCreateWithoutNarcoticRegisterEntriesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
@@ -11806,6 +11964,7 @@ export type TenantUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
   saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutNarcoticRegisterEntriesInput = {
@@ -11891,6 +12050,7 @@ export type TenantUpdateWithoutNarcoticRegisterEntriesInput = {
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
@@ -11960,6 +12120,7 @@ export type TenantUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
   saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSaltAliasesInput = {
@@ -12029,6 +12190,7 @@ export type TenantCreateWithoutSaltAliasesInput = {
   stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
   notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutSaltAliasesInput = {
@@ -12098,6 +12260,7 @@ export type TenantUncheckedCreateWithoutSaltAliasesInput = {
   stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutSaltAliasesInput = {
@@ -12183,6 +12346,7 @@ export type TenantUpdateWithoutSaltAliasesInput = {
   stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
   notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutSaltAliasesInput = {
@@ -12252,6 +12416,303 @@ export type TenantUncheckedUpdateWithoutSaltAliasesInput = {
   stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  documentSequences?: Prisma.DocumentSequenceUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutDocumentSequencesInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutDocumentSequencesInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutDocumentSequencesInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutDocumentSequencesInput, Prisma.TenantUncheckedCreateWithoutDocumentSequencesInput>
+}
+
+export type TenantUpsertWithoutDocumentSequencesInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutDocumentSequencesInput, Prisma.TenantUncheckedUpdateWithoutDocumentSequencesInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutDocumentSequencesInput, Prisma.TenantUncheckedCreateWithoutDocumentSequencesInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutDocumentSequencesInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutDocumentSequencesInput, Prisma.TenantUncheckedUpdateWithoutDocumentSequencesInput>
+}
+
+export type TenantUpdateWithoutDocumentSequencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutDocumentSequencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 
@@ -12296,6 +12757,7 @@ export type TenantCountOutputType = {
   notes: number
   roles: number
   saltAliases: number
+  documentSequences: number
 }
 
 export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -12335,6 +12797,7 @@ export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   notes?: boolean | TenantCountOutputTypeCountNotesArgs
   roles?: boolean | TenantCountOutputTypeCountRolesArgs
   saltAliases?: boolean | TenantCountOutputTypeCountSaltAliasesArgs
+  documentSequences?: boolean | TenantCountOutputTypeCountDocumentSequencesArgs
 }
 
 /**
@@ -12599,6 +13062,13 @@ export type TenantCountOutputTypeCountSaltAliasesArgs<ExtArgs extends runtime.Ty
   where?: Prisma.SaltAliasWhereInput
 }
 
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountDocumentSequencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentSequenceWhereInput
+}
+
 
 export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -12668,6 +13138,7 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   notes?: boolean | Prisma.Tenant$notesArgs<ExtArgs>
   roles?: boolean | Prisma.Tenant$rolesArgs<ExtArgs>
   saltAliases?: boolean | Prisma.Tenant$saltAliasesArgs<ExtArgs>
+  documentSequences?: boolean | Prisma.Tenant$documentSequencesArgs<ExtArgs>
   _count?: boolean | Prisma.TenantCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tenant"]>
 
@@ -12811,6 +13282,7 @@ export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   notes?: boolean | Prisma.Tenant$notesArgs<ExtArgs>
   roles?: boolean | Prisma.Tenant$rolesArgs<ExtArgs>
   saltAliases?: boolean | Prisma.Tenant$saltAliasesArgs<ExtArgs>
+  documentSequences?: boolean | Prisma.Tenant$documentSequencesArgs<ExtArgs>
   _count?: boolean | Prisma.TenantCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TenantIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -12855,6 +13327,7 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     notes: Prisma.$NotePayload<ExtArgs>[]
     roles: Prisma.$RolePayload<ExtArgs>[]
     saltAliases: Prisma.$SaltAliasPayload<ExtArgs>[]
+    documentSequences: Prisma.$DocumentSequencePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -13364,6 +13837,7 @@ export interface Prisma__TenantClient<T, Null = never, ExtArgs extends runtime.T
   notes<T extends Prisma.Tenant$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roles<T extends Prisma.Tenant$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   saltAliases<T extends Prisma.Tenant$saltAliasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$saltAliasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SaltAliasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documentSequences<T extends Prisma.Tenant$documentSequencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$documentSequencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentSequencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14678,6 +15152,30 @@ export type Tenant$saltAliasesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.SaltAliasScalarFieldEnum | Prisma.SaltAliasScalarFieldEnum[]
+}
+
+/**
+ * Tenant.documentSequences
+ */
+export type Tenant$documentSequencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentSequence
+   */
+  select?: Prisma.DocumentSequenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentSequence
+   */
+  omit?: Prisma.DocumentSequenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentSequenceInclude<ExtArgs> | null
+  where?: Prisma.DocumentSequenceWhereInput
+  orderBy?: Prisma.DocumentSequenceOrderByWithRelationInput | Prisma.DocumentSequenceOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentSequenceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentSequenceScalarFieldEnum | Prisma.DocumentSequenceScalarFieldEnum[]
 }
 
 /**

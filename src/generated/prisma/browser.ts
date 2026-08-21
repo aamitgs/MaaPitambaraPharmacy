@@ -356,3 +356,18 @@ export type SaltAlias = Prisma.SaltAliasModel
  * cannot be replayed as a login.
  */
 export type TrustedDevice = Prisma.TrustedDeviceModel
+/**
+ * Model DocumentSequence
+ * Per-month counter behind every generated document number (INV, CN, ADJ,
+ * CNT). Exists because the old approach — count the rows already issued and
+ * add one — is not safe with two people billing: both read the same count
+ * and both build the same number, and the unique index on the document then
+ * rejects the second sale outright. That is worst exactly when it is least
+ * affordable, replaying a queue of sales after the internet comes back.
+ * 
+ * Incremented with INSERT ... ON CONFLICT DO UPDATE inside the same
+ * transaction as the document, so the row lock serialises allocation and a
+ * rolled-back sale gives its number back rather than leaving a hole. Gapless
+ * matters here: a missing invoice number is a question at GST filing time.
+ */
+export type DocumentSequence = Prisma.DocumentSequenceModel
