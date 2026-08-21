@@ -2,7 +2,7 @@
   "name": "maa-pitambara-pharmacy",
   "version": "0.1.0",
   "private": true,
-  "description": "Maa Pitambara Pharmacy — counter billing, inventory & GST compliance",
+  "description": "Maa Pitambara Pharmacy \u2014 counter billing, inventory & GST compliance",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "db:seed": "tsx prisma/seed.ts",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "provision": "tsx --tsconfig tsconfig.scripts.json scripts/provision.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

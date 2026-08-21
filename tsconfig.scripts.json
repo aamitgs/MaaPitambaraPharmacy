@@ -1,0 +1,22 @@
+{
+  "//": [
+    "For CLI scripts run with tsx, which resolves modules itself rather than",
+    "through Next's bundler.",
+    "",
+    "`server-only` is not a real package here — Next resolves it internally to",
+    "fail any build that pulls server code into a client bundle. A script has",
+    "no client bundle, so it maps to an empty module, exactly as the test setup",
+    "does.",
+    "",
+    "This mapping is kept OUT of the main tsconfig on purpose: putting it there",
+    "would override Next's own resolution and quietly disable that guard for",
+    "the whole app."
+  ],
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "server-only": ["./src/test/empty-module.ts"]
+    }
+  }
+}

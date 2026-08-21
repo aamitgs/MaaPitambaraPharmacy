@@ -102,11 +102,63 @@ decipher.setAuthTag(authTag);
 const json = Buffer.concat([decipher.update(ciphertext), decipher.final()]).toString("utf8");
 ```
 
-The decrypted JSON contains the tenant's branches, items, batches,
-customers, doctors, and invoices (with line items and discounts) as of the
-export time. Restoring it back into the database isn't automated in Phase
-1 — the export exists so the data is recoverable, not as a one-click
-restore flow yet.
+The decrypted JSON contains every table in the backup manifest as of the
+export time — see `src/lib/backup-schema.ts` for the list.
+
+There are two ways to put it back, and which one you want depends on
+whether the database already holds a pharmacy.
+
+**Restoring over an existing install** — Settings → Backup, in the app.
+Owner-only, asks for typed confirmation, and refuses a file belonging to a
+different pharmacy. `replace` deletes the tenant's rows before writing the
+file's rows back; the whole thing is one transaction, so either all of it
+lands or none of it does.
+
+**Provisioning a new install** — the command below. The in-app restore
+cannot do this: it needs an owner session to authorise it and an existing
+tenant row to update, and a newly created database has neither.
+
+### Provisioning a new database
+
+A newly created database is empty — no schema, no tenant, no accounts.
+Three things have to happen in order, and half-doing them is the dangerous
+outcome: a database with tables but no tenant looks healthy until someone
+signs in, and one with only some tables populated looks healthy until an
+invoice is opened and its lines are missing.
+
+```bash
+DATABASE_URL="postgresql://..." \
+BACKUP_ENCRYPTION_KEY="<the key the file was written with>" \
+npm run provision -- --backup ./backups/pharmacy-backup-....enc
+```
+
+That applies pending migrations (`prisma migrate deploy` — never `reset`,
+never `dev`), recreates the tenant under its original id so nothing is
+orphaned, and writes every table back. It prints what landed and compares
+it against what the file claimed, so a restore that quietly dropped rows
+is visible rather than silent.
+
+Notes:
+
+- **The file is decrypted and validated before the database is touched**, so
+  a wrong `BACKUP_ENCRYPTION_KEY` or a truncated file fails without leaving
+  a half-provisioned install behind.
+- **It refuses to run against a database that already holds a pharmacy**,
+  since this command exists to be run when tired and it targets production
+  by definition. `--force` overrides that; use the in-app restore instead
+  unless the database is genuinely disposable.
+- **Re-running is safe.** Rows already present are skipped rather than
+  duplicated, so a partly-finished run can simply be repeated. On a
+  database that started empty, though, a reported shortfall is not
+  expected — investigate before putting the install into service.
+- `--skip-migrate` restores without touching the schema, for when
+  migrations have already been applied separately.
+- Sign-in credentials come from the backup: the accounts are the same ones
+  as the install the file came from. If the file has no users, seed one
+  with `npm run db:seed`.
+
+The command and the in-app restore decrypt and validate through the same
+`parseBackup`, so a file one accepts is a file the other accepts.
 
 ## Reading fields from a photo (optional)
 

@@ -18,6 +18,7 @@ import {
   DELETE_ORDER,
 } from "@/lib/backup-tables";
 import { gatherTenantData, serializeBackup } from "@/lib/backup-payload";
+import { parseBackup } from "@/lib/backup-parse";
 
 export async function createManualBackup() {
   const session = await requirePermission("backup.manage");
@@ -82,49 +83,6 @@ export type BackupInspection = {
   /** True when the file came from this same pharmacy. */
   sameTenant: boolean;
 };
-
-function parseBackup(base64: string): BackupPayload {
-  let json: string;
-  try {
-    json = decryptBackup(Buffer.from(base64, "base64"));
-  } catch {
-    throw new Error(
-      "Could not decrypt that file. It needs the same BACKUP_ENCRYPTION_KEY it was created with."
-    );
-  }
-
-  let payload: BackupPayload;
-  try {
-    payload = JSON.parse(json) as BackupPayload;
-  } catch {
-    throw new Error("That file decrypted but is not a valid backup.");
-  }
-
-  if (payload.version !== BACKUP_VERSION) {
-    throw new Error(
-      `That backup is version ${payload.version ?? "1"}; this app writes and reads version ` +
-        `${BACKUP_VERSION}. Version 1 files only contain six tables and cannot be restored.`
-    );
-  }
-  if (!payload.tables || !payload.tenant) {
-    throw new Error("That backup is missing its table data.");
-  }
-
-  // The counts recorded at export time must match what the file actually
-  // holds. A mismatch means truncation or tampering, and restoring half a
-  // ledger is worse than restoring none of it.
-  for (const table of BACKUP_TABLES) {
-    const actual = payload.tables[table]?.length ?? 0;
-    const claimed = payload.counts?.[table] ?? 0;
-    if (actual !== claimed) {
-      throw new Error(
-        `That backup is damaged: it says ${claimed} ${table} but contains ${actual}.`
-      );
-    }
-  }
-
-  return payload;
-}
 
 /** Read a backup file and report what is in it — no writes. */
 export async function inspectBackup(base64: string): Promise<BackupInspection> {
