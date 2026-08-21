@@ -10,10 +10,10 @@ import { applySchemes } from "@/lib/scheme-engine";
 import { completeSale, getPosData, verifyManagerPin, verifyPharmacistCredentials } from "@/lib/actions/pos";
 import { validateCoupon } from "@/lib/actions/coupons";
 import { useOnlineStatus } from "@/hooks/use-online-status";
-import { saveCache, queueSale, listPendingSales, discardSale, newOfflineClientId } from "@/lib/offline/queue";
+import { saveCache, loadCache, queueSale, listPendingSales, discardSale, newOfflineClientId } from "@/lib/offline/queue";
 import { syncPendingSales } from "@/lib/offline/sync";
 import { buildOfflineReceiptData } from "@/lib/offline/receipt";
-import type { PendingSale, ReceiptHeader } from "@/lib/offline/db";
+import type { PendingSale, ReceiptHeader, PosCacheRecord } from "@/lib/offline/db";
 import type { ReceiptData } from "@/lib/actions/invoices";
 import { OfflineBanner } from "./offline-banner";
 import { OfflineReceiptOverlay } from "./offline-receipt-overlay";
@@ -92,6 +92,33 @@ export function PosScreen({
   const pharmacistReauthRef = useRef<{ email: string; password: string } | undefined>(undefined);
 
   const isOnline = useOnlineStatus();
+  /**
+   * The snapshot this device last took while online.
+   *
+   * Only consulted when the page itself was served from the offline cache:
+   * in that case the props above came out of a copy of the HTML that may be
+   * hours old, whereas the snapshot is refreshed every few minutes for as
+   * long as the till has a connection. When we loaded online, the props are
+   * live and the snapshot is ignored.
+   */
+  const [restored, setRestored] = useState<PosCacheRecord | null>(null);
+  useEffect(() => {
+    // navigator.onLine, not the polled status: this asks "was this page
+    // loaded during an outage", which has to be answered before the first
+    // ping completes.
+    if (typeof navigator !== "undefined" && navigator.onLine) return;
+    let cancelled = false;
+    void (async () => {
+      const snapshot = await loadCache();
+      if (!cancelled && snapshot && snapshot.tenantId === tenantId) {
+        setRestored(snapshot);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [tenantId]);
+
   const [pendingSales, setPendingSales] = useState<PendingSale[]>([]);
   const [syncing, setSyncing] = useState(false);
   const [offlineReceipt, setOfflineReceipt] = useState<ReceiptData | null>(null);
@@ -129,8 +156,12 @@ export function PosScreen({
   // rendered on screen — it's purely a background snapshot for the
   // offline fallback path, so it can't destabilize the normal online flow.
   useEffect(() => {
+    // Only ever snapshot data that came fresh from the server. Offline, these
+    // props are whatever was baked into the cached copy of this page, and
+    // writing them back would age the snapshot instead of preserving it.
+    if (!isOnline) return;
     void saveCache({ tenantId, branchId, items, customers: customerList, doctors: doctorList, schemes, staffDiscountCapPercent, receiptHeader });
-  }, [tenantId, branchId, items, customerList, doctorList, schemes, staffDiscountCapPercent, receiptHeader]);
+  }, [isOnline, tenantId, branchId, items, customerList, doctorList, schemes, staffDiscountCapPercent, receiptHeader]);
 
   // Keep the offline cache from going stale over a long shift, without
   // touching the live rendered item list — a long-open POS tab should
@@ -182,7 +213,15 @@ export function PosScreen({
     await refreshPendingSales();
   }
 
-  const catalogByItemId = useMemo(() => new Map(items.map((i) => [i.id, i])), [items]);
+  const effectiveItems = restored?.items ?? items;
+  const effectiveSchemes = restored?.schemes ?? schemes;
+  const effectiveReceiptHeader = restored?.receiptHeader ?? receiptHeader;
+  const effectiveDiscountCap = restored?.staffDiscountCapPercent ?? staffDiscountCapPercent;
+
+  const catalogByItemId = useMemo(
+    () => new Map(effectiveItems.map((i) => [i.id, i])),
+    [effectiveItems]
+  );
 
   const selectedCustomer = customerList.find((c) => c.id === store.customerId) ?? null;
 
@@ -191,10 +230,10 @@ export function PosScreen({
   const schemeApplications = useMemo(
     () =>
       applySchemes(
-        schemes,
+        effectiveSchemes,
         store.lines.map((l) => ({ lineId: l.lineId, itemId: l.itemId, qty: l.qty, rate: l.rate }))
       ),
-    [schemes, store.lines]
+    [effectiveSchemes, store.lines]
   );
   const schemeByLineId = useMemo(
     () => new Map(schemeApplications.map((a) => [a.lineId, a])),
@@ -339,7 +378,7 @@ export function PosScreen({
   }
 
   function requestPinIfNeeded(pending: PendingDiscount, effectivePercent: number, apply: () => void) {
-    if (role !== "counter_staff" || effectivePercent <= staffDiscountCapPercent || pinVerifiedRef.current) {
+    if (role !== "counter_staff" || effectivePercent <= effectiveDiscountCap || pinVerifiedRef.current) {
       apply();
       return;
     }
@@ -509,7 +548,7 @@ export function PosScreen({
           patientAge: store.patientAge,
           patientPhone: store.patientPhone,
           patientAddress: store.patientAddress,
-          header: receiptHeader,
+          header: effectiveReceiptHeader,
         });
 
         toast.success("Saved offline — will sync when back online");
@@ -632,7 +671,7 @@ export function PosScreen({
         onPostAnyway={(localId) => void handleSync([localId])}
       />
       <div className="flex-1 space-y-4 overflow-y-auto p-4">
-        <SearchPanel items={items} onSelect={handleAddItem} inputRef={searchInputRef} />
+        <SearchPanel items={effectiveItems} onSelect={handleAddItem} inputRef={searchInputRef} />
 
         {needsPrescription && (
           <div className="space-y-2">

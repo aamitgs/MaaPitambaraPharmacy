@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Offline</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        margin: 0; min-height: 100vh; display: grid; place-items: center;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: #fdfbf7; color: #4a1420; padding: 24px;
+      }
+      @media (prefers-color-scheme: dark) { body { background: #1a1013; color: #f5e9ec; } }
+      .card { max-width: 26rem; text-align: center; }
+      img { width: 72px; height: 72px; margin-bottom: 20px; }
+      h1 { font-size: 1.25rem; margin: 0 0 12px; }
+      p { margin: 0 0 10px; line-height: 1.55; opacity: .85; font-size: .95rem; }
+      button {
+        margin-top: 18px; padding: 10px 20px; border: 0; border-radius: 8px;
+        background: #7b1e3a; color: #fff; font-size: .95rem; cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <img src="/logo-icon.png" alt="" />
+      <h1>No connection</h1>
+      <p>
+        This screen has not been opened on this device yet, so there is no
+        saved copy to fall back on.
+      </p>
+      <p>
+        Any bills already queued on this device are safe and will be sent
+        automatically once the connection returns.
+      </p>
+      <button onclick="location.reload()">Try again</button>
+    </div>
+  </body>
+</html>

@@ -13,15 +13,22 @@ const PUBLIC_ASSETS = new Set([
   "/logo-icon.png",
   "/logo-stacked.png",
   "/logo-horizontal.png",
+  // The offline shell. Both must answer without a session: a service worker
+  // is registered from a redirect-free URL or not at all, and the offline
+  // fallback page is by definition shown when the session cannot be checked.
+  // Neither reveals anything — sw.js is caching logic, offline.html is a
+  // static "no connection" message.
+  "/sw.js",
+  "/offline.html",
 ]);
 
 export const authConfig = {
-  // Required for self-hosted deployments (this app only ships as
-  // self-hosted Docker, never Vercel): Auth.js only trusts the incoming
-  // Host header automatically when it can detect a Vercel deployment.
-  // Everywhere else — including `next start` in this repo's own Docker
-  // image — auth silently 500s on every request without this, which only
-  // shows up in production/standalone mode, never in `next dev`. The
+  // Required behind any proxy we terminate TLS at: Auth.js only trusts the
+  // incoming Host header automatically when it can detect a Vercel
+  // deployment. Everywhere else — including `next start` in this repo's own
+  // Docker image — auth silently 500s on every request without this, which
+  // only shows up in production/standalone mode, never in `next dev`.
+  // Harmless on a cloud host, where it is already the effective default. The
   // operator is expected to terminate TLS and set NEXTAUTH_URL correctly
   // in front of this (see README).
   trustHost: true,
