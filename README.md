@@ -82,6 +82,34 @@ in `docker-compose.yml`) and logs the attempt the same way a manual backup
 does — it'll show up in Settings and count toward the 48h staleness check on
 the dashboard.
 
+**On a cloud host**, `vercel.json` schedules the same route daily at 20:30
+UTC, which is 02:00 IST — after the shop has closed. Two things differ from
+the cron above and both are required:
+
+- **The platform issues a `GET`, not a `POST`, and cannot send a custom
+  header.** It sends `Authorization: Bearer $CRON_SECRET` instead, so set
+  `CRON_SECRET` in the project's environment variables. The route accepts
+  either credential and refuses the request without one; the comparison is
+  constant-time.
+- **The backup must go somewhere that still exists tomorrow.** With
+  `ATTACHMENT_S3_BUCKET` set, backups are written to that bucket under a
+  `backups/` prefix and the log records `object_store`; without it they go
+  to local disk and the log records `local`. On a serverless host a local
+  write is discarded between invocations, so scheduling the job without a
+  bucket produces a nightly "success" and no file — which is worse than no
+  backup at all, because nobody looks until they need it.
+
+The route declares `maxDuration = 60`. Gathering forty-five tables,
+encrypting and uploading takes longer than a request-shaped default allows,
+and a function killed part-way leaves no log line at all — the backup simply
+does not happen and nothing says so. Sixty seconds is within every plan
+tier's ceiling.
+
+One thing to check yourself: the function region. It defaults to the
+platform's, which may be a long way from the database, and every page here
+issues several queries. If the deployment feels slow, moving the functions
+nearer the database is usually the reason.
+
 ### Restoring a backup
 
 Backup files are AES-256-GCM encrypted (`[12-byte IV][16-byte auth tag][ciphertext]`,

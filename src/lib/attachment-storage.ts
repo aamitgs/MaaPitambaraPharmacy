@@ -2,8 +2,8 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import path from "node:path";
-import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { objectKey, keyIsSafe } from "@/lib/attachment-keys";
+import { usingObjectStore, putObject, getObject } from "@/lib/object-store";
 
 /**
  * Storage for uploaded documents, kept outside `public/` so a file can only
@@ -61,33 +61,6 @@ const MAX_BYTES = 8 * 1024 * 1024;
 
 export class AttachmentUploadError extends Error {}
 
-/** Bucket name is the switch: no bucket, no S3. */
-const S3_BUCKET = process.env.ATTACHMENT_S3_BUCKET;
-
-let cachedClient: S3Client | null = null;
-
-function s3(): S3Client {
-  if (!cachedClient) {
-    const endpoint = process.env.ATTACHMENT_S3_ENDPOINT;
-    const accessKeyId = process.env.ATTACHMENT_S3_ACCESS_KEY_ID;
-    const secretAccessKey = process.env.ATTACHMENT_S3_SECRET_ACCESS_KEY;
-    cachedClient = new S3Client({
-      // "auto" is what R2 expects; real AWS needs its own region set.
-      region: process.env.ATTACHMENT_S3_REGION || "auto",
-      endpoint: endpoint || undefined,
-      // Non-AWS providers address buckets by path, not by subdomain.
-      forcePathStyle: Boolean(endpoint),
-      // Fall through to the SDK's own credential chain when no explicit
-      // key is given, so an instance role keeps working.
-      credentials:
-        accessKeyId && secretAccessKey
-          ? { accessKeyId, secretAccessKey }
-          : undefined,
-    });
-  }
-  return cachedClient;
-}
-
 export async function saveAttachment(
   kind: AttachmentKind,
   tenantId: string,
@@ -105,15 +78,8 @@ export async function saveAttachment(
   const buffer = Buffer.from(await file.arrayBuffer());
   const relativePath = `${tenantId}/${filename}`;
 
-  if (S3_BUCKET) {
-    await s3().send(
-      new PutObjectCommand({
-        Bucket: S3_BUCKET,
-        Key: objectKey(kind, relativePath),
-        Body: buffer,
-        ContentType: file.type,
-      })
-    );
+  if (usingObjectStore()) {
+    await putObject(objectKey(kind, relativePath), buffer, file.type);
     return relativePath;
   }
 
@@ -143,23 +109,12 @@ export async function readAttachment(
   const contentType = CONTENT_TYPES[ext];
   if (!contentType) return null;
 
-  if (S3_BUCKET) {
+  if (usingObjectStore()) {
     if (!keyIsSafe(relativePath)) return null;
-    try {
-      const found = await s3().send(
-        new GetObjectCommand({
-          Bucket: S3_BUCKET,
-          Key: objectKey(kind, relativePath),
-        })
-      );
-      if (!found.Body) return null;
-      const bytes = Buffer.from(await found.Body.transformToByteArray());
-      return { bytes, contentType };
-    } catch {
-      // A missing object and an unreachable bucket both read as "not found"
-      // to the caller, which is what the local backend already does.
-      return null;
-    }
+    // A missing object and an unreachable bucket both read as "not found" to
+    // the caller, which is what the local backend already does.
+    const bytes = await getObject(objectKey(kind, relativePath));
+    return bytes ? { bytes, contentType } : null;
   }
 
   const root = ROOTS[kind];

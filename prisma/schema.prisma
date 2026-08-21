@@ -1389,6 +1389,10 @@ model AuditLog {
 enum BackupDestination {
   local
   manual
+  /// An S3-compatible bucket. Distinct from `local` so the backup log says
+  /// where a file actually went — on a host with no durable disk those are
+  /// very different outcomes, and only one of them leaves a file behind.
+  object_store
 }
 
 enum BackupStatus {

@@ -201,7 +201,8 @@ export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 export const BackupDestination = {
   local: 'local',
-  manual: 'manual'
+  manual: 'manual',
+  object_store: 'object_store'
 } as const
 
 export type BackupDestination = (typeof BackupDestination)[keyof typeof BackupDestination]
