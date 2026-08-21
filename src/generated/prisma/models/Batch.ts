@@ -28,16 +28,20 @@ export type AggregateBatch = {
 
 export type BatchAvgAggregateOutputType = {
   mrp: runtime.Decimal | null
+  ptr: runtime.Decimal | null
   purchaseRate: runtime.Decimal | null
   saleRate: runtime.Decimal | null
   currentQty: number | null
+  looseUnits: number | null
 }
 
 export type BatchSumAggregateOutputType = {
   mrp: runtime.Decimal | null
+  ptr: runtime.Decimal | null
   purchaseRate: runtime.Decimal | null
   saleRate: runtime.Decimal | null
   currentQty: number | null
+  looseUnits: number | null
 }
 
 export type BatchMinAggregateOutputType = {
@@ -48,9 +52,11 @@ export type BatchMinAggregateOutputType = {
   mfgDate: Date | null
   expiryDate: Date | null
   mrp: runtime.Decimal | null
+  ptr: runtime.Decimal | null
   purchaseRate: runtime.Decimal | null
   saleRate: runtime.Decimal | null
   currentQty: number | null
+  looseUnits: number | null
   rackLocation: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -64,9 +70,11 @@ export type BatchMaxAggregateOutputType = {
   mfgDate: Date | null
   expiryDate: Date | null
   mrp: runtime.Decimal | null
+  ptr: runtime.Decimal | null
   purchaseRate: runtime.Decimal | null
   saleRate: runtime.Decimal | null
   currentQty: number | null
+  looseUnits: number | null
   rackLocation: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -80,9 +88,11 @@ export type BatchCountAggregateOutputType = {
   mfgDate: number
   expiryDate: number
   mrp: number
+  ptr: number
   purchaseRate: number
   saleRate: number
   currentQty: number
+  looseUnits: number
   rackLocation: number
   createdAt: number
   updatedAt: number
@@ -92,16 +102,20 @@ export type BatchCountAggregateOutputType = {
 
 export type BatchAvgAggregateInputType = {
   mrp?: true
+  ptr?: true
   purchaseRate?: true
   saleRate?: true
   currentQty?: true
+  looseUnits?: true
 }
 
 export type BatchSumAggregateInputType = {
   mrp?: true
+  ptr?: true
   purchaseRate?: true
   saleRate?: true
   currentQty?: true
+  looseUnits?: true
 }
 
 export type BatchMinAggregateInputType = {
@@ -112,9 +126,11 @@ export type BatchMinAggregateInputType = {
   mfgDate?: true
   expiryDate?: true
   mrp?: true
+  ptr?: true
   purchaseRate?: true
   saleRate?: true
   currentQty?: true
+  looseUnits?: true
   rackLocation?: true
   createdAt?: true
   updatedAt?: true
@@ -128,9 +144,11 @@ export type BatchMaxAggregateInputType = {
   mfgDate?: true
   expiryDate?: true
   mrp?: true
+  ptr?: true
   purchaseRate?: true
   saleRate?: true
   currentQty?: true
+  looseUnits?: true
   rackLocation?: true
   createdAt?: true
   updatedAt?: true
@@ -144,9 +162,11 @@ export type BatchCountAggregateInputType = {
   mfgDate?: true
   expiryDate?: true
   mrp?: true
+  ptr?: true
   purchaseRate?: true
   saleRate?: true
   currentQty?: true
+  looseUnits?: true
   rackLocation?: true
   createdAt?: true
   updatedAt?: true
@@ -247,9 +267,11 @@ export type BatchGroupByOutputType = {
   mfgDate: Date | null
   expiryDate: Date
   mrp: runtime.Decimal
+  ptr: runtime.Decimal | null
   purchaseRate: runtime.Decimal
   saleRate: runtime.Decimal
   currentQty: number
+  looseUnits: number
   rackLocation: string | null
   createdAt: Date
   updatedAt: Date
@@ -286,18 +308,23 @@ export type BatchWhereInput = {
   mfgDate?: Prisma.DateTimeNullableFilter<"Batch"> | Date | string | null
   expiryDate?: Prisma.DateTimeFilter<"Batch"> | Date | string
   mrp?: Prisma.DecimalFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.DecimalNullableFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFilter<"Batch"> | number
+  looseUnits?: Prisma.IntFilter<"Batch"> | number
   rackLocation?: Prisma.StringNullableFilter<"Batch"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Batch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Batch"> | Date | string
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
   branch?: Prisma.XOR<Prisma.BranchScalarRelationFilter, Prisma.BranchWhereInput>
+  salesReturnItems?: Prisma.SalesReturnItemListRelationFilter
   salesInvoiceItems?: Prisma.SalesInvoiceItemListRelationFilter
   grnItems?: Prisma.GrnItemListRelationFilter
   purchaseReturnItems?: Prisma.PurchaseReturnItemListRelationFilter
   stockTransferItems?: Prisma.StockTransferItemListRelationFilter
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemListRelationFilter
+  stockCountLines?: Prisma.StockCountLineListRelationFilter
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryListRelationFilter
 }
 
@@ -309,18 +336,23 @@ export type BatchOrderByWithRelationInput = {
   mfgDate?: Prisma.SortOrderInput | Prisma.SortOrder
   expiryDate?: Prisma.SortOrder
   mrp?: Prisma.SortOrder
+  ptr?: Prisma.SortOrderInput | Prisma.SortOrder
   purchaseRate?: Prisma.SortOrder
   saleRate?: Prisma.SortOrder
   currentQty?: Prisma.SortOrder
+  looseUnits?: Prisma.SortOrder
   rackLocation?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   item?: Prisma.ItemOrderByWithRelationInput
   branch?: Prisma.BranchOrderByWithRelationInput
+  salesReturnItems?: Prisma.SalesReturnItemOrderByRelationAggregateInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemOrderByRelationAggregateInput
   grnItems?: Prisma.GrnItemOrderByRelationAggregateInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemOrderByRelationAggregateInput
   stockTransferItems?: Prisma.StockTransferItemOrderByRelationAggregateInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemOrderByRelationAggregateInput
+  stockCountLines?: Prisma.StockCountLineOrderByRelationAggregateInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryOrderByRelationAggregateInput
 }
 
@@ -335,18 +367,23 @@ export type BatchWhereUniqueInput = Prisma.AtLeast<{
   mfgDate?: Prisma.DateTimeNullableFilter<"Batch"> | Date | string | null
   expiryDate?: Prisma.DateTimeFilter<"Batch"> | Date | string
   mrp?: Prisma.DecimalFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.DecimalNullableFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFilter<"Batch"> | number
+  looseUnits?: Prisma.IntFilter<"Batch"> | number
   rackLocation?: Prisma.StringNullableFilter<"Batch"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Batch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Batch"> | Date | string
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
   branch?: Prisma.XOR<Prisma.BranchScalarRelationFilter, Prisma.BranchWhereInput>
+  salesReturnItems?: Prisma.SalesReturnItemListRelationFilter
   salesInvoiceItems?: Prisma.SalesInvoiceItemListRelationFilter
   grnItems?: Prisma.GrnItemListRelationFilter
   purchaseReturnItems?: Prisma.PurchaseReturnItemListRelationFilter
   stockTransferItems?: Prisma.StockTransferItemListRelationFilter
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemListRelationFilter
+  stockCountLines?: Prisma.StockCountLineListRelationFilter
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryListRelationFilter
 }, "id">
 
@@ -358,9 +395,11 @@ export type BatchOrderByWithAggregationInput = {
   mfgDate?: Prisma.SortOrderInput | Prisma.SortOrder
   expiryDate?: Prisma.SortOrder
   mrp?: Prisma.SortOrder
+  ptr?: Prisma.SortOrderInput | Prisma.SortOrder
   purchaseRate?: Prisma.SortOrder
   saleRate?: Prisma.SortOrder
   currentQty?: Prisma.SortOrder
+  looseUnits?: Prisma.SortOrder
   rackLocation?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -382,9 +421,11 @@ export type BatchScalarWhereWithAggregatesInput = {
   mfgDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Batch"> | Date | string | null
   expiryDate?: Prisma.DateTimeWithAggregatesFilter<"Batch"> | Date | string
   mrp?: Prisma.DecimalWithAggregatesFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.DecimalNullableWithAggregatesFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalWithAggregatesFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalWithAggregatesFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntWithAggregatesFilter<"Batch"> | number
+  looseUnits?: Prisma.IntWithAggregatesFilter<"Batch"> | number
   rackLocation?: Prisma.StringNullableWithAggregatesFilter<"Batch"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Batch"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Batch"> | Date | string
@@ -396,18 +437,23 @@ export type BatchCreateInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   item: Prisma.ItemCreateNestedOneWithoutBatchesInput
   branch: Prisma.BranchCreateNestedOneWithoutBatchesInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBatchInput
 }
 
@@ -419,16 +465,21 @@ export type BatchUncheckedCreateInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBatchInput
 }
 
@@ -438,18 +489,23 @@ export type BatchUpdateInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   item?: Prisma.ItemUpdateOneRequiredWithoutBatchesNestedInput
   branch?: Prisma.BranchUpdateOneRequiredWithoutBatchesNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBatchNestedInput
 }
 
@@ -461,16 +517,21 @@ export type BatchUncheckedUpdateInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBatchNestedInput
 }
 
@@ -482,9 +543,11 @@ export type BatchCreateManyInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -496,9 +559,11 @@ export type BatchUpdateManyMutationInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -512,9 +577,11 @@ export type BatchUncheckedUpdateManyInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -538,9 +605,11 @@ export type BatchCountOrderByAggregateInput = {
   mfgDate?: Prisma.SortOrder
   expiryDate?: Prisma.SortOrder
   mrp?: Prisma.SortOrder
+  ptr?: Prisma.SortOrder
   purchaseRate?: Prisma.SortOrder
   saleRate?: Prisma.SortOrder
   currentQty?: Prisma.SortOrder
+  looseUnits?: Prisma.SortOrder
   rackLocation?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -548,9 +617,11 @@ export type BatchCountOrderByAggregateInput = {
 
 export type BatchAvgOrderByAggregateInput = {
   mrp?: Prisma.SortOrder
+  ptr?: Prisma.SortOrder
   purchaseRate?: Prisma.SortOrder
   saleRate?: Prisma.SortOrder
   currentQty?: Prisma.SortOrder
+  looseUnits?: Prisma.SortOrder
 }
 
 export type BatchMaxOrderByAggregateInput = {
@@ -561,9 +632,11 @@ export type BatchMaxOrderByAggregateInput = {
   mfgDate?: Prisma.SortOrder
   expiryDate?: Prisma.SortOrder
   mrp?: Prisma.SortOrder
+  ptr?: Prisma.SortOrder
   purchaseRate?: Prisma.SortOrder
   saleRate?: Prisma.SortOrder
   currentQty?: Prisma.SortOrder
+  looseUnits?: Prisma.SortOrder
   rackLocation?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -577,9 +650,11 @@ export type BatchMinOrderByAggregateInput = {
   mfgDate?: Prisma.SortOrder
   expiryDate?: Prisma.SortOrder
   mrp?: Prisma.SortOrder
+  ptr?: Prisma.SortOrder
   purchaseRate?: Prisma.SortOrder
   saleRate?: Prisma.SortOrder
   currentQty?: Prisma.SortOrder
+  looseUnits?: Prisma.SortOrder
   rackLocation?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -587,9 +662,11 @@ export type BatchMinOrderByAggregateInput = {
 
 export type BatchSumOrderByAggregateInput = {
   mrp?: Prisma.SortOrder
+  ptr?: Prisma.SortOrder
   purchaseRate?: Prisma.SortOrder
   saleRate?: Prisma.SortOrder
   currentQty?: Prisma.SortOrder
+  looseUnits?: Prisma.SortOrder
 }
 
 export type BatchScalarRelationFilter = {
@@ -681,8 +758,54 @@ export type BatchUncheckedUpdateManyWithoutItemNestedInput = {
   deleteMany?: Prisma.BatchScalarWhereInput | Prisma.BatchScalarWhereInput[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type BatchCreateNestedOneWithoutSalesReturnItemsInput = {
+  create?: Prisma.XOR<Prisma.BatchCreateWithoutSalesReturnItemsInput, Prisma.BatchUncheckedCreateWithoutSalesReturnItemsInput>
+  connectOrCreate?: Prisma.BatchCreateOrConnectWithoutSalesReturnItemsInput
+  connect?: Prisma.BatchWhereUniqueInput
+}
+
+export type BatchUpdateOneRequiredWithoutSalesReturnItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.BatchCreateWithoutSalesReturnItemsInput, Prisma.BatchUncheckedCreateWithoutSalesReturnItemsInput>
+  connectOrCreate?: Prisma.BatchCreateOrConnectWithoutSalesReturnItemsInput
+  upsert?: Prisma.BatchUpsertWithoutSalesReturnItemsInput
+  connect?: Prisma.BatchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BatchUpdateToOneWithWhereWithoutSalesReturnItemsInput, Prisma.BatchUpdateWithoutSalesReturnItemsInput>, Prisma.BatchUncheckedUpdateWithoutSalesReturnItemsInput>
+}
+
+export type BatchCreateNestedOneWithoutStockCountLinesInput = {
+  create?: Prisma.XOR<Prisma.BatchCreateWithoutStockCountLinesInput, Prisma.BatchUncheckedCreateWithoutStockCountLinesInput>
+  connectOrCreate?: Prisma.BatchCreateOrConnectWithoutStockCountLinesInput
+  connect?: Prisma.BatchWhereUniqueInput
+}
+
+export type BatchUpdateOneRequiredWithoutStockCountLinesNestedInput = {
+  create?: Prisma.XOR<Prisma.BatchCreateWithoutStockCountLinesInput, Prisma.BatchUncheckedCreateWithoutStockCountLinesInput>
+  connectOrCreate?: Prisma.BatchCreateOrConnectWithoutStockCountLinesInput
+  upsert?: Prisma.BatchUpsertWithoutStockCountLinesInput
+  connect?: Prisma.BatchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BatchUpdateToOneWithWhereWithoutStockCountLinesInput, Prisma.BatchUpdateWithoutStockCountLinesInput>, Prisma.BatchUncheckedUpdateWithoutStockCountLinesInput>
+}
+
+export type BatchCreateNestedOneWithoutStockAdjustmentItemsInput = {
+  create?: Prisma.XOR<Prisma.BatchCreateWithoutStockAdjustmentItemsInput, Prisma.BatchUncheckedCreateWithoutStockAdjustmentItemsInput>
+  connectOrCreate?: Prisma.BatchCreateOrConnectWithoutStockAdjustmentItemsInput
+  connect?: Prisma.BatchWhereUniqueInput
+}
+
+export type BatchUpdateOneRequiredWithoutStockAdjustmentItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.BatchCreateWithoutStockAdjustmentItemsInput, Prisma.BatchUncheckedCreateWithoutStockAdjustmentItemsInput>
+  connectOrCreate?: Prisma.BatchCreateOrConnectWithoutStockAdjustmentItemsInput
+  upsert?: Prisma.BatchUpsertWithoutStockAdjustmentItemsInput
+  connect?: Prisma.BatchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BatchUpdateToOneWithWhereWithoutStockAdjustmentItemsInput, Prisma.BatchUpdateWithoutStockAdjustmentItemsInput>, Prisma.BatchUncheckedUpdateWithoutStockAdjustmentItemsInput>
 }
 
 export type BatchCreateNestedOneWithoutSalesInvoiceItemsInput = {
@@ -761,17 +884,22 @@ export type BatchCreateWithoutBranchInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   item: Prisma.ItemCreateNestedOneWithoutBatchesInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBatchInput
 }
 
@@ -782,16 +910,21 @@ export type BatchUncheckedCreateWithoutBranchInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBatchInput
 }
 
@@ -832,9 +965,11 @@ export type BatchScalarWhereInput = {
   mfgDate?: Prisma.DateTimeNullableFilter<"Batch"> | Date | string | null
   expiryDate?: Prisma.DateTimeFilter<"Batch"> | Date | string
   mrp?: Prisma.DecimalFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.DecimalNullableFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFilter<"Batch"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFilter<"Batch"> | number
+  looseUnits?: Prisma.IntFilter<"Batch"> | number
   rackLocation?: Prisma.StringNullableFilter<"Batch"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Batch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Batch"> | Date | string
@@ -846,17 +981,22 @@ export type BatchCreateWithoutItemInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   branch: Prisma.BranchCreateNestedOneWithoutBatchesInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBatchInput
 }
 
@@ -867,16 +1007,21 @@ export type BatchUncheckedCreateWithoutItemInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBatchInput
 }
 
@@ -906,23 +1051,376 @@ export type BatchUpdateManyWithWhereWithoutItemInput = {
   data: Prisma.XOR<Prisma.BatchUpdateManyMutationInput, Prisma.BatchUncheckedUpdateManyWithoutItemInput>
 }
 
+export type BatchCreateWithoutSalesReturnItemsInput = {
+  id?: string
+  batchNo: string
+  mfgDate?: Date | string | null
+  expiryDate: Date | string
+  mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentQty?: number
+  looseUnits?: number
+  rackLocation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  item: Prisma.ItemCreateNestedOneWithoutBatchesInput
+  branch: Prisma.BranchCreateNestedOneWithoutBatchesInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutBatchInput
+  grnItems?: Prisma.GrnItemCreateNestedManyWithoutBatchInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutBatchInput
+  stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutBatchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBatchInput
+}
+
+export type BatchUncheckedCreateWithoutSalesReturnItemsInput = {
+  id?: string
+  itemId: string
+  branchId: string
+  batchNo: string
+  mfgDate?: Date | string | null
+  expiryDate: Date | string
+  mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentQty?: number
+  looseUnits?: number
+  rackLocation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutBatchInput
+  grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutBatchInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutBatchInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutBatchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBatchInput
+}
+
+export type BatchCreateOrConnectWithoutSalesReturnItemsInput = {
+  where: Prisma.BatchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BatchCreateWithoutSalesReturnItemsInput, Prisma.BatchUncheckedCreateWithoutSalesReturnItemsInput>
+}
+
+export type BatchUpsertWithoutSalesReturnItemsInput = {
+  update: Prisma.XOR<Prisma.BatchUpdateWithoutSalesReturnItemsInput, Prisma.BatchUncheckedUpdateWithoutSalesReturnItemsInput>
+  create: Prisma.XOR<Prisma.BatchCreateWithoutSalesReturnItemsInput, Prisma.BatchUncheckedCreateWithoutSalesReturnItemsInput>
+  where?: Prisma.BatchWhereInput
+}
+
+export type BatchUpdateToOneWithWhereWithoutSalesReturnItemsInput = {
+  where?: Prisma.BatchWhereInput
+  data: Prisma.XOR<Prisma.BatchUpdateWithoutSalesReturnItemsInput, Prisma.BatchUncheckedUpdateWithoutSalesReturnItemsInput>
+}
+
+export type BatchUpdateWithoutSalesReturnItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  batchNo?: Prisma.StringFieldUpdateOperationsInput | string
+  mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
+  rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  item?: Prisma.ItemUpdateOneRequiredWithoutBatchesNestedInput
+  branch?: Prisma.BranchUpdateOneRequiredWithoutBatchesNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutBatchNestedInput
+  grnItems?: Prisma.GrnItemUpdateManyWithoutBatchNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutBatchNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutBatchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBatchNestedInput
+}
+
+export type BatchUncheckedUpdateWithoutSalesReturnItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  itemId?: Prisma.StringFieldUpdateOperationsInput | string
+  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  batchNo?: Prisma.StringFieldUpdateOperationsInput | string
+  mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
+  rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutBatchNestedInput
+  grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutBatchNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutBatchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBatchNestedInput
+}
+
+export type BatchCreateWithoutStockCountLinesInput = {
+  id?: string
+  batchNo: string
+  mfgDate?: Date | string | null
+  expiryDate: Date | string
+  mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentQty?: number
+  looseUnits?: number
+  rackLocation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  item: Prisma.ItemCreateNestedOneWithoutBatchesInput
+  branch: Prisma.BranchCreateNestedOneWithoutBatchesInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutBatchInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutBatchInput
+  grnItems?: Prisma.GrnItemCreateNestedManyWithoutBatchInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutBatchInput
+  stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutBatchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBatchInput
+}
+
+export type BatchUncheckedCreateWithoutStockCountLinesInput = {
+  id?: string
+  itemId: string
+  branchId: string
+  batchNo: string
+  mfgDate?: Date | string | null
+  expiryDate: Date | string
+  mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentQty?: number
+  looseUnits?: number
+  rackLocation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutBatchInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutBatchInput
+  grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutBatchInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutBatchInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutBatchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBatchInput
+}
+
+export type BatchCreateOrConnectWithoutStockCountLinesInput = {
+  where: Prisma.BatchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BatchCreateWithoutStockCountLinesInput, Prisma.BatchUncheckedCreateWithoutStockCountLinesInput>
+}
+
+export type BatchUpsertWithoutStockCountLinesInput = {
+  update: Prisma.XOR<Prisma.BatchUpdateWithoutStockCountLinesInput, Prisma.BatchUncheckedUpdateWithoutStockCountLinesInput>
+  create: Prisma.XOR<Prisma.BatchCreateWithoutStockCountLinesInput, Prisma.BatchUncheckedCreateWithoutStockCountLinesInput>
+  where?: Prisma.BatchWhereInput
+}
+
+export type BatchUpdateToOneWithWhereWithoutStockCountLinesInput = {
+  where?: Prisma.BatchWhereInput
+  data: Prisma.XOR<Prisma.BatchUpdateWithoutStockCountLinesInput, Prisma.BatchUncheckedUpdateWithoutStockCountLinesInput>
+}
+
+export type BatchUpdateWithoutStockCountLinesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  batchNo?: Prisma.StringFieldUpdateOperationsInput | string
+  mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
+  rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  item?: Prisma.ItemUpdateOneRequiredWithoutBatchesNestedInput
+  branch?: Prisma.BranchUpdateOneRequiredWithoutBatchesNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutBatchNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutBatchNestedInput
+  grnItems?: Prisma.GrnItemUpdateManyWithoutBatchNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutBatchNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutBatchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBatchNestedInput
+}
+
+export type BatchUncheckedUpdateWithoutStockCountLinesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  itemId?: Prisma.StringFieldUpdateOperationsInput | string
+  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  batchNo?: Prisma.StringFieldUpdateOperationsInput | string
+  mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
+  rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutBatchNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutBatchNestedInput
+  grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutBatchNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutBatchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBatchNestedInput
+}
+
+export type BatchCreateWithoutStockAdjustmentItemsInput = {
+  id?: string
+  batchNo: string
+  mfgDate?: Date | string | null
+  expiryDate: Date | string
+  mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentQty?: number
+  looseUnits?: number
+  rackLocation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  item: Prisma.ItemCreateNestedOneWithoutBatchesInput
+  branch: Prisma.BranchCreateNestedOneWithoutBatchesInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutBatchInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutBatchInput
+  grnItems?: Prisma.GrnItemCreateNestedManyWithoutBatchInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutBatchInput
+  stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutBatchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBatchInput
+}
+
+export type BatchUncheckedCreateWithoutStockAdjustmentItemsInput = {
+  id?: string
+  itemId: string
+  branchId: string
+  batchNo: string
+  mfgDate?: Date | string | null
+  expiryDate: Date | string
+  mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentQty?: number
+  looseUnits?: number
+  rackLocation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutBatchInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutBatchInput
+  grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutBatchInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutBatchInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutBatchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBatchInput
+}
+
+export type BatchCreateOrConnectWithoutStockAdjustmentItemsInput = {
+  where: Prisma.BatchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BatchCreateWithoutStockAdjustmentItemsInput, Prisma.BatchUncheckedCreateWithoutStockAdjustmentItemsInput>
+}
+
+export type BatchUpsertWithoutStockAdjustmentItemsInput = {
+  update: Prisma.XOR<Prisma.BatchUpdateWithoutStockAdjustmentItemsInput, Prisma.BatchUncheckedUpdateWithoutStockAdjustmentItemsInput>
+  create: Prisma.XOR<Prisma.BatchCreateWithoutStockAdjustmentItemsInput, Prisma.BatchUncheckedCreateWithoutStockAdjustmentItemsInput>
+  where?: Prisma.BatchWhereInput
+}
+
+export type BatchUpdateToOneWithWhereWithoutStockAdjustmentItemsInput = {
+  where?: Prisma.BatchWhereInput
+  data: Prisma.XOR<Prisma.BatchUpdateWithoutStockAdjustmentItemsInput, Prisma.BatchUncheckedUpdateWithoutStockAdjustmentItemsInput>
+}
+
+export type BatchUpdateWithoutStockAdjustmentItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  batchNo?: Prisma.StringFieldUpdateOperationsInput | string
+  mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
+  rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  item?: Prisma.ItemUpdateOneRequiredWithoutBatchesNestedInput
+  branch?: Prisma.BranchUpdateOneRequiredWithoutBatchesNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutBatchNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutBatchNestedInput
+  grnItems?: Prisma.GrnItemUpdateManyWithoutBatchNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutBatchNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutBatchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBatchNestedInput
+}
+
+export type BatchUncheckedUpdateWithoutStockAdjustmentItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  itemId?: Prisma.StringFieldUpdateOperationsInput | string
+  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  batchNo?: Prisma.StringFieldUpdateOperationsInput | string
+  mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
+  rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutBatchNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutBatchNestedInput
+  grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutBatchNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutBatchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBatchNestedInput
+}
+
 export type BatchCreateWithoutSalesInvoiceItemsInput = {
   id?: string
   batchNo: string
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   item: Prisma.ItemCreateNestedOneWithoutBatchesInput
   branch: Prisma.BranchCreateNestedOneWithoutBatchesInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBatchInput
 }
 
@@ -934,15 +1432,20 @@ export type BatchUncheckedCreateWithoutSalesInvoiceItemsInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBatchInput
 }
 
@@ -968,17 +1471,22 @@ export type BatchUpdateWithoutSalesInvoiceItemsInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   item?: Prisma.ItemUpdateOneRequiredWithoutBatchesNestedInput
   branch?: Prisma.BranchUpdateOneRequiredWithoutBatchesNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBatchNestedInput
 }
 
@@ -990,15 +1498,20 @@ export type BatchUncheckedUpdateWithoutSalesInvoiceItemsInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBatchNestedInput
 }
 
@@ -1008,17 +1521,22 @@ export type BatchCreateWithoutGrnItemsInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   item: Prisma.ItemCreateNestedOneWithoutBatchesInput
   branch: Prisma.BranchCreateNestedOneWithoutBatchesInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBatchInput
 }
 
@@ -1030,15 +1548,20 @@ export type BatchUncheckedCreateWithoutGrnItemsInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBatchInput
 }
 
@@ -1064,17 +1587,22 @@ export type BatchUpdateWithoutGrnItemsInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   item?: Prisma.ItemUpdateOneRequiredWithoutBatchesNestedInput
   branch?: Prisma.BranchUpdateOneRequiredWithoutBatchesNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBatchNestedInput
 }
 
@@ -1086,15 +1614,20 @@ export type BatchUncheckedUpdateWithoutGrnItemsInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBatchNestedInput
 }
 
@@ -1104,17 +1637,22 @@ export type BatchCreateWithoutPurchaseReturnItemsInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   item: Prisma.ItemCreateNestedOneWithoutBatchesInput
   branch: Prisma.BranchCreateNestedOneWithoutBatchesInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBatchInput
 }
 
@@ -1126,15 +1664,20 @@ export type BatchUncheckedCreateWithoutPurchaseReturnItemsInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBatchInput
 }
 
@@ -1160,17 +1703,22 @@ export type BatchUpdateWithoutPurchaseReturnItemsInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   item?: Prisma.ItemUpdateOneRequiredWithoutBatchesNestedInput
   branch?: Prisma.BranchUpdateOneRequiredWithoutBatchesNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBatchNestedInput
 }
 
@@ -1182,15 +1730,20 @@ export type BatchUncheckedUpdateWithoutPurchaseReturnItemsInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBatchNestedInput
 }
 
@@ -1200,17 +1753,22 @@ export type BatchCreateWithoutStockTransferItemsInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   item: Prisma.ItemCreateNestedOneWithoutBatchesInput
   branch: Prisma.BranchCreateNestedOneWithoutBatchesInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBatchInput
 }
 
@@ -1222,15 +1780,20 @@ export type BatchUncheckedCreateWithoutStockTransferItemsInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutBatchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBatchInput
 }
 
@@ -1256,17 +1819,22 @@ export type BatchUpdateWithoutStockTransferItemsInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   item?: Prisma.ItemUpdateOneRequiredWithoutBatchesNestedInput
   branch?: Prisma.BranchUpdateOneRequiredWithoutBatchesNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBatchNestedInput
 }
 
@@ -1278,15 +1846,20 @@ export type BatchUncheckedUpdateWithoutStockTransferItemsInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBatchNestedInput
 }
 
@@ -1296,18 +1869,23 @@ export type BatchCreateWithoutNarcoticRegisterEntriesInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   item: Prisma.ItemCreateNestedOneWithoutBatchesInput
   branch: Prisma.BranchCreateNestedOneWithoutBatchesInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutBatchInput
 }
 
 export type BatchUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
@@ -1318,16 +1896,21 @@ export type BatchUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutBatchInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutBatchInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutBatchInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutBatchInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutBatchInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutBatchInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutBatchInput
 }
 
 export type BatchCreateOrConnectWithoutNarcoticRegisterEntriesInput = {
@@ -1352,18 +1935,23 @@ export type BatchUpdateWithoutNarcoticRegisterEntriesInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   item?: Prisma.ItemUpdateOneRequiredWithoutBatchesNestedInput
   branch?: Prisma.BranchUpdateOneRequiredWithoutBatchesNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutBatchNestedInput
 }
 
 export type BatchUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
@@ -1374,16 +1962,21 @@ export type BatchUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutBatchNestedInput
 }
 
 export type BatchCreateManyBranchInput = {
@@ -1393,9 +1986,11 @@ export type BatchCreateManyBranchInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1407,17 +2002,22 @@ export type BatchUpdateWithoutBranchInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   item?: Prisma.ItemUpdateOneRequiredWithoutBatchesNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBatchNestedInput
 }
 
@@ -1428,16 +2028,21 @@ export type BatchUncheckedUpdateWithoutBranchInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBatchNestedInput
 }
 
@@ -1448,9 +2053,11 @@ export type BatchUncheckedUpdateManyWithoutBranchInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1463,9 +2070,11 @@ export type BatchCreateManyItemInput = {
   mfgDate?: Date | string | null
   expiryDate: Date | string
   mrp: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: number
+  looseUnits?: number
   rackLocation?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1477,17 +2086,22 @@ export type BatchUpdateWithoutItemInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branch?: Prisma.BranchUpdateOneRequiredWithoutBatchesNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBatchNestedInput
 }
 
@@ -1498,16 +2112,21 @@ export type BatchUncheckedUpdateWithoutItemInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutBatchNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutBatchNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutBatchNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutBatchNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutBatchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBatchNestedInput
 }
 
@@ -1518,9 +2137,11 @@ export type BatchUncheckedUpdateManyWithoutItemInput = {
   mfgDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mrp?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ptr?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   purchaseRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   saleRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  looseUnits?: Prisma.IntFieldUpdateOperationsInput | number
   rackLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1532,18 +2153,24 @@ export type BatchUncheckedUpdateManyWithoutItemInput = {
  */
 
 export type BatchCountOutputType = {
+  salesReturnItems: number
   salesInvoiceItems: number
   grnItems: number
   purchaseReturnItems: number
   stockTransferItems: number
+  stockAdjustmentItems: number
+  stockCountLines: number
   narcoticRegisterEntries: number
 }
 
 export type BatchCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  salesReturnItems?: boolean | BatchCountOutputTypeCountSalesReturnItemsArgs
   salesInvoiceItems?: boolean | BatchCountOutputTypeCountSalesInvoiceItemsArgs
   grnItems?: boolean | BatchCountOutputTypeCountGrnItemsArgs
   purchaseReturnItems?: boolean | BatchCountOutputTypeCountPurchaseReturnItemsArgs
   stockTransferItems?: boolean | BatchCountOutputTypeCountStockTransferItemsArgs
+  stockAdjustmentItems?: boolean | BatchCountOutputTypeCountStockAdjustmentItemsArgs
+  stockCountLines?: boolean | BatchCountOutputTypeCountStockCountLinesArgs
   narcoticRegisterEntries?: boolean | BatchCountOutputTypeCountNarcoticRegisterEntriesArgs
 }
 
@@ -1555,6 +2182,13 @@ export type BatchCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
    * Select specific fields to fetch from the BatchCountOutputType
    */
   select?: Prisma.BatchCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * BatchCountOutputType without action
+ */
+export type BatchCountOutputTypeCountSalesReturnItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalesReturnItemWhereInput
 }
 
 /**
@@ -1588,6 +2222,20 @@ export type BatchCountOutputTypeCountStockTransferItemsArgs<ExtArgs extends runt
 /**
  * BatchCountOutputType without action
  */
+export type BatchCountOutputTypeCountStockAdjustmentItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockAdjustmentItemWhereInput
+}
+
+/**
+ * BatchCountOutputType without action
+ */
+export type BatchCountOutputTypeCountStockCountLinesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockCountLineWhereInput
+}
+
+/**
+ * BatchCountOutputType without action
+ */
 export type BatchCountOutputTypeCountNarcoticRegisterEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.NarcoticRegisterEntryWhereInput
 }
@@ -1601,18 +2249,23 @@ export type BatchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   mfgDate?: boolean
   expiryDate?: boolean
   mrp?: boolean
+  ptr?: boolean
   purchaseRate?: boolean
   saleRate?: boolean
   currentQty?: boolean
+  looseUnits?: boolean
   rackLocation?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  salesReturnItems?: boolean | Prisma.Batch$salesReturnItemsArgs<ExtArgs>
   salesInvoiceItems?: boolean | Prisma.Batch$salesInvoiceItemsArgs<ExtArgs>
   grnItems?: boolean | Prisma.Batch$grnItemsArgs<ExtArgs>
   purchaseReturnItems?: boolean | Prisma.Batch$purchaseReturnItemsArgs<ExtArgs>
   stockTransferItems?: boolean | Prisma.Batch$stockTransferItemsArgs<ExtArgs>
+  stockAdjustmentItems?: boolean | Prisma.Batch$stockAdjustmentItemsArgs<ExtArgs>
+  stockCountLines?: boolean | Prisma.Batch$stockCountLinesArgs<ExtArgs>
   narcoticRegisterEntries?: boolean | Prisma.Batch$narcoticRegisterEntriesArgs<ExtArgs>
   _count?: boolean | Prisma.BatchCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["batch"]>
@@ -1625,9 +2278,11 @@ export type BatchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   mfgDate?: boolean
   expiryDate?: boolean
   mrp?: boolean
+  ptr?: boolean
   purchaseRate?: boolean
   saleRate?: boolean
   currentQty?: boolean
+  looseUnits?: boolean
   rackLocation?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1643,9 +2298,11 @@ export type BatchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   mfgDate?: boolean
   expiryDate?: boolean
   mrp?: boolean
+  ptr?: boolean
   purchaseRate?: boolean
   saleRate?: boolean
   currentQty?: boolean
+  looseUnits?: boolean
   rackLocation?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1661,22 +2318,27 @@ export type BatchSelectScalar = {
   mfgDate?: boolean
   expiryDate?: boolean
   mrp?: boolean
+  ptr?: boolean
   purchaseRate?: boolean
   saleRate?: boolean
   currentQty?: boolean
+  looseUnits?: boolean
   rackLocation?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "itemId" | "branchId" | "batchNo" | "mfgDate" | "expiryDate" | "mrp" | "purchaseRate" | "saleRate" | "currentQty" | "rackLocation" | "createdAt" | "updatedAt", ExtArgs["result"]["batch"]>
+export type BatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "itemId" | "branchId" | "batchNo" | "mfgDate" | "expiryDate" | "mrp" | "ptr" | "purchaseRate" | "saleRate" | "currentQty" | "looseUnits" | "rackLocation" | "createdAt" | "updatedAt", ExtArgs["result"]["batch"]>
 export type BatchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
+  salesReturnItems?: boolean | Prisma.Batch$salesReturnItemsArgs<ExtArgs>
   salesInvoiceItems?: boolean | Prisma.Batch$salesInvoiceItemsArgs<ExtArgs>
   grnItems?: boolean | Prisma.Batch$grnItemsArgs<ExtArgs>
   purchaseReturnItems?: boolean | Prisma.Batch$purchaseReturnItemsArgs<ExtArgs>
   stockTransferItems?: boolean | Prisma.Batch$stockTransferItemsArgs<ExtArgs>
+  stockAdjustmentItems?: boolean | Prisma.Batch$stockAdjustmentItemsArgs<ExtArgs>
+  stockCountLines?: boolean | Prisma.Batch$stockCountLinesArgs<ExtArgs>
   narcoticRegisterEntries?: boolean | Prisma.Batch$narcoticRegisterEntriesArgs<ExtArgs>
   _count?: boolean | Prisma.BatchCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1694,10 +2356,13 @@ export type $BatchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     item: Prisma.$ItemPayload<ExtArgs>
     branch: Prisma.$BranchPayload<ExtArgs>
+    salesReturnItems: Prisma.$SalesReturnItemPayload<ExtArgs>[]
     salesInvoiceItems: Prisma.$SalesInvoiceItemPayload<ExtArgs>[]
     grnItems: Prisma.$GrnItemPayload<ExtArgs>[]
     purchaseReturnItems: Prisma.$PurchaseReturnItemPayload<ExtArgs>[]
     stockTransferItems: Prisma.$StockTransferItemPayload<ExtArgs>[]
+    stockAdjustmentItems: Prisma.$StockAdjustmentItemPayload<ExtArgs>[]
+    stockCountLines: Prisma.$StockCountLinePayload<ExtArgs>[]
     narcoticRegisterEntries: Prisma.$NarcoticRegisterEntryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1708,9 +2373,25 @@ export type $BatchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     mfgDate: Date | null
     expiryDate: Date
     mrp: runtime.Decimal
+    /**
+     * Price To Retailer — what a wholesale buyer pays, printed on the
+     * distributor's invoice. Distinct from `purchaseRate` (what this
+     * pharmacy paid) and from `saleRate` (its retail price). Null on stock
+     * that is only ever sold retail.
+     */
+    ptr: runtime.Decimal | null
     purchaseRate: runtime.Decimal
     saleRate: runtime.Decimal
+    /**
+     * Unopened packs.
+     */
     currentQty: number
+    /**
+     * Units left in the single opened pack. Always less than the item's
+     * unitsPerPack — as soon as it would reach a full pack it becomes one,
+     * so the same stock has exactly one representation.
+     */
+    looseUnits: number
     rackLocation: string | null
     createdAt: Date
     updatedAt: Date
@@ -2110,10 +2791,13 @@ export interface Prisma__BatchClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   item<T extends Prisma.ItemDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ItemDefaultArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   branch<T extends Prisma.BranchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BranchDefaultArgs<ExtArgs>>): Prisma.Prisma__BranchClient<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  salesReturnItems<T extends Prisma.Batch$salesReturnItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Batch$salesReturnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesReturnItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   salesInvoiceItems<T extends Prisma.Batch$salesInvoiceItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Batch$salesInvoiceItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesInvoiceItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   grnItems<T extends Prisma.Batch$grnItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Batch$grnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GrnItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   purchaseReturnItems<T extends Prisma.Batch$purchaseReturnItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Batch$purchaseReturnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseReturnItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockTransferItems<T extends Prisma.Batch$stockTransferItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Batch$stockTransferItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockAdjustmentItems<T extends Prisma.Batch$stockAdjustmentItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Batch$stockAdjustmentItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockAdjustmentItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockCountLines<T extends Prisma.Batch$stockCountLinesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Batch$stockCountLinesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockCountLinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   narcoticRegisterEntries<T extends Prisma.Batch$narcoticRegisterEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Batch$narcoticRegisterEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NarcoticRegisterEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2151,9 +2835,11 @@ export interface BatchFieldRefs {
   readonly mfgDate: Prisma.FieldRef<"Batch", 'DateTime'>
   readonly expiryDate: Prisma.FieldRef<"Batch", 'DateTime'>
   readonly mrp: Prisma.FieldRef<"Batch", 'Decimal'>
+  readonly ptr: Prisma.FieldRef<"Batch", 'Decimal'>
   readonly purchaseRate: Prisma.FieldRef<"Batch", 'Decimal'>
   readonly saleRate: Prisma.FieldRef<"Batch", 'Decimal'>
   readonly currentQty: Prisma.FieldRef<"Batch", 'Int'>
+  readonly looseUnits: Prisma.FieldRef<"Batch", 'Int'>
   readonly rackLocation: Prisma.FieldRef<"Batch", 'String'>
   readonly createdAt: Prisma.FieldRef<"Batch", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Batch", 'DateTime'>
@@ -2558,6 +3244,30 @@ export type BatchDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Batch.salesReturnItems
+ */
+export type Batch$salesReturnItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalesReturnItem
+   */
+  select?: Prisma.SalesReturnItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SalesReturnItem
+   */
+  omit?: Prisma.SalesReturnItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalesReturnItemInclude<ExtArgs> | null
+  where?: Prisma.SalesReturnItemWhereInput
+  orderBy?: Prisma.SalesReturnItemOrderByWithRelationInput | Prisma.SalesReturnItemOrderByWithRelationInput[]
+  cursor?: Prisma.SalesReturnItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalesReturnItemScalarFieldEnum | Prisma.SalesReturnItemScalarFieldEnum[]
+}
+
+/**
  * Batch.salesInvoiceItems
  */
 export type Batch$salesInvoiceItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2651,6 +3361,54 @@ export type Batch$stockTransferItemsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.StockTransferItemScalarFieldEnum | Prisma.StockTransferItemScalarFieldEnum[]
+}
+
+/**
+ * Batch.stockAdjustmentItems
+ */
+export type Batch$stockAdjustmentItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockAdjustmentItem
+   */
+  select?: Prisma.StockAdjustmentItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockAdjustmentItem
+   */
+  omit?: Prisma.StockAdjustmentItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockAdjustmentItemInclude<ExtArgs> | null
+  where?: Prisma.StockAdjustmentItemWhereInput
+  orderBy?: Prisma.StockAdjustmentItemOrderByWithRelationInput | Prisma.StockAdjustmentItemOrderByWithRelationInput[]
+  cursor?: Prisma.StockAdjustmentItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockAdjustmentItemScalarFieldEnum | Prisma.StockAdjustmentItemScalarFieldEnum[]
+}
+
+/**
+ * Batch.stockCountLines
+ */
+export type Batch$stockCountLinesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockCountLine
+   */
+  select?: Prisma.StockCountLineSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockCountLine
+   */
+  omit?: Prisma.StockCountLineOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockCountLineInclude<ExtArgs> | null
+  where?: Prisma.StockCountLineWhereInput
+  orderBy?: Prisma.StockCountLineOrderByWithRelationInput | Prisma.StockCountLineOrderByWithRelationInput[]
+  cursor?: Prisma.StockCountLineWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockCountLineScalarFieldEnum | Prisma.StockCountLineScalarFieldEnum[]
 }
 
 /**

@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole } from "@/lib/rbac";
+import { requirePermission } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 import type { SchemeDef } from "@/lib/scheme-engine";
 
@@ -57,16 +57,16 @@ function serializeScheme(s: {
 
 /** Lightweight item list for the scheme form's item-scope picker. */
 export async function listItemNamesForSchemes() {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("promotions.manage");
   return prisma.item.findMany({
-    where: { tenantId: session.user.tenantId },
+    where: { tenantId: session.user.tenantId, isActive: true },
     select: { id: true, name: true },
     orderBy: { name: "asc" },
   });
 }
 
 export async function listSchemes() {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("promotions.manage");
   const schemes = await prisma.scheme.findMany({
     where: { tenantId: session.user.tenantId },
     orderBy: { validFrom: "desc" },
@@ -89,7 +89,7 @@ export async function listActiveSchemesForBilling(tenantId: string): Promise<Sch
 }
 
 export async function createScheme(input: SchemeInput) {
-  const session = await requireRole(["owner"]);
+  const session = await requirePermission("promotions.manage");
   const parsed = schemeSchema.parse(input);
 
   const scheme = await prisma.scheme.create({
@@ -118,7 +118,7 @@ export async function createScheme(input: SchemeInput) {
 }
 
 export async function updateScheme(schemeId: string, input: SchemeInput) {
-  const session = await requireRole(["owner"]);
+  const session = await requirePermission("promotions.manage");
   const parsed = schemeSchema.parse(input);
 
   const scheme = await prisma.scheme.findFirst({
@@ -151,7 +151,7 @@ export async function updateScheme(schemeId: string, input: SchemeInput) {
 }
 
 export async function getScheme(schemeId: string) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("promotions.manage");
   const scheme = await prisma.scheme.findFirst({
     where: { id: schemeId, tenantId: session.user.tenantId },
   });

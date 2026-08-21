@@ -1,7 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { getSalesRegister } from "@/lib/actions/reports";
 import { defaultMonthRange } from "@/lib/date-range";
-import { toCsv } from "@/lib/csv";
+import {
+  exportResponse,
+  formatFromRequest,
+  type ExportColumn,
+} from "@/lib/export-response";
 import { format } from "date-fns";
 
 export async function GET(request: NextRequest) {
@@ -13,22 +17,22 @@ export async function GET(request: NextRequest) {
 
   const rows = await getSalesRegister(from, to);
 
-  const csv = toCsv(rows, [
+  const columns: ExportColumn<(typeof rows)[number]>[] = [
     { key: "invoiceNo", label: "Invoice no." },
     { key: (r) => format(new Date(r.invoiceDate), "yyyy-MM-dd HH:mm"), label: "Date" },
     { key: "branchName", label: "Branch" },
     { key: "customerName", label: "Customer" },
     { key: "paymentMode", label: "Payment mode" },
-    { key: "subtotal", label: "Subtotal" },
-    { key: "discountAmount", label: "Discount" },
-    { key: "taxAmount", label: "Tax" },
-    { key: "total", label: "Total" },
-  ]);
+    { key: "subtotal", label: "Subtotal" , type: "money" },
+    { key: "discountAmount", label: "Discount" , type: "money" },
+    { key: "taxAmount", label: "Tax" , type: "money" },
+    { key: "total", label: "Total" , type: "money" },
+  ];
 
-  return new NextResponse(csv, {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="sales-register-${from}-to-${to}.csv"`,
-    },
+  return exportResponse({
+    format: formatFromRequest(searchParams),
+    rows: rows,
+    columns,
+    filename: `sales-register-${from}-to-${to}`,
   });
 }

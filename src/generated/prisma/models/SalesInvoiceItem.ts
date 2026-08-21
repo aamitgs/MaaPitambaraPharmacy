@@ -28,6 +28,7 @@ export type AggregateSalesInvoiceItem = {
 
 export type SalesInvoiceItemAvgAggregateOutputType = {
   qty: number | null
+  unitsPerPack: number | null
   rate: runtime.Decimal | null
   taxRate: runtime.Decimal | null
   discountAmount: runtime.Decimal | null
@@ -35,6 +36,7 @@ export type SalesInvoiceItemAvgAggregateOutputType = {
 
 export type SalesInvoiceItemSumAggregateOutputType = {
   qty: number | null
+  unitsPerPack: number | null
   rate: runtime.Decimal | null
   taxRate: runtime.Decimal | null
   discountAmount: runtime.Decimal | null
@@ -46,6 +48,9 @@ export type SalesInvoiceItemMinAggregateOutputType = {
   itemId: string | null
   batchId: string | null
   qty: number | null
+  priceBasis: $Enums.PriceBasis | null
+  isLooseSale: boolean | null
+  unitsPerPack: number | null
   rate: runtime.Decimal | null
   taxRate: runtime.Decimal | null
   discountAmount: runtime.Decimal | null
@@ -57,6 +62,9 @@ export type SalesInvoiceItemMaxAggregateOutputType = {
   itemId: string | null
   batchId: string | null
   qty: number | null
+  priceBasis: $Enums.PriceBasis | null
+  isLooseSale: boolean | null
+  unitsPerPack: number | null
   rate: runtime.Decimal | null
   taxRate: runtime.Decimal | null
   discountAmount: runtime.Decimal | null
@@ -68,6 +76,9 @@ export type SalesInvoiceItemCountAggregateOutputType = {
   itemId: number
   batchId: number
   qty: number
+  priceBasis: number
+  isLooseSale: number
+  unitsPerPack: number
   rate: number
   taxRate: number
   discountAmount: number
@@ -77,6 +88,7 @@ export type SalesInvoiceItemCountAggregateOutputType = {
 
 export type SalesInvoiceItemAvgAggregateInputType = {
   qty?: true
+  unitsPerPack?: true
   rate?: true
   taxRate?: true
   discountAmount?: true
@@ -84,6 +96,7 @@ export type SalesInvoiceItemAvgAggregateInputType = {
 
 export type SalesInvoiceItemSumAggregateInputType = {
   qty?: true
+  unitsPerPack?: true
   rate?: true
   taxRate?: true
   discountAmount?: true
@@ -95,6 +108,9 @@ export type SalesInvoiceItemMinAggregateInputType = {
   itemId?: true
   batchId?: true
   qty?: true
+  priceBasis?: true
+  isLooseSale?: true
+  unitsPerPack?: true
   rate?: true
   taxRate?: true
   discountAmount?: true
@@ -106,6 +122,9 @@ export type SalesInvoiceItemMaxAggregateInputType = {
   itemId?: true
   batchId?: true
   qty?: true
+  priceBasis?: true
+  isLooseSale?: true
+  unitsPerPack?: true
   rate?: true
   taxRate?: true
   discountAmount?: true
@@ -117,6 +136,9 @@ export type SalesInvoiceItemCountAggregateInputType = {
   itemId?: true
   batchId?: true
   qty?: true
+  priceBasis?: true
+  isLooseSale?: true
+  unitsPerPack?: true
   rate?: true
   taxRate?: true
   discountAmount?: true
@@ -215,6 +237,9 @@ export type SalesInvoiceItemGroupByOutputType = {
   itemId: string
   batchId: string
   qty: number
+  priceBasis: $Enums.PriceBasis
+  isLooseSale: boolean
+  unitsPerPack: number
   rate: runtime.Decimal
   taxRate: runtime.Decimal
   discountAmount: runtime.Decimal
@@ -249,6 +274,9 @@ export type SalesInvoiceItemWhereInput = {
   itemId?: Prisma.StringFilter<"SalesInvoiceItem"> | string
   batchId?: Prisma.StringFilter<"SalesInvoiceItem"> | string
   qty?: Prisma.IntFilter<"SalesInvoiceItem"> | number
+  priceBasis?: Prisma.EnumPriceBasisFilter<"SalesInvoiceItem"> | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFilter<"SalesInvoiceItem"> | boolean
+  unitsPerPack?: Prisma.IntFilter<"SalesInvoiceItem"> | number
   rate?: Prisma.DecimalFilter<"SalesInvoiceItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFilter<"SalesInvoiceItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFilter<"SalesInvoiceItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -256,6 +284,7 @@ export type SalesInvoiceItemWhereInput = {
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
   batch?: Prisma.XOR<Prisma.BatchScalarRelationFilter, Prisma.BatchWhereInput>
   discounts?: Prisma.DiscountListRelationFilter
+  returnItems?: Prisma.SalesReturnItemListRelationFilter
 }
 
 export type SalesInvoiceItemOrderByWithRelationInput = {
@@ -264,6 +293,9 @@ export type SalesInvoiceItemOrderByWithRelationInput = {
   itemId?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   qty?: Prisma.SortOrder
+  priceBasis?: Prisma.SortOrder
+  isLooseSale?: Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
   rate?: Prisma.SortOrder
   taxRate?: Prisma.SortOrder
   discountAmount?: Prisma.SortOrder
@@ -271,6 +303,7 @@ export type SalesInvoiceItemOrderByWithRelationInput = {
   item?: Prisma.ItemOrderByWithRelationInput
   batch?: Prisma.BatchOrderByWithRelationInput
   discounts?: Prisma.DiscountOrderByRelationAggregateInput
+  returnItems?: Prisma.SalesReturnItemOrderByRelationAggregateInput
 }
 
 export type SalesInvoiceItemWhereUniqueInput = Prisma.AtLeast<{
@@ -282,6 +315,9 @@ export type SalesInvoiceItemWhereUniqueInput = Prisma.AtLeast<{
   itemId?: Prisma.StringFilter<"SalesInvoiceItem"> | string
   batchId?: Prisma.StringFilter<"SalesInvoiceItem"> | string
   qty?: Prisma.IntFilter<"SalesInvoiceItem"> | number
+  priceBasis?: Prisma.EnumPriceBasisFilter<"SalesInvoiceItem"> | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFilter<"SalesInvoiceItem"> | boolean
+  unitsPerPack?: Prisma.IntFilter<"SalesInvoiceItem"> | number
   rate?: Prisma.DecimalFilter<"SalesInvoiceItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFilter<"SalesInvoiceItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFilter<"SalesInvoiceItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -289,6 +325,7 @@ export type SalesInvoiceItemWhereUniqueInput = Prisma.AtLeast<{
   item?: Prisma.XOR<Prisma.ItemScalarRelationFilter, Prisma.ItemWhereInput>
   batch?: Prisma.XOR<Prisma.BatchScalarRelationFilter, Prisma.BatchWhereInput>
   discounts?: Prisma.DiscountListRelationFilter
+  returnItems?: Prisma.SalesReturnItemListRelationFilter
 }, "id">
 
 export type SalesInvoiceItemOrderByWithAggregationInput = {
@@ -297,6 +334,9 @@ export type SalesInvoiceItemOrderByWithAggregationInput = {
   itemId?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   qty?: Prisma.SortOrder
+  priceBasis?: Prisma.SortOrder
+  isLooseSale?: Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
   rate?: Prisma.SortOrder
   taxRate?: Prisma.SortOrder
   discountAmount?: Prisma.SortOrder
@@ -316,6 +356,9 @@ export type SalesInvoiceItemScalarWhereWithAggregatesInput = {
   itemId?: Prisma.StringWithAggregatesFilter<"SalesInvoiceItem"> | string
   batchId?: Prisma.StringWithAggregatesFilter<"SalesInvoiceItem"> | string
   qty?: Prisma.IntWithAggregatesFilter<"SalesInvoiceItem"> | number
+  priceBasis?: Prisma.EnumPriceBasisWithAggregatesFilter<"SalesInvoiceItem"> | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolWithAggregatesFilter<"SalesInvoiceItem"> | boolean
+  unitsPerPack?: Prisma.IntWithAggregatesFilter<"SalesInvoiceItem"> | number
   rate?: Prisma.DecimalWithAggregatesFilter<"SalesInvoiceItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalWithAggregatesFilter<"SalesInvoiceItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalWithAggregatesFilter<"SalesInvoiceItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -324,6 +367,9 @@ export type SalesInvoiceItemScalarWhereWithAggregatesInput = {
 export type SalesInvoiceItemCreateInput = {
   id?: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -331,6 +377,7 @@ export type SalesInvoiceItemCreateInput = {
   item: Prisma.ItemCreateNestedOneWithoutSalesInvoiceItemsInput
   batch: Prisma.BatchCreateNestedOneWithoutSalesInvoiceItemsInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceItemInput
+  returnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutInvoiceItemInput
 }
 
 export type SalesInvoiceItemUncheckedCreateInput = {
@@ -339,15 +386,22 @@ export type SalesInvoiceItemUncheckedCreateInput = {
   itemId: string
   batchId: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceItemInput
+  returnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutInvoiceItemInput
 }
 
 export type SalesInvoiceItemUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -355,6 +409,7 @@ export type SalesInvoiceItemUpdateInput = {
   item?: Prisma.ItemUpdateOneRequiredWithoutSalesInvoiceItemsNestedInput
   batch?: Prisma.BatchUpdateOneRequiredWithoutSalesInvoiceItemsNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceItemNestedInput
+  returnItems?: Prisma.SalesReturnItemUpdateManyWithoutInvoiceItemNestedInput
 }
 
 export type SalesInvoiceItemUncheckedUpdateInput = {
@@ -363,10 +418,14 @@ export type SalesInvoiceItemUncheckedUpdateInput = {
   itemId?: Prisma.StringFieldUpdateOperationsInput | string
   batchId?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceItemNestedInput
+  returnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutInvoiceItemNestedInput
 }
 
 export type SalesInvoiceItemCreateManyInput = {
@@ -375,6 +434,9 @@ export type SalesInvoiceItemCreateManyInput = {
   itemId: string
   batchId: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -383,6 +445,9 @@ export type SalesInvoiceItemCreateManyInput = {
 export type SalesInvoiceItemUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -394,6 +459,9 @@ export type SalesInvoiceItemUncheckedUpdateManyInput = {
   itemId?: Prisma.StringFieldUpdateOperationsInput | string
   batchId?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -409,12 +477,20 @@ export type SalesInvoiceItemOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type SalesInvoiceItemScalarRelationFilter = {
+  is?: Prisma.SalesInvoiceItemWhereInput
+  isNot?: Prisma.SalesInvoiceItemWhereInput
+}
+
 export type SalesInvoiceItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   itemId?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   qty?: Prisma.SortOrder
+  priceBasis?: Prisma.SortOrder
+  isLooseSale?: Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
   rate?: Prisma.SortOrder
   taxRate?: Prisma.SortOrder
   discountAmount?: Prisma.SortOrder
@@ -422,6 +498,7 @@ export type SalesInvoiceItemCountOrderByAggregateInput = {
 
 export type SalesInvoiceItemAvgOrderByAggregateInput = {
   qty?: Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
   rate?: Prisma.SortOrder
   taxRate?: Prisma.SortOrder
   discountAmount?: Prisma.SortOrder
@@ -433,6 +510,9 @@ export type SalesInvoiceItemMaxOrderByAggregateInput = {
   itemId?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   qty?: Prisma.SortOrder
+  priceBasis?: Prisma.SortOrder
+  isLooseSale?: Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
   rate?: Prisma.SortOrder
   taxRate?: Prisma.SortOrder
   discountAmount?: Prisma.SortOrder
@@ -444,6 +524,9 @@ export type SalesInvoiceItemMinOrderByAggregateInput = {
   itemId?: Prisma.SortOrder
   batchId?: Prisma.SortOrder
   qty?: Prisma.SortOrder
+  priceBasis?: Prisma.SortOrder
+  isLooseSale?: Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
   rate?: Prisma.SortOrder
   taxRate?: Prisma.SortOrder
   discountAmount?: Prisma.SortOrder
@@ -451,6 +534,7 @@ export type SalesInvoiceItemMinOrderByAggregateInput = {
 
 export type SalesInvoiceItemSumOrderByAggregateInput = {
   qty?: Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
   rate?: Prisma.SortOrder
   taxRate?: Prisma.SortOrder
   discountAmount?: Prisma.SortOrder
@@ -545,6 +629,20 @@ export type SalesInvoiceItemUncheckedUpdateManyWithoutBatchNestedInput = {
   deleteMany?: Prisma.SalesInvoiceItemScalarWhereInput | Prisma.SalesInvoiceItemScalarWhereInput[]
 }
 
+export type SalesInvoiceItemCreateNestedOneWithoutReturnItemsInput = {
+  create?: Prisma.XOR<Prisma.SalesInvoiceItemCreateWithoutReturnItemsInput, Prisma.SalesInvoiceItemUncheckedCreateWithoutReturnItemsInput>
+  connectOrCreate?: Prisma.SalesInvoiceItemCreateOrConnectWithoutReturnItemsInput
+  connect?: Prisma.SalesInvoiceItemWhereUniqueInput
+}
+
+export type SalesInvoiceItemUpdateOneRequiredWithoutReturnItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.SalesInvoiceItemCreateWithoutReturnItemsInput, Prisma.SalesInvoiceItemUncheckedCreateWithoutReturnItemsInput>
+  connectOrCreate?: Prisma.SalesInvoiceItemCreateOrConnectWithoutReturnItemsInput
+  upsert?: Prisma.SalesInvoiceItemUpsertWithoutReturnItemsInput
+  connect?: Prisma.SalesInvoiceItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SalesInvoiceItemUpdateToOneWithWhereWithoutReturnItemsInput, Prisma.SalesInvoiceItemUpdateWithoutReturnItemsInput>, Prisma.SalesInvoiceItemUncheckedUpdateWithoutReturnItemsInput>
+}
+
 export type SalesInvoiceItemCreateNestedManyWithoutInvoiceInput = {
   create?: Prisma.XOR<Prisma.SalesInvoiceItemCreateWithoutInvoiceInput, Prisma.SalesInvoiceItemUncheckedCreateWithoutInvoiceInput> | Prisma.SalesInvoiceItemCreateWithoutInvoiceInput[] | Prisma.SalesInvoiceItemUncheckedCreateWithoutInvoiceInput[]
   connectOrCreate?: Prisma.SalesInvoiceItemCreateOrConnectWithoutInvoiceInput | Prisma.SalesInvoiceItemCreateOrConnectWithoutInvoiceInput[]
@@ -587,6 +685,10 @@ export type SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput = {
   deleteMany?: Prisma.SalesInvoiceItemScalarWhereInput | Prisma.SalesInvoiceItemScalarWhereInput[]
 }
 
+export type EnumPriceBasisFieldUpdateOperationsInput = {
+  set?: $Enums.PriceBasis
+}
+
 export type SalesInvoiceItemCreateNestedOneWithoutDiscountsInput = {
   create?: Prisma.XOR<Prisma.SalesInvoiceItemCreateWithoutDiscountsInput, Prisma.SalesInvoiceItemUncheckedCreateWithoutDiscountsInput>
   connectOrCreate?: Prisma.SalesInvoiceItemCreateOrConnectWithoutDiscountsInput
@@ -606,12 +708,16 @@ export type SalesInvoiceItemUpdateOneWithoutDiscountsNestedInput = {
 export type SalesInvoiceItemCreateWithoutItemInput = {
   id?: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   invoice: Prisma.SalesInvoiceCreateNestedOneWithoutItemsInput
   batch: Prisma.BatchCreateNestedOneWithoutSalesInvoiceItemsInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceItemInput
+  returnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutInvoiceItemInput
 }
 
 export type SalesInvoiceItemUncheckedCreateWithoutItemInput = {
@@ -619,10 +725,14 @@ export type SalesInvoiceItemUncheckedCreateWithoutItemInput = {
   invoiceId: string
   batchId: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceItemInput
+  returnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutInvoiceItemInput
 }
 
 export type SalesInvoiceItemCreateOrConnectWithoutItemInput = {
@@ -660,6 +770,9 @@ export type SalesInvoiceItemScalarWhereInput = {
   itemId?: Prisma.StringFilter<"SalesInvoiceItem"> | string
   batchId?: Prisma.StringFilter<"SalesInvoiceItem"> | string
   qty?: Prisma.IntFilter<"SalesInvoiceItem"> | number
+  priceBasis?: Prisma.EnumPriceBasisFilter<"SalesInvoiceItem"> | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFilter<"SalesInvoiceItem"> | boolean
+  unitsPerPack?: Prisma.IntFilter<"SalesInvoiceItem"> | number
   rate?: Prisma.DecimalFilter<"SalesInvoiceItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFilter<"SalesInvoiceItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFilter<"SalesInvoiceItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -668,12 +781,16 @@ export type SalesInvoiceItemScalarWhereInput = {
 export type SalesInvoiceItemCreateWithoutBatchInput = {
   id?: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   invoice: Prisma.SalesInvoiceCreateNestedOneWithoutItemsInput
   item: Prisma.ItemCreateNestedOneWithoutSalesInvoiceItemsInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceItemInput
+  returnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutInvoiceItemInput
 }
 
 export type SalesInvoiceItemUncheckedCreateWithoutBatchInput = {
@@ -681,10 +798,14 @@ export type SalesInvoiceItemUncheckedCreateWithoutBatchInput = {
   invoiceId: string
   itemId: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceItemInput
+  returnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutInvoiceItemInput
 }
 
 export type SalesInvoiceItemCreateOrConnectWithoutBatchInput = {
@@ -713,15 +834,95 @@ export type SalesInvoiceItemUpdateManyWithWhereWithoutBatchInput = {
   data: Prisma.XOR<Prisma.SalesInvoiceItemUpdateManyMutationInput, Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutBatchInput>
 }
 
+export type SalesInvoiceItemCreateWithoutReturnItemsInput = {
+  id?: string
+  qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
+  rate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  invoice: Prisma.SalesInvoiceCreateNestedOneWithoutItemsInput
+  item: Prisma.ItemCreateNestedOneWithoutSalesInvoiceItemsInput
+  batch: Prisma.BatchCreateNestedOneWithoutSalesInvoiceItemsInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceItemInput
+}
+
+export type SalesInvoiceItemUncheckedCreateWithoutReturnItemsInput = {
+  id?: string
+  invoiceId: string
+  itemId: string
+  batchId: string
+  qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
+  rate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceItemInput
+}
+
+export type SalesInvoiceItemCreateOrConnectWithoutReturnItemsInput = {
+  where: Prisma.SalesInvoiceItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.SalesInvoiceItemCreateWithoutReturnItemsInput, Prisma.SalesInvoiceItemUncheckedCreateWithoutReturnItemsInput>
+}
+
+export type SalesInvoiceItemUpsertWithoutReturnItemsInput = {
+  update: Prisma.XOR<Prisma.SalesInvoiceItemUpdateWithoutReturnItemsInput, Prisma.SalesInvoiceItemUncheckedUpdateWithoutReturnItemsInput>
+  create: Prisma.XOR<Prisma.SalesInvoiceItemCreateWithoutReturnItemsInput, Prisma.SalesInvoiceItemUncheckedCreateWithoutReturnItemsInput>
+  where?: Prisma.SalesInvoiceItemWhereInput
+}
+
+export type SalesInvoiceItemUpdateToOneWithWhereWithoutReturnItemsInput = {
+  where?: Prisma.SalesInvoiceItemWhereInput
+  data: Prisma.XOR<Prisma.SalesInvoiceItemUpdateWithoutReturnItemsInput, Prisma.SalesInvoiceItemUncheckedUpdateWithoutReturnItemsInput>
+}
+
+export type SalesInvoiceItemUpdateWithoutReturnItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  invoice?: Prisma.SalesInvoiceUpdateOneRequiredWithoutItemsNestedInput
+  item?: Prisma.ItemUpdateOneRequiredWithoutSalesInvoiceItemsNestedInput
+  batch?: Prisma.BatchUpdateOneRequiredWithoutSalesInvoiceItemsNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutInvoiceItemNestedInput
+}
+
+export type SalesInvoiceItemUncheckedUpdateWithoutReturnItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  invoiceId?: Prisma.StringFieldUpdateOperationsInput | string
+  itemId?: Prisma.StringFieldUpdateOperationsInput | string
+  batchId?: Prisma.StringFieldUpdateOperationsInput | string
+  qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceItemNestedInput
+}
+
 export type SalesInvoiceItemCreateWithoutInvoiceInput = {
   id?: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   item: Prisma.ItemCreateNestedOneWithoutSalesInvoiceItemsInput
   batch: Prisma.BatchCreateNestedOneWithoutSalesInvoiceItemsInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceItemInput
+  returnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutInvoiceItemInput
 }
 
 export type SalesInvoiceItemUncheckedCreateWithoutInvoiceInput = {
@@ -729,10 +930,14 @@ export type SalesInvoiceItemUncheckedCreateWithoutInvoiceInput = {
   itemId: string
   batchId: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceItemInput
+  returnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutInvoiceItemInput
 }
 
 export type SalesInvoiceItemCreateOrConnectWithoutInvoiceInput = {
@@ -764,12 +969,16 @@ export type SalesInvoiceItemUpdateManyWithWhereWithoutInvoiceInput = {
 export type SalesInvoiceItemCreateWithoutDiscountsInput = {
   id?: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
   invoice: Prisma.SalesInvoiceCreateNestedOneWithoutItemsInput
   item: Prisma.ItemCreateNestedOneWithoutSalesInvoiceItemsInput
   batch: Prisma.BatchCreateNestedOneWithoutSalesInvoiceItemsInput
+  returnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutInvoiceItemInput
 }
 
 export type SalesInvoiceItemUncheckedCreateWithoutDiscountsInput = {
@@ -778,9 +987,13 @@ export type SalesInvoiceItemUncheckedCreateWithoutDiscountsInput = {
   itemId: string
   batchId: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  returnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutInvoiceItemInput
 }
 
 export type SalesInvoiceItemCreateOrConnectWithoutDiscountsInput = {
@@ -802,12 +1015,16 @@ export type SalesInvoiceItemUpdateToOneWithWhereWithoutDiscountsInput = {
 export type SalesInvoiceItemUpdateWithoutDiscountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   invoice?: Prisma.SalesInvoiceUpdateOneRequiredWithoutItemsNestedInput
   item?: Prisma.ItemUpdateOneRequiredWithoutSalesInvoiceItemsNestedInput
   batch?: Prisma.BatchUpdateOneRequiredWithoutSalesInvoiceItemsNestedInput
+  returnItems?: Prisma.SalesReturnItemUpdateManyWithoutInvoiceItemNestedInput
 }
 
 export type SalesInvoiceItemUncheckedUpdateWithoutDiscountsInput = {
@@ -816,9 +1033,13 @@ export type SalesInvoiceItemUncheckedUpdateWithoutDiscountsInput = {
   itemId?: Prisma.StringFieldUpdateOperationsInput | string
   batchId?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  returnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutInvoiceItemNestedInput
 }
 
 export type SalesInvoiceItemCreateManyItemInput = {
@@ -826,6 +1047,9 @@ export type SalesInvoiceItemCreateManyItemInput = {
   invoiceId: string
   batchId: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -834,12 +1058,16 @@ export type SalesInvoiceItemCreateManyItemInput = {
 export type SalesInvoiceItemUpdateWithoutItemInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   invoice?: Prisma.SalesInvoiceUpdateOneRequiredWithoutItemsNestedInput
   batch?: Prisma.BatchUpdateOneRequiredWithoutSalesInvoiceItemsNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceItemNestedInput
+  returnItems?: Prisma.SalesReturnItemUpdateManyWithoutInvoiceItemNestedInput
 }
 
 export type SalesInvoiceItemUncheckedUpdateWithoutItemInput = {
@@ -847,10 +1075,14 @@ export type SalesInvoiceItemUncheckedUpdateWithoutItemInput = {
   invoiceId?: Prisma.StringFieldUpdateOperationsInput | string
   batchId?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceItemNestedInput
+  returnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutInvoiceItemNestedInput
 }
 
 export type SalesInvoiceItemUncheckedUpdateManyWithoutItemInput = {
@@ -858,6 +1090,9 @@ export type SalesInvoiceItemUncheckedUpdateManyWithoutItemInput = {
   invoiceId?: Prisma.StringFieldUpdateOperationsInput | string
   batchId?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -868,6 +1103,9 @@ export type SalesInvoiceItemCreateManyBatchInput = {
   invoiceId: string
   itemId: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -876,12 +1114,16 @@ export type SalesInvoiceItemCreateManyBatchInput = {
 export type SalesInvoiceItemUpdateWithoutBatchInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   invoice?: Prisma.SalesInvoiceUpdateOneRequiredWithoutItemsNestedInput
   item?: Prisma.ItemUpdateOneRequiredWithoutSalesInvoiceItemsNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceItemNestedInput
+  returnItems?: Prisma.SalesReturnItemUpdateManyWithoutInvoiceItemNestedInput
 }
 
 export type SalesInvoiceItemUncheckedUpdateWithoutBatchInput = {
@@ -889,10 +1131,14 @@ export type SalesInvoiceItemUncheckedUpdateWithoutBatchInput = {
   invoiceId?: Prisma.StringFieldUpdateOperationsInput | string
   itemId?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceItemNestedInput
+  returnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutInvoiceItemNestedInput
 }
 
 export type SalesInvoiceItemUncheckedUpdateManyWithoutBatchInput = {
@@ -900,6 +1146,9 @@ export type SalesInvoiceItemUncheckedUpdateManyWithoutBatchInput = {
   invoiceId?: Prisma.StringFieldUpdateOperationsInput | string
   itemId?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -910,6 +1159,9 @@ export type SalesInvoiceItemCreateManyInvoiceInput = {
   itemId: string
   batchId: string
   qty: number
+  priceBasis?: $Enums.PriceBasis
+  isLooseSale?: boolean
+  unitsPerPack?: number
   rate: runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate: runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -918,12 +1170,16 @@ export type SalesInvoiceItemCreateManyInvoiceInput = {
 export type SalesInvoiceItemUpdateWithoutInvoiceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   item?: Prisma.ItemUpdateOneRequiredWithoutSalesInvoiceItemsNestedInput
   batch?: Prisma.BatchUpdateOneRequiredWithoutSalesInvoiceItemsNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceItemNestedInput
+  returnItems?: Prisma.SalesReturnItemUpdateManyWithoutInvoiceItemNestedInput
 }
 
 export type SalesInvoiceItemUncheckedUpdateWithoutInvoiceInput = {
@@ -931,10 +1187,14 @@ export type SalesInvoiceItemUncheckedUpdateWithoutInvoiceInput = {
   itemId?: Prisma.StringFieldUpdateOperationsInput | string
   batchId?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceItemNestedInput
+  returnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutInvoiceItemNestedInput
 }
 
 export type SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceInput = {
@@ -942,6 +1202,9 @@ export type SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceInput = {
   itemId?: Prisma.StringFieldUpdateOperationsInput | string
   batchId?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
+  priceBasis?: Prisma.EnumPriceBasisFieldUpdateOperationsInput | $Enums.PriceBasis
+  isLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
   rate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -954,10 +1217,12 @@ export type SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceInput = {
 
 export type SalesInvoiceItemCountOutputType = {
   discounts: number
+  returnItems: number
 }
 
 export type SalesInvoiceItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   discounts?: boolean | SalesInvoiceItemCountOutputTypeCountDiscountsArgs
+  returnItems?: boolean | SalesInvoiceItemCountOutputTypeCountReturnItemsArgs
 }
 
 /**
@@ -977,6 +1242,13 @@ export type SalesInvoiceItemCountOutputTypeCountDiscountsArgs<ExtArgs extends ru
   where?: Prisma.DiscountWhereInput
 }
 
+/**
+ * SalesInvoiceItemCountOutputType without action
+ */
+export type SalesInvoiceItemCountOutputTypeCountReturnItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalesReturnItemWhereInput
+}
+
 
 export type SalesInvoiceItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -984,6 +1256,9 @@ export type SalesInvoiceItemSelect<ExtArgs extends runtime.Types.Extensions.Inte
   itemId?: boolean
   batchId?: boolean
   qty?: boolean
+  priceBasis?: boolean
+  isLooseSale?: boolean
+  unitsPerPack?: boolean
   rate?: boolean
   taxRate?: boolean
   discountAmount?: boolean
@@ -991,6 +1266,7 @@ export type SalesInvoiceItemSelect<ExtArgs extends runtime.Types.Extensions.Inte
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
   batch?: boolean | Prisma.BatchDefaultArgs<ExtArgs>
   discounts?: boolean | Prisma.SalesInvoiceItem$discountsArgs<ExtArgs>
+  returnItems?: boolean | Prisma.SalesInvoiceItem$returnItemsArgs<ExtArgs>
   _count?: boolean | Prisma.SalesInvoiceItemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["salesInvoiceItem"]>
 
@@ -1000,6 +1276,9 @@ export type SalesInvoiceItemSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   itemId?: boolean
   batchId?: boolean
   qty?: boolean
+  priceBasis?: boolean
+  isLooseSale?: boolean
+  unitsPerPack?: boolean
   rate?: boolean
   taxRate?: boolean
   discountAmount?: boolean
@@ -1014,6 +1293,9 @@ export type SalesInvoiceItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   itemId?: boolean
   batchId?: boolean
   qty?: boolean
+  priceBasis?: boolean
+  isLooseSale?: boolean
+  unitsPerPack?: boolean
   rate?: boolean
   taxRate?: boolean
   discountAmount?: boolean
@@ -1028,17 +1310,21 @@ export type SalesInvoiceItemSelectScalar = {
   itemId?: boolean
   batchId?: boolean
   qty?: boolean
+  priceBasis?: boolean
+  isLooseSale?: boolean
+  unitsPerPack?: boolean
   rate?: boolean
   taxRate?: boolean
   discountAmount?: boolean
 }
 
-export type SalesInvoiceItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "invoiceId" | "itemId" | "batchId" | "qty" | "rate" | "taxRate" | "discountAmount", ExtArgs["result"]["salesInvoiceItem"]>
+export type SalesInvoiceItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "invoiceId" | "itemId" | "batchId" | "qty" | "priceBasis" | "isLooseSale" | "unitsPerPack" | "rate" | "taxRate" | "discountAmount", ExtArgs["result"]["salesInvoiceItem"]>
 export type SalesInvoiceItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   invoice?: boolean | Prisma.SalesInvoiceDefaultArgs<ExtArgs>
   item?: boolean | Prisma.ItemDefaultArgs<ExtArgs>
   batch?: boolean | Prisma.BatchDefaultArgs<ExtArgs>
   discounts?: boolean | Prisma.SalesInvoiceItem$discountsArgs<ExtArgs>
+  returnItems?: boolean | Prisma.SalesInvoiceItem$returnItemsArgs<ExtArgs>
   _count?: boolean | Prisma.SalesInvoiceItemCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SalesInvoiceItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1059,6 +1345,7 @@ export type $SalesInvoiceItemPayload<ExtArgs extends runtime.Types.Extensions.In
     item: Prisma.$ItemPayload<ExtArgs>
     batch: Prisma.$BatchPayload<ExtArgs>
     discounts: Prisma.$DiscountPayload<ExtArgs>[]
+    returnItems: Prisma.$SalesReturnItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1066,6 +1353,23 @@ export type $SalesInvoiceItemPayload<ExtArgs extends runtime.Types.Extensions.In
     itemId: string
     batchId: string
     qty: number
+    /**
+     * Which price this line was billed on. Recorded rather than inferred:
+     * a batch's PTR can be edited later, and a past invoice must still be
+     * explainable.
+     */
+    priceBasis: $Enums.PriceBasis
+    /**
+     * True when `qty` counts loose units rather than packs. The rate is then
+     * the per-unit price, and the bill says so — a customer must be able to
+     * see they were charged for 4 tablets, not 4 strips.
+     */
+    isLooseSale: boolean
+    /**
+     * Snapshot of the item's unitsPerPack at the time of sale, so a later
+     * change to the pack size cannot rewrite what a past bill meant.
+     */
+    unitsPerPack: number
     rate: runtime.Decimal
     taxRate: runtime.Decimal
     discountAmount: runtime.Decimal
@@ -1467,6 +1771,7 @@ export interface Prisma__SalesInvoiceItemClient<T, Null = never, ExtArgs extends
   item<T extends Prisma.ItemDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ItemDefaultArgs<ExtArgs>>): Prisma.Prisma__ItemClient<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   batch<T extends Prisma.BatchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BatchDefaultArgs<ExtArgs>>): Prisma.Prisma__BatchClient<runtime.Types.Result.GetResult<Prisma.$BatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   discounts<T extends Prisma.SalesInvoiceItem$discountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalesInvoiceItem$discountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DiscountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  returnItems<T extends Prisma.SalesInvoiceItem$returnItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalesInvoiceItem$returnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesReturnItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1501,6 +1806,9 @@ export interface SalesInvoiceItemFieldRefs {
   readonly itemId: Prisma.FieldRef<"SalesInvoiceItem", 'String'>
   readonly batchId: Prisma.FieldRef<"SalesInvoiceItem", 'String'>
   readonly qty: Prisma.FieldRef<"SalesInvoiceItem", 'Int'>
+  readonly priceBasis: Prisma.FieldRef<"SalesInvoiceItem", 'PriceBasis'>
+  readonly isLooseSale: Prisma.FieldRef<"SalesInvoiceItem", 'Boolean'>
+  readonly unitsPerPack: Prisma.FieldRef<"SalesInvoiceItem", 'Int'>
   readonly rate: Prisma.FieldRef<"SalesInvoiceItem", 'Decimal'>
   readonly taxRate: Prisma.FieldRef<"SalesInvoiceItem", 'Decimal'>
   readonly discountAmount: Prisma.FieldRef<"SalesInvoiceItem", 'Decimal'>
@@ -1926,6 +2234,30 @@ export type SalesInvoiceItem$discountsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.DiscountScalarFieldEnum | Prisma.DiscountScalarFieldEnum[]
+}
+
+/**
+ * SalesInvoiceItem.returnItems
+ */
+export type SalesInvoiceItem$returnItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalesReturnItem
+   */
+  select?: Prisma.SalesReturnItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SalesReturnItem
+   */
+  omit?: Prisma.SalesReturnItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalesReturnItemInclude<ExtArgs> | null
+  where?: Prisma.SalesReturnItemWhereInput
+  orderBy?: Prisma.SalesReturnItemOrderByWithRelationInput | Prisma.SalesReturnItemOrderByWithRelationInput[]
+  cursor?: Prisma.SalesReturnItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalesReturnItemScalarFieldEnum | Prisma.SalesReturnItemScalarFieldEnum[]
 }
 
 /**

@@ -2,15 +2,15 @@
 
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole } from "@/lib/rbac";
+import { requirePermission } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
-import { validateRows } from "@/lib/import/validate";
+import { validateRows, parseBoolean } from "@/lib/import/validate";
 import { SCHEDULE_CLASSES, type ImportFieldKey } from "@/lib/import/fields";
 import type { NormalizedRow } from "@/lib/import/normalize";
 import { resolveConcreteBranch } from "@/lib/branch-scope";
 
 export async function commitImport(rows: NormalizedRow[]) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("data.import");
   const tenantId = session.user.tenantId;
 
   const branchId = await resolveConcreteBranch(tenantId, session.user.role);
@@ -35,6 +35,8 @@ export async function commitImport(rows: NormalizedRow[]) {
     const scheduleClass =
       SCHEDULE_CLASSES.find((c) => c.toUpperCase() === raw.scheduleClass?.toUpperCase()) ?? "none";
 
+    const looseSale = raw.allowLooseSale !== undefined ? parseBoolean(raw.allowLooseSale) : null;
+
     const itemData = {
       genericName: raw.genericName,
       manufacturer: raw.manufacturer,
@@ -44,6 +46,9 @@ export async function commitImport(rows: NormalizedRow[]) {
       taxRate: raw.taxRate !== undefined ? Number(raw.taxRate) : undefined,
       unit: raw.unit,
       packSize: raw.packSize,
+      barcode: raw.barcode?.trim() || undefined,
+      unitsPerPack: raw.unitsPerPack !== undefined ? Number(raw.unitsPerPack) : undefined,
+      allowLooseSale: looseSale ?? undefined,
       reorderLevel: raw.reorderLevel !== undefined ? Number(raw.reorderLevel) : undefined,
     };
 
@@ -61,6 +66,9 @@ export async function commitImport(rows: NormalizedRow[]) {
             taxRate: raw.taxRate !== undefined ? Number(raw.taxRate) : 0,
             unit: raw.unit ?? "unit",
             packSize: raw.packSize,
+            barcode: raw.barcode?.trim() || undefined,
+            unitsPerPack: raw.unitsPerPack !== undefined ? Number(raw.unitsPerPack) : undefined,
+            allowLooseSale: looseSale ?? undefined,
             reorderLevel: raw.reorderLevel !== undefined ? Number(raw.reorderLevel) : 10,
           },
         });
@@ -80,6 +88,7 @@ export async function commitImport(rows: NormalizedRow[]) {
           purchaseRate: raw.purchaseRate !== undefined ? Number(raw.purchaseRate) : 0,
           saleRate: Number(raw.saleRate),
           currentQty: raw.currentQty !== undefined ? Number(raw.currentQty) : 0,
+          looseUnits: raw.looseUnits !== undefined ? Number(raw.looseUnits) : 0,
           rackLocation: raw.rackLocation,
         },
       });

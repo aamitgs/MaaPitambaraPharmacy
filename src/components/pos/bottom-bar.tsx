@@ -55,7 +55,13 @@ export function BottomBar({
   onRemoveCoupon,
   couponError,
   couponChecking,
+  holdControls,
+  creditHeadroom,
 }: {
+  /** The Hold / Held pair, passed in so this bar stays presentational. */
+  holdControls?: React.ReactNode;
+  /** Remaining credit for the selected customer; null when not on credit. */
+  creditHeadroom?: number | null;
   billing: BillingResult;
   billDiscountValue: number;
   billDiscountIsPercent: boolean;
@@ -174,7 +180,12 @@ export function BottomBar({
           </div>
 
           <div className="col-span-2 space-y-1">
-            <Label className="text-xs">Payment mode</Label>
+            <Label className="text-xs">
+            Payment mode
+            <kbd className="ml-1.5 rounded bg-muted px-1 py-0.5 text-[9px] font-normal text-muted-foreground">
+              F4
+            </kbd>
+          </Label>
             <div className="flex gap-1">
               {PAYMENT_MODES.map((m) => {
                 const disabled = m.value === "credit" && !creditEligible;
@@ -270,6 +281,29 @@ export function BottomBar({
             <div className="text-xs text-muted-foreground">Total</div>
             <div className="text-2xl font-semibold tabular-nums">₹{billing.total.toFixed(2)}</div>
           </div>
+          {creditHeadroom !== null && creditHeadroom !== undefined && (
+            <div
+              className={cn(
+                "rounded-md border px-2.5 py-1.5 text-xs",
+                billing.total > creditHeadroom
+                  ? "border-destructive/40 bg-destructive/10 text-destructive"
+                  : "text-muted-foreground"
+              )}
+            >
+              {billing.total > creditHeadroom ? (
+                <>
+                  Over credit limit by ₹{(billing.total - creditHeadroom).toFixed(2)}
+                  <div className="text-[10px]">Manager PIN needed</div>
+                </>
+              ) : (
+                <>
+                  Credit left
+                  <div className="font-medium tabular-nums">₹{creditHeadroom.toFixed(2)}</div>
+                </>
+              )}
+            </div>
+          )}
+          {holdControls}
           <Button
             size="lg"
             className="h-14 px-6"

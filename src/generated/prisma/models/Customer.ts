@@ -28,12 +28,14 @@ export type AggregateCustomer = {
 
 export type CustomerAvgAggregateOutputType = {
   creditLimit: runtime.Decimal | null
+  creditTermDays: number | null
   outstandingBalance: runtime.Decimal | null
   cumulativeSpend: runtime.Decimal | null
 }
 
 export type CustomerSumAggregateOutputType = {
   creditLimit: runtime.Decimal | null
+  creditTermDays: number | null
   outstandingBalance: runtime.Decimal | null
   cumulativeSpend: runtime.Decimal | null
 }
@@ -44,6 +46,7 @@ export type CustomerMinAggregateOutputType = {
   name: string | null
   phone: string | null
   creditLimit: runtime.Decimal | null
+  creditTermDays: number | null
   outstandingBalance: runtime.Decimal | null
   loyaltyTierId: string | null
   cumulativeSpend: runtime.Decimal | null
@@ -56,6 +59,7 @@ export type CustomerMaxAggregateOutputType = {
   name: string | null
   phone: string | null
   creditLimit: runtime.Decimal | null
+  creditTermDays: number | null
   outstandingBalance: runtime.Decimal | null
   loyaltyTierId: string | null
   cumulativeSpend: runtime.Decimal | null
@@ -68,6 +72,7 @@ export type CustomerCountAggregateOutputType = {
   name: number
   phone: number
   creditLimit: number
+  creditTermDays: number
   outstandingBalance: number
   loyaltyTierId: number
   cumulativeSpend: number
@@ -78,12 +83,14 @@ export type CustomerCountAggregateOutputType = {
 
 export type CustomerAvgAggregateInputType = {
   creditLimit?: true
+  creditTermDays?: true
   outstandingBalance?: true
   cumulativeSpend?: true
 }
 
 export type CustomerSumAggregateInputType = {
   creditLimit?: true
+  creditTermDays?: true
   outstandingBalance?: true
   cumulativeSpend?: true
 }
@@ -94,6 +101,7 @@ export type CustomerMinAggregateInputType = {
   name?: true
   phone?: true
   creditLimit?: true
+  creditTermDays?: true
   outstandingBalance?: true
   loyaltyTierId?: true
   cumulativeSpend?: true
@@ -106,6 +114,7 @@ export type CustomerMaxAggregateInputType = {
   name?: true
   phone?: true
   creditLimit?: true
+  creditTermDays?: true
   outstandingBalance?: true
   loyaltyTierId?: true
   cumulativeSpend?: true
@@ -118,6 +127,7 @@ export type CustomerCountAggregateInputType = {
   name?: true
   phone?: true
   creditLimit?: true
+  creditTermDays?: true
   outstandingBalance?: true
   loyaltyTierId?: true
   cumulativeSpend?: true
@@ -217,6 +227,7 @@ export type CustomerGroupByOutputType = {
   name: string
   phone: string | null
   creditLimit: runtime.Decimal | null
+  creditTermDays: number | null
   outstandingBalance: runtime.Decimal
   loyaltyTierId: string | null
   cumulativeSpend: runtime.Decimal
@@ -252,6 +263,7 @@ export type CustomerWhereInput = {
   name?: Prisma.StringFilter<"Customer"> | string
   phone?: Prisma.StringNullableFilter<"Customer"> | string | null
   creditLimit?: Prisma.DecimalNullableFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.IntNullableFilter<"Customer"> | number | null
   outstandingBalance?: Prisma.DecimalFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: Prisma.StringNullableFilter<"Customer"> | string | null
   cumulativeSpend?: Prisma.DecimalFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -261,7 +273,9 @@ export type CustomerWhereInput = {
   salesInvoices?: Prisma.SalesInvoiceListRelationFilter
   ledgerEntries?: Prisma.CustomerLedgerEntryListRelationFilter
   whatsappLogs?: Prisma.WhatsAppLogListRelationFilter
+  smsLogs?: Prisma.SmsLogListRelationFilter
   emailLogs?: Prisma.EmailLogListRelationFilter
+  promiseOrders?: Prisma.PromiseOrderListRelationFilter
 }
 
 export type CustomerOrderByWithRelationInput = {
@@ -270,6 +284,7 @@ export type CustomerOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   creditLimit?: Prisma.SortOrderInput | Prisma.SortOrder
+  creditTermDays?: Prisma.SortOrderInput | Prisma.SortOrder
   outstandingBalance?: Prisma.SortOrder
   loyaltyTierId?: Prisma.SortOrderInput | Prisma.SortOrder
   cumulativeSpend?: Prisma.SortOrder
@@ -279,7 +294,9 @@ export type CustomerOrderByWithRelationInput = {
   salesInvoices?: Prisma.SalesInvoiceOrderByRelationAggregateInput
   ledgerEntries?: Prisma.CustomerLedgerEntryOrderByRelationAggregateInput
   whatsappLogs?: Prisma.WhatsAppLogOrderByRelationAggregateInput
+  smsLogs?: Prisma.SmsLogOrderByRelationAggregateInput
   emailLogs?: Prisma.EmailLogOrderByRelationAggregateInput
+  promiseOrders?: Prisma.PromiseOrderOrderByRelationAggregateInput
 }
 
 export type CustomerWhereUniqueInput = Prisma.AtLeast<{
@@ -291,6 +308,7 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Customer"> | string
   phone?: Prisma.StringNullableFilter<"Customer"> | string | null
   creditLimit?: Prisma.DecimalNullableFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.IntNullableFilter<"Customer"> | number | null
   outstandingBalance?: Prisma.DecimalFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: Prisma.StringNullableFilter<"Customer"> | string | null
   cumulativeSpend?: Prisma.DecimalFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -300,7 +318,9 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
   salesInvoices?: Prisma.SalesInvoiceListRelationFilter
   ledgerEntries?: Prisma.CustomerLedgerEntryListRelationFilter
   whatsappLogs?: Prisma.WhatsAppLogListRelationFilter
+  smsLogs?: Prisma.SmsLogListRelationFilter
   emailLogs?: Prisma.EmailLogListRelationFilter
+  promiseOrders?: Prisma.PromiseOrderListRelationFilter
 }, "id">
 
 export type CustomerOrderByWithAggregationInput = {
@@ -309,6 +329,7 @@ export type CustomerOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   creditLimit?: Prisma.SortOrderInput | Prisma.SortOrder
+  creditTermDays?: Prisma.SortOrderInput | Prisma.SortOrder
   outstandingBalance?: Prisma.SortOrder
   loyaltyTierId?: Prisma.SortOrderInput | Prisma.SortOrder
   cumulativeSpend?: Prisma.SortOrder
@@ -329,6 +350,7 @@ export type CustomerScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Customer"> | string
   phone?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
   creditLimit?: Prisma.DecimalNullableWithAggregatesFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.IntNullableWithAggregatesFilter<"Customer"> | number | null
   outstandingBalance?: Prisma.DecimalWithAggregatesFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null
   cumulativeSpend?: Prisma.DecimalWithAggregatesFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -340,6 +362,7 @@ export type CustomerCreateInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
@@ -348,7 +371,9 @@ export type CustomerCreateInput = {
   salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutCustomerInput
   ledgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutCustomerInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutCustomerInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateInput = {
@@ -357,6 +382,7 @@ export type CustomerUncheckedCreateInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: string | null
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -364,7 +390,9 @@ export type CustomerUncheckedCreateInput = {
   salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutCustomerInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutCustomerInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutCustomerInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUpdateInput = {
@@ -372,6 +400,7 @@ export type CustomerUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -380,7 +409,9 @@ export type CustomerUpdateInput = {
   salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutCustomerNestedInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutCustomerNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutCustomerNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateInput = {
@@ -389,6 +420,7 @@ export type CustomerUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -396,7 +428,9 @@ export type CustomerUncheckedUpdateInput = {
   salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutCustomerNestedInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutCustomerNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutCustomerNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateManyInput = {
@@ -405,6 +439,7 @@ export type CustomerCreateManyInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: string | null
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -416,6 +451,7 @@ export type CustomerUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -427,6 +463,7 @@ export type CustomerUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -449,6 +486,7 @@ export type CustomerCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   creditLimit?: Prisma.SortOrder
+  creditTermDays?: Prisma.SortOrder
   outstandingBalance?: Prisma.SortOrder
   loyaltyTierId?: Prisma.SortOrder
   cumulativeSpend?: Prisma.SortOrder
@@ -457,6 +495,7 @@ export type CustomerCountOrderByAggregateInput = {
 
 export type CustomerAvgOrderByAggregateInput = {
   creditLimit?: Prisma.SortOrder
+  creditTermDays?: Prisma.SortOrder
   outstandingBalance?: Prisma.SortOrder
   cumulativeSpend?: Prisma.SortOrder
 }
@@ -467,6 +506,7 @@ export type CustomerMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   creditLimit?: Prisma.SortOrder
+  creditTermDays?: Prisma.SortOrder
   outstandingBalance?: Prisma.SortOrder
   loyaltyTierId?: Prisma.SortOrder
   cumulativeSpend?: Prisma.SortOrder
@@ -479,6 +519,7 @@ export type CustomerMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   creditLimit?: Prisma.SortOrder
+  creditTermDays?: Prisma.SortOrder
   outstandingBalance?: Prisma.SortOrder
   loyaltyTierId?: Prisma.SortOrder
   cumulativeSpend?: Prisma.SortOrder
@@ -487,6 +528,7 @@ export type CustomerMinOrderByAggregateInput = {
 
 export type CustomerSumOrderByAggregateInput = {
   creditLimit?: Prisma.SortOrder
+  creditTermDays?: Prisma.SortOrder
   outstandingBalance?: Prisma.SortOrder
   cumulativeSpend?: Prisma.SortOrder
 }
@@ -543,12 +585,44 @@ export type CustomerUncheckedUpdateManyWithoutTenantNestedInput = {
   deleteMany?: Prisma.CustomerScalarWhereInput | Prisma.CustomerScalarWhereInput[]
 }
 
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type CustomerCreateNestedOneWithoutPromiseOrdersInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutPromiseOrdersInput, Prisma.CustomerUncheckedCreateWithoutPromiseOrdersInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutPromiseOrdersInput
+  connect?: Prisma.CustomerWhereUniqueInput
+}
+
+export type CustomerUpdateOneWithoutPromiseOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutPromiseOrdersInput, Prisma.CustomerUncheckedCreateWithoutPromiseOrdersInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutPromiseOrdersInput
+  upsert?: Prisma.CustomerUpsertWithoutPromiseOrdersInput
+  disconnect?: Prisma.CustomerWhereInput | boolean
+  delete?: Prisma.CustomerWhereInput | boolean
+  connect?: Prisma.CustomerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutPromiseOrdersInput, Prisma.CustomerUpdateWithoutPromiseOrdersInput>, Prisma.CustomerUncheckedUpdateWithoutPromiseOrdersInput>
+}
+
+export type CustomerCreateNestedOneWithoutSmsLogsInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutSmsLogsInput, Prisma.CustomerUncheckedCreateWithoutSmsLogsInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutSmsLogsInput
+  connect?: Prisma.CustomerWhereUniqueInput
+}
+
+export type CustomerUpdateOneWithoutSmsLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutSmsLogsInput, Prisma.CustomerUncheckedCreateWithoutSmsLogsInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutSmsLogsInput
+  upsert?: Prisma.CustomerUpsertWithoutSmsLogsInput
+  disconnect?: Prisma.CustomerWhereInput | boolean
+  delete?: Prisma.CustomerWhereInput | boolean
+  connect?: Prisma.CustomerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutSmsLogsInput, Prisma.CustomerUpdateWithoutSmsLogsInput>, Prisma.CustomerUncheckedUpdateWithoutSmsLogsInput>
 }
 
 export type CustomerCreateNestedOneWithoutEmailLogsInput = {
@@ -660,6 +734,7 @@ export type CustomerCreateWithoutTenantInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
@@ -667,7 +742,9 @@ export type CustomerCreateWithoutTenantInput = {
   salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutCustomerInput
   ledgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutCustomerInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutCustomerInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutTenantInput = {
@@ -675,6 +752,7 @@ export type CustomerUncheckedCreateWithoutTenantInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: string | null
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -682,7 +760,9 @@ export type CustomerUncheckedCreateWithoutTenantInput = {
   salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutCustomerInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutCustomerInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutCustomerInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutTenantInput = {
@@ -720,17 +800,19 @@ export type CustomerScalarWhereInput = {
   name?: Prisma.StringFilter<"Customer"> | string
   phone?: Prisma.StringNullableFilter<"Customer"> | string | null
   creditLimit?: Prisma.DecimalNullableFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.IntNullableFilter<"Customer"> | number | null
   outstandingBalance?: Prisma.DecimalFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: Prisma.StringNullableFilter<"Customer"> | string | null
   cumulativeSpend?: Prisma.DecimalFilter<"Customer"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFilter<"Customer"> | Date | string
 }
 
-export type CustomerCreateWithoutEmailLogsInput = {
+export type CustomerCreateWithoutPromiseOrdersInput = {
   id?: string
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
@@ -739,6 +821,184 @@ export type CustomerCreateWithoutEmailLogsInput = {
   salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutCustomerInput
   ledgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutCustomerInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutCustomerInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerUncheckedCreateWithoutPromiseOrdersInput = {
+  id?: string
+  tenantId: string
+  name: string
+  phone?: string | null
+  creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
+  outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loyaltyTierId?: string | null
+  cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutCustomerInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutCustomerInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerCreateOrConnectWithoutPromiseOrdersInput = {
+  where: Prisma.CustomerWhereUniqueInput
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutPromiseOrdersInput, Prisma.CustomerUncheckedCreateWithoutPromiseOrdersInput>
+}
+
+export type CustomerUpsertWithoutPromiseOrdersInput = {
+  update: Prisma.XOR<Prisma.CustomerUpdateWithoutPromiseOrdersInput, Prisma.CustomerUncheckedUpdateWithoutPromiseOrdersInput>
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutPromiseOrdersInput, Prisma.CustomerUncheckedCreateWithoutPromiseOrdersInput>
+  where?: Prisma.CustomerWhereInput
+}
+
+export type CustomerUpdateToOneWithWhereWithoutPromiseOrdersInput = {
+  where?: Prisma.CustomerWhereInput
+  data: Prisma.XOR<Prisma.CustomerUpdateWithoutPromiseOrdersInput, Prisma.CustomerUncheckedUpdateWithoutPromiseOrdersInput>
+}
+
+export type CustomerUpdateWithoutPromiseOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutCustomersNestedInput
+  loyaltyTier?: Prisma.LoyaltyTierUpdateOneWithoutCustomersNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutCustomerNestedInput
+  ledgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutCustomerNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutCustomerNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutCustomerNestedInput
+}
+
+export type CustomerUncheckedUpdateWithoutPromiseOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loyaltyTierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutCustomerNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutCustomerNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutCustomerNestedInput
+}
+
+export type CustomerCreateWithoutSmsLogsInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
+  outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutCustomersInput
+  loyaltyTier?: Prisma.LoyaltyTierCreateNestedOneWithoutCustomersInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutCustomerInput
+  ledgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutCustomerInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutCustomerInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerUncheckedCreateWithoutSmsLogsInput = {
+  id?: string
+  tenantId: string
+  name: string
+  phone?: string | null
+  creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
+  outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  loyaltyTierId?: string | null
+  cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutCustomerInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutCustomerInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerCreateOrConnectWithoutSmsLogsInput = {
+  where: Prisma.CustomerWhereUniqueInput
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutSmsLogsInput, Prisma.CustomerUncheckedCreateWithoutSmsLogsInput>
+}
+
+export type CustomerUpsertWithoutSmsLogsInput = {
+  update: Prisma.XOR<Prisma.CustomerUpdateWithoutSmsLogsInput, Prisma.CustomerUncheckedUpdateWithoutSmsLogsInput>
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutSmsLogsInput, Prisma.CustomerUncheckedCreateWithoutSmsLogsInput>
+  where?: Prisma.CustomerWhereInput
+}
+
+export type CustomerUpdateToOneWithWhereWithoutSmsLogsInput = {
+  where?: Prisma.CustomerWhereInput
+  data: Prisma.XOR<Prisma.CustomerUpdateWithoutSmsLogsInput, Prisma.CustomerUncheckedUpdateWithoutSmsLogsInput>
+}
+
+export type CustomerUpdateWithoutSmsLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutCustomersNestedInput
+  loyaltyTier?: Prisma.LoyaltyTierUpdateOneWithoutCustomersNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutCustomerNestedInput
+  ledgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutCustomerNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutCustomerNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutCustomerNestedInput
+}
+
+export type CustomerUncheckedUpdateWithoutSmsLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  loyaltyTierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutCustomerNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutCustomerNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutCustomerNestedInput
+}
+
+export type CustomerCreateWithoutEmailLogsInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
+  outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutCustomersInput
+  loyaltyTier?: Prisma.LoyaltyTierCreateNestedOneWithoutCustomersInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutCustomerInput
+  ledgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutCustomerInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutEmailLogsInput = {
@@ -747,6 +1007,7 @@ export type CustomerUncheckedCreateWithoutEmailLogsInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: string | null
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -754,6 +1015,8 @@ export type CustomerUncheckedCreateWithoutEmailLogsInput = {
   salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutCustomerInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutCustomerInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutEmailLogsInput = {
@@ -777,6 +1040,7 @@ export type CustomerUpdateWithoutEmailLogsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -785,6 +1049,8 @@ export type CustomerUpdateWithoutEmailLogsInput = {
   salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutCustomerNestedInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutCustomerNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutEmailLogsInput = {
@@ -793,6 +1059,7 @@ export type CustomerUncheckedUpdateWithoutEmailLogsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -800,6 +1067,8 @@ export type CustomerUncheckedUpdateWithoutEmailLogsInput = {
   salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutCustomerNestedInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutCustomerNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutWhatsappLogsInput = {
@@ -807,6 +1076,7 @@ export type CustomerCreateWithoutWhatsappLogsInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
@@ -814,7 +1084,9 @@ export type CustomerCreateWithoutWhatsappLogsInput = {
   loyaltyTier?: Prisma.LoyaltyTierCreateNestedOneWithoutCustomersInput
   salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutCustomerInput
   ledgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutCustomerInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutWhatsappLogsInput = {
@@ -823,13 +1095,16 @@ export type CustomerUncheckedCreateWithoutWhatsappLogsInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: string | null
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutCustomerInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutCustomerInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutWhatsappLogsInput = {
@@ -853,6 +1128,7 @@ export type CustomerUpdateWithoutWhatsappLogsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -860,7 +1136,9 @@ export type CustomerUpdateWithoutWhatsappLogsInput = {
   loyaltyTier?: Prisma.LoyaltyTierUpdateOneWithoutCustomersNestedInput
   salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutCustomerNestedInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutCustomerNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutWhatsappLogsInput = {
@@ -869,13 +1147,16 @@ export type CustomerUncheckedUpdateWithoutWhatsappLogsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutCustomerNestedInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutCustomerNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutLedgerEntriesInput = {
@@ -883,6 +1164,7 @@ export type CustomerCreateWithoutLedgerEntriesInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
@@ -890,7 +1172,9 @@ export type CustomerCreateWithoutLedgerEntriesInput = {
   loyaltyTier?: Prisma.LoyaltyTierCreateNestedOneWithoutCustomersInput
   salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutCustomerInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutCustomerInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutLedgerEntriesInput = {
@@ -899,13 +1183,16 @@ export type CustomerUncheckedCreateWithoutLedgerEntriesInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: string | null
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutCustomerInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutCustomerInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutLedgerEntriesInput = {
@@ -929,6 +1216,7 @@ export type CustomerUpdateWithoutLedgerEntriesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -936,7 +1224,9 @@ export type CustomerUpdateWithoutLedgerEntriesInput = {
   loyaltyTier?: Prisma.LoyaltyTierUpdateOneWithoutCustomersNestedInput
   salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutCustomerNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutCustomerNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutLedgerEntriesInput = {
@@ -945,13 +1235,16 @@ export type CustomerUncheckedUpdateWithoutLedgerEntriesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutCustomerNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutCustomerNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutLoyaltyTierInput = {
@@ -959,6 +1252,7 @@ export type CustomerCreateWithoutLoyaltyTierInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
@@ -966,7 +1260,9 @@ export type CustomerCreateWithoutLoyaltyTierInput = {
   salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutCustomerInput
   ledgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutCustomerInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutCustomerInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutLoyaltyTierInput = {
@@ -975,13 +1271,16 @@ export type CustomerUncheckedCreateWithoutLoyaltyTierInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutCustomerInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutCustomerInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutCustomerInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutLoyaltyTierInput = {
@@ -1015,6 +1314,7 @@ export type CustomerCreateWithoutSalesInvoicesInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
@@ -1022,7 +1322,9 @@ export type CustomerCreateWithoutSalesInvoicesInput = {
   loyaltyTier?: Prisma.LoyaltyTierCreateNestedOneWithoutCustomersInput
   ledgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutCustomerInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutCustomerInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutSalesInvoicesInput = {
@@ -1031,13 +1333,16 @@ export type CustomerUncheckedCreateWithoutSalesInvoicesInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: string | null
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutCustomerInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutCustomerInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutCustomerInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutCustomerInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutSalesInvoicesInput = {
@@ -1061,6 +1366,7 @@ export type CustomerUpdateWithoutSalesInvoicesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1068,7 +1374,9 @@ export type CustomerUpdateWithoutSalesInvoicesInput = {
   loyaltyTier?: Prisma.LoyaltyTierUpdateOneWithoutCustomersNestedInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutCustomerNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutCustomerNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutSalesInvoicesInput = {
@@ -1077,13 +1385,16 @@ export type CustomerUncheckedUpdateWithoutSalesInvoicesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutCustomerNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutCustomerNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateManyTenantInput = {
@@ -1091,6 +1402,7 @@ export type CustomerCreateManyTenantInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: string | null
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1102,6 +1414,7 @@ export type CustomerUpdateWithoutTenantInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1109,7 +1422,9 @@ export type CustomerUpdateWithoutTenantInput = {
   salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutCustomerNestedInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutCustomerNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutCustomerNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutTenantInput = {
@@ -1117,6 +1432,7 @@ export type CustomerUncheckedUpdateWithoutTenantInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1124,7 +1440,9 @@ export type CustomerUncheckedUpdateWithoutTenantInput = {
   salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutCustomerNestedInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutCustomerNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutCustomerNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateManyWithoutTenantInput = {
@@ -1132,6 +1450,7 @@ export type CustomerUncheckedUpdateManyWithoutTenantInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   loyaltyTierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1144,6 +1463,7 @@ export type CustomerCreateManyLoyaltyTierInput = {
   name: string
   phone?: string | null
   creditLimit?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: number | null
   outstandingBalance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
@@ -1154,6 +1474,7 @@ export type CustomerUpdateWithoutLoyaltyTierInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1161,7 +1482,9 @@ export type CustomerUpdateWithoutLoyaltyTierInput = {
   salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutCustomerNestedInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutCustomerNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutCustomerNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutLoyaltyTierInput = {
@@ -1170,13 +1493,16 @@ export type CustomerUncheckedUpdateWithoutLoyaltyTierInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutCustomerNestedInput
   ledgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutCustomerNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutCustomerNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutCustomerNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutCustomerNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateManyWithoutLoyaltyTierInput = {
@@ -1185,6 +1511,7 @@ export type CustomerUncheckedUpdateManyWithoutLoyaltyTierInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creditLimit?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  creditTermDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outstandingBalance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   cumulativeSpend?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1199,14 +1526,18 @@ export type CustomerCountOutputType = {
   salesInvoices: number
   ledgerEntries: number
   whatsappLogs: number
+  smsLogs: number
   emailLogs: number
+  promiseOrders: number
 }
 
 export type CustomerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   salesInvoices?: boolean | CustomerCountOutputTypeCountSalesInvoicesArgs
   ledgerEntries?: boolean | CustomerCountOutputTypeCountLedgerEntriesArgs
   whatsappLogs?: boolean | CustomerCountOutputTypeCountWhatsappLogsArgs
+  smsLogs?: boolean | CustomerCountOutputTypeCountSmsLogsArgs
   emailLogs?: boolean | CustomerCountOutputTypeCountEmailLogsArgs
+  promiseOrders?: boolean | CustomerCountOutputTypeCountPromiseOrdersArgs
 }
 
 /**
@@ -1243,8 +1574,22 @@ export type CustomerCountOutputTypeCountWhatsappLogsArgs<ExtArgs extends runtime
 /**
  * CustomerCountOutputType without action
  */
+export type CustomerCountOutputTypeCountSmsLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SmsLogWhereInput
+}
+
+/**
+ * CustomerCountOutputType without action
+ */
 export type CustomerCountOutputTypeCountEmailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EmailLogWhereInput
+}
+
+/**
+ * CustomerCountOutputType without action
+ */
+export type CustomerCountOutputTypeCountPromiseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromiseOrderWhereInput
 }
 
 
@@ -1254,6 +1599,7 @@ export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name?: boolean
   phone?: boolean
   creditLimit?: boolean
+  creditTermDays?: boolean
   outstandingBalance?: boolean
   loyaltyTierId?: boolean
   cumulativeSpend?: boolean
@@ -1263,7 +1609,9 @@ export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   salesInvoices?: boolean | Prisma.Customer$salesInvoicesArgs<ExtArgs>
   ledgerEntries?: boolean | Prisma.Customer$ledgerEntriesArgs<ExtArgs>
   whatsappLogs?: boolean | Prisma.Customer$whatsappLogsArgs<ExtArgs>
+  smsLogs?: boolean | Prisma.Customer$smsLogsArgs<ExtArgs>
   emailLogs?: boolean | Prisma.Customer$emailLogsArgs<ExtArgs>
+  promiseOrders?: boolean | Prisma.Customer$promiseOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.CustomerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["customer"]>
 
@@ -1273,6 +1621,7 @@ export type CustomerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   name?: boolean
   phone?: boolean
   creditLimit?: boolean
+  creditTermDays?: boolean
   outstandingBalance?: boolean
   loyaltyTierId?: boolean
   cumulativeSpend?: boolean
@@ -1287,6 +1636,7 @@ export type CustomerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   name?: boolean
   phone?: boolean
   creditLimit?: boolean
+  creditTermDays?: boolean
   outstandingBalance?: boolean
   loyaltyTierId?: boolean
   cumulativeSpend?: boolean
@@ -1301,20 +1651,23 @@ export type CustomerSelectScalar = {
   name?: boolean
   phone?: boolean
   creditLimit?: boolean
+  creditTermDays?: boolean
   outstandingBalance?: boolean
   loyaltyTierId?: boolean
   cumulativeSpend?: boolean
   createdAt?: boolean
 }
 
-export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "phone" | "creditLimit" | "outstandingBalance" | "loyaltyTierId" | "cumulativeSpend" | "createdAt", ExtArgs["result"]["customer"]>
+export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "phone" | "creditLimit" | "creditTermDays" | "outstandingBalance" | "loyaltyTierId" | "cumulativeSpend" | "createdAt", ExtArgs["result"]["customer"]>
 export type CustomerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   loyaltyTier?: boolean | Prisma.Customer$loyaltyTierArgs<ExtArgs>
   salesInvoices?: boolean | Prisma.Customer$salesInvoicesArgs<ExtArgs>
   ledgerEntries?: boolean | Prisma.Customer$ledgerEntriesArgs<ExtArgs>
   whatsappLogs?: boolean | Prisma.Customer$whatsappLogsArgs<ExtArgs>
+  smsLogs?: boolean | Prisma.Customer$smsLogsArgs<ExtArgs>
   emailLogs?: boolean | Prisma.Customer$emailLogsArgs<ExtArgs>
+  promiseOrders?: boolean | Prisma.Customer$promiseOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.CustomerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CustomerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1334,7 +1687,9 @@ export type $CustomerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     salesInvoices: Prisma.$SalesInvoicePayload<ExtArgs>[]
     ledgerEntries: Prisma.$CustomerLedgerEntryPayload<ExtArgs>[]
     whatsappLogs: Prisma.$WhatsAppLogPayload<ExtArgs>[]
+    smsLogs: Prisma.$SmsLogPayload<ExtArgs>[]
     emailLogs: Prisma.$EmailLogPayload<ExtArgs>[]
+    promiseOrders: Prisma.$PromiseOrderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1342,6 +1697,11 @@ export type $CustomerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     name: string
     phone: string | null
     creditLimit: runtime.Decimal | null
+    /**
+     * Days a credit sale may stay unpaid before it counts as overdue.
+     * Null means the pharmacy has set no term, so nothing is chased.
+     */
+    creditTermDays: number | null
     outstandingBalance: runtime.Decimal
     loyaltyTierId: string | null
     cumulativeSpend: runtime.Decimal
@@ -1745,7 +2105,9 @@ export interface Prisma__CustomerClient<T, Null = never, ExtArgs extends runtime
   salesInvoices<T extends Prisma.Customer$salesInvoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$salesInvoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesInvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ledgerEntries<T extends Prisma.Customer$ledgerEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$ledgerEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomerLedgerEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   whatsappLogs<T extends Prisma.Customer$whatsappLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$whatsappLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WhatsAppLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  smsLogs<T extends Prisma.Customer$smsLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$smsLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SmsLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailLogs<T extends Prisma.Customer$emailLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$emailLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promiseOrders<T extends Prisma.Customer$promiseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$promiseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromiseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1780,6 +2142,7 @@ export interface CustomerFieldRefs {
   readonly name: Prisma.FieldRef<"Customer", 'String'>
   readonly phone: Prisma.FieldRef<"Customer", 'String'>
   readonly creditLimit: Prisma.FieldRef<"Customer", 'Decimal'>
+  readonly creditTermDays: Prisma.FieldRef<"Customer", 'Int'>
   readonly outstandingBalance: Prisma.FieldRef<"Customer", 'Decimal'>
   readonly loyaltyTierId: Prisma.FieldRef<"Customer", 'String'>
   readonly cumulativeSpend: Prisma.FieldRef<"Customer", 'Decimal'>
@@ -2276,6 +2639,30 @@ export type Customer$whatsappLogsArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * Customer.smsLogs
+ */
+export type Customer$smsLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SmsLog
+   */
+  select?: Prisma.SmsLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SmsLog
+   */
+  omit?: Prisma.SmsLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SmsLogInclude<ExtArgs> | null
+  where?: Prisma.SmsLogWhereInput
+  orderBy?: Prisma.SmsLogOrderByWithRelationInput | Prisma.SmsLogOrderByWithRelationInput[]
+  cursor?: Prisma.SmsLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SmsLogScalarFieldEnum | Prisma.SmsLogScalarFieldEnum[]
+}
+
+/**
  * Customer.emailLogs
  */
 export type Customer$emailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2297,6 +2684,30 @@ export type Customer$emailLogsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.EmailLogScalarFieldEnum | Prisma.EmailLogScalarFieldEnum[]
+}
+
+/**
+ * Customer.promiseOrders
+ */
+export type Customer$promiseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromiseOrder
+   */
+  select?: Prisma.PromiseOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PromiseOrder
+   */
+  omit?: Prisma.PromiseOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromiseOrderInclude<ExtArgs> | null
+  where?: Prisma.PromiseOrderWhereInput
+  orderBy?: Prisma.PromiseOrderOrderByWithRelationInput | Prisma.PromiseOrderOrderByWithRelationInput[]
+  cursor?: Prisma.PromiseOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromiseOrderScalarFieldEnum | Prisma.PromiseOrderScalarFieldEnum[]
 }
 
 /**

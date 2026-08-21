@@ -189,9 +189,24 @@ export function BranchForm({ branch }: { branch?: BranchDetail }) {
           <Input placeholder="License no." {...form.register("drugLicenseRetailNo")} />
           <Input type="date" {...form.register("retailExpiry")} />
 
-          <Label className="col-span-2 -mb-2 text-xs text-muted-foreground">Wholesale drug license</Label>
+          {/*
+            Named "wholesale" in the database, but for most pharmacies the
+            second licence is a second *retail* one — Form 20 covers drugs
+            outside Schedules C, C(1) and X, Form 21 covers Schedule C and
+            C(1). Labelling it "wholesale" invited the reader to conclude
+            the shop is licensed to supply other shops when it is not.
+            Both numbers print together on the bill either way.
+          */}
+          <Label className="col-span-2 -mb-2 text-xs text-muted-foreground">
+            Second drug license
+          </Label>
           <Input placeholder="License no." {...form.register("drugLicenseWholesaleNo")} />
           <Input type="date" {...form.register("wholesaleExpiry")} />
+          <p className="col-span-2 -mt-1 text-[11px] text-muted-foreground">
+            A second retail licence (Form 21) or a wholesale licence, whichever you hold. Billing
+            at PTR needs a genuine wholesale licence — leave Wholesale billing switched off in
+            Settings if this is a second retail licence.
+          </p>
 
           <Label className="col-span-2 -mb-2 text-xs text-muted-foreground">Narcotic license</Label>
           <Input placeholder="License no." {...form.register("narcoticLicenseNo")} />

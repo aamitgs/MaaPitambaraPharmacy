@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { describeComposition } from "@/lib/composition";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { toast } from "sonner";
@@ -19,7 +20,7 @@ import {
 import { createItem, updateItem, type ItemInput } from "@/lib/actions/items";
 import { AttachmentUpload } from "@/components/attachment-upload";
 import { readItemPhoto } from "@/lib/actions/vision";
-import { Sparkles, Loader2 } from "lucide-react";
+import { Sparkles, Loader2, CircleCheck, CircleAlert } from "lucide-react";
 import type { PlainItem } from "@/lib/serialize";
 
 const formSchema = z.object({
@@ -29,9 +30,13 @@ const formSchema = z.object({
   composition: z.string().trim().optional(),
   scheduleClass: z.enum(["none", "H", "H1", "X", "G"]),
   hsnCode: z.string().trim().optional(),
+  barcode: z.string().trim().max(64).optional(),
   taxRate: z.coerce.number().min(0).max(100),
+  taxSlabId: z.string().optional(),
   unit: z.string().trim().min(1, "Unit is required"),
   packSize: z.string().trim().optional(),
+  unitsPerPack: z.coerce.number().int().min(1).max(1000),
+  allowLooseSale: z.boolean(),
   reorderLevel: z.coerce.number().int().min(0),
   imageUrl: z.string().nullish(),
 });
@@ -44,7 +49,14 @@ const formSchema = z.object({
 type FormValues = z.input<typeof formSchema>;
 type FormOutput = z.output<typeof formSchema>;
 
-export function ItemForm({ item }: { item?: PlainItem }) {
+export function ItemForm({
+  item,
+  taxSlabs = [],
+}: {
+  item?: PlainItem;
+  /** Loaded server-side; empty until the pharmacy defines any. */
+  taxSlabs?: { id: string; name: string; currentRate: number | null }[];
+}) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [reading, startReading] = useTransition();
@@ -86,13 +98,20 @@ export function ItemForm({ item }: { item?: PlainItem }) {
       composition: item?.composition ?? "",
       scheduleClass: item?.scheduleClass ?? "none",
       hsnCode: item?.hsnCode ?? "",
+      barcode: item?.barcode ?? "",
       taxRate: item ? Number(item.taxRate) : 12,
+      taxSlabId: item?.taxSlabId ?? "",
       unit: item?.unit ?? "unit",
       packSize: item?.packSize ?? "",
+      unitsPerPack: item?.unitsPerPack ?? 1,
+      allowLooseSale: item?.allowLooseSale ?? false,
       reorderLevel: item?.reorderLevel ?? 10,
       imageUrl: item?.imageUrl ?? null,
     },
   });
+
+  const compositionText = form.watch("composition") ?? "";
+  const readable = describeComposition(compositionText);
 
   function onSubmit(values: FormOutput) {
     startTransition(async () => {
@@ -133,7 +152,30 @@ export function ItemForm({ item }: { item?: PlainItem }) {
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="composition">Composition</Label>
-          <Input id="composition" {...form.register("composition")} />
+          <Input
+            id="composition"
+            placeholder="Paracetamol 500mg + Caffeine 30mg"
+            {...form.register("composition")}
+          />
+          {/*
+            Told here rather than discovered later. Whether a composition
+            can be matched depends only on the strengths being written
+            down, which is a pure check — no round-trip, no waiting.
+          */}
+          {compositionText.trim() ? (
+            readable ? (
+              <p className="flex items-start gap-1 text-[11px] text-success">
+                <CircleCheck className="mt-0.5 h-3 w-3 shrink-0" />
+                Reads as {readable} — substitutes will match on this.
+              </p>
+            ) : (
+              <p className="flex items-start gap-1 text-[11px] text-warning-foreground">
+                <CircleAlert className="mt-0.5 h-3 w-3 shrink-0" />
+                Every ingredient needs a strength, or this item will not be offered as a
+                substitute. It still saves.
+              </p>
+            )
+          ) : null}
         </div>
         <div className="space-y-1.5">
           <Label>Schedule class</Label>
@@ -158,8 +200,42 @@ export function ItemForm({ item }: { item?: PlainItem }) {
           <Input id="hsnCode" {...form.register("hsnCode")} />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="taxRate">Tax rate (%)</Label>
+          <Label htmlFor="barcode">Barcode</Label>
+          <Input
+            id="barcode"
+            placeholder="Scan the pack, or type the EAN"
+            {...form.register("barcode")}
+          />
+          <p className="text-[11px] text-muted-foreground">
+            Lets the till add this item by scanning. Leave blank if the pack has no code.
+          </p>
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="taxSlabId">GST slab</Label>
+          <select
+            id="taxSlabId"
+            className="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 text-sm"
+            {...form.register("taxSlabId")}
+          >
+            <option value="">Resolve from HSN code</option>
+            {taxSlabs.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.name}
+                {s.currentRate !== null ? ` — ${s.currentRate}%` : " — no rate set"}
+              </option>
+            ))}
+          </select>
+          <p className="text-[11px] text-muted-foreground">
+            Leave on &ldquo;resolve from HSN&rdquo; unless this item is an exception. Setting a
+            slab here overrides the HSN mapping.
+          </p>
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="taxRate">Fallback tax rate (%)</Label>
           <Input id="taxRate" type="number" step="0.01" {...form.register("taxRate")} />
+          <p className="text-[11px] text-muted-foreground">
+            Only used when neither a slab nor an HSN mapping applies.
+          </p>
           {form.formState.errors.taxRate && (
             <p className="text-xs text-destructive">{form.formState.errors.taxRate.message}</p>
           )}
@@ -171,6 +247,35 @@ export function ItemForm({ item }: { item?: PlainItem }) {
         <div className="space-y-1.5">
           <Label htmlFor="packSize">Pack size</Label>
           <Input id="packSize" placeholder="10 tablets" {...form.register("packSize")} />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="unitsPerPack">Units per pack</Label>
+          <Input
+            id="unitsPerPack"
+            type="number"
+            min={1}
+            {...form.register("unitsPerPack")}
+          />
+          <p className="text-[11px] text-muted-foreground">
+            How many sellable units are in one pack — 10 for a strip of ten tablets. Leave at 1
+            for a bottle or a tube.
+          </p>
+        </div>
+        <div className="space-y-1.5 sm:col-span-2">
+          <label className="flex items-start gap-2.5 rounded-lg border p-3">
+            <input
+              type="checkbox"
+              className="mt-0.5"
+              {...form.register("allowLooseSale")}
+            />
+            <span>
+              <span className="text-sm font-medium">Can be sold loose</span>
+              <span className="block text-[11px] text-muted-foreground">
+                Lets the counter break a pack and sell single units. Off by default — a strip
+                broken by mistake cannot be un-broken.
+              </span>
+            </span>
+          </label>
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="reorderLevel">Reorder level</Label>

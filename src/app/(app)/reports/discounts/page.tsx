@@ -5,6 +5,7 @@ import { DateRangeFilter } from "@/components/reports/date-range-filter";
 import { PrintButton } from "@/components/reports/print-button";
 import { RestrictedAccess } from "@/components/reports/restricted-access";
 import { Button } from "@/components/ui/button";
+import { ExportButtons } from "@/components/reports/export-buttons";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
@@ -45,11 +46,7 @@ export default async function DiscountReportPage({
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button asChild size="sm" variant="outline">
-            <a href={`/api/export/discount-report?from=${from}&to=${to}`}>
-              <Download className="h-4 w-4" /> Export CSV
-            </a>
-          </Button>
+          <ExportButtons href={`/api/export/discount-report?from=${from}&to=${to}`} />
           <PrintButton />
         </div>
       </div>

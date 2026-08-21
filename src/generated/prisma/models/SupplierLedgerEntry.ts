@@ -40,6 +40,7 @@ export type SupplierLedgerEntryMinAggregateOutputType = {
   supplierId: string | null
   type: $Enums.SupplierLedgerEntryType | null
   amount: runtime.Decimal | null
+  dueDate: Date | null
   referenceId: string | null
   referenceType: string | null
   note: string | null
@@ -52,6 +53,7 @@ export type SupplierLedgerEntryMaxAggregateOutputType = {
   supplierId: string | null
   type: $Enums.SupplierLedgerEntryType | null
   amount: runtime.Decimal | null
+  dueDate: Date | null
   referenceId: string | null
   referenceType: string | null
   note: string | null
@@ -64,6 +66,7 @@ export type SupplierLedgerEntryCountAggregateOutputType = {
   supplierId: number
   type: number
   amount: number
+  dueDate: number
   referenceId: number
   referenceType: number
   note: number
@@ -86,6 +89,7 @@ export type SupplierLedgerEntryMinAggregateInputType = {
   supplierId?: true
   type?: true
   amount?: true
+  dueDate?: true
   referenceId?: true
   referenceType?: true
   note?: true
@@ -98,6 +102,7 @@ export type SupplierLedgerEntryMaxAggregateInputType = {
   supplierId?: true
   type?: true
   amount?: true
+  dueDate?: true
   referenceId?: true
   referenceType?: true
   note?: true
@@ -110,6 +115,7 @@ export type SupplierLedgerEntryCountAggregateInputType = {
   supplierId?: true
   type?: true
   amount?: true
+  dueDate?: true
   referenceId?: true
   referenceType?: true
   note?: true
@@ -209,6 +215,7 @@ export type SupplierLedgerEntryGroupByOutputType = {
   supplierId: string
   type: $Enums.SupplierLedgerEntryType
   amount: runtime.Decimal
+  dueDate: Date | null
   referenceId: string | null
   referenceType: string | null
   note: string | null
@@ -244,6 +251,7 @@ export type SupplierLedgerEntryWhereInput = {
   supplierId?: Prisma.StringFilter<"SupplierLedgerEntry"> | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFilter<"SupplierLedgerEntry"> | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFilter<"SupplierLedgerEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.DateTimeNullableFilter<"SupplierLedgerEntry"> | Date | string | null
   referenceId?: Prisma.StringNullableFilter<"SupplierLedgerEntry"> | string | null
   referenceType?: Prisma.StringNullableFilter<"SupplierLedgerEntry"> | string | null
   note?: Prisma.StringNullableFilter<"SupplierLedgerEntry"> | string | null
@@ -258,6 +266,7 @@ export type SupplierLedgerEntryOrderByWithRelationInput = {
   supplierId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
   referenceId?: Prisma.SortOrderInput | Prisma.SortOrder
   referenceType?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -275,6 +284,7 @@ export type SupplierLedgerEntryWhereUniqueInput = Prisma.AtLeast<{
   supplierId?: Prisma.StringFilter<"SupplierLedgerEntry"> | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFilter<"SupplierLedgerEntry"> | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFilter<"SupplierLedgerEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.DateTimeNullableFilter<"SupplierLedgerEntry"> | Date | string | null
   referenceId?: Prisma.StringNullableFilter<"SupplierLedgerEntry"> | string | null
   referenceType?: Prisma.StringNullableFilter<"SupplierLedgerEntry"> | string | null
   note?: Prisma.StringNullableFilter<"SupplierLedgerEntry"> | string | null
@@ -289,6 +299,7 @@ export type SupplierLedgerEntryOrderByWithAggregationInput = {
   supplierId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
   referenceId?: Prisma.SortOrderInput | Prisma.SortOrder
   referenceType?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -309,6 +320,7 @@ export type SupplierLedgerEntryScalarWhereWithAggregatesInput = {
   supplierId?: Prisma.StringWithAggregatesFilter<"SupplierLedgerEntry"> | string
   type?: Prisma.EnumSupplierLedgerEntryTypeWithAggregatesFilter<"SupplierLedgerEntry"> | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalWithAggregatesFilter<"SupplierLedgerEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.DateTimeNullableWithAggregatesFilter<"SupplierLedgerEntry"> | Date | string | null
   referenceId?: Prisma.StringNullableWithAggregatesFilter<"SupplierLedgerEntry"> | string | null
   referenceType?: Prisma.StringNullableWithAggregatesFilter<"SupplierLedgerEntry"> | string | null
   note?: Prisma.StringNullableWithAggregatesFilter<"SupplierLedgerEntry"> | string | null
@@ -319,6 +331,7 @@ export type SupplierLedgerEntryCreateInput = {
   id?: string
   type: $Enums.SupplierLedgerEntryType
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Date | string | null
   referenceId?: string | null
   referenceType?: string | null
   note?: string | null
@@ -333,6 +346,7 @@ export type SupplierLedgerEntryUncheckedCreateInput = {
   supplierId: string
   type: $Enums.SupplierLedgerEntryType
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Date | string | null
   referenceId?: string | null
   referenceType?: string | null
   note?: string | null
@@ -343,6 +357,7 @@ export type SupplierLedgerEntryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFieldUpdateOperationsInput | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -357,6 +372,7 @@ export type SupplierLedgerEntryUncheckedUpdateInput = {
   supplierId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFieldUpdateOperationsInput | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -369,6 +385,7 @@ export type SupplierLedgerEntryCreateManyInput = {
   supplierId: string
   type: $Enums.SupplierLedgerEntryType
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Date | string | null
   referenceId?: string | null
   referenceType?: string | null
   note?: string | null
@@ -379,6 +396,7 @@ export type SupplierLedgerEntryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFieldUpdateOperationsInput | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -391,6 +409,7 @@ export type SupplierLedgerEntryUncheckedUpdateManyInput = {
   supplierId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFieldUpdateOperationsInput | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -413,6 +432,7 @@ export type SupplierLedgerEntryCountOrderByAggregateInput = {
   supplierId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
   referenceId?: Prisma.SortOrder
   referenceType?: Prisma.SortOrder
   note?: Prisma.SortOrder
@@ -429,6 +449,7 @@ export type SupplierLedgerEntryMaxOrderByAggregateInput = {
   supplierId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
   referenceId?: Prisma.SortOrder
   referenceType?: Prisma.SortOrder
   note?: Prisma.SortOrder
@@ -441,6 +462,7 @@ export type SupplierLedgerEntryMinOrderByAggregateInput = {
   supplierId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
   referenceId?: Prisma.SortOrder
   referenceType?: Prisma.SortOrder
   note?: Prisma.SortOrder
@@ -543,6 +565,7 @@ export type SupplierLedgerEntryCreateWithoutTenantInput = {
   id?: string
   type: $Enums.SupplierLedgerEntryType
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Date | string | null
   referenceId?: string | null
   referenceType?: string | null
   note?: string | null
@@ -555,6 +578,7 @@ export type SupplierLedgerEntryUncheckedCreateWithoutTenantInput = {
   supplierId: string
   type: $Enums.SupplierLedgerEntryType
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Date | string | null
   referenceId?: string | null
   referenceType?: string | null
   note?: string | null
@@ -596,6 +620,7 @@ export type SupplierLedgerEntryScalarWhereInput = {
   supplierId?: Prisma.StringFilter<"SupplierLedgerEntry"> | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFilter<"SupplierLedgerEntry"> | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFilter<"SupplierLedgerEntry"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.DateTimeNullableFilter<"SupplierLedgerEntry"> | Date | string | null
   referenceId?: Prisma.StringNullableFilter<"SupplierLedgerEntry"> | string | null
   referenceType?: Prisma.StringNullableFilter<"SupplierLedgerEntry"> | string | null
   note?: Prisma.StringNullableFilter<"SupplierLedgerEntry"> | string | null
@@ -606,6 +631,7 @@ export type SupplierLedgerEntryCreateWithoutSupplierInput = {
   id?: string
   type: $Enums.SupplierLedgerEntryType
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Date | string | null
   referenceId?: string | null
   referenceType?: string | null
   note?: string | null
@@ -618,6 +644,7 @@ export type SupplierLedgerEntryUncheckedCreateWithoutSupplierInput = {
   tenantId: string
   type: $Enums.SupplierLedgerEntryType
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Date | string | null
   referenceId?: string | null
   referenceType?: string | null
   note?: string | null
@@ -655,6 +682,7 @@ export type SupplierLedgerEntryCreateManyTenantInput = {
   supplierId: string
   type: $Enums.SupplierLedgerEntryType
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Date | string | null
   referenceId?: string | null
   referenceType?: string | null
   note?: string | null
@@ -665,6 +693,7 @@ export type SupplierLedgerEntryUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFieldUpdateOperationsInput | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -677,6 +706,7 @@ export type SupplierLedgerEntryUncheckedUpdateWithoutTenantInput = {
   supplierId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFieldUpdateOperationsInput | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -688,6 +718,7 @@ export type SupplierLedgerEntryUncheckedUpdateManyWithoutTenantInput = {
   supplierId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFieldUpdateOperationsInput | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -699,6 +730,7 @@ export type SupplierLedgerEntryCreateManySupplierInput = {
   tenantId: string
   type: $Enums.SupplierLedgerEntryType
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Date | string | null
   referenceId?: string | null
   referenceType?: string | null
   note?: string | null
@@ -709,6 +741,7 @@ export type SupplierLedgerEntryUpdateWithoutSupplierInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFieldUpdateOperationsInput | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -721,6 +754,7 @@ export type SupplierLedgerEntryUncheckedUpdateWithoutSupplierInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFieldUpdateOperationsInput | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -732,6 +766,7 @@ export type SupplierLedgerEntryUncheckedUpdateManyWithoutSupplierInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSupplierLedgerEntryTypeFieldUpdateOperationsInput | $Enums.SupplierLedgerEntryType
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referenceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -746,6 +781,7 @@ export type SupplierLedgerEntrySelect<ExtArgs extends runtime.Types.Extensions.I
   supplierId?: boolean
   type?: boolean
   amount?: boolean
+  dueDate?: boolean
   referenceId?: boolean
   referenceType?: boolean
   note?: boolean
@@ -760,6 +796,7 @@ export type SupplierLedgerEntrySelectCreateManyAndReturn<ExtArgs extends runtime
   supplierId?: boolean
   type?: boolean
   amount?: boolean
+  dueDate?: boolean
   referenceId?: boolean
   referenceType?: boolean
   note?: boolean
@@ -774,6 +811,7 @@ export type SupplierLedgerEntrySelectUpdateManyAndReturn<ExtArgs extends runtime
   supplierId?: boolean
   type?: boolean
   amount?: boolean
+  dueDate?: boolean
   referenceId?: boolean
   referenceType?: boolean
   note?: boolean
@@ -788,13 +826,14 @@ export type SupplierLedgerEntrySelectScalar = {
   supplierId?: boolean
   type?: boolean
   amount?: boolean
+  dueDate?: boolean
   referenceId?: boolean
   referenceType?: boolean
   note?: boolean
   createdAt?: boolean
 }
 
-export type SupplierLedgerEntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "supplierId" | "type" | "amount" | "referenceId" | "referenceType" | "note" | "createdAt", ExtArgs["result"]["supplierLedgerEntry"]>
+export type SupplierLedgerEntryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "supplierId" | "type" | "amount" | "dueDate" | "referenceId" | "referenceType" | "note" | "createdAt", ExtArgs["result"]["supplierLedgerEntry"]>
 export type SupplierLedgerEntryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>
@@ -820,6 +859,12 @@ export type $SupplierLedgerEntryPayload<ExtArgs extends runtime.Types.Extensions
     supplierId: string
     type: $Enums.SupplierLedgerEntryType
     amount: runtime.Decimal
+    /**
+     * When this purchase falls due, from the supplier's payment terms at
+     * the time of receipt. Copied rather than derived, so renegotiating
+     * terms later does not silently re-age invoices already agreed.
+     */
+    dueDate: Date | null
     referenceId: string | null
     referenceType: string | null
     note: string | null
@@ -1254,6 +1299,7 @@ export interface SupplierLedgerEntryFieldRefs {
   readonly supplierId: Prisma.FieldRef<"SupplierLedgerEntry", 'String'>
   readonly type: Prisma.FieldRef<"SupplierLedgerEntry", 'SupplierLedgerEntryType'>
   readonly amount: Prisma.FieldRef<"SupplierLedgerEntry", 'Decimal'>
+  readonly dueDate: Prisma.FieldRef<"SupplierLedgerEntry", 'DateTime'>
   readonly referenceId: Prisma.FieldRef<"SupplierLedgerEntry", 'String'>
   readonly referenceType: Prisma.FieldRef<"SupplierLedgerEntry", 'String'>
   readonly note: Prisma.FieldRef<"SupplierLedgerEntry", 'String'>

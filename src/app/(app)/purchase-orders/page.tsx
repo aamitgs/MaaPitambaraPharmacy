@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
-import { Plus } from "lucide-react";
+import { Plus, Sparkles } from "lucide-react";
 
 const STATUS_VARIANT: Record<string, string> = {
   draft: "bg-muted text-muted-foreground",
@@ -29,11 +29,18 @@ export default async function PurchaseOrdersPage() {
           </p>
         </div>
         {canEdit && (
+          <div className="flex gap-2">
+          <Button asChild variant="outline">
+            <Link href="/purchase-orders/suggestions">
+              <Sparkles className="h-4 w-4" /> Suggest reorders
+            </Link>
+          </Button>
           <Button asChild size="sm">
             <Link href="/purchase-orders/new">
               <Plus /> New purchase order
             </Link>
           </Button>
+        </div>
         )}
       </div>
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireRole, UnauthorizedError } from "@/lib/rbac";
+import { requirePermission, UnauthorizedError } from "@/lib/rbac";
 import { saveAttachment, AttachmentUploadError } from "@/lib/attachment-storage";
 
 export async function POST(request: NextRequest) {
@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
   // shows the message in a toast, and "Upload failed" explains nothing.
   let session;
   try {
-    session = await requireRole(["owner", "pharmacist"]);
+    session = await requirePermission("purchasing.manage");
   } catch (e) {
     if (e instanceof UnauthorizedError) {
       return NextResponse.json(

@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole, requireSession } from "@/lib/rbac";
+import { requirePermission, requireSession } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 import { serializePurchaseOrderItem, serializeSupplier } from "@/lib/serialize";
 import { getBranchFilter, resolveConcreteBranch } from "@/lib/branch-scope";
@@ -100,7 +100,7 @@ export async function listOpenPurchaseOrdersForSupplier(supplierId: string, incl
 }
 
 export async function createPurchaseOrder(input: PurchaseOrderInput) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("purchasing.manage");
   const parsed = poSchema.parse(input);
 
   const supplier = await prisma.supplier.findFirst({
@@ -148,7 +148,7 @@ export async function createPurchaseOrder(input: PurchaseOrderInput) {
 const statusSchema = z.enum(["draft", "sent", "received", "cancelled"]);
 
 export async function updatePurchaseOrderStatus(id: string, status: z.infer<typeof statusSchema>) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("purchasing.manage");
   const parsedStatus = statusSchema.parse(status);
 
   const before = await prisma.purchaseOrder.findFirst({

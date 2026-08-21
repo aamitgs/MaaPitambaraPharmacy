@@ -16,6 +16,16 @@ export interface CartLine {
   rate: number;
   qty: number;
   discountPercent: number;
+  /** True when this line is loose units out of a pack, not whole packs. */
+  isLooseSale: boolean;
+  /** Sellable units in one pack, copied from the item. */
+  unitsPerPack: number;
+  /** Loose units currently open on this batch, for the availability check. */
+  looseUnits: number;
+  /** Retail or wholesale. Always "mrp" unless wholesale billing is on. */
+  priceBasis: "mrp" | "ptr";
+  /** The batch's PTR, if it has one. */
+  ptr: number | null;
 }
 
 interface RemovedLine {
@@ -27,6 +37,22 @@ export interface AppliedCoupon {
   code: string;
   type: "percent" | "flat";
   value: number;
+}
+
+/** The parts of the cart a held sale round-trips. Excludes transient UI
+ *  state (undo buffer, focused line) which means nothing after a resume. */
+export interface CartSnapshot {
+  lines: CartLine[];
+  billDiscount: { isPercent: boolean; value: number };
+  customerId: string | null;
+  doctorId: string | null;
+  patientName: string;
+  patientAge: string;
+  patientPhone: string;
+  patientAddress: string;
+  paymentMode: PaymentMode;
+  prescriptionImagePath: string | null;
+  appliedCoupon: AppliedCoupon | null;
 }
 
 interface CartState {
@@ -44,7 +70,13 @@ interface CartState {
   focusLineId: string | null;
   appliedCoupon: AppliedCoupon | null;
 
-  addLine: (line: Omit<CartLine, "lineId" | "qty" | "discountPercent">) => string;
+  addLine: (
+    line: Omit<CartLine, "lineId" | "qty" | "discountPercent" | "isLooseSale" | "priceBasis">
+  ) => string;
+  /** Switches a line between retail and wholesale pricing. */
+  setLineBasis: (lineId: string, basis: "mrp" | "ptr") => void;
+  /** Switches a line between whole packs and loose units. */
+  setLineLoose: (lineId: string, isLoose: boolean) => void;
   updateQty: (lineId: string, qty: number) => void;
   setLineDiscount: (lineId: string, percent: number) => void;
   overrideBatch: (
@@ -64,6 +96,10 @@ interface CartState {
   setPaymentMode: (mode: PaymentMode) => void;
   setPrescriptionImagePath: (path: string | null) => void;
   setAppliedCoupon: (coupon: AppliedCoupon | null) => void;
+  /** Replaces the whole cart — used when a held sale is resumed. */
+  restore: (snapshot: CartSnapshot) => void;
+  /** Everything a hold needs to come back exactly as it was. */
+  snapshot: () => CartSnapshot;
   reset: () => void;
 }
 
@@ -93,8 +129,10 @@ export const useCartStore = create<CartState>((set, get) => ({
   ...initialState,
 
   addLine: (line) => {
+    // Matched on the loose flag too: four loose tablets and two full
+    // strips of the same batch are separate lines, priced differently.
     const existing = get().lines.find(
-      (l) => l.itemId === line.itemId && l.batchId === line.batchId
+      (l) => l.itemId === line.itemId && l.batchId === line.batchId && !l.isLooseSale
     );
     if (existing) {
       set({
@@ -107,7 +145,10 @@ export const useCartStore = create<CartState>((set, get) => ({
     }
     const lineId = nextId();
     set({
-      lines: [...get().lines, { ...line, lineId, qty: 1, discountPercent: 0 }],
+      lines: [
+        ...get().lines,
+        { ...line, lineId, qty: 1, discountPercent: 0, isLooseSale: false, priceBasis: "mrp" },
+      ],
       focusLineId: lineId,
     });
     return lineId;
@@ -168,6 +209,26 @@ export const useCartStore = create<CartState>((set, get) => ({
     set({ lines, lastRemoved: null });
   },
 
+  setLineLoose: (lineId, isLoose) =>
+    set({
+      lines: get().lines.map((l) =>
+        l.lineId === lineId
+          ? {
+              ...l,
+              isLooseSale: isLoose,
+              // Switching units without resetting the quantity would turn
+              // "2 strips" into "2 tablets" — same number, tenth of the sale.
+              qty: 1,
+            }
+          : l
+      ),
+    }),
+
+  setLineBasis: (lineId, basis) =>
+    set({
+      lines: get().lines.map((l) => (l.lineId === lineId ? { ...l, priceBasis: basis } : l)),
+    }),
+
   clearFocusLine: () => set({ focusLineId: null }),
 
   setBillDiscount: (d) => set({ billDiscount: d }),
@@ -180,6 +241,28 @@ export const useCartStore = create<CartState>((set, get) => ({
   setPaymentMode: (mode) => set({ paymentMode: mode }),
   setPrescriptionImagePath: (path) => set({ prescriptionImagePath: path }),
   setAppliedCoupon: (coupon) => set({ appliedCoupon: coupon }),
+
+  snapshot: () => {
+    const s = get();
+    return {
+      lines: s.lines,
+      billDiscount: s.billDiscount,
+      customerId: s.customerId,
+      doctorId: s.doctorId,
+      patientName: s.patientName,
+      patientAge: s.patientAge,
+      patientPhone: s.patientPhone,
+      patientAddress: s.patientAddress,
+      paymentMode: s.paymentMode,
+      prescriptionImagePath: s.prescriptionImagePath,
+      appliedCoupon: s.appliedCoupon,
+    };
+  },
+
+  // Starts from initialState so anything not in the snapshot — the undo
+  // buffer, the focused line — is cleared rather than carried across from
+  // whatever cart happened to be on screen before.
+  restore: (snapshot) => set({ ...initialState, ...snapshot }),
 
   reset: () => set({ ...initialState, lines: [] }),
 }));

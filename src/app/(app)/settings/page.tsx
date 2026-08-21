@@ -1,14 +1,17 @@
 import { auth } from "@/auth";
-import { prisma } from "@/lib/prisma";
 import { canEditItemMaster, canManageCompliance } from "@/lib/rbac";
 import { getBackupStatus } from "@/lib/actions/backup";
 import { getLicenseExpiryWindow } from "@/lib/actions/branch-settings";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BackupPanel } from "@/components/settings/backup-panel";
-import { SecurityPanel } from "@/components/settings/security-panel";
 import { ImportPanel } from "@/components/settings/import-panel";
+import { PartyImportPanel } from "@/components/settings/party-import-panel";
 import { ExportPanel } from "@/components/settings/export-panel";
 import { CompliancePanel } from "@/components/settings/compliance-panel";
+import { SellingPanel } from "@/components/settings/selling-panel";
+import { RetentionPanel } from "@/components/settings/retention-panel";
+import { IntegrationsPanel } from "@/components/settings/integrations-panel";
+import { getSellingSettings } from "@/lib/actions/tenant-settings";
 import { Separator } from "@/components/ui/separator";
 
 export default async function SettingsPage() {
@@ -17,11 +20,14 @@ export default async function SettingsPage() {
 
   const canImport = canEditItemMaster(session.user.role);
   const canCompliance = canManageCompliance(session.user.role);
+  // Stock warnings only — owner only. The authority controls live under
+  // Staff & roles, and everything printed on a bill under /branding.
+  const isOwner = session.user.role === "owner";
 
-  const [backupStatus, user, licenseWindow] = await Promise.all([
+  const [backupStatus, licenseWindow, selling] = await Promise.all([
     getBackupStatus(),
-    prisma.user.findUniqueOrThrow({ where: { id: session.user.id } }),
     canCompliance ? getLicenseExpiryWindow() : Promise.resolve(null),
+    isOwner ? getSellingSettings() : Promise.resolve(null),
   ]);
 
   return (
@@ -31,7 +37,9 @@ export default async function SettingsPage() {
         <TabsList>
           <TabsTrigger value="backup">Backup</TabsTrigger>
           <TabsTrigger value="data">Import / Export</TabsTrigger>
-          <TabsTrigger value="security">Security</TabsTrigger>
+          {isOwner && <TabsTrigger value="selling">Stock warnings</TabsTrigger>}
+          {isOwner && <TabsTrigger value="integrations">Integrations</TabsTrigger>}
+          {isOwner && <TabsTrigger value="retention">Retention</TabsTrigger>}
           {canCompliance && <TabsTrigger value="compliance">Compliance</TabsTrigger>}
         </TabsList>
         <TabsContent value="backup" className="pt-4">
@@ -39,6 +47,7 @@ export default async function SettingsPage() {
             lastBackupAt={backupStatus.lastBackupAt}
             lastBackupStatus={backupStatus.lastBackupStatus}
             isStale={backupStatus.isStale}
+            canRestore={isOwner}
           />
         </TabsContent>
         <TabsContent value="data" className="space-y-6 pt-4">
@@ -46,13 +55,29 @@ export default async function SettingsPage() {
             <>
               <ImportPanel />
               <Separator className="max-w-3xl" />
+              <PartyImportPanel kind="supplier" />
+              <Separator className="max-w-3xl" />
+              <PartyImportPanel kind="customer" />
+              <Separator className="max-w-3xl" />
             </>
           )}
           <ExportPanel />
         </TabsContent>
-        <TabsContent value="security" className="pt-4">
-          <SecurityPanel totpEnabled={user.totpEnabled} />
-        </TabsContent>
+        {isOwner && selling && (
+          <TabsContent value="selling" className="pt-4">
+            <SellingPanel initial={selling} />
+          </TabsContent>
+        )}
+        {isOwner && (
+          <TabsContent value="integrations" className="pt-4">
+            <IntegrationsPanel />
+          </TabsContent>
+        )}
+        {isOwner && (
+          <TabsContent value="retention" className="pt-4">
+            <RetentionPanel />
+          </TabsContent>
+        )}
         {canCompliance && licenseWindow && (
           <TabsContent value="compliance" className="pt-4">
             <CompliancePanel initial={licenseWindow} />

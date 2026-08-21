@@ -7,6 +7,7 @@ import { PrintButton } from "@/components/reports/print-button";
 import { RestrictedAccess } from "@/components/reports/restricted-access";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ExportButtons } from "@/components/reports/export-buttons";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
 import { Download } from "lucide-react";
@@ -38,11 +39,7 @@ export default async function StockLedgerPage({
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button asChild size="sm" variant="outline">
-            <a href={`/api/export/stock-ledger?from=${from}&to=${to}`}>
-              <Download className="h-4 w-4" /> Export CSV
-            </a>
-          </Button>
+          <ExportButtons href={`/api/export/stock-ledger?from=${from}&to=${to}`} />
           <PrintButton />
         </div>
       </div>

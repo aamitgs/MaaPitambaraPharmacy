@@ -11,12 +11,14 @@ export function BatchesTable({
   showPurchaseRate,
   nearExpiryWindowDays,
   canEdit,
+  canPricePtr,
 }: {
   itemId: string;
   batches: PlainBatch[];
   showPurchaseRate: boolean;
   nearExpiryWindowDays: number;
   canEdit: boolean;
+  canPricePtr: boolean;
 }) {
   const now = new Date();
   const nearExpiryCutoff = new Date(now.getTime() + nearExpiryWindowDays * 86400000);
@@ -30,6 +32,7 @@ export function BatchesTable({
             <TableHead>Expiry</TableHead>
             <TableHead>MRP</TableHead>
             <TableHead>Sale rate</TableHead>
+            {canPricePtr && <TableHead>PTR</TableHead>}
             {showPurchaseRate && <TableHead>Purchase rate</TableHead>}
             <TableHead>Qty</TableHead>
             <TableHead>Rack</TableHead>
@@ -53,6 +56,11 @@ export function BatchesTable({
                   </TableCell>
                   <TableCell>₹{Number(batch.mrp).toFixed(2)}</TableCell>
                   <TableCell>₹{Number(batch.saleRate).toFixed(2)}</TableCell>
+                  {canPricePtr && (
+                    <TableCell className={cn(batch.ptr == null && "text-muted-foreground/40")}>
+                      {batch.ptr == null ? "—" : `₹${Number(batch.ptr).toFixed(2)}`}
+                    </TableCell>
+                  )}
                   {showPurchaseRate && (
                     <TableCell>₹{Number(batch.purchaseRate).toFixed(2)}</TableCell>
                   )}
@@ -83,7 +91,12 @@ export function BatchesTable({
                   </TableCell>
                   {canEdit && (
                     <TableCell>
-                      <BatchForm itemId={itemId} batch={batch} showPurchaseRate={showPurchaseRate} />
+                      <BatchForm
+                        itemId={itemId}
+                        batch={batch}
+                        showPurchaseRate={showPurchaseRate}
+                        canPricePtr={canPricePtr}
+                      />
                     </TableCell>
                   )}
                 </TableRow>
@@ -92,7 +105,7 @@ export function BatchesTable({
           ) : (
             <TableRow>
               <TableCell
-                colSpan={showPurchaseRate ? 9 : 8}
+                colSpan={8 + (showPurchaseRate ? 1 : 0) + (canPricePtr ? 1 : 0)}
                 className="h-20 text-center text-muted-foreground"
               >
                 No batches yet.

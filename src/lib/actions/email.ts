@@ -7,6 +7,7 @@ import { prisma } from "@/lib/prisma";
 import { getInvoiceForReceipt } from "@/lib/actions/invoices";
 import { getCustomerStatement } from "@/lib/actions/customers";
 import { sendEmailMessage, type EmailSendResult } from "@/lib/email/provider";
+import { invoiceFileName, renderInvoicePdf } from "@/lib/pdf/render-invoice";
 import { z } from "zod";
 
 const sendSchema = z.object({ email: z.string().email("Enter a valid email address") });
@@ -40,9 +41,9 @@ async function logAndReturn(params: {
 }
 
 /**
- * Sends the same itemised text summary WhatsApp does. There is still no
- * server-side document rendering in this app, so this is not a PDF of the
- * bill — see the WhatsApp note in the README.
+ * Sends the itemised text summary with the A5 bill attached as a PDF. The
+ * attachment only rides along on the SMTP path — a mailto: hand-off carries
+ * text only, so there the bill is offered as a separate download.
  */
 export async function sendReceiptEmail(invoiceId: string, emailOverride?: string) {
   const session = await requireSession();
@@ -73,6 +74,11 @@ export async function sendReceiptEmail(invoiceId: string, emailOverride?: string
     to: parsed.email,
     subject: `${invoice.tenant.pharmacyName} — Invoice ${invoice.invoiceNo}`,
     text,
+    attachment: {
+      filename: invoiceFileName(invoice.invoiceNo),
+      content: await renderInvoicePdf(invoice),
+      contentType: "application/pdf",
+    },
   });
 
   const outcome = await logAndReturn({

@@ -7,7 +7,7 @@ import { getBranchFilter } from "@/lib/branch-scope";
 
 const LICENSE_LABELS: Record<LicenseType, string> = {
   retail: "Retail drug license",
-  wholesale: "Wholesale drug license",
+  wholesale: "Second drug license",
   narcotic: "Narcotic license",
   fssai: "FSSAI registration",
 };
@@ -137,11 +137,57 @@ export async function getAlerts() {
   }
   licenseExpiry.sort((a, b) => a.expiryDate.getTime() - b.expiryDate.getTime());
 
+  /**
+   * Details a bill is required to carry that nobody has filled in.
+   *
+   * These were all optional columns rendered with `{x && ...}`, so a blank
+   * one simply vanished from the bill — the pharmacy looked compliant on
+   * screen while printing an incomplete document. Absence has to be
+   * visible somewhere, and the alerts screen is where the rest of the
+   * compliance nags already live.
+   */
+  const complianceGaps: { branchId: string; branchName: string; field: string; why: string }[] = [];
+  for (const branch of branches) {
+    if (!branch.pharmacistName) {
+      complianceGaps.push({
+        branchId: branch.id,
+        branchName: branch.name,
+        field: "Registered pharmacist",
+        why: "A sale of prescription medicine is made under a registered pharmacist's supervision, and the bill should name them.",
+      });
+    }
+    if (!branch.pharmacistRegistrationNo) {
+      complianceGaps.push({
+        branchId: branch.id,
+        branchName: branch.name,
+        field: "Pharmacist registration number",
+        why: "The state pharmacy council number that makes the named pharmacist traceable.",
+      });
+    }
+    if (!branch.gstin) {
+      complianceGaps.push({
+        branchId: branch.id,
+        branchName: branch.name,
+        field: "GSTIN",
+        why: "Required on every tax invoice under Rule 46 of the CGST Rules.",
+      });
+    }
+    if (!branch.drugLicenseRetailNo && !branch.drugLicenseWholesaleNo) {
+      complianceGaps.push({
+        branchId: branch.id,
+        branchName: branch.name,
+        field: "Drug licence number",
+        why: "The Form 20/21 licence under which medicines are sold.",
+      });
+    }
+  }
+
   return {
     lowStock,
     nearExpiry,
     nearExpiryWindowDays: tenant.nearExpiryWindowDays,
     licenseExpiry,
     licenseExpiryWindowDays: tenant.licenseExpiryWindowDays,
+    complianceGaps,
   };
 }

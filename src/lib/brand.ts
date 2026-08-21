@@ -34,6 +34,20 @@ export const BRAND = {
     pincode: "282001",
   },
 
+  /**
+   * The counter never closes — no session windows, no weekly off. The
+   * dashboard panel renders this directly rather than computing an
+   * open/closed state; if the shop ever adopts fixed hours, this is where
+   * the windows go and the panel's status row becomes a real calculation
+   * again.
+   */
+  hours: {
+    alwaysOpen: true,
+    headline: "24 × 7",
+    daysLabel: "Every day, including Sundays and holidays",
+    note: "Day and night — the counter is staffed around the clock.",
+  },
+
   registration: {
     gstin: "09APFPS2581C1ZT",
     /** Characters 3–12 of the GSTIN are the PAN. */

@@ -68,18 +68,19 @@ export function ReceiptView({
             {/* Address sits under the lockup rather than beside it: squeezed
                 into a middle column between logo and registrations it wrapped
                 to three lines, which cost back the space this layout saves.
-                Note this prints the brand asset rather than
-                `tenant.pharmacyName` — renaming the tenant in Settings will
-                not change what a cut-sheet bill shows. */}
+                With the logo switched off the name takes its place, so the
+                bill never loses its heading. */}
             <div className="min-w-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/logo-horizontal.png"
-                alt={data.tenant.pharmacyName}
-                width={1348}
-                height={440}
-                className="mb-1 h-11 w-auto object-contain"
-              />
+              {data.tenant.showLogo ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={data.tenant.logoHorizontal}
+                  alt={data.tenant.pharmacyName}
+                  className="mb-1 h-11 w-auto object-contain"
+                />
+              ) : (
+                <div className="mb-1 text-base font-bold">{data.tenant.pharmacyName}</div>
+              )}
               <div className="text-[10px] whitespace-pre-line">{data.branch.licensedAddress}</div>
             </div>
             {/* Middle column of the header row rather than a line of its own
@@ -103,14 +104,14 @@ export function ReceiptView({
         </div>
       ) : (
         <div className="text-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logo-icon.png"
-            alt=""
-            width={48}
-            height={48}
-            className="mx-auto mb-1 h-12 w-12 object-contain"
-          />
+          {data.tenant.showLogo && (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={data.tenant.logoIcon}
+              alt=""
+              className="mx-auto mb-1 h-12 w-12 object-contain"
+            />
+          )}
           <div className="text-sm font-bold">{data.tenant.pharmacyName}</div>
           <div className="text-[10px] whitespace-pre-line">{data.branch.licensedAddress}</div>
           {hasContact && (
@@ -127,6 +128,18 @@ export function ReceiptView({
             <div className="text-[10px]">FSSAI: {data.branch.fssaiNo}</div>
           )}
           <div className="mt-1.5 text-[11px] font-bold tracking-[0.2em]">GST INVOICE</div>
+        </div>
+      )}
+
+      {/* Owner-set line under the header — a greeting, a helpline, a camp
+          notice. Above the divider so it reads as part of the letterhead
+          rather than as the first thing about this particular bill. "|"
+          splits it onto separate lines, matching the footer and terms. */}
+      {data.tenant.invoiceHeaderText && (
+        <div className="mt-1 text-center text-[10px] italic">
+          {data.tenant.invoiceHeaderText.split("|").map((line, i) => (
+            <div key={i}>{line.trim()}</div>
+          ))}
         </div>
       )}
 
@@ -184,7 +197,15 @@ export function ReceiptView({
                 <span className="tabular-nums">
                   {line.expiryDate ? format(new Date(line.expiryDate), "MM/yy") : "—"}
                 </span>
-                <span className="text-right tabular-nums">{line.qty}</span>
+                <span className="text-right tabular-nums">
+                  {line.qty}
+                  {line.isLooseSale && (
+                    <span className="text-[9px]"> {line.unit}</span>
+                  )}
+                  {line.priceBasis === "ptr" && (
+                    <span className="text-[8px] font-medium"> PTR</span>
+                  )}
+                </span>
                 <span className="text-right tabular-nums">
                   {line.mrp === null ? "—" : line.mrp.toFixed(2)}
                 </span>
@@ -239,7 +260,15 @@ export function ReceiptView({
               )}
               <Row cols={[5, 1.5, 1.5, 2]}>
                 <span />
-                <span className="text-right tabular-nums">{line.qty}</span>
+                <span className="text-right tabular-nums">
+                  {line.qty}
+                  {line.isLooseSale && (
+                    <span className="text-[9px]"> {line.unit}</span>
+                  )}
+                  {line.priceBasis === "ptr" && (
+                    <span className="text-[8px] font-medium"> PTR</span>
+                  )}
+                </span>
                 <span className="text-right tabular-nums">{line.rate.toFixed(2)}</span>
                 <span className="text-right font-medium tabular-nums">
                   {line.lineTotal.toFixed(2)}

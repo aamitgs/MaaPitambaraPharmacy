@@ -27,6 +27,17 @@ const columns = columnHelper.columns([
       </Link>
     ),
   }),
+  columnHelper.accessor("phone", {
+    header: "Phone",
+    cell: ({ row }) =>
+      row.original.phone ? (
+        <a href={`tel:${row.original.phone}`} className="hover:underline">
+          {row.original.phone}
+        </a>
+      ) : (
+        "—"
+      ),
+  }),
   columnHelper.accessor("gstin", {
     header: "GSTIN",
     cell: ({ row }) => row.original.gstin || "—",
@@ -49,6 +60,18 @@ const columns = columnHelper.columns([
       </span>
     ),
   }),
+  columnHelper.display({
+    id: "actions",
+    header: "",
+    cell: ({ row }) => (
+      <Link
+        href={`/suppliers/${row.original.id}/edit`}
+        className="text-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+      >
+        Edit
+      </Link>
+    ),
+  }),
 ]);
 
 export function SuppliersTable({ suppliers }: { suppliers: PlainSupplier[] }) {
@@ -60,7 +83,8 @@ export function SuppliersTable({ suppliers }: { suppliers: PlainSupplier[] }) {
     return suppliers.filter(
       (s) =>
         s.name.toLowerCase().includes(q) ||
-        (s.gstin?.toLowerCase().includes(q) ?? false)
+        (s.gstin?.toLowerCase().includes(q) ?? false) ||
+        (s.phone?.toLowerCase().includes(q) ?? false)
     );
   }, [suppliers, search]);
 
@@ -69,7 +93,7 @@ export function SuppliersTable({ suppliers }: { suppliers: PlainSupplier[] }) {
   return (
     <div className="space-y-3">
       <Input
-        placeholder="Search suppliers by name or GSTIN…"
+        placeholder="Search suppliers by name, phone or GSTIN…"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="max-w-sm"

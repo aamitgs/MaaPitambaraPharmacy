@@ -20,8 +20,18 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  failedLoginCount: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  failedLoginCount: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -30,6 +40,8 @@ export type UserMinAggregateOutputType = {
   name: string | null
   email: string | null
   role: $Enums.UserRole | null
+  roleId: string | null
+  isActive: boolean | null
   phone: string | null
   licenseNo: string | null
   passwordHash: string | null
@@ -37,6 +49,9 @@ export type UserMinAggregateOutputType = {
   totpEnabled: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  failedLoginCount: number | null
+  lastFailedLoginAt: Date | null
+  lockedUntil: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -45,6 +60,8 @@ export type UserMaxAggregateOutputType = {
   name: string | null
   email: string | null
   role: $Enums.UserRole | null
+  roleId: string | null
+  isActive: boolean | null
   phone: string | null
   licenseNo: string | null
   passwordHash: string | null
@@ -52,6 +69,9 @@ export type UserMaxAggregateOutputType = {
   totpEnabled: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  failedLoginCount: number | null
+  lastFailedLoginAt: Date | null
+  lockedUntil: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -60,6 +80,8 @@ export type UserCountAggregateOutputType = {
   name: number
   email: number
   role: number
+  roleId: number
+  isActive: number
   phone: number
   licenseNo: number
   passwordHash: number
@@ -67,9 +89,20 @@ export type UserCountAggregateOutputType = {
   totpEnabled: number
   createdAt: number
   updatedAt: number
+  failedLoginCount: number
+  lastFailedLoginAt: number
+  lockedUntil: number
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  failedLoginCount?: true
+}
+
+export type UserSumAggregateInputType = {
+  failedLoginCount?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -77,6 +110,8 @@ export type UserMinAggregateInputType = {
   name?: true
   email?: true
   role?: true
+  roleId?: true
+  isActive?: true
   phone?: true
   licenseNo?: true
   passwordHash?: true
@@ -84,6 +119,9 @@ export type UserMinAggregateInputType = {
   totpEnabled?: true
   createdAt?: true
   updatedAt?: true
+  failedLoginCount?: true
+  lastFailedLoginAt?: true
+  lockedUntil?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -92,6 +130,8 @@ export type UserMaxAggregateInputType = {
   name?: true
   email?: true
   role?: true
+  roleId?: true
+  isActive?: true
   phone?: true
   licenseNo?: true
   passwordHash?: true
@@ -99,6 +139,9 @@ export type UserMaxAggregateInputType = {
   totpEnabled?: true
   createdAt?: true
   updatedAt?: true
+  failedLoginCount?: true
+  lastFailedLoginAt?: true
+  lockedUntil?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -107,6 +150,8 @@ export type UserCountAggregateInputType = {
   name?: true
   email?: true
   role?: true
+  roleId?: true
+  isActive?: true
   phone?: true
   licenseNo?: true
   passwordHash?: true
@@ -114,6 +159,9 @@ export type UserCountAggregateInputType = {
   totpEnabled?: true
   createdAt?: true
   updatedAt?: true
+  failedLoginCount?: true
+  lastFailedLoginAt?: true
+  lockedUntil?: true
   _all?: true
 }
 
@@ -155,6 +203,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -185,6 +245,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -195,6 +257,8 @@ export type UserGroupByOutputType = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId: string | null
+  isActive: boolean
   phone: string | null
   licenseNo: string | null
   passwordHash: string
@@ -202,7 +266,12 @@ export type UserGroupByOutputType = {
   totpEnabled: boolean
   createdAt: Date
   updatedAt: Date
+  failedLoginCount: number
+  lastFailedLoginAt: Date | null
+  lockedUntil: Date | null
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -231,6 +300,8 @@ export type UserWhereInput = {
   name?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  roleId?: Prisma.StringNullableFilter<"User"> | string | null
+  isActive?: Prisma.BoolFilter<"User"> | boolean
   phone?: Prisma.StringNullableFilter<"User"> | string | null
   licenseNo?: Prisma.StringNullableFilter<"User"> | string | null
   passwordHash?: Prisma.StringFilter<"User"> | string
@@ -238,7 +309,11 @@ export type UserWhereInput = {
   totpEnabled?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  failedLoginCount?: Prisma.IntFilter<"User"> | number
+  lastFailedLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lockedUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  roleRef?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
   auditLogs?: Prisma.AuditLogListRelationFilter
   discountsApplied?: Prisma.DiscountListRelationFilter
   discountsApproved?: Prisma.DiscountListRelationFilter
@@ -249,6 +324,18 @@ export type UserWhereInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryListRelationFilter
   stockTransfersRequested?: Prisma.StockTransferListRelationFilter
   stockTransfersApproved?: Prisma.StockTransferListRelationFilter
+  notes?: Prisma.NoteListRelationFilter
+  salesReturns?: Prisma.SalesReturnListRelationFilter
+  cashUps?: Prisma.CashUpListRelationFilter
+  stockAdjustments?: Prisma.StockAdjustmentListRelationFilter
+  heldSales?: Prisma.HeldSaleListRelationFilter
+  stockCountsStarted?: Prisma.StockCountListRelationFilter
+  stockCountsCompleted?: Prisma.StockCountListRelationFilter
+  taxRatesCreated?: Prisma.TaxSlabRateListRelationFilter
+  expensesRecorded?: Prisma.ExpenseListRelationFilter
+  promiseOrdersTaken?: Prisma.PromiseOrderListRelationFilter
+  sessions?: Prisma.UserSessionListRelationFilter
+  trustedDevices?: Prisma.TrustedDeviceListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -257,6 +344,8 @@ export type UserOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  roleId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseNo?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
@@ -264,7 +353,11 @@ export type UserOrderByWithRelationInput = {
   totpEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  failedLoginCount?: Prisma.SortOrder
+  lastFailedLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lockedUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   tenant?: Prisma.TenantOrderByWithRelationInput
+  roleRef?: Prisma.RoleOrderByWithRelationInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
   discountsApplied?: Prisma.DiscountOrderByRelationAggregateInput
   discountsApproved?: Prisma.DiscountOrderByRelationAggregateInput
@@ -275,6 +368,18 @@ export type UserOrderByWithRelationInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryOrderByRelationAggregateInput
   stockTransfersRequested?: Prisma.StockTransferOrderByRelationAggregateInput
   stockTransfersApproved?: Prisma.StockTransferOrderByRelationAggregateInput
+  notes?: Prisma.NoteOrderByRelationAggregateInput
+  salesReturns?: Prisma.SalesReturnOrderByRelationAggregateInput
+  cashUps?: Prisma.CashUpOrderByRelationAggregateInput
+  stockAdjustments?: Prisma.StockAdjustmentOrderByRelationAggregateInput
+  heldSales?: Prisma.HeldSaleOrderByRelationAggregateInput
+  stockCountsStarted?: Prisma.StockCountOrderByRelationAggregateInput
+  stockCountsCompleted?: Prisma.StockCountOrderByRelationAggregateInput
+  taxRatesCreated?: Prisma.TaxSlabRateOrderByRelationAggregateInput
+  expensesRecorded?: Prisma.ExpenseOrderByRelationAggregateInput
+  promiseOrdersTaken?: Prisma.PromiseOrderOrderByRelationAggregateInput
+  sessions?: Prisma.UserSessionOrderByRelationAggregateInput
+  trustedDevices?: Prisma.TrustedDeviceOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -287,6 +392,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  roleId?: Prisma.StringNullableFilter<"User"> | string | null
+  isActive?: Prisma.BoolFilter<"User"> | boolean
   phone?: Prisma.StringNullableFilter<"User"> | string | null
   licenseNo?: Prisma.StringNullableFilter<"User"> | string | null
   passwordHash?: Prisma.StringFilter<"User"> | string
@@ -294,7 +401,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   totpEnabled?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  failedLoginCount?: Prisma.IntFilter<"User"> | number
+  lastFailedLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lockedUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  roleRef?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
   auditLogs?: Prisma.AuditLogListRelationFilter
   discountsApplied?: Prisma.DiscountListRelationFilter
   discountsApproved?: Prisma.DiscountListRelationFilter
@@ -305,6 +416,18 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryListRelationFilter
   stockTransfersRequested?: Prisma.StockTransferListRelationFilter
   stockTransfersApproved?: Prisma.StockTransferListRelationFilter
+  notes?: Prisma.NoteListRelationFilter
+  salesReturns?: Prisma.SalesReturnListRelationFilter
+  cashUps?: Prisma.CashUpListRelationFilter
+  stockAdjustments?: Prisma.StockAdjustmentListRelationFilter
+  heldSales?: Prisma.HeldSaleListRelationFilter
+  stockCountsStarted?: Prisma.StockCountListRelationFilter
+  stockCountsCompleted?: Prisma.StockCountListRelationFilter
+  taxRatesCreated?: Prisma.TaxSlabRateListRelationFilter
+  expensesRecorded?: Prisma.ExpenseListRelationFilter
+  promiseOrdersTaken?: Prisma.PromiseOrderListRelationFilter
+  sessions?: Prisma.UserSessionListRelationFilter
+  trustedDevices?: Prisma.TrustedDeviceListRelationFilter
 }, "id" | "tenantId_email">
 
 export type UserOrderByWithAggregationInput = {
@@ -313,6 +436,8 @@ export type UserOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  roleId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseNo?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
@@ -320,9 +445,14 @@ export type UserOrderByWithAggregationInput = {
   totpEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  failedLoginCount?: Prisma.SortOrder
+  lastFailedLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lockedUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -334,6 +464,8 @@ export type UserScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
+  roleId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   licenseNo?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   passwordHash?: Prisma.StringWithAggregatesFilter<"User"> | string
@@ -341,6 +473,9 @@ export type UserScalarWhereWithAggregatesInput = {
   totpEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  failedLoginCount?: Prisma.IntWithAggregatesFilter<"User"> | number
+  lastFailedLoginAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  lockedUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
 }
 
 export type UserCreateInput = {
@@ -348,6 +483,7 @@ export type UserCreateInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -355,7 +491,11 @@ export type UserCreateInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
@@ -366,6 +506,18 @@ export type UserCreateInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -374,6 +526,8 @@ export type UserUncheckedCreateInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -381,6 +535,9 @@ export type UserUncheckedCreateInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
@@ -391,6 +548,18 @@ export type UserUncheckedCreateInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -398,6 +567,7 @@ export type UserUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -405,7 +575,11 @@ export type UserUpdateInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
@@ -416,6 +590,18 @@ export type UserUpdateInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -424,6 +610,8 @@ export type UserUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -431,6 +619,9 @@ export type UserUncheckedUpdateInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
@@ -441,6 +632,18 @@ export type UserUncheckedUpdateInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -449,6 +652,8 @@ export type UserCreateManyInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -456,6 +661,9 @@ export type UserCreateManyInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -463,6 +671,7 @@ export type UserUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -470,6 +679,9 @@ export type UserUpdateManyMutationInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -478,6 +690,8 @@ export type UserUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -485,6 +699,9 @@ export type UserUncheckedUpdateManyInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserListRelationFilter = {
@@ -497,14 +714,14 @@ export type UserOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
-}
-
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type UserTenantIdEmailCompoundUniqueInput = {
@@ -518,6 +735,8 @@ export type UserCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  roleId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   licenseNo?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
@@ -525,6 +744,13 @@ export type UserCountOrderByAggregateInput = {
   totpEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  failedLoginCount?: Prisma.SortOrder
+  lastFailedLoginAt?: Prisma.SortOrder
+  lockedUntil?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  failedLoginCount?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -533,6 +759,8 @@ export type UserMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  roleId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   licenseNo?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
@@ -540,6 +768,9 @@ export type UserMaxOrderByAggregateInput = {
   totpEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  failedLoginCount?: Prisma.SortOrder
+  lastFailedLoginAt?: Prisma.SortOrder
+  lockedUntil?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -548,6 +779,8 @@ export type UserMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  roleId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   licenseNo?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
@@ -555,6 +788,13 @@ export type UserMinOrderByAggregateInput = {
   totpEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  failedLoginCount?: Prisma.SortOrder
+  lastFailedLoginAt?: Prisma.SortOrder
+  lockedUntil?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  failedLoginCount?: Prisma.SortOrder
 }
 
 export type UserCreateNestedManyWithoutTenantInput = {
@@ -597,6 +837,150 @@ export type UserUncheckedUpdateManyWithoutTenantNestedInput = {
   update?: Prisma.UserUpdateWithWhereUniqueWithoutTenantInput | Prisma.UserUpdateWithWhereUniqueWithoutTenantInput[]
   updateMany?: Prisma.UserUpdateManyWithWhereWithoutTenantInput | Prisma.UserUpdateManyWithWhereWithoutTenantInput[]
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutPromiseOrdersTakenInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPromiseOrdersTakenInput, Prisma.UserUncheckedCreateWithoutPromiseOrdersTakenInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPromiseOrdersTakenInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPromiseOrdersTakenNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPromiseOrdersTakenInput, Prisma.UserUncheckedCreateWithoutPromiseOrdersTakenInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPromiseOrdersTakenInput
+  upsert?: Prisma.UserUpsertWithoutPromiseOrdersTakenInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPromiseOrdersTakenInput, Prisma.UserUpdateWithoutPromiseOrdersTakenInput>, Prisma.UserUncheckedUpdateWithoutPromiseOrdersTakenInput>
+}
+
+export type UserCreateNestedOneWithoutExpensesRecordedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutExpensesRecordedInput, Prisma.UserUncheckedCreateWithoutExpensesRecordedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutExpensesRecordedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutExpensesRecordedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutExpensesRecordedInput, Prisma.UserUncheckedCreateWithoutExpensesRecordedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutExpensesRecordedInput
+  upsert?: Prisma.UserUpsertWithoutExpensesRecordedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutExpensesRecordedInput, Prisma.UserUpdateWithoutExpensesRecordedInput>, Prisma.UserUncheckedUpdateWithoutExpensesRecordedInput>
+}
+
+export type UserCreateNestedOneWithoutTaxRatesCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTaxRatesCreatedInput, Prisma.UserUncheckedCreateWithoutTaxRatesCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTaxRatesCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutTaxRatesCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTaxRatesCreatedInput, Prisma.UserUncheckedCreateWithoutTaxRatesCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTaxRatesCreatedInput
+  upsert?: Prisma.UserUpsertWithoutTaxRatesCreatedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTaxRatesCreatedInput, Prisma.UserUpdateWithoutTaxRatesCreatedInput>, Prisma.UserUncheckedUpdateWithoutTaxRatesCreatedInput>
+}
+
+export type UserCreateNestedOneWithoutNotesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotesInput, Prisma.UserUncheckedCreateWithoutNotesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotesInput, Prisma.UserUncheckedCreateWithoutNotesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotesInput
+  upsert?: Prisma.UserUpsertWithoutNotesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotesInput, Prisma.UserUpdateWithoutNotesInput>, Prisma.UserUncheckedUpdateWithoutNotesInput>
+}
+
+export type UserCreateNestedOneWithoutSalesReturnsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSalesReturnsInput, Prisma.UserUncheckedCreateWithoutSalesReturnsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSalesReturnsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSalesReturnsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSalesReturnsInput, Prisma.UserUncheckedCreateWithoutSalesReturnsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSalesReturnsInput
+  upsert?: Prisma.UserUpsertWithoutSalesReturnsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSalesReturnsInput, Prisma.UserUpdateWithoutSalesReturnsInput>, Prisma.UserUncheckedUpdateWithoutSalesReturnsInput>
+}
+
+export type UserCreateNestedOneWithoutStockCountsStartedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockCountsStartedInput, Prisma.UserUncheckedCreateWithoutStockCountsStartedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockCountsStartedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutStockCountsCompletedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockCountsCompletedInput, Prisma.UserUncheckedCreateWithoutStockCountsCompletedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockCountsCompletedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStockCountsStartedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockCountsStartedInput, Prisma.UserUncheckedCreateWithoutStockCountsStartedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockCountsStartedInput
+  upsert?: Prisma.UserUpsertWithoutStockCountsStartedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStockCountsStartedInput, Prisma.UserUpdateWithoutStockCountsStartedInput>, Prisma.UserUncheckedUpdateWithoutStockCountsStartedInput>
+}
+
+export type UserUpdateOneWithoutStockCountsCompletedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockCountsCompletedInput, Prisma.UserUncheckedCreateWithoutStockCountsCompletedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockCountsCompletedInput
+  upsert?: Prisma.UserUpsertWithoutStockCountsCompletedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStockCountsCompletedInput, Prisma.UserUpdateWithoutStockCountsCompletedInput>, Prisma.UserUncheckedUpdateWithoutStockCountsCompletedInput>
+}
+
+export type UserCreateNestedOneWithoutHeldSalesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutHeldSalesInput, Prisma.UserUncheckedCreateWithoutHeldSalesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutHeldSalesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutHeldSalesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutHeldSalesInput, Prisma.UserUncheckedCreateWithoutHeldSalesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutHeldSalesInput
+  upsert?: Prisma.UserUpsertWithoutHeldSalesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutHeldSalesInput, Prisma.UserUpdateWithoutHeldSalesInput>, Prisma.UserUncheckedUpdateWithoutHeldSalesInput>
+}
+
+export type UserCreateNestedOneWithoutStockAdjustmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockAdjustmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStockAdjustmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockAdjustmentsInput
+  upsert?: Prisma.UserUpsertWithoutStockAdjustmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStockAdjustmentsInput, Prisma.UserUpdateWithoutStockAdjustmentsInput>, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsInput>
+}
+
+export type UserCreateNestedOneWithoutCashUpsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCashUpsInput, Prisma.UserUncheckedCreateWithoutCashUpsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCashUpsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCashUpsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCashUpsInput, Prisma.UserUncheckedCreateWithoutCashUpsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCashUpsInput
+  upsert?: Prisma.UserUpsertWithoutCashUpsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCashUpsInput, Prisma.UserUpdateWithoutCashUpsInput>, Prisma.UserUncheckedUpdateWithoutCashUpsInput>
 }
 
 export type UserCreateNestedOneWithoutSalesInvoicesSignedOffInput = {
@@ -643,6 +1027,48 @@ export type UserUpdateOneWithoutDiscountsApprovedNestedInput = {
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDiscountsApprovedInput, Prisma.UserUpdateWithoutDiscountsApprovedInput>, Prisma.UserUncheckedUpdateWithoutDiscountsApprovedInput>
+}
+
+export type UserCreateNestedManyWithoutRoleRefInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoleRefInput, Prisma.UserUncheckedCreateWithoutRoleRefInput> | Prisma.UserCreateWithoutRoleRefInput[] | Prisma.UserUncheckedCreateWithoutRoleRefInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoleRefInput | Prisma.UserCreateOrConnectWithoutRoleRefInput[]
+  createMany?: Prisma.UserCreateManyRoleRefInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutRoleRefInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoleRefInput, Prisma.UserUncheckedCreateWithoutRoleRefInput> | Prisma.UserCreateWithoutRoleRefInput[] | Prisma.UserUncheckedCreateWithoutRoleRefInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoleRefInput | Prisma.UserCreateOrConnectWithoutRoleRefInput[]
+  createMany?: Prisma.UserCreateManyRoleRefInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutRoleRefNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoleRefInput, Prisma.UserUncheckedCreateWithoutRoleRefInput> | Prisma.UserCreateWithoutRoleRefInput[] | Prisma.UserUncheckedCreateWithoutRoleRefInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoleRefInput | Prisma.UserCreateOrConnectWithoutRoleRefInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutRoleRefInput | Prisma.UserUpsertWithWhereUniqueWithoutRoleRefInput[]
+  createMany?: Prisma.UserCreateManyRoleRefInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutRoleRefInput | Prisma.UserUpdateWithWhereUniqueWithoutRoleRefInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutRoleRefInput | Prisma.UserUpdateManyWithWhereWithoutRoleRefInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutRoleRefNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoleRefInput, Prisma.UserUncheckedCreateWithoutRoleRefInput> | Prisma.UserCreateWithoutRoleRefInput[] | Prisma.UserUncheckedCreateWithoutRoleRefInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoleRefInput | Prisma.UserCreateOrConnectWithoutRoleRefInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutRoleRefInput | Prisma.UserUpsertWithWhereUniqueWithoutRoleRefInput[]
+  createMany?: Prisma.UserCreateManyRoleRefInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutRoleRefInput | Prisma.UserUpdateWithWhereUniqueWithoutRoleRefInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutRoleRefInput | Prisma.UserUpdateManyWithWhereWithoutRoleRefInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
 export type EnumUserRoleFieldUpdateOperationsInput = {
@@ -749,11 +1175,40 @@ export type UserUpdateOneRequiredWithoutNarcoticEntriesDispensedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNarcoticEntriesDispensedInput, Prisma.UserUpdateWithoutNarcoticEntriesDispensedInput>, Prisma.UserUncheckedUpdateWithoutNarcoticEntriesDispensedInput>
 }
 
+export type UserCreateNestedOneWithoutSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  upsert?: Prisma.UserUpsertWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+}
+
+export type UserCreateNestedOneWithoutTrustedDevicesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTrustedDevicesInput, Prisma.UserUncheckedCreateWithoutTrustedDevicesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTrustedDevicesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTrustedDevicesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTrustedDevicesInput, Prisma.UserUncheckedCreateWithoutTrustedDevicesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTrustedDevicesInput
+  upsert?: Prisma.UserUpsertWithoutTrustedDevicesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTrustedDevicesInput, Prisma.UserUpdateWithoutTrustedDevicesInput>, Prisma.UserUncheckedUpdateWithoutTrustedDevicesInput>
+}
+
 export type UserCreateWithoutTenantInput = {
   id?: string
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -761,6 +1216,10 @@ export type UserCreateWithoutTenantInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
@@ -771,6 +1230,18 @@ export type UserCreateWithoutTenantInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTenantInput = {
@@ -778,6 +1249,8 @@ export type UserUncheckedCreateWithoutTenantInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -785,6 +1258,9 @@ export type UserUncheckedCreateWithoutTenantInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
@@ -795,6 +1271,18 @@ export type UserUncheckedCreateWithoutTenantInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTenantInput = {
@@ -832,6 +1320,8 @@ export type UserScalarWhereInput = {
   name?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  roleId?: Prisma.StringNullableFilter<"User"> | string | null
+  isActive?: Prisma.BoolFilter<"User"> | boolean
   phone?: Prisma.StringNullableFilter<"User"> | string | null
   licenseNo?: Prisma.StringNullableFilter<"User"> | string | null
   passwordHash?: Prisma.StringFilter<"User"> | string
@@ -839,13 +1329,17 @@ export type UserScalarWhereInput = {
   totpEnabled?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  failedLoginCount?: Prisma.IntFilter<"User"> | number
+  lastFailedLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lockedUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
 }
 
-export type UserCreateWithoutSalesInvoicesSignedOffInput = {
+export type UserCreateWithoutPromiseOrdersTakenInput = {
   id?: string
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -853,7 +1347,1811 @@ export type UserCreateWithoutSalesInvoicesSignedOffInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPromiseOrdersTakenInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPromiseOrdersTakenInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPromiseOrdersTakenInput, Prisma.UserUncheckedCreateWithoutPromiseOrdersTakenInput>
+}
+
+export type UserUpsertWithoutPromiseOrdersTakenInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPromiseOrdersTakenInput, Prisma.UserUncheckedUpdateWithoutPromiseOrdersTakenInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPromiseOrdersTakenInput, Prisma.UserUncheckedCreateWithoutPromiseOrdersTakenInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPromiseOrdersTakenInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPromiseOrdersTakenInput, Prisma.UserUncheckedUpdateWithoutPromiseOrdersTakenInput>
+}
+
+export type UserUpdateWithoutPromiseOrdersTakenInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPromiseOrdersTakenInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutExpensesRecordedInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutExpensesRecordedInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutExpensesRecordedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutExpensesRecordedInput, Prisma.UserUncheckedCreateWithoutExpensesRecordedInput>
+}
+
+export type UserUpsertWithoutExpensesRecordedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutExpensesRecordedInput, Prisma.UserUncheckedUpdateWithoutExpensesRecordedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutExpensesRecordedInput, Prisma.UserUncheckedCreateWithoutExpensesRecordedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutExpensesRecordedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutExpensesRecordedInput, Prisma.UserUncheckedUpdateWithoutExpensesRecordedInput>
+}
+
+export type UserUpdateWithoutExpensesRecordedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutExpensesRecordedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutTaxRatesCreatedInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutTaxRatesCreatedInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutTaxRatesCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTaxRatesCreatedInput, Prisma.UserUncheckedCreateWithoutTaxRatesCreatedInput>
+}
+
+export type UserUpsertWithoutTaxRatesCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTaxRatesCreatedInput, Prisma.UserUncheckedUpdateWithoutTaxRatesCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTaxRatesCreatedInput, Prisma.UserUncheckedCreateWithoutTaxRatesCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTaxRatesCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTaxRatesCreatedInput, Prisma.UserUncheckedUpdateWithoutTaxRatesCreatedInput>
+}
+
+export type UserUpdateWithoutTaxRatesCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTaxRatesCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotesInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotesInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotesInput, Prisma.UserUncheckedCreateWithoutNotesInput>
+}
+
+export type UserUpsertWithoutNotesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotesInput, Prisma.UserUncheckedUpdateWithoutNotesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotesInput, Prisma.UserUncheckedCreateWithoutNotesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotesInput, Prisma.UserUncheckedUpdateWithoutNotesInput>
+}
+
+export type UserUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSalesReturnsInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSalesReturnsInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSalesReturnsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSalesReturnsInput, Prisma.UserUncheckedCreateWithoutSalesReturnsInput>
+}
+
+export type UserUpsertWithoutSalesReturnsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSalesReturnsInput, Prisma.UserUncheckedUpdateWithoutSalesReturnsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSalesReturnsInput, Prisma.UserUncheckedCreateWithoutSalesReturnsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSalesReturnsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSalesReturnsInput, Prisma.UserUncheckedUpdateWithoutSalesReturnsInput>
+}
+
+export type UserUpdateWithoutSalesReturnsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSalesReturnsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutStockCountsStartedInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStockCountsStartedInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStockCountsStartedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockCountsStartedInput, Prisma.UserUncheckedCreateWithoutStockCountsStartedInput>
+}
+
+export type UserCreateWithoutStockCountsCompletedInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStockCountsCompletedInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStockCountsCompletedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockCountsCompletedInput, Prisma.UserUncheckedCreateWithoutStockCountsCompletedInput>
+}
+
+export type UserUpsertWithoutStockCountsStartedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStockCountsStartedInput, Prisma.UserUncheckedUpdateWithoutStockCountsStartedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockCountsStartedInput, Prisma.UserUncheckedCreateWithoutStockCountsStartedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStockCountsStartedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStockCountsStartedInput, Prisma.UserUncheckedUpdateWithoutStockCountsStartedInput>
+}
+
+export type UserUpdateWithoutStockCountsStartedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStockCountsStartedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutStockCountsCompletedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStockCountsCompletedInput, Prisma.UserUncheckedUpdateWithoutStockCountsCompletedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockCountsCompletedInput, Prisma.UserUncheckedCreateWithoutStockCountsCompletedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStockCountsCompletedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStockCountsCompletedInput, Prisma.UserUncheckedUpdateWithoutStockCountsCompletedInput>
+}
+
+export type UserUpdateWithoutStockCountsCompletedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStockCountsCompletedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutHeldSalesInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutHeldSalesInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutHeldSalesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutHeldSalesInput, Prisma.UserUncheckedCreateWithoutHeldSalesInput>
+}
+
+export type UserUpsertWithoutHeldSalesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutHeldSalesInput, Prisma.UserUncheckedUpdateWithoutHeldSalesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutHeldSalesInput, Prisma.UserUncheckedCreateWithoutHeldSalesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutHeldSalesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutHeldSalesInput, Prisma.UserUncheckedUpdateWithoutHeldSalesInput>
+}
+
+export type UserUpdateWithoutHeldSalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutHeldSalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutStockAdjustmentsInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStockAdjustmentsInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStockAdjustmentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsInput>
+}
+
+export type UserUpsertWithoutStockAdjustmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStockAdjustmentsInput, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStockAdjustmentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStockAdjustmentsInput, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsInput>
+}
+
+export type UserUpdateWithoutStockAdjustmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStockAdjustmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutCashUpsInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCashUpsInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCashUpsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCashUpsInput, Prisma.UserUncheckedCreateWithoutCashUpsInput>
+}
+
+export type UserUpsertWithoutCashUpsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCashUpsInput, Prisma.UserUncheckedUpdateWithoutCashUpsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCashUpsInput, Prisma.UserUncheckedCreateWithoutCashUpsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCashUpsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCashUpsInput, Prisma.UserUncheckedUpdateWithoutCashUpsInput>
+}
+
+export type UserUpdateWithoutCashUpsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCashUpsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSalesInvoicesSignedOffInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
@@ -863,6 +3161,18 @@ export type UserCreateWithoutSalesInvoicesSignedOffInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSalesInvoicesSignedOffInput = {
@@ -871,6 +3181,8 @@ export type UserUncheckedCreateWithoutSalesInvoicesSignedOffInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -878,6 +3190,9 @@ export type UserUncheckedCreateWithoutSalesInvoicesSignedOffInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
@@ -887,6 +3202,18 @@ export type UserUncheckedCreateWithoutSalesInvoicesSignedOffInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSalesInvoicesSignedOffInput = {
@@ -910,6 +3237,7 @@ export type UserUpdateWithoutSalesInvoicesSignedOffInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -917,7 +3245,11 @@ export type UserUpdateWithoutSalesInvoicesSignedOffInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
@@ -927,6 +3259,18 @@ export type UserUpdateWithoutSalesInvoicesSignedOffInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSalesInvoicesSignedOffInput = {
@@ -935,6 +3279,8 @@ export type UserUncheckedUpdateWithoutSalesInvoicesSignedOffInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -942,6 +3288,9 @@ export type UserUncheckedUpdateWithoutSalesInvoicesSignedOffInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
@@ -951,6 +3300,18 @@ export type UserUncheckedUpdateWithoutSalesInvoicesSignedOffInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDiscountsAppliedInput = {
@@ -958,6 +3319,7 @@ export type UserCreateWithoutDiscountsAppliedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -965,7 +3327,11 @@ export type UserCreateWithoutDiscountsAppliedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
   purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
@@ -975,6 +3341,18 @@ export type UserCreateWithoutDiscountsAppliedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDiscountsAppliedInput = {
@@ -983,6 +3361,8 @@ export type UserUncheckedCreateWithoutDiscountsAppliedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -990,6 +3370,9 @@ export type UserUncheckedCreateWithoutDiscountsAppliedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
   purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
@@ -999,6 +3382,18 @@ export type UserUncheckedCreateWithoutDiscountsAppliedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDiscountsAppliedInput = {
@@ -1011,6 +3406,7 @@ export type UserCreateWithoutDiscountsApprovedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1018,7 +3414,11 @@ export type UserCreateWithoutDiscountsApprovedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
   purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
@@ -1028,6 +3428,18 @@ export type UserCreateWithoutDiscountsApprovedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDiscountsApprovedInput = {
@@ -1036,6 +3448,8 @@ export type UserUncheckedCreateWithoutDiscountsApprovedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1043,6 +3457,9 @@ export type UserUncheckedCreateWithoutDiscountsApprovedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
   purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
@@ -1052,6 +3469,18 @@ export type UserUncheckedCreateWithoutDiscountsApprovedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDiscountsApprovedInput = {
@@ -1075,6 +3504,7 @@ export type UserUpdateWithoutDiscountsAppliedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1082,7 +3512,11 @@ export type UserUpdateWithoutDiscountsAppliedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
   purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
@@ -1092,6 +3526,18 @@ export type UserUpdateWithoutDiscountsAppliedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDiscountsAppliedInput = {
@@ -1100,6 +3546,8 @@ export type UserUncheckedUpdateWithoutDiscountsAppliedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1107,6 +3555,9 @@ export type UserUncheckedUpdateWithoutDiscountsAppliedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
   purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -1116,6 +3567,18 @@ export type UserUncheckedUpdateWithoutDiscountsAppliedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutDiscountsApprovedInput = {
@@ -1134,6 +3597,7 @@ export type UserUpdateWithoutDiscountsApprovedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1141,7 +3605,11 @@ export type UserUpdateWithoutDiscountsApprovedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
   purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
@@ -1151,6 +3619,18 @@ export type UserUpdateWithoutDiscountsApprovedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDiscountsApprovedInput = {
@@ -1159,6 +3639,8 @@ export type UserUncheckedUpdateWithoutDiscountsApprovedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1166,6 +3648,9 @@ export type UserUncheckedUpdateWithoutDiscountsApprovedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
   purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -1175,13 +3660,26 @@ export type UserUncheckedUpdateWithoutDiscountsApprovedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateWithoutAuditLogsInput = {
+export type UserCreateWithoutRoleRefInput = {
   id?: string
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1189,7 +3687,11 @@ export type UserCreateWithoutAuditLogsInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
   purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
@@ -1199,14 +3701,27 @@ export type UserCreateWithoutAuditLogsInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutAuditLogsInput = {
+export type UserUncheckedCreateWithoutRoleRefInput = {
   id?: string
   tenantId: string
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1214,6 +3729,10 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
   purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
@@ -1223,6 +3742,126 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRoleRefInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoleRefInput, Prisma.UserUncheckedCreateWithoutRoleRefInput>
+}
+
+export type UserCreateManyRoleRefInputEnvelope = {
+  data: Prisma.UserCreateManyRoleRefInput | Prisma.UserCreateManyRoleRefInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutRoleRefInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRoleRefInput, Prisma.UserUncheckedUpdateWithoutRoleRefInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoleRefInput, Prisma.UserUncheckedCreateWithoutRoleRefInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutRoleRefInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRoleRefInput, Prisma.UserUncheckedUpdateWithoutRoleRefInput>
+}
+
+export type UserUpdateManyWithWhereWithoutRoleRefInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutRoleRefInput>
+}
+
+export type UserCreateWithoutAuditLogsInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAuditLogsInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -1246,6 +3885,7 @@ export type UserUpdateWithoutAuditLogsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1253,7 +3893,11 @@ export type UserUpdateWithoutAuditLogsInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
   purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
@@ -1263,6 +3907,18 @@ export type UserUpdateWithoutAuditLogsInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -1271,6 +3927,8 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1278,6 +3936,9 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
   purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -1287,6 +3948,18 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPurchaseOrdersCreatedInput = {
@@ -1294,6 +3967,7 @@ export type UserCreateWithoutPurchaseOrdersCreatedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1301,7 +3975,11 @@ export type UserCreateWithoutPurchaseOrdersCreatedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
@@ -1311,6 +3989,18 @@ export type UserCreateWithoutPurchaseOrdersCreatedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
@@ -1319,6 +4009,8 @@ export type UserUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1326,6 +4018,9 @@ export type UserUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
@@ -1335,6 +4030,18 @@ export type UserUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPurchaseOrdersCreatedInput = {
@@ -1358,6 +4065,7 @@ export type UserUpdateWithoutPurchaseOrdersCreatedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1365,7 +4073,11 @@ export type UserUpdateWithoutPurchaseOrdersCreatedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
@@ -1375,6 +4087,18 @@ export type UserUpdateWithoutPurchaseOrdersCreatedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
@@ -1383,6 +4107,8 @@ export type UserUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1390,6 +4116,9 @@ export type UserUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
@@ -1399,6 +4128,18 @@ export type UserUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutGrnsReceivedInput = {
@@ -1406,6 +4147,7 @@ export type UserCreateWithoutGrnsReceivedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1413,7 +4155,11 @@ export type UserCreateWithoutGrnsReceivedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
@@ -1423,6 +4169,18 @@ export type UserCreateWithoutGrnsReceivedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutGrnsReceivedInput = {
@@ -1431,6 +4189,8 @@ export type UserUncheckedCreateWithoutGrnsReceivedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1438,6 +4198,9 @@ export type UserUncheckedCreateWithoutGrnsReceivedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
@@ -1447,6 +4210,18 @@ export type UserUncheckedCreateWithoutGrnsReceivedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutGrnsReceivedInput = {
@@ -1470,6 +4245,7 @@ export type UserUpdateWithoutGrnsReceivedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1477,7 +4253,11 @@ export type UserUpdateWithoutGrnsReceivedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
@@ -1487,6 +4267,18 @@ export type UserUpdateWithoutGrnsReceivedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGrnsReceivedInput = {
@@ -1495,6 +4287,8 @@ export type UserUncheckedUpdateWithoutGrnsReceivedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1502,6 +4296,9 @@ export type UserUncheckedUpdateWithoutGrnsReceivedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
@@ -1511,6 +4308,18 @@ export type UserUncheckedUpdateWithoutGrnsReceivedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPurchaseReturnsCreatedInput = {
@@ -1518,6 +4327,7 @@ export type UserCreateWithoutPurchaseReturnsCreatedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1525,7 +4335,11 @@ export type UserCreateWithoutPurchaseReturnsCreatedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
@@ -1535,6 +4349,18 @@ export type UserCreateWithoutPurchaseReturnsCreatedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPurchaseReturnsCreatedInput = {
@@ -1543,6 +4369,8 @@ export type UserUncheckedCreateWithoutPurchaseReturnsCreatedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1550,6 +4378,9 @@ export type UserUncheckedCreateWithoutPurchaseReturnsCreatedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
@@ -1559,6 +4390,18 @@ export type UserUncheckedCreateWithoutPurchaseReturnsCreatedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPurchaseReturnsCreatedInput = {
@@ -1582,6 +4425,7 @@ export type UserUpdateWithoutPurchaseReturnsCreatedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1589,7 +4433,11 @@ export type UserUpdateWithoutPurchaseReturnsCreatedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
@@ -1599,6 +4447,18 @@ export type UserUpdateWithoutPurchaseReturnsCreatedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPurchaseReturnsCreatedInput = {
@@ -1607,6 +4467,8 @@ export type UserUncheckedUpdateWithoutPurchaseReturnsCreatedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1614,6 +4476,9 @@ export type UserUncheckedUpdateWithoutPurchaseReturnsCreatedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
@@ -1623,6 +4488,18 @@ export type UserUncheckedUpdateWithoutPurchaseReturnsCreatedInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStockTransfersRequestedInput = {
@@ -1630,6 +4507,7 @@ export type UserCreateWithoutStockTransfersRequestedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1637,7 +4515,11 @@ export type UserCreateWithoutStockTransfersRequestedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
@@ -1647,6 +4529,18 @@ export type UserCreateWithoutStockTransfersRequestedInput = {
   salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
   stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStockTransfersRequestedInput = {
@@ -1655,6 +4549,8 @@ export type UserUncheckedCreateWithoutStockTransfersRequestedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1662,6 +4558,9 @@ export type UserUncheckedCreateWithoutStockTransfersRequestedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
@@ -1671,6 +4570,18 @@ export type UserUncheckedCreateWithoutStockTransfersRequestedInput = {
   salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStockTransfersRequestedInput = {
@@ -1683,6 +4594,7 @@ export type UserCreateWithoutStockTransfersApprovedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1690,7 +4602,11 @@ export type UserCreateWithoutStockTransfersApprovedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
@@ -1700,6 +4616,18 @@ export type UserCreateWithoutStockTransfersApprovedInput = {
   salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStockTransfersApprovedInput = {
@@ -1708,6 +4636,8 @@ export type UserUncheckedCreateWithoutStockTransfersApprovedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1715,6 +4645,9 @@ export type UserUncheckedCreateWithoutStockTransfersApprovedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
@@ -1724,6 +4657,18 @@ export type UserUncheckedCreateWithoutStockTransfersApprovedInput = {
   salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStockTransfersApprovedInput = {
@@ -1747,6 +4692,7 @@ export type UserUpdateWithoutStockTransfersRequestedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1754,7 +4700,11 @@ export type UserUpdateWithoutStockTransfersRequestedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
@@ -1764,6 +4714,18 @@ export type UserUpdateWithoutStockTransfersRequestedInput = {
   salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStockTransfersRequestedInput = {
@@ -1772,6 +4734,8 @@ export type UserUncheckedUpdateWithoutStockTransfersRequestedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1779,6 +4743,9 @@ export type UserUncheckedUpdateWithoutStockTransfersRequestedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
@@ -1788,6 +4755,18 @@ export type UserUncheckedUpdateWithoutStockTransfersRequestedInput = {
   salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutStockTransfersApprovedInput = {
@@ -1806,6 +4785,7 @@ export type UserUpdateWithoutStockTransfersApprovedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1813,7 +4793,11 @@ export type UserUpdateWithoutStockTransfersApprovedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
@@ -1823,6 +4807,18 @@ export type UserUpdateWithoutStockTransfersApprovedInput = {
   salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStockTransfersApprovedInput = {
@@ -1831,6 +4827,8 @@ export type UserUncheckedUpdateWithoutStockTransfersApprovedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1838,6 +4836,9 @@ export type UserUncheckedUpdateWithoutStockTransfersApprovedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
@@ -1847,6 +4848,18 @@ export type UserUncheckedUpdateWithoutStockTransfersApprovedInput = {
   salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNarcoticEntriesDispensedInput = {
@@ -1854,6 +4867,7 @@ export type UserCreateWithoutNarcoticEntriesDispensedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1861,7 +4875,11 @@ export type UserCreateWithoutNarcoticEntriesDispensedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
@@ -1871,6 +4889,18 @@ export type UserCreateWithoutNarcoticEntriesDispensedInput = {
   salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
   stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNarcoticEntriesDispensedInput = {
@@ -1879,6 +4909,8 @@ export type UserUncheckedCreateWithoutNarcoticEntriesDispensedInput = {
   name: string
   email: string
   role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1886,6 +4918,9 @@ export type UserUncheckedCreateWithoutNarcoticEntriesDispensedInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
   discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
@@ -1895,6 +4930,18 @@ export type UserUncheckedCreateWithoutNarcoticEntriesDispensedInput = {
   salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNarcoticEntriesDispensedInput = {
@@ -1918,6 +4965,7 @@ export type UserUpdateWithoutNarcoticEntriesDispensedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1925,7 +4973,11 @@ export type UserUpdateWithoutNarcoticEntriesDispensedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
@@ -1935,6 +4987,18 @@ export type UserUpdateWithoutNarcoticEntriesDispensedInput = {
   salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
   stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNarcoticEntriesDispensedInput = {
@@ -1943,6 +5007,8 @@ export type UserUncheckedUpdateWithoutNarcoticEntriesDispensedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1950,6 +5016,9 @@ export type UserUncheckedUpdateWithoutNarcoticEntriesDispensedInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
@@ -1959,13 +5028,26 @@ export type UserUncheckedUpdateWithoutNarcoticEntriesDispensedInput = {
   salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateManyTenantInput = {
+export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
   email: string
   role: $Enums.UserRole
+  isActive?: boolean
   phone?: string | null
   licenseNo?: string | null
   passwordHash: string
@@ -1973,13 +5055,97 @@ export type UserCreateManyTenantInput = {
   totpEnabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
 }
 
-export type UserUpdateWithoutTenantInput = {
+export type UserUncheckedCreateWithoutSessionsInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+}
+
+export type UserUpsertWithoutSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+}
+
+export type UserUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1987,6 +5153,11 @@ export type UserUpdateWithoutTenantInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
@@ -1997,13 +5168,27 @@ export type UserUpdateWithoutTenantInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutTenantInput = {
+export type UserUncheckedUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2011,6 +5196,9 @@ export type UserUncheckedUpdateWithoutTenantInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
   discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
@@ -2021,13 +5209,123 @@ export type UserUncheckedUpdateWithoutTenantInput = {
   narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
   stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
   stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateManyWithoutTenantInput = {
+export type UserCreateWithoutTrustedDevicesInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutUsersInput
+  roleRef?: Prisma.RoleCreateNestedOneWithoutUsersInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutTrustedDevicesInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  discountsApplied?: Prisma.DiscountUncheckedCreateNestedManyWithoutAppliedByInput
+  discountsApproved?: Prisma.DiscountUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsReceived?: Prisma.GrnUncheckedCreateNestedManyWithoutReceivedByInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutPharmacistSignoffInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutDispensedByInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedCreateNestedManyWithoutRequestedByInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedCreateNestedManyWithoutApprovedByInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutAuthorInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutCreatedByInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutCountedByInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutAdjustedByInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutHeldByInput
+  stockCountsStarted?: Prisma.StockCountUncheckedCreateNestedManyWithoutStartedByInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedCreateNestedManyWithoutCompletedByInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedCreateNestedManyWithoutCreatedByInput
+  expensesRecorded?: Prisma.ExpenseUncheckedCreateNestedManyWithoutRecordedByInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTakenByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutTrustedDevicesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTrustedDevicesInput, Prisma.UserUncheckedCreateWithoutTrustedDevicesInput>
+}
+
+export type UserUpsertWithoutTrustedDevicesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTrustedDevicesInput, Prisma.UserUncheckedUpdateWithoutTrustedDevicesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTrustedDevicesInput, Prisma.UserUncheckedCreateWithoutTrustedDevicesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTrustedDevicesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTrustedDevicesInput, Prisma.UserUncheckedUpdateWithoutTrustedDevicesInput>
+}
+
+export type UserUpdateWithoutTrustedDevicesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2035,6 +5333,313 @@ export type UserUncheckedUpdateManyWithoutTenantInput = {
   totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTrustedDevicesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateManyTenantInput = {
+  id?: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  roleId?: string | null
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+}
+
+export type UserUpdateWithoutTenantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  roleRef?: Prisma.RoleUpdateOneWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTenantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutTenantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type UserCreateManyRoleRefInput = {
+  id?: string
+  tenantId: string
+  name: string
+  email: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  phone?: string | null
+  licenseNo?: string | null
+  passwordHash: string
+  totpSecret?: string | null
+  totpEnabled?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  failedLoginCount?: number
+  lastFailedLoginAt?: Date | string | null
+  lockedUntil?: Date | string | null
+}
+
+export type UserUpdateWithoutRoleRefInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutUsersNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRoleRefInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  discountsApplied?: Prisma.DiscountUncheckedUpdateManyWithoutAppliedByNestedInput
+  discountsApproved?: Prisma.DiscountUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsReceived?: Prisma.GrnUncheckedUpdateManyWithoutReceivedByNestedInput
+  purchaseReturnsCreated?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  salesInvoicesSignedOff?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffNestedInput
+  narcoticEntriesDispensed?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutDispensedByNestedInput
+  stockTransfersRequested?: Prisma.StockTransferUncheckedUpdateManyWithoutRequestedByNestedInput
+  stockTransfersApproved?: Prisma.StockTransferUncheckedUpdateManyWithoutApprovedByNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutAuthorNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutCreatedByNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutCountedByNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutAdjustedByNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutHeldByNestedInput
+  stockCountsStarted?: Prisma.StockCountUncheckedUpdateManyWithoutStartedByNestedInput
+  stockCountsCompleted?: Prisma.StockCountUncheckedUpdateManyWithoutCompletedByNestedInput
+  taxRatesCreated?: Prisma.TaxSlabRateUncheckedUpdateManyWithoutCreatedByNestedInput
+  expensesRecorded?: Prisma.ExpenseUncheckedUpdateManyWithoutRecordedByNestedInput
+  promiseOrdersTaken?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTakenByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutRoleRefInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  failedLoginCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockedUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -2053,6 +5658,18 @@ export type UserCountOutputType = {
   narcoticEntriesDispensed: number
   stockTransfersRequested: number
   stockTransfersApproved: number
+  notes: number
+  salesReturns: number
+  cashUps: number
+  stockAdjustments: number
+  heldSales: number
+  stockCountsStarted: number
+  stockCountsCompleted: number
+  taxRatesCreated: number
+  expensesRecorded: number
+  promiseOrdersTaken: number
+  sessions: number
+  trustedDevices: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2066,6 +5683,18 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   narcoticEntriesDispensed?: boolean | UserCountOutputTypeCountNarcoticEntriesDispensedArgs
   stockTransfersRequested?: boolean | UserCountOutputTypeCountStockTransfersRequestedArgs
   stockTransfersApproved?: boolean | UserCountOutputTypeCountStockTransfersApprovedArgs
+  notes?: boolean | UserCountOutputTypeCountNotesArgs
+  salesReturns?: boolean | UserCountOutputTypeCountSalesReturnsArgs
+  cashUps?: boolean | UserCountOutputTypeCountCashUpsArgs
+  stockAdjustments?: boolean | UserCountOutputTypeCountStockAdjustmentsArgs
+  heldSales?: boolean | UserCountOutputTypeCountHeldSalesArgs
+  stockCountsStarted?: boolean | UserCountOutputTypeCountStockCountsStartedArgs
+  stockCountsCompleted?: boolean | UserCountOutputTypeCountStockCountsCompletedArgs
+  taxRatesCreated?: boolean | UserCountOutputTypeCountTaxRatesCreatedArgs
+  expensesRecorded?: boolean | UserCountOutputTypeCountExpensesRecordedArgs
+  promiseOrdersTaken?: boolean | UserCountOutputTypeCountPromiseOrdersTakenArgs
+  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+  trustedDevices?: boolean | UserCountOutputTypeCountTrustedDevicesArgs
 }
 
 /**
@@ -2148,6 +5777,90 @@ export type UserCountOutputTypeCountStockTransfersApprovedArgs<ExtArgs extends r
   where?: Prisma.StockTransferWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NoteWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSalesReturnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalesReturnWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCashUpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CashUpWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStockAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockAdjustmentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountHeldSalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HeldSaleWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStockCountsStartedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockCountWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStockCountsCompletedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockCountWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTaxRatesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaxSlabRateWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountExpensesRecordedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExpenseWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPromiseOrdersTakenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromiseOrderWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserSessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTrustedDevicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TrustedDeviceWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2155,6 +5868,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   name?: boolean
   email?: boolean
   role?: boolean
+  roleId?: boolean
+  isActive?: boolean
   phone?: boolean
   licenseNo?: boolean
   passwordHash?: boolean
@@ -2162,7 +5877,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   totpEnabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  failedLoginCount?: boolean
+  lastFailedLoginAt?: boolean
+  lockedUntil?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.User$roleRefArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   discountsApplied?: boolean | Prisma.User$discountsAppliedArgs<ExtArgs>
   discountsApproved?: boolean | Prisma.User$discountsApprovedArgs<ExtArgs>
@@ -2173,6 +5892,18 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   narcoticEntriesDispensed?: boolean | Prisma.User$narcoticEntriesDispensedArgs<ExtArgs>
   stockTransfersRequested?: boolean | Prisma.User$stockTransfersRequestedArgs<ExtArgs>
   stockTransfersApproved?: boolean | Prisma.User$stockTransfersApprovedArgs<ExtArgs>
+  notes?: boolean | Prisma.User$notesArgs<ExtArgs>
+  salesReturns?: boolean | Prisma.User$salesReturnsArgs<ExtArgs>
+  cashUps?: boolean | Prisma.User$cashUpsArgs<ExtArgs>
+  stockAdjustments?: boolean | Prisma.User$stockAdjustmentsArgs<ExtArgs>
+  heldSales?: boolean | Prisma.User$heldSalesArgs<ExtArgs>
+  stockCountsStarted?: boolean | Prisma.User$stockCountsStartedArgs<ExtArgs>
+  stockCountsCompleted?: boolean | Prisma.User$stockCountsCompletedArgs<ExtArgs>
+  taxRatesCreated?: boolean | Prisma.User$taxRatesCreatedArgs<ExtArgs>
+  expensesRecorded?: boolean | Prisma.User$expensesRecordedArgs<ExtArgs>
+  promiseOrdersTaken?: boolean | Prisma.User$promiseOrdersTakenArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  trustedDevices?: boolean | Prisma.User$trustedDevicesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2182,6 +5913,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   email?: boolean
   role?: boolean
+  roleId?: boolean
+  isActive?: boolean
   phone?: boolean
   licenseNo?: boolean
   passwordHash?: boolean
@@ -2189,7 +5922,11 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   totpEnabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  failedLoginCount?: boolean
+  lastFailedLoginAt?: boolean
+  lockedUntil?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.User$roleRefArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2198,6 +5935,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   email?: boolean
   role?: boolean
+  roleId?: boolean
+  isActive?: boolean
   phone?: boolean
   licenseNo?: boolean
   passwordHash?: boolean
@@ -2205,7 +5944,11 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   totpEnabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  failedLoginCount?: boolean
+  lastFailedLoginAt?: boolean
+  lockedUntil?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.User$roleRefArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -2214,6 +5957,8 @@ export type UserSelectScalar = {
   name?: boolean
   email?: boolean
   role?: boolean
+  roleId?: boolean
+  isActive?: boolean
   phone?: boolean
   licenseNo?: boolean
   passwordHash?: boolean
@@ -2221,11 +5966,15 @@ export type UserSelectScalar = {
   totpEnabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  failedLoginCount?: boolean
+  lastFailedLoginAt?: boolean
+  lockedUntil?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "email" | "role" | "phone" | "licenseNo" | "passwordHash" | "totpSecret" | "totpEnabled" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "email" | "role" | "roleId" | "isActive" | "phone" | "licenseNo" | "passwordHash" | "totpSecret" | "totpEnabled" | "createdAt" | "updatedAt" | "failedLoginCount" | "lastFailedLoginAt" | "lockedUntil", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.User$roleRefArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   discountsApplied?: boolean | Prisma.User$discountsAppliedArgs<ExtArgs>
   discountsApproved?: boolean | Prisma.User$discountsApprovedArgs<ExtArgs>
@@ -2236,19 +5985,34 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   narcoticEntriesDispensed?: boolean | Prisma.User$narcoticEntriesDispensedArgs<ExtArgs>
   stockTransfersRequested?: boolean | Prisma.User$stockTransfersRequestedArgs<ExtArgs>
   stockTransfersApproved?: boolean | Prisma.User$stockTransfersApprovedArgs<ExtArgs>
+  notes?: boolean | Prisma.User$notesArgs<ExtArgs>
+  salesReturns?: boolean | Prisma.User$salesReturnsArgs<ExtArgs>
+  cashUps?: boolean | Prisma.User$cashUpsArgs<ExtArgs>
+  stockAdjustments?: boolean | Prisma.User$stockAdjustmentsArgs<ExtArgs>
+  heldSales?: boolean | Prisma.User$heldSalesArgs<ExtArgs>
+  stockCountsStarted?: boolean | Prisma.User$stockCountsStartedArgs<ExtArgs>
+  stockCountsCompleted?: boolean | Prisma.User$stockCountsCompletedArgs<ExtArgs>
+  taxRatesCreated?: boolean | Prisma.User$taxRatesCreatedArgs<ExtArgs>
+  expensesRecorded?: boolean | Prisma.User$expensesRecordedArgs<ExtArgs>
+  promiseOrdersTaken?: boolean | Prisma.User$promiseOrdersTakenArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  trustedDevices?: boolean | Prisma.User$trustedDevicesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.User$roleRefArgs<ExtArgs>
 }
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  roleRef?: boolean | Prisma.User$roleRefArgs<ExtArgs>
 }
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
     tenant: Prisma.$TenantPayload<ExtArgs>
+    roleRef: Prisma.$RolePayload<ExtArgs> | null
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
     discountsApplied: Prisma.$DiscountPayload<ExtArgs>[]
     discountsApproved: Prisma.$DiscountPayload<ExtArgs>[]
@@ -2259,13 +6023,34 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     narcoticEntriesDispensed: Prisma.$NarcoticRegisterEntryPayload<ExtArgs>[]
     stockTransfersRequested: Prisma.$StockTransferPayload<ExtArgs>[]
     stockTransfersApproved: Prisma.$StockTransferPayload<ExtArgs>[]
+    notes: Prisma.$NotePayload<ExtArgs>[]
+    salesReturns: Prisma.$SalesReturnPayload<ExtArgs>[]
+    cashUps: Prisma.$CashUpPayload<ExtArgs>[]
+    stockAdjustments: Prisma.$StockAdjustmentPayload<ExtArgs>[]
+    heldSales: Prisma.$HeldSalePayload<ExtArgs>[]
+    stockCountsStarted: Prisma.$StockCountPayload<ExtArgs>[]
+    stockCountsCompleted: Prisma.$StockCountPayload<ExtArgs>[]
+    taxRatesCreated: Prisma.$TaxSlabRatePayload<ExtArgs>[]
+    expensesRecorded: Prisma.$ExpensePayload<ExtArgs>[]
+    promiseOrdersTaken: Prisma.$PromiseOrderPayload<ExtArgs>[]
+    sessions: Prisma.$UserSessionPayload<ExtArgs>[]
+    trustedDevices: Prisma.$TrustedDevicePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     tenantId: string
     name: string
     email: string
+    /**
+     * Kept as the coarse identity the session carries and the owner
+     * short-circuit relies on. Fine-grained access comes from `roleRef`.
+     */
     role: $Enums.UserRole
+    roleId: string | null
+    /**
+     * Deactivated staff keep their history but cannot sign in.
+     */
+    isActive: boolean
     phone: string | null
     licenseNo: string | null
     passwordHash: string
@@ -2273,6 +6058,17 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     totpEnabled: boolean
     createdAt: Date
     updatedAt: Date
+    /**
+     * Consecutive failed sign-in attempts — password OR authenticator code.
+     * Both count towards the same total: a correct password followed by a
+     * brute-forced 6-digit code is the more dangerous of the two paths.
+     */
+    failedLoginCount: number
+    lastFailedLoginAt: Date | null
+    /**
+     * Set once the threshold is passed; sign-in is refused until it elapses.
+     */
+    lockedUntil: Date | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -2668,6 +6464,7 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  roleRef<T extends Prisma.User$roleRefArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$roleRefArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   discountsApplied<T extends Prisma.User$discountsAppliedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$discountsAppliedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DiscountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   discountsApproved<T extends Prisma.User$discountsApprovedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$discountsApprovedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DiscountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2678,6 +6475,18 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   narcoticEntriesDispensed<T extends Prisma.User$narcoticEntriesDispensedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$narcoticEntriesDispensedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NarcoticRegisterEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockTransfersRequested<T extends Prisma.User$stockTransfersRequestedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockTransfersRequestedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockTransfersApproved<T extends Prisma.User$stockTransfersApprovedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockTransfersApprovedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notes<T extends Prisma.User$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  salesReturns<T extends Prisma.User$salesReturnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$salesReturnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesReturnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cashUps<T extends Prisma.User$cashUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cashUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CashUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockAdjustments<T extends Prisma.User$stockAdjustmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockAdjustmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockAdjustmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  heldSales<T extends Prisma.User$heldSalesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$heldSalesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HeldSalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockCountsStarted<T extends Prisma.User$stockCountsStartedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockCountsStartedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockCountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockCountsCompleted<T extends Prisma.User$stockCountsCompletedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockCountsCompletedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockCountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  taxRatesCreated<T extends Prisma.User$taxRatesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$taxRatesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaxSlabRatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  expensesRecorded<T extends Prisma.User$expensesRecordedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$expensesRecordedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promiseOrdersTaken<T extends Prisma.User$promiseOrdersTakenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$promiseOrdersTakenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromiseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  trustedDevices<T extends Prisma.User$trustedDevicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$trustedDevicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrustedDevicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2712,6 +6521,8 @@ export interface UserFieldRefs {
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
+  readonly roleId: Prisma.FieldRef<"User", 'String'>
+  readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly phone: Prisma.FieldRef<"User", 'String'>
   readonly licenseNo: Prisma.FieldRef<"User", 'String'>
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
@@ -2719,6 +6530,9 @@ export interface UserFieldRefs {
   readonly totpEnabled: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly failedLoginCount: Prisma.FieldRef<"User", 'Int'>
+  readonly lastFailedLoginAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly lockedUntil: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 
@@ -3120,6 +6934,25 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.roleRef
+ */
+export type User$roleRefArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Role
+   */
+  select?: Prisma.RoleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Role
+   */
+  omit?: Prisma.RoleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoleInclude<ExtArgs> | null
+  where?: Prisma.RoleWhereInput
+}
+
+/**
  * User.auditLogs
  */
 export type User$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3357,6 +7190,294 @@ export type User$stockTransfersApprovedArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.StockTransferScalarFieldEnum | Prisma.StockTransferScalarFieldEnum[]
+}
+
+/**
+ * User.notes
+ */
+export type User$notesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Note
+   */
+  select?: Prisma.NoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Note
+   */
+  omit?: Prisma.NoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NoteInclude<ExtArgs> | null
+  where?: Prisma.NoteWhereInput
+  orderBy?: Prisma.NoteOrderByWithRelationInput | Prisma.NoteOrderByWithRelationInput[]
+  cursor?: Prisma.NoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NoteScalarFieldEnum | Prisma.NoteScalarFieldEnum[]
+}
+
+/**
+ * User.salesReturns
+ */
+export type User$salesReturnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalesReturn
+   */
+  select?: Prisma.SalesReturnSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SalesReturn
+   */
+  omit?: Prisma.SalesReturnOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalesReturnInclude<ExtArgs> | null
+  where?: Prisma.SalesReturnWhereInput
+  orderBy?: Prisma.SalesReturnOrderByWithRelationInput | Prisma.SalesReturnOrderByWithRelationInput[]
+  cursor?: Prisma.SalesReturnWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalesReturnScalarFieldEnum | Prisma.SalesReturnScalarFieldEnum[]
+}
+
+/**
+ * User.cashUps
+ */
+export type User$cashUpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CashUp
+   */
+  select?: Prisma.CashUpSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CashUp
+   */
+  omit?: Prisma.CashUpOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CashUpInclude<ExtArgs> | null
+  where?: Prisma.CashUpWhereInput
+  orderBy?: Prisma.CashUpOrderByWithRelationInput | Prisma.CashUpOrderByWithRelationInput[]
+  cursor?: Prisma.CashUpWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CashUpScalarFieldEnum | Prisma.CashUpScalarFieldEnum[]
+}
+
+/**
+ * User.stockAdjustments
+ */
+export type User$stockAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockAdjustment
+   */
+  select?: Prisma.StockAdjustmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockAdjustment
+   */
+  omit?: Prisma.StockAdjustmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockAdjustmentInclude<ExtArgs> | null
+  where?: Prisma.StockAdjustmentWhereInput
+  orderBy?: Prisma.StockAdjustmentOrderByWithRelationInput | Prisma.StockAdjustmentOrderByWithRelationInput[]
+  cursor?: Prisma.StockAdjustmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockAdjustmentScalarFieldEnum | Prisma.StockAdjustmentScalarFieldEnum[]
+}
+
+/**
+ * User.heldSales
+ */
+export type User$heldSalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HeldSale
+   */
+  select?: Prisma.HeldSaleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HeldSale
+   */
+  omit?: Prisma.HeldSaleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HeldSaleInclude<ExtArgs> | null
+  where?: Prisma.HeldSaleWhereInput
+  orderBy?: Prisma.HeldSaleOrderByWithRelationInput | Prisma.HeldSaleOrderByWithRelationInput[]
+  cursor?: Prisma.HeldSaleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HeldSaleScalarFieldEnum | Prisma.HeldSaleScalarFieldEnum[]
+}
+
+/**
+ * User.stockCountsStarted
+ */
+export type User$stockCountsStartedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockCount
+   */
+  select?: Prisma.StockCountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockCount
+   */
+  omit?: Prisma.StockCountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockCountInclude<ExtArgs> | null
+  where?: Prisma.StockCountWhereInput
+  orderBy?: Prisma.StockCountOrderByWithRelationInput | Prisma.StockCountOrderByWithRelationInput[]
+  cursor?: Prisma.StockCountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockCountScalarFieldEnum | Prisma.StockCountScalarFieldEnum[]
+}
+
+/**
+ * User.stockCountsCompleted
+ */
+export type User$stockCountsCompletedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockCount
+   */
+  select?: Prisma.StockCountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockCount
+   */
+  omit?: Prisma.StockCountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockCountInclude<ExtArgs> | null
+  where?: Prisma.StockCountWhereInput
+  orderBy?: Prisma.StockCountOrderByWithRelationInput | Prisma.StockCountOrderByWithRelationInput[]
+  cursor?: Prisma.StockCountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockCountScalarFieldEnum | Prisma.StockCountScalarFieldEnum[]
+}
+
+/**
+ * User.taxRatesCreated
+ */
+export type User$taxRatesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TaxSlabRate
+   */
+  select?: Prisma.TaxSlabRateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TaxSlabRate
+   */
+  omit?: Prisma.TaxSlabRateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaxSlabRateInclude<ExtArgs> | null
+  where?: Prisma.TaxSlabRateWhereInput
+  orderBy?: Prisma.TaxSlabRateOrderByWithRelationInput | Prisma.TaxSlabRateOrderByWithRelationInput[]
+  cursor?: Prisma.TaxSlabRateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaxSlabRateScalarFieldEnum | Prisma.TaxSlabRateScalarFieldEnum[]
+}
+
+/**
+ * User.expensesRecorded
+ */
+export type User$expensesRecordedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Expense
+   */
+  select?: Prisma.ExpenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Expense
+   */
+  omit?: Prisma.ExpenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExpenseInclude<ExtArgs> | null
+  where?: Prisma.ExpenseWhereInput
+  orderBy?: Prisma.ExpenseOrderByWithRelationInput | Prisma.ExpenseOrderByWithRelationInput[]
+  cursor?: Prisma.ExpenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExpenseScalarFieldEnum | Prisma.ExpenseScalarFieldEnum[]
+}
+
+/**
+ * User.promiseOrdersTaken
+ */
+export type User$promiseOrdersTakenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromiseOrder
+   */
+  select?: Prisma.PromiseOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PromiseOrder
+   */
+  omit?: Prisma.PromiseOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromiseOrderInclude<ExtArgs> | null
+  where?: Prisma.PromiseOrderWhereInput
+  orderBy?: Prisma.PromiseOrderOrderByWithRelationInput | Prisma.PromiseOrderOrderByWithRelationInput[]
+  cursor?: Prisma.PromiseOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromiseOrderScalarFieldEnum | Prisma.PromiseOrderScalarFieldEnum[]
+}
+
+/**
+ * User.sessions
+ */
+export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserSession
+   */
+  select?: Prisma.UserSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserSession
+   */
+  omit?: Prisma.UserSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserSessionInclude<ExtArgs> | null
+  where?: Prisma.UserSessionWhereInput
+  orderBy?: Prisma.UserSessionOrderByWithRelationInput | Prisma.UserSessionOrderByWithRelationInput[]
+  cursor?: Prisma.UserSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserSessionScalarFieldEnum | Prisma.UserSessionScalarFieldEnum[]
+}
+
+/**
+ * User.trustedDevices
+ */
+export type User$trustedDevicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrustedDevice
+   */
+  select?: Prisma.TrustedDeviceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TrustedDevice
+   */
+  omit?: Prisma.TrustedDeviceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrustedDeviceInclude<ExtArgs> | null
+  where?: Prisma.TrustedDeviceWhereInput
+  orderBy?: Prisma.TrustedDeviceOrderByWithRelationInput | Prisma.TrustedDeviceOrderByWithRelationInput[]
+  cursor?: Prisma.TrustedDeviceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TrustedDeviceScalarFieldEnum | Prisma.TrustedDeviceScalarFieldEnum[]
 }
 
 /**

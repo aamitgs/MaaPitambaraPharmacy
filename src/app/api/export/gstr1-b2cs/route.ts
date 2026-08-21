@@ -1,7 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { getGstr1B2cs } from "@/lib/actions/gstr-export";
 import { defaultMonthRange } from "@/lib/date-range";
-import { toCsv } from "@/lib/csv";
+import {
+  exportResponse,
+  formatFromRequest,
+  type ExportColumn,
+} from "@/lib/export-response";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -12,19 +16,19 @@ export async function GET(request: NextRequest) {
 
   const rows = await getGstr1B2cs(from, to);
 
-  const csv = toCsv(rows, [
+  const columns: ExportColumn<(typeof rows)[number]>[] = [
     { key: "type", label: "Type" },
     { key: "placeOfSupply", label: "Place Of Supply" },
     { key: "taxRate", label: "Applicable % of Tax Rate" },
-    { key: "taxRate", label: "Rate" },
-    { key: "taxableValue", label: "Taxable Value" },
-    { key: "cessAmount", label: "Cess Amount" },
-  ]);
+    { key: "taxRate", label: "Rate" , type: "money" },
+    { key: "taxableValue", label: "Taxable Value" , type: "money" },
+    { key: "cessAmount", label: "Cess Amount" , type: "money" },
+  ];
 
-  return new NextResponse(csv, {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="gstr1-b2cs-${from}-to-${to}.csv"`,
-    },
+  return exportResponse({
+    format: formatFromRequest(searchParams),
+    rows: rows,
+    columns,
+    filename: `gstr1-b2cs-${from}-to-${to}`,
   });
 }

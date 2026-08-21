@@ -9,8 +9,14 @@ import { FilePlus2, TriangleAlert } from "lucide-react";
 
 export default async function AlertsPage() {
   const session = await auth();
-  const { lowStock, nearExpiry, nearExpiryWindowDays, licenseExpiry, licenseExpiryWindowDays } =
-    await getAlerts();
+  const {
+    lowStock,
+    nearExpiry,
+    nearExpiryWindowDays,
+    licenseExpiry,
+    licenseExpiryWindowDays,
+    complianceGaps,
+  } = await getAlerts();
   const canEdit = session?.user.role === "owner" || session?.user.role === "pharmacist";
 
   return (
@@ -21,6 +27,46 @@ export default async function AlertsPage() {
           Live stock issues that need attention — act on them directly from here.
         </p>
       </div>
+
+      {complianceGaps.length > 0 && (
+        <div className="space-y-3">
+          <h2 className="text-sm font-medium">
+            Missing from your bills{" "}
+            <span className="text-muted-foreground">({complianceGaps.length})</span>
+          </h2>
+          <div className="space-y-2">
+            {complianceGaps.map((gap, i) => (
+              <div
+                key={`${gap.branchId}-${gap.field}-${i}`}
+                className="flex items-start gap-3 rounded-lg border border-destructive/30 bg-destructive/5 p-3"
+              >
+                <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
+                <div className="min-w-0 flex-1">
+                  <div className="text-sm font-medium">
+                    {gap.field} not recorded
+                    <span className="ml-1.5 font-normal text-muted-foreground">
+                      · {gap.branchName}
+                    </span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">{gap.why}</p>
+                </div>
+                {canEdit && (
+                  <Link
+                    href={`/branches/${gap.branchId}`}
+                    className="shrink-0 text-xs font-medium underline underline-offset-2"
+                  >
+                    Add it
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            Each of these is blank, so it is simply left off the printed bill — the bill looks
+            fine on screen while being incomplete on paper.
+          </p>
+        </div>
+      )}
 
       <div className="space-y-3">
         <h2 className="text-sm font-medium">

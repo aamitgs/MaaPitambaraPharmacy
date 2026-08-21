@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState, useTransition } from "react";
-import Papa from "papaparse";
+import { readTabularFile } from "@/lib/import/read-file";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,20 +18,13 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { IMPORT_FIELDS, type ImportFieldKey } from "@/lib/import/fields";
 import { mapRows, type ColumnMapping } from "@/lib/import/normalize";
+import { autoMapColumns, deriveColumns, type DerivedColumn } from "@/lib/import/auto-map";
 import { validateRows, type ValidationSummary } from "@/lib/import/validate";
 import { commitImport } from "@/lib/actions/import";
 import { AlertCircle, CheckCircle2, Loader2, UploadCloud } from "lucide-react";
 import { toast } from "sonner";
 
 type Step = "upload" | "map" | "preview" | "done";
-
-function guessColumn(headers: string[], key: ImportFieldKey, label: string) {
-  const needle = [key, label].map((s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""));
-  return headers.find((h) => {
-    const norm = h.toLowerCase().replace(/[^a-z0-9]/g, "");
-    return needle.includes(norm);
-  });
-}
 
 export function ImportPanel() {
   const [step, setStep] = useState<Step>("upload");
@@ -40,6 +34,8 @@ export function ImportPanel() {
   const [fileName, setFileName] = useState("");
   const [pending, startTransition] = useTransition();
   const [result, setResult] = useState<Awaited<ReturnType<typeof commitImport>> | null>(null);
+  const [derived, setDerived] = useState<DerivedColumn[]>([]);
+  const [mappedCount, setMappedCount] = useState(0);
 
   const summary: ValidationSummary | null = useMemo(() => {
     if (step !== "preview" && step !== "done") return null;
@@ -47,28 +43,33 @@ export function ImportPanel() {
     return validateRows(normalized);
   }, [step, rawRows, mapping]);
 
-  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
     setFileName(file.name);
-    Papa.parse<Record<string, string>>(file, {
-      header: true,
-      skipEmptyLines: true,
-      complete: (results) => {
-        const cols = results.meta.fields ?? [];
-        setHeaders(cols);
-        setRawRows(results.data);
+    try {
+      const { headers: cols, rows } = await readTabularFile(file);
+      if (rows.length === 0) {
+        toast.error("That file has a header but no rows.");
+        return;
+      }
+      // Build the columns the file implies but does not carry (a single
+      // GST rate from its SGST/CGST halves; packs and loose units from a
+      // "83.2" stock figure), then match everything by name.
+      const { headers: withDerived, rows: withDerivedRows, derived: added, seed } = deriveColumns(cols, rows);
+      setHeaders(withDerived);
+      setRawRows(withDerivedRows);
+      setDerived(added);
 
-        const autoMapping: ColumnMapping = {};
-        for (const field of IMPORT_FIELDS) {
-          const guess = guessColumn(cols, field.key, field.label);
-          if (guess) autoMapping[field.key] = guess;
-        }
-        setMapping(autoMapping);
-        setStep("map");
-      },
-      error: (err) => toast.error(`Could not parse CSV: ${err.message}`),
-    });
+      const autoMapping = autoMapColumns(withDerived, { seed, sample: withDerivedRows.slice(0, 200) });
+      setMapping(autoMapping);
+      setMappedCount(Object.keys(autoMapping).length);
+      setStep("map");
+    } catch (err) {
+      toast.error(
+        err instanceof Error ? `Could not read that file: ${err.message}` : "Could not read that file"
+      );
+    }
   }
 
   function commit() {
@@ -98,26 +99,47 @@ export function ImportPanel() {
   return (
     <div className="max-w-3xl space-y-4">
       <div>
-        <h2 className="text-sm font-medium">Import item master (CSV)</h2>
+        <h2 className="text-sm font-medium">Import items &amp; stock</h2>
         <p className="text-sm text-muted-foreground">
-          Upload a CSV of items (and optionally batches). You&apos;ll map columns to fields and
-          preview validation errors before anything is saved.
+          Upload a CSV or Excel file. Items alone, or items with their batches — batch number,
+          expiry, MRP and quantity in the same row bring stock in with them. Columns are matched
+          automatically; you can correct any of them before anything is saved.
         </p>
       </div>
 
       {step === "upload" && (
         <label className="flex h-32 cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed text-sm text-muted-foreground hover:bg-muted/30">
           <UploadCloud className="h-6 w-6" />
-          Click to choose a .csv file
-          <input type="file" accept=".csv,text/csv" className="hidden" onChange={handleFile} />
+          Click to choose a .csv or .xlsx file
+          <input
+            type="file"
+            accept=".csv,text/csv,.xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            className="hidden"
+            onChange={handleFile}
+          />
         </label>
       )}
 
       {step === "map" && (
         <div className="space-y-4">
           <p className="text-xs text-muted-foreground">
-            {fileName} · {rawRows.length} row{rawRows.length === 1 ? "" : "s"} detected
+            {fileName} · {rawRows.length} row{rawRows.length === 1 ? "" : "s"} detected ·{" "}
+            <span className="font-medium text-foreground">
+              {mappedCount} column{mappedCount === 1 ? "" : "s"} matched automatically
+            </span>
+            . Check them below and change anything that looks wrong.
           </p>
+          {derived.length > 0 && (
+            // A computed column must never be a surprise — say where it
+            // came from, next to the mapping that uses it.
+            <div className="space-y-1 rounded-md border bg-muted/30 p-2 text-xs text-muted-foreground">
+              {derived.map((d) => (
+                <p key={d.header}>
+                  <span className="font-medium text-foreground">{d.header}</span> — {d.note}
+                </p>
+              ))}
+            </div>
+          )}
           <div className="grid grid-cols-2 gap-3 rounded-lg border p-3">
             {IMPORT_FIELDS.map((field) => (
               <div key={field.key} className="flex items-center justify-between gap-2">
@@ -176,6 +198,11 @@ export function ImportPanel() {
                 {summary.invalidCount} with errors
               </Badge>
             )}
+            {summary.warningCount > 0 && (
+              <Badge className="bg-warning/20 text-warning-foreground hover:bg-warning/20">
+                {summary.warningCount} to check
+              </Badge>
+            )}
             <span className="text-muted-foreground">of {summary.total} rows</span>
           </div>
 
@@ -201,9 +228,18 @@ export function ImportPanel() {
                     </TableCell>
                     <TableCell>
                       {row.errors.length === 0 ? (
-                        <span className="inline-flex items-center gap-1 text-xs text-success">
-                          <CheckCircle2 className="h-3.5 w-3.5" /> OK
-                        </span>
+                        row.warnings.length === 0 ? (
+                          <span className="inline-flex items-center gap-1 text-xs text-success">
+                            <CheckCircle2 className="h-3.5 w-3.5" /> OK
+                          </span>
+                        ) : (
+                          // Imports either way — this is worth knowing, not
+                          // worth refusing the row over.
+                          <span className="inline-flex items-start gap-1 text-xs text-warning-foreground">
+                            <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+                            {row.warnings.join("; ")}
+                          </span>
+                        )
                       ) : (
                         <span className="inline-flex items-start gap-1 text-xs text-destructive">
                           <AlertCircle className="h-3.5 w-3.5 shrink-0" />
@@ -216,6 +252,20 @@ export function ImportPanel() {
               </TableBody>
             </Table>
           </div>
+
+          {summary.warningCount > 0 && (
+            <p className="rounded-md border border-warning/40 bg-warning/10 p-2 text-xs text-warning-foreground">
+              {summary.warningCount === 1
+                ? "1 row will import, but its composition cannot be matched, so that item will not be offered as a substitute."
+                : `${summary.warningCount} rows will import, but their compositions cannot be matched, so those items will not be offered as substitutes.`}{" "}
+              {summary.warningCount === 1 ? "You can fix it" : "You can fix them"} here or
+              afterwards under{" "}
+              <Link href="/items/composition" className="underline underline-offset-2">
+                Items → Composition
+              </Link>
+              .
+            </p>
+          )}
 
           <div className="flex gap-2">
             <Button onClick={commit} disabled={pending || summary.validCount === 0}>

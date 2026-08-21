@@ -10,6 +10,10 @@ import { cn } from "@/lib/utils";
 import type { CartLine } from "@/store/cart-store";
 import type { SchemeApplication } from "@/lib/scheme-engine";
 import type { PosItem } from "./types";
+import { looseUnitRate } from "@/lib/loose-stock";
+
+/** Whether the item master allows breaking a pack for this line. */
+const looseAllowedByItem = (item: PosItem | undefined) => Boolean(item?.allowLooseSale);
 
 export function CartTable({
   lines,
@@ -17,6 +21,9 @@ export function CartTable({
   focusLineId,
   onFocusHandled,
   onQtyChange,
+  onLooseChange,
+  onBasisChange,
+  wholesaleBillingEnabled,
   onQtyEnter,
   onDiscountChange,
   onOverrideBatch,
@@ -28,6 +35,9 @@ export function CartTable({
   focusLineId: string | null;
   onFocusHandled: () => void;
   onQtyChange: (lineId: string, qty: number) => void;
+  onLooseChange: (lineId: string, isLoose: boolean) => void;
+  onBasisChange: (lineId: string, basis: "mrp" | "ptr") => void;
+  wholesaleBillingEnabled: boolean;
   onQtyEnter: () => void;
   onDiscountChange: (lineId: string, percent: number) => void;
   onOverrideBatch: (lineId: string, batchId: string) => void;
@@ -74,8 +84,25 @@ export function CartTable({
           {lines.map((line) => {
             const catalogItem = catalogByItemId.get(line.itemId);
             const otherBatches = catalogItem?.batches ?? [];
+            const baseRate =
+              wholesaleBillingEnabled && line.priceBasis === "ptr" && line.ptr
+                ? line.ptr
+                : line.rate;
+            const effectiveRate = line.isLooseSale
+              ? looseUnitRate(baseRate, line.unitsPerPack)
+              : baseRate;
             const grossBeforeTax =
-              line.qty * line.rate * (1 - line.discountPercent / 100);
+              line.qty * effectiveRate * (1 - line.discountPercent / 100);
+            // A loose line can draw on every unit on the shelf, opened pack
+            // included; a pack line only on unopened packs.
+            const maxQty = line.isLooseSale
+              ? line.availableQty * line.unitsPerPack + line.looseUnits
+              : line.availableQty;
+            const canSellLoose = line.unitsPerPack > 1 && looseAllowedByItem(catalogItem);
+            // Only offered where there is a PTR to switch to — a toggle
+            // that silently does nothing is worse than no toggle.
+            const canSellWholesale =
+              wholesaleBillingEnabled && line.ptr !== null && line.ptr > 0;
             const lineTotal = grossBeforeTax * (1 + line.taxRate / 100);
             const expired = new Date(line.expiryDate) < new Date();
 
@@ -125,7 +152,7 @@ export function CartTable({
                     }}
                     type="number"
                     min={1}
-                    max={line.availableQty}
+                    max={maxQty}
                     value={line.qty}
                     onChange={(e) => onQtyChange(line.lineId, Number(e.target.value))}
                     onKeyDown={(e) => {
@@ -136,6 +163,63 @@ export function CartTable({
                     }}
                     className="h-8 text-right tabular-nums"
                   />
+                  {canSellLoose && (
+                    <div className="mt-1 flex overflow-hidden rounded-md border text-[10px]">
+                      <button
+                        type="button"
+                        className={cn(
+                          "flex-1 px-1.5 py-0.5",
+                          !line.isLooseSale ? "bg-primary text-primary-foreground" : "hover:bg-muted"
+                        )}
+                        onClick={() => onLooseChange(line.lineId, false)}
+                      >
+                        Pack
+                      </button>
+                      <button
+                        type="button"
+                        className={cn(
+                          "flex-1 px-1.5 py-0.5",
+                          line.isLooseSale ? "bg-primary text-primary-foreground" : "hover:bg-muted"
+                        )}
+                        onClick={() => onLooseChange(line.lineId, true)}
+                      >
+                        Loose
+                      </button>
+                    </div>
+                  )}
+                  {canSellWholesale && (
+                    <div className="mt-1 flex overflow-hidden rounded-md border text-[10px]">
+                      <button
+                        type="button"
+                        className={cn(
+                          "flex-1 px-1.5 py-0.5",
+                          line.priceBasis === "mrp"
+                            ? "bg-primary text-primary-foreground"
+                            : "hover:bg-muted"
+                        )}
+                        onClick={() => onBasisChange(line.lineId, "mrp")}
+                      >
+                        Retail
+                      </button>
+                      <button
+                        type="button"
+                        className={cn(
+                          "flex-1 px-1.5 py-0.5",
+                          line.priceBasis === "ptr"
+                            ? "bg-primary text-primary-foreground"
+                            : "hover:bg-muted"
+                        )}
+                        onClick={() => onBasisChange(line.lineId, "ptr")}
+                      >
+                        PTR
+                      </button>
+                    </div>
+                  )}
+                  {line.isLooseSale && (
+                    <div className="mt-0.5 text-[10px] text-muted-foreground">
+                      ₹{effectiveRate.toFixed(2)} each · {maxQty} available
+                    </div>
+                  )}
                 </td>
                 <td className="px-3 py-2 text-right align-top tabular-nums">
                   ₹{line.rate.toFixed(2)}
@@ -149,6 +233,63 @@ export function CartTable({
                     onChange={(e) => onDiscountChange(line.lineId, Number(e.target.value))}
                     className="h-8 text-right tabular-nums"
                   />
+                  {canSellLoose && (
+                    <div className="mt-1 flex overflow-hidden rounded-md border text-[10px]">
+                      <button
+                        type="button"
+                        className={cn(
+                          "flex-1 px-1.5 py-0.5",
+                          !line.isLooseSale ? "bg-primary text-primary-foreground" : "hover:bg-muted"
+                        )}
+                        onClick={() => onLooseChange(line.lineId, false)}
+                      >
+                        Pack
+                      </button>
+                      <button
+                        type="button"
+                        className={cn(
+                          "flex-1 px-1.5 py-0.5",
+                          line.isLooseSale ? "bg-primary text-primary-foreground" : "hover:bg-muted"
+                        )}
+                        onClick={() => onLooseChange(line.lineId, true)}
+                      >
+                        Loose
+                      </button>
+                    </div>
+                  )}
+                  {canSellWholesale && (
+                    <div className="mt-1 flex overflow-hidden rounded-md border text-[10px]">
+                      <button
+                        type="button"
+                        className={cn(
+                          "flex-1 px-1.5 py-0.5",
+                          line.priceBasis === "mrp"
+                            ? "bg-primary text-primary-foreground"
+                            : "hover:bg-muted"
+                        )}
+                        onClick={() => onBasisChange(line.lineId, "mrp")}
+                      >
+                        Retail
+                      </button>
+                      <button
+                        type="button"
+                        className={cn(
+                          "flex-1 px-1.5 py-0.5",
+                          line.priceBasis === "ptr"
+                            ? "bg-primary text-primary-foreground"
+                            : "hover:bg-muted"
+                        )}
+                        onClick={() => onBasisChange(line.lineId, "ptr")}
+                      >
+                        PTR
+                      </button>
+                    </div>
+                  )}
+                  {line.isLooseSale && (
+                    <div className="mt-0.5 text-[10px] text-muted-foreground">
+                      ₹{effectiveRate.toFixed(2)} each · {maxQty} available
+                    </div>
+                  )}
                 </td>
                 <td className="px-3 py-2 text-right align-top tabular-nums text-muted-foreground">
                   {line.taxRate}%

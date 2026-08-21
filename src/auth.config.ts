@@ -44,6 +44,22 @@ export const authConfig = {
       const isPublic =
         pathname.startsWith("/login") ||
         pathname.startsWith("/api/auth") ||
+        // Uploaded brand logos. Same reasoning as the bundled assets below,
+        // but they cannot be listed by name — the filename is a UUID that
+        // changes on every upload. Nothing confidential is served from this
+        // route; see src/app/api/brand/[file]/route.ts.
+        pathname.startsWith("/api/brand/") ||
+        // The liveness probe. Genuinely public, which is the whole point:
+        // an uptime monitor has no session, and until this was listed here
+        // it was answered with a redirect to /login — so the monitor saw a
+        // healthy 200 from the login page whatever state the app was in.
+        // It reveals only whether the database answered, and how quickly.
+        pathname === "/api/health" ||
+        // The customer's own copy of their bill, reached by an unguessable
+        // 128-bit token sent to them over SMS/WhatsApp. The recipient has
+        // no account, so this cannot sit behind the session; the token is
+        // the credential, and the page shows one invoice and nothing else.
+        pathname.startsWith("/bill/") ||
         // Brand assets referenced from the <head> of the login page itself
         // (Next's icon file convention and the PWA manifest). Without this
         // they 307 to /login, so a signed-out tab shows no favicon and the
@@ -67,6 +83,7 @@ export const authConfig = {
     // `session.user` — without this, middleware can't see role/tenantId/
     // mfaSetupRequired and the `authorized` callback above would misfire.
     async session({ session, token }) {
+      session.sid = (token.sid as string | null | undefined) ?? null;
       session.user.id = token.id as string;
       session.user.tenantId = token.tenantId as string;
       session.user.role = token.role;

@@ -20,6 +20,11 @@ import { OfflineReceiptOverlay } from "./offline-receipt-overlay";
 import { SearchPanel } from "./search-panel";
 import { CartTable } from "./cart-table";
 import { BottomBar } from "./bottom-bar";
+import { looseUnitRate } from "@/lib/loose-stock";
+import { isBatchExpired } from "@/lib/expiry";
+import { rateFor } from "@/lib/pricing";
+import type { PaymentMode } from "@/generated/prisma/client";
+import { HeldSales } from "./held-sales";
 import { PrescriptionFields } from "./prescription-fields";
 import { PrescriptionUpload } from "./prescription-upload";
 import { ManagerPinDialog } from "./manager-pin-dialog";
@@ -40,6 +45,8 @@ export function PosScreen({
   doctors,
   branchId,
   staffDiscountCapPercent,
+  offlineSyncMaxHours,
+  wholesaleBillingEnabled,
   role,
   schemes,
   tenantId,
@@ -50,6 +57,11 @@ export function PosScreen({
   doctors: PosDoctor[];
   branchId: string | null;
   staffDiscountCapPercent: number;
+  /// From the pharmacy's settings — how long a queued sale may wait before
+  /// it needs a human decision instead of posting itself.
+  offlineSyncMaxHours: number;
+  /** Off for a retail-only pharmacy, and then no PTR control appears. */
+  wholesaleBillingEnabled: boolean;
   role: UserRole;
   schemes: PosScheme[];
   tenantId: string;
@@ -89,18 +101,28 @@ export function PosScreen({
     setPendingSales(await listPendingSales(tenantId));
   }, [tenantId]);
 
-  const handleSync = useCallback(async () => {
-    setSyncing(true);
-    try {
-      const summary = await syncPendingSales(tenantId);
-      await refreshPendingSales();
-      if (summary.synced > 0) toast.success(`${summary.synced} offline bill${summary.synced === 1 ? "" : "s"} synced`);
-      if (summary.conflicts > 0) toast.error(`${summary.conflicts} offline bill${summary.conflicts === 1 ? "" : "s"} need review — stock changed while offline`);
-      if (summary.failed > 0) toast.error(`${summary.failed} offline bill${summary.failed === 1 ? "" : "s"} failed to sync — will retry`);
-    } finally {
-      setSyncing(false);
-    }
-  }, [tenantId, refreshPendingSales]);
+  const handleSync = useCallback(
+    async (force?: string[]) => {
+      setSyncing(true);
+      try {
+        const summary = await syncPendingSales(tenantId, {
+          maxAgeHours: offlineSyncMaxHours,
+          force,
+        });
+        await refreshPendingSales();
+        if (summary.synced > 0) toast.success(`${summary.synced} offline bill${summary.synced === 1 ? "" : "s"} synced`);
+        if (summary.conflicts > 0) toast.error(`${summary.conflicts} offline bill${summary.conflicts === 1 ? "" : "s"} need review — stock changed while offline`);
+        if (summary.failed > 0) toast.error(`${summary.failed} offline bill${summary.failed === 1 ? "" : "s"} failed to sync — will retry`);
+        if (summary.stale > 0)
+          toast.warning(
+            `${summary.stale} bill${summary.stale === 1 ? " has" : "s have"} been queued too long to post automatically — open the queue to review`
+          );
+      } finally {
+        setSyncing(false);
+      }
+    },
+    [tenantId, refreshPendingSales, offlineSyncMaxHours]
+  );
 
   // Cache what this session needs to keep billing (and printing) working
   // offline. Writing this doesn't touch the live items/customers state
@@ -183,7 +205,14 @@ export function PosScreen({
     const lineInputs: BillingLineInput[] = store.lines.map((l) => ({
       lineId: l.lineId,
       qty: l.qty,
-      rate: l.rate,
+      // Mirrors the server's recompute, so the till and the bill agree:
+      // basis first, then the loose split.
+      rate: (() => {
+        const base = wholesaleBillingEnabled
+          ? rateFor({ saleRate: l.rate, ptr: l.ptr }, l.priceBasis)
+          : l.rate;
+        return l.isLooseSale ? looseUnitRate(base, l.unitsPerPack) : base;
+      })(),
       taxRate: l.taxRate,
       discountPercent: l.discountPercent,
       schemeDiscountAmount: schemeByLineId.get(l.lineId)?.discountAmount ?? 0,
@@ -202,7 +231,14 @@ export function PosScreen({
       });
     }
     return computeBilling(lineInputs, billDiscounts);
-  }, [store.lines, store.billDiscount, store.appliedCoupon, schemeByLineId, selectedCustomer]);
+  }, [
+    store.lines,
+    store.billDiscount,
+    store.appliedCoupon,
+    schemeByLineId,
+    selectedCustomer,
+    wholesaleBillingEnabled,
+  ]);
 
   const needsPrescription = store.lines.some((l) => REQUIRES_PRESCRIPTION.has(l.scheduleClass));
 
@@ -219,8 +255,24 @@ export function PosScreen({
     setDoctor(doctorList[0].id);
   }, [needsPrescription, store.doctorId, doctorList, setDoctor]);
 
+  /**
+   * How much more this customer may owe. Null when there is no credit
+   * account or no limit — the POS already has both the limit and a
+   * ledger-summed balance, so this needs no extra round trip.
+   */
+  const creditHeadroom = useMemo(() => {
+    if (!selectedCustomer || selectedCustomer.creditLimit === null) return null;
+    return selectedCustomer.creditLimit - selectedCustomer.outstandingBalance;
+  }, [selectedCustomer]);
+
   const blockedReason = useMemo(() => {
     if (store.lines.length === 0) return "Add at least one item to the cart.";
+    // Mirrors the server's hard block, so the counter finds out while the
+    // customer is still standing there rather than at the last click.
+    const expiredLine = store.lines.find((l) => isBatchExpired(new Date(l.expiryDate)));
+    if (expiredLine) {
+      return `${expiredLine.itemName} batch ${expiredLine.batchNo} has expired — remove it from the cart.`;
+    }
     if (needsPrescription) {
       // Name only what's actually missing — with a single doctor on file
       // the selection is made automatically, so a combined message would
@@ -238,6 +290,10 @@ export function PosScreen({
       if (!customer || customer.creditLimit === null) {
         return "Select a customer with a credit account for credit sales.";
       }
+      // Going over the limit is deliberately NOT blocked here: the server
+      // accepts a manager PIN for it, so blocking would hide an approval
+      // the counter is entitled to seek. The bottom bar shows the shortfall
+      // and says a PIN is needed.
     }
     if (!branchId) return "No branch configured for this pharmacy yet.";
     // Offline-specific blocks — anything that needs a real-time server
@@ -276,6 +332,9 @@ export function PosScreen({
       expiryDate: fefo.expiryDate.toISOString(),
       availableQty: fefo.currentQty,
       rate: fefo.saleRate,
+      unitsPerPack: item.unitsPerPack,
+      looseUnits: fefo.looseUnits,
+      ptr: fefo.ptr === null || fefo.ptr === undefined ? null : Number(fefo.ptr),
     });
   }
 
@@ -380,6 +439,25 @@ export function PosScreen({
 
   async function submitSale() {
     if (!branchId) return;
+
+    // Going over a credit ceiling needs the same manager PIN the discount
+    // cap does. Asked for here rather than letting the server refuse:
+    // telling the counter "a manager PIN is needed" and giving them no way
+    // to enter one is worse than not offering the sale at all.
+    if (
+      store.paymentMode === "credit" &&
+      creditHeadroom !== null &&
+      billing.total > creditHeadroom &&
+      !managerPinRef.current
+    ) {
+      if (!isOnline) {
+        toast.error("Going over a credit limit needs a live connection for PIN approval.");
+        return;
+      }
+      setPinDialog({ open: true, pending: null, error: null, forFinalSubmit: true });
+      return;
+    }
+
     setSubmitting(true);
     try {
       const payload = {
@@ -400,6 +478,8 @@ export function PosScreen({
           itemId: l.itemId,
           batchId: l.batchId,
           qty: l.qty,
+          isLooseSale: l.isLooseSale,
+          priceBasis: l.priceBasis,
           discountPercent: l.discountPercent,
         })),
       };
@@ -481,17 +561,56 @@ export function PosScreen({
     void submitSale();
   }
 
+  /**
+   * Counter shortcuts.
+   *
+   * Function keys rather than Ctrl/Alt combinations: the till is used by
+   * people whose hands are on a scanner and a cash drawer, and a barcode
+   * scanner emits ordinary characters — a letter-based shortcut would fire
+   * mid-scan. F-keys are also what every other Indian billing package uses,
+   * so they are already in muscle memory.
+   *
+   * Escape is the exception, and it is scoped: it only clears the field the
+   * cursor is in, never the cart.
+   */
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "F9") {
-        e.preventDefault();
-        handleCompleteSale();
+      // Never steal a key from a dialog — a manager typing a PIN must not
+      // trigger a sale.
+      if (document.querySelector("[role=dialog]")) return;
+
+      switch (e.key) {
+        case "F2":
+          e.preventDefault();
+          focusSearch();
+          break;
+        case "F4": {
+          e.preventDefault();
+          // Cycles in the order the buttons are shown, so the shortcut and
+          // the screen agree.
+          const modes: PaymentMode[] = ["cash", "upi", "card", "credit"];
+          const next = modes[(modes.indexOf(store.paymentMode) + 1) % modes.length];
+          store.setPaymentMode(next);
+          break;
+        }
+        case "F9":
+          e.preventDefault();
+          handleCompleteSale();
+          break;
+        case "Escape":
+          // Only when the cursor is in the item search — Escape anywhere
+          // else means "close what I opened", which is not ours to handle.
+          if (document.activeElement === searchInputRef.current) {
+            e.preventDefault();
+            searchInputRef.current?.blur();
+          }
+          break;
       }
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [blockedReason, submitting, store]);
+  }, [blockedReason, submitting, store, focusSearch]);
 
   if (offlineReceipt) {
     return (
@@ -510,6 +629,7 @@ export function PosScreen({
         pendingSales={pendingSales}
         onRetrySync={() => void handleSync()}
         onDiscard={(localId) => void handleDiscardQueued(localId)}
+        onPostAnyway={(localId) => void handleSync([localId])}
       />
       <div className="flex-1 space-y-4 overflow-y-auto p-4">
         <SearchPanel items={items} onSelect={handleAddItem} inputRef={searchInputRef} />
@@ -550,6 +670,9 @@ export function PosScreen({
           focusLineId={store.focusLineId}
           onFocusHandled={store.clearFocusLine}
           onQtyChange={store.updateQty}
+          onLooseChange={store.setLineLoose}
+          onBasisChange={store.setLineBasis}
+          wholesaleBillingEnabled={wholesaleBillingEnabled}
           onQtyEnter={focusSearch}
           onDiscountChange={handleLineDiscountChange}
           onOverrideBatch={handleOverrideBatch}
@@ -559,6 +682,22 @@ export function PosScreen({
       </div>
 
       <BottomBar
+        creditHeadroom={store.paymentMode === "credit" ? creditHeadroom : null}
+        holdControls={
+          <HeldSales
+            cartIsEmpty={store.lines.length === 0}
+            getSnapshot={store.snapshot}
+            estimatedTotal={billing.total}
+            itemCount={store.lines.length}
+            suggestedLabel={
+              store.patientName.trim() ||
+              customerList.find((c) => c.id === store.customerId)?.name ||
+              `${store.lines.length} item${store.lines.length === 1 ? "" : "s"}`
+            }
+            onHeld={() => store.reset()}
+            onResume={(snapshot) => store.restore(snapshot)}
+          />
+        }
         billing={billing}
         billDiscountValue={store.billDiscount.value}
         billDiscountIsPercent={store.billDiscount.isPercent}
@@ -587,8 +726,15 @@ export function PosScreen({
         onSubmit={handlePinSubmit}
         error={pinDialog.error}
         reason={
+          // The same dialog now guards two different overrides, so it has
+          // to say which one — "a discount above your limit" on a credit
+          // overage would send staff hunting for a discount that isn't there.
           pinDialog.forFinalSubmit
-            ? "This sale includes a discount above your approval limit."
+            ? store.paymentMode === "credit" &&
+              creditHeadroom !== null &&
+              billing.total > creditHeadroom
+              ? `This puts ${selectedCustomer?.name ?? "the customer"} ₹${(billing.total - creditHeadroom).toFixed(2)} over their credit limit. Enter the manager PIN to approve.`
+              : "This sale includes a discount above your approval limit."
             : "This discount exceeds the staff limit. Enter the manager PIN to override."
         }
       />

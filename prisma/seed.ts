@@ -3,6 +3,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client";
 import bcrypt from "bcryptjs";
 import { BRAND, BRAND_ADDRESS } from "../src/lib/brand";
+import { SYSTEM_ROLE_NAMES, SYSTEM_ROLE_PERMISSIONS } from "../src/lib/permissions";
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
@@ -56,6 +57,22 @@ async function main() {
       ...branchIdentity,
     },
   });
+
+  // The three shipped roles, so a fresh install has them before anyone
+  // opens Staff & Roles. Permissions are re-applied on re-seed; custom
+  // roles the owner has added are untouched.
+  for (const role of ["owner", "pharmacist", "counter_staff"] as const) {
+    await prisma.role.upsert({
+      where: { tenantId_name: { tenantId: tenant.id, name: SYSTEM_ROLE_NAMES[role] } },
+      update: { permissions: SYSTEM_ROLE_PERMISSIONS[role] },
+      create: {
+        tenantId: tenant.id,
+        name: SYSTEM_ROLE_NAMES[role],
+        permissions: SYSTEM_ROLE_PERMISSIONS[role],
+        isSystem: true,
+      },
+    });
+  }
 
   const users = [
     {

@@ -1,5 +1,6 @@
 import { completeSale } from "@/lib/actions/pos";
 import { listPendingSales, updateSaleStatus, pruneSynced } from "./queue";
+import { judgeStaleness } from "./staleness";
 
 const CONFLICT_PATTERNS = [
   "no longer available",
@@ -15,6 +16,7 @@ export interface SyncSummary {
   synced: number;
   conflicts: number;
   failed: number;
+  stale: number;
 }
 
 /**
@@ -25,14 +27,29 @@ export interface SyncSummary {
  * staff can reconcile it manually rather than it silently overselling or
  * vanishing from the queue.
  */
-export async function syncPendingSales(tenantId: string): Promise<SyncSummary> {
+export async function syncPendingSales(
+  tenantId: string,
+  options: { maxAgeHours: number; force?: string[] } = { maxAgeHours: 12 }
+): Promise<SyncSummary> {
   const pending = (await listPendingSales(tenantId)).filter(
-    (s) => s.status === "pending" || s.status === "failed"
+    (s) => s.status === "pending" || s.status === "failed" || s.status === "stale"
   );
 
-  const summary: SyncSummary = { synced: 0, conflicts: 0, failed: 0 };
+  const summary: SyncSummary = { synced: 0, conflicts: 0, failed: 0, stale: 0 };
+  const forced = new Set(options.force ?? []);
 
   for (const sale of pending) {
+    // Age is checked before the sale is sent, not after: the point is to
+    // stop it reaching the server unattended, not to explain afterwards.
+    const verdict = judgeStaleness(sale.createdAt, options.maxAgeHours);
+    if (verdict.stale && !forced.has(sale.localId)) {
+      if (sale.status !== "stale") {
+        await updateSaleStatus(sale.localId, "stale", { message: verdict.reason });
+      }
+      summary.stale += 1;
+      continue;
+    }
+
     await updateSaleStatus(sale.localId, "syncing");
     try {
       const result = await completeSale(sale.payload);

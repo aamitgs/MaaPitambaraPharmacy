@@ -5,6 +5,7 @@ import { DateRangeFilter } from "@/components/reports/date-range-filter";
 import { PrintButton } from "@/components/reports/print-button";
 import { RestrictedAccess } from "@/components/reports/restricted-access";
 import { Button } from "@/components/ui/button";
+import { ExportButtons } from "@/components/reports/export-buttons";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
 import { Download } from "lucide-react";
@@ -37,11 +38,7 @@ export default async function PurchaseRegisterPage({
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button asChild size="sm" variant="outline">
-            <a href={`/api/export/purchase-register?from=${from}&to=${to}`}>
-              <Download className="h-4 w-4" /> Export CSV
-            </a>
-          </Button>
+          <ExportButtons href={`/api/export/purchase-register?from=${from}&to=${to}`} />
           <PrintButton />
         </div>
       </div>

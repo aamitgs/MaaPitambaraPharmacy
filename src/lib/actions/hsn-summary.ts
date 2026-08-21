@@ -1,7 +1,8 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { requireRole } from "@/lib/rbac";
+import { localDateWindow } from "@/lib/date-range";
+import { requirePermission } from "@/lib/rbac";
 import { getBranchFilter } from "@/lib/branch-scope";
 
 export interface HsnSummaryRow {
@@ -25,12 +26,10 @@ function round2(n: number) {
  * 50/50 split as billing.ts and the receipt.
  */
 export async function getHsnSummary(from: string, to: string): Promise<HsnSummaryRow[]> {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("reports.view");
   const branchFilter = await getBranchFilter(session.user.tenantId, session.user.role);
 
-  const fromDate = new Date(from);
-  const toDate = new Date(to);
-  toDate.setHours(23, 59, 59, 999);
+  const { fromDate, toDate } = localDateWindow(from, to);
 
   const lines = await prisma.salesInvoiceItem.findMany({
     where: {

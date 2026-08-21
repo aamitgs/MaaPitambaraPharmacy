@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireRole, UnauthorizedError } from "@/lib/rbac";
+import { requirePermission, UnauthorizedError } from "@/lib/rbac";
 import { saveAttachment, AttachmentUploadError } from "@/lib/attachment-storage";
 
 export async function POST(request: NextRequest) {
   // Same roles that may edit the item master.
   let session;
   try {
-    session = await requireRole(["owner", "pharmacist"]);
+    session = await requirePermission("items.manage");
   } catch (e) {
     if (e instanceof UnauthorizedError) {
       return NextResponse.json(

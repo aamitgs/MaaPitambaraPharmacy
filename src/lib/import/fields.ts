@@ -15,6 +15,9 @@ export type ImportFieldKey =
   | "taxRate"
   | "unit"
   | "packSize"
+  | "barcode"
+  | "unitsPerPack"
+  | "allowLooseSale"
   | "reorderLevel"
   | "batchNo"
   | "mfgDate"
@@ -23,6 +26,7 @@ export type ImportFieldKey =
   | "purchaseRate"
   | "saleRate"
   | "currentQty"
+  | "looseUnits"
   | "rackLocation";
 
 export interface ImportFieldDef {
@@ -30,7 +34,7 @@ export interface ImportFieldDef {
   label: string;
   group: "item" | "batch";
   required: boolean;
-  type: "string" | "number" | "int" | "date" | "scheduleClass";
+  type: "string" | "number" | "int" | "date" | "scheduleClass" | "boolean";
 }
 
 export const IMPORT_FIELDS: ImportFieldDef[] = [
@@ -49,6 +53,21 @@ export const IMPORT_FIELDS: ImportFieldDef[] = [
   { key: "taxRate", label: "Tax rate (%)", group: "item", required: false, type: "number" },
   { key: "unit", label: "Unit", group: "item", required: false, type: "string" },
   { key: "packSize", label: "Pack size", group: "item", required: false, type: "string" },
+  { key: "barcode", label: "Barcode", group: "item", required: false, type: "string" },
+  {
+    key: "unitsPerPack",
+    label: "Units per pack",
+    group: "item",
+    required: false,
+    type: "int",
+  },
+  {
+    key: "allowLooseSale",
+    label: "Allow loose sale",
+    group: "item",
+    required: false,
+    type: "boolean",
+  },
   { key: "reorderLevel", label: "Reorder level", group: "item", required: false, type: "int" },
   { key: "batchNo", label: "Batch no.", group: "batch", required: false, type: "string" },
   { key: "mfgDate", label: "Mfg date", group: "batch", required: false, type: "date" },
@@ -57,6 +76,16 @@ export const IMPORT_FIELDS: ImportFieldDef[] = [
   { key: "purchaseRate", label: "Purchase rate", group: "batch", required: false, type: "number" },
   { key: "saleRate", label: "Sale rate", group: "batch", required: false, type: "number" },
   { key: "currentQty", label: "Current qty", group: "batch", required: false, type: "int" },
+  {
+    // Marg and most Indian systems write stock as packs.units — "83.2" is
+    // 83 strips plus 2 loose tablets. Without a column for the loose part,
+    // those tablets vanish on import and again on any export/re-import.
+    key: "looseUnits",
+    label: "Loose units",
+    group: "batch",
+    required: false,
+    type: "int",
+  },
   { key: "rackLocation", label: "Rack location", group: "batch", required: false, type: "string" },
 ];
 

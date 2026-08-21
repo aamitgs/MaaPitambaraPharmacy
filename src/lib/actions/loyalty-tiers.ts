@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole } from "@/lib/rbac";
+import { requirePermission } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 
 function serializeTier(t: { id: string; name: string; minCumulativeSpend: unknown; discountPercent: unknown }) {
@@ -16,7 +16,7 @@ function serializeTier(t: { id: string; name: string; minCumulativeSpend: unknow
 }
 
 export async function listLoyaltyTiers() {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("promotions.manage");
   const tiers = await prisma.loyaltyTier.findMany({
     where: { tenantId: session.user.tenantId },
     orderBy: { minCumulativeSpend: "asc" },
@@ -33,7 +33,7 @@ const tierSchema = z.object({
 export type LoyaltyTierInput = z.infer<typeof tierSchema>;
 
 export async function createLoyaltyTier(input: LoyaltyTierInput) {
-  const session = await requireRole(["owner"]);
+  const session = await requirePermission("promotions.manage");
   const parsed = tierSchema.parse(input);
 
   const tier = await prisma.loyaltyTier.create({
@@ -54,7 +54,7 @@ export async function createLoyaltyTier(input: LoyaltyTierInput) {
 }
 
 export async function updateLoyaltyTier(tierId: string, input: LoyaltyTierInput) {
-  const session = await requireRole(["owner"]);
+  const session = await requirePermission("promotions.manage");
   const parsed = tierSchema.parse(input);
 
   const tier = await prisma.loyaltyTier.findFirst({
@@ -77,7 +77,7 @@ export async function updateLoyaltyTier(tierId: string, input: LoyaltyTierInput)
 }
 
 export async function deleteLoyaltyTier(tierId: string) {
-  const session = await requireRole(["owner"]);
+  const session = await requirePermission("promotions.manage");
   const tier = await prisma.loyaltyTier.findFirst({
     where: { id: tierId, tenantId: session.user.tenantId },
   });

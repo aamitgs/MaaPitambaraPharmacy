@@ -17,6 +17,7 @@ import type { PlainSupplier } from "@/lib/serialize";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
+  phone: z.string().trim().max(60).optional(),
   gstin: z.string().trim().optional(),
   address: z.string().trim().optional(),
   paymentTermsDays: z.coerce.number().int().min(0).optional(),
@@ -65,6 +66,7 @@ export function SupplierForm({ supplier }: { supplier?: PlainSupplier }) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: supplier?.name ?? "",
+      phone: supplier?.phone ?? "",
       gstin: supplier?.gstin ?? "",
       address: supplier?.address ?? "",
       paymentTermsDays: supplier?.paymentTermsDays ?? undefined,
@@ -100,6 +102,10 @@ export function SupplierForm({ supplier }: { supplier?: PlainSupplier }) {
           {form.formState.errors.name && (
             <p className="text-xs text-destructive">{form.formState.errors.name.message}</p>
           )}
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="phone">Phone</Label>
+          <Input id="phone" placeholder="9897038085" {...form.register("phone")} />
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="gstin">GSTIN</Label>

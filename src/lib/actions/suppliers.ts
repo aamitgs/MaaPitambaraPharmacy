@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole, requireSession } from "@/lib/rbac";
+import { requirePermission, requireSession } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 import {
   serializeSupplier,
@@ -13,6 +13,7 @@ import {
 
 const supplierSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
+  phone: z.string().trim().max(60).optional(),
   gstin: z.string().trim().optional(),
   address: z.string().trim().optional(),
   paymentTermsDays: z.coerce.number().int().min(0).optional(),
@@ -72,7 +73,7 @@ export async function getSupplier(id: string) {
 }
 
 export async function createSupplier(input: SupplierInput) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("purchasing.manage");
   const parsed = supplierSchema.parse(input);
 
   const supplier = await prisma.supplier.create({
@@ -93,7 +94,7 @@ export async function createSupplier(input: SupplierInput) {
 }
 
 export async function updateSupplier(id: string, input: SupplierInput) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("purchasing.manage");
   const parsed = supplierSchema.parse(input);
 
   const before = await prisma.supplier.findFirst({
@@ -129,7 +130,7 @@ const paymentSchema = z.object({
 export type SupplierPaymentInput = z.infer<typeof paymentSchema>;
 
 export async function recordSupplierPayment(supplierId: string, input: SupplierPaymentInput) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("purchasing.manage");
   const parsed = paymentSchema.parse(input);
 
   const supplier = await prisma.supplier.findFirst({

@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole, requireSession } from "@/lib/rbac";
+import { requirePermission, requireSession } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 
 function serializeCoupon(c: {
@@ -31,7 +31,7 @@ function serializeCoupon(c: {
 }
 
 export async function listCoupons() {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("promotions.manage");
   const coupons = await prisma.coupon.findMany({
     where: { tenantId: session.user.tenantId },
     orderBy: { validFrom: "desc" },
@@ -56,7 +56,7 @@ const couponSchema = z.object({
 export type CouponInput = z.infer<typeof couponSchema>;
 
 export async function createCoupon(input: CouponInput) {
-  const session = await requireRole(["owner"]);
+  const session = await requirePermission("promotions.manage");
   const parsed = couponSchema.parse(input);
 
   const existing = await prisma.coupon.findFirst({
@@ -91,7 +91,7 @@ export async function createCoupon(input: CouponInput) {
 }
 
 export async function updateCoupon(couponId: string, input: CouponInput) {
-  const session = await requireRole(["owner"]);
+  const session = await requirePermission("promotions.manage");
   const parsed = couponSchema.parse(input);
 
   const coupon = await prisma.coupon.findFirst({

@@ -1,7 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { getHsnSummary } from "@/lib/actions/hsn-summary";
 import { defaultMonthRange } from "@/lib/date-range";
-import { toCsv } from "@/lib/csv";
+import {
+  exportResponse,
+  formatFromRequest,
+  type ExportColumn,
+} from "@/lib/export-response";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -12,20 +16,20 @@ export async function GET(request: NextRequest) {
 
   const rows = await getHsnSummary(from, to);
 
-  const csv = toCsv(rows, [
+  const columns: ExportColumn<(typeof rows)[number]>[] = [
     { key: "hsnCode", label: "HSN code" },
-    { key: "taxRate", label: "Tax rate (%)" },
-    { key: "taxableValue", label: "Taxable value" },
-    { key: "cgstAmount", label: "CGST" },
-    { key: "sgstAmount", label: "SGST" },
-    { key: "taxAmount", label: "Total tax" },
-    { key: "totalValue", label: "Total value" },
-  ]);
+    { key: "taxRate", label: "Tax rate (%)" , type: "money" },
+    { key: "taxableValue", label: "Taxable value" , type: "money" },
+    { key: "cgstAmount", label: "CGST" , type: "money" },
+    { key: "sgstAmount", label: "SGST" , type: "money" },
+    { key: "taxAmount", label: "Total tax" , type: "money" },
+    { key: "totalValue", label: "Total value" , type: "money" },
+  ];
 
-  return new NextResponse(csv, {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="hsn-summary-${from}-to-${to}.csv"`,
-    },
+  return exportResponse({
+    format: formatFromRequest(searchParams),
+    rows: rows,
+    columns,
+    filename: `hsn-summary-${from}-to-${to}`,
   });
 }

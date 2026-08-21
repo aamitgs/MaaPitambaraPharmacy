@@ -31,6 +31,8 @@ type DraftRow = {
   mfgDate: string;
   expiryDate: string;
   mrp: string;
+  /** Price To Retailer. Empty for stock only sold retail. */
+  ptr: string;
   rate: string;
   qty: string;
 };
@@ -51,9 +53,12 @@ function rowWarnings(row: DraftRow): string[] {
 export function GrnForm({
   suppliers,
   items,
+  wholesaleBillingEnabled = false,
 }: {
   suppliers: PlainSupplier[];
   items: PurchasableItem[];
+  /** When off, no PTR field appears — see the wholesale setting. */
+  wholesaleBillingEnabled?: boolean;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -105,6 +110,9 @@ export function GrnForm({
         mfgDate: r.mfgDate,
         expiryDate: r.expiryDate,
         mrp: r.mrp,
+        // Photo-reviewed rows carry no PTR — a distributor invoice states
+        // it, but the extractor does not read it yet.
+        ptr: "",
         rate: r.rate || "0",
         qty: r.qty,
       })),
@@ -123,6 +131,7 @@ export function GrnForm({
   const [mfgDate, setMfgDate] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [mrp, setMrp] = useState("");
+  const [ptr, setPtr] = useState("");
   const [rate, setRate] = useState("");
   const [qty, setQty] = useState("");
 
@@ -210,6 +219,7 @@ export function GrnForm({
         mfgDate,
         expiryDate,
         mrp,
+        ptr,
         rate: rate || "0",
         qty,
       },
@@ -235,14 +245,19 @@ export function GrnForm({
     setMfgDate(row.mfgDate);
     setExpiryDate(row.expiryDate);
     setMrp(row.mrp);
+    setPtr(row.ptr ?? "");
     setRate(row.rate);
     setQty(row.qty);
     batchNoRef.current?.focus();
   }
 
   const total = rows.reduce((sum, r) => sum + Number(r.qty) * Number(r.rate), 0);
+  const [variance, setVariance] = useState<{
+    net: number;
+    lines: { kind: string; message: string }[];
+  } | null>(null);
 
-  function onSave() {
+  function save(acknowledgeVariance = false) {
     if (!supplierId) {
       toast.error("Select a supplier");
       return;
@@ -274,17 +289,37 @@ export function GrnForm({
             mfgDate: r.mfgDate || undefined,
             expiryDate: r.expiryDate,
             mrp: Number(r.mrp),
+            // Blank means "no PTR", not zero.
+            ptr: r.ptr ? Number(r.ptr) : undefined,
             rate: Number(r.rate),
             qty: Number(r.qty),
           })),
+          acknowledgeVariance,
         });
         toast.success("GRN saved — stock updated");
         router.push(`/grn/${created.id}`);
         router.refresh();
       } catch (e) {
-        toast.error(e instanceof Error ? e.message : "Something went wrong");
+        const message = e instanceof Error ? e.message : "Something went wrong";
+        // The receipt costs more than the purchase order agreed. Shown
+        // before it is booked, because afterwards the stock is in and the
+        // payable is owed.
+        if (message.startsWith("PURCHASE_VARIANCE:")) {
+          try {
+            setVariance(JSON.parse(message.slice("PURCHASE_VARIANCE:".length)));
+            return;
+          } catch {
+            // Fall through to the plain error if it cannot be parsed.
+          }
+        }
+        toast.error(message);
       }
     });
+  }
+
+  function onSave() {
+    setVariance(null);
+    save(false);
   }
 
   return (
@@ -393,6 +428,22 @@ export function GrnForm({
               inputRef={itemRef}
             />
           </div>
+          {wholesaleBillingEnabled && (
+            <div className="space-y-1">
+              <Label htmlFor="grnPtr" className="text-xs text-muted-foreground">
+                PTR
+              </Label>
+              <Input
+                id="grnPtr"
+                type="number"
+                step="0.01"
+                value={ptr}
+                placeholder="optional"
+                onChange={(e) => setPtr(e.target.value)}
+                onFocus={(e) => e.target.select()}
+              />
+            </div>
+          )}
           <div className="w-32 space-y-1">
             <Label htmlFor="grnBatchNo" className="text-xs text-muted-foreground">
               Batch no.
@@ -596,6 +647,45 @@ export function GrnForm({
           </div>
         )}
       </div>
+
+      {variance && (
+        <div className="space-y-3 rounded-lg border border-warning/50 bg-warning/10 p-4">
+          <div className="flex items-start gap-2">
+            <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-warning-foreground" />
+            <div className="space-y-1">
+              <p className="text-sm font-medium text-warning-foreground">
+                This invoice does not match the purchase order.
+              </p>
+              <p className="text-sm text-warning-foreground">
+                {variance.net > 0
+                  ? `It costs ₹${variance.net.toFixed(2)} more than the order agreed.`
+                  : variance.net < 0
+                    ? `It costs ₹${Math.abs(variance.net).toFixed(2)} less than the order agreed.`
+                    : "The quantities differ from the order."}
+              </p>
+            </div>
+          </div>
+          <ul className="space-y-1 pl-6 text-sm text-warning-foreground">
+            {variance.lines.map((l, i) => (
+              <li key={i} className="list-disc">
+                {l.message}
+              </li>
+            ))}
+          </ul>
+          <p className="pl-6 text-xs text-warning-foreground/80">
+            Check the distributor&apos;s invoice before receiving. If the difference is genuine,
+            receive it anyway — the difference is recorded against this GRN either way.
+          </p>
+          <div className="flex gap-2 pl-6">
+            <Button size="sm" variant="outline" onClick={() => save(true)} disabled={pending}>
+              Receive it anyway
+            </Button>
+            <Button size="sm" variant="ghost" onClick={() => setVariance(null)} disabled={pending}>
+              Go back and check
+            </Button>
+          </div>
+        </div>
+      )}
 
       <div className="flex gap-2">
         <Button onClick={onSave} disabled={pending}>

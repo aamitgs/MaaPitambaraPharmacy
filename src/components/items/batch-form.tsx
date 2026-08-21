@@ -27,6 +27,7 @@ const formSchema = z.object({
   mrp: z.coerce.number().positive("MRP must be greater than 0"),
   purchaseRate: z.coerce.number().min(0),
   saleRate: z.coerce.number().positive("Sale rate must be greater than 0"),
+  ptr: z.union([z.literal(""), z.coerce.number().positive("PTR must be greater than 0")]).optional(),
   currentQty: z.coerce.number().int().min(0),
   rackLocation: z.string().trim().optional(),
 });
@@ -44,10 +45,14 @@ export function BatchForm({
   itemId,
   batch,
   showPurchaseRate,
+  canPricePtr,
 }: {
   itemId: string;
   batch?: PlainBatch;
   showPurchaseRate: boolean;
+  /// Whether this user may set the wholesale price. When false the field is
+  /// not rendered at all and the server leaves any stored PTR untouched.
+  canPricePtr: boolean;
 }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -62,6 +67,7 @@ export function BatchForm({
       mrp: batch ? Number(batch.mrp) : 0,
       purchaseRate: batch ? Number(batch.purchaseRate) : 0,
       saleRate: batch ? Number(batch.saleRate) : 0,
+      ptr: batch?.ptr != null ? Number(batch.ptr) : "",
       currentQty: batch?.currentQty ?? 0,
       rackLocation: batch?.rackLocation ?? "",
     },
@@ -70,7 +76,13 @@ export function BatchForm({
   function onSubmit(values: FormOutput) {
     startTransition(async () => {
       try {
-        const input: BatchInput = { ...values, itemId };
+        const input: BatchInput = {
+          ...values,
+          itemId,
+          // Blank clears the wholesale price; omitted entirely when the user
+          // may not price wholesale, which the server reads as "leave it".
+          ptr: canPricePtr ? (values.ptr === "" || values.ptr === undefined ? null : Number(values.ptr)) : undefined,
+        };
         if (batch) {
           await updateBatch(batch.id, input);
           toast.success("Batch updated");
@@ -148,6 +160,15 @@ export function BatchForm({
                 </p>
               )}
             </div>
+            {canPricePtr && (
+              <div className="space-y-1.5">
+                <Label htmlFor="ptr">PTR (wholesale)</Label>
+                <Input id="ptr" type="number" step="0.01" placeholder="—" {...form.register("ptr")} />
+                {form.formState.errors.ptr && (
+                  <p className="text-xs text-destructive">{form.formState.errors.ptr.message}</p>
+                )}
+              </div>
+            )}
             {showPurchaseRate && (
               <div className="space-y-1.5">
                 <Label htmlFor="purchaseRate">Purchase rate</Label>

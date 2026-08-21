@@ -168,6 +168,72 @@ Roughly a cent per photo at current rates; switching that constant to
 out to read easily. Extraction runs server-side only — the SDK and the key
 never reach the browser.
 
+## Sending a bill by SMS
+
+A customer gets a short message with the invoice number, amount and date,
+plus a link to their own read-only copy of the bill. SMS cannot carry a
+PDF, which is why the link exists.
+
+### DLT registration comes first (India)
+
+This is not optional and not something the app can do for you. Since TRAI's
+2021 regulation, every commercial SMS sent to an Indian number must be
+matched against a template registered on a DLT (Distributed Ledger
+Technology) platform. Operators silently drop anything that does not match
+— the send appears to succeed and the message never arrives.
+
+1. **Register the business** on any operator's DLT portal (Jio, Airtel,
+   Vodafone Idea or BSNL — registering with one propagates to the others).
+   You will need the pharmacy's GST certificate and a letter of
+   authorisation.
+2. **Register a header** (sender ID): six characters, e.g. `MPPHRM`.
+3. **Register each template.** The exact text to paste is in
+   `src/lib/sms/templates.ts` — copy it verbatim, `{#var#}` placeholders
+   included. Changing that file without re-registering will get messages
+   dropped by the operator, not by this code.
+4. **Copy each template id** the portal issues into the matching env var.
+
+### Environment
+
+```bash
+MSG91_AUTH_KEY=...              # from msg91.com
+MSG91_SENDER_ID=MPPHRM          # the 6-character DLT header
+SMS_TEMPLATE_ID_RECEIPT=...     # DLT id for the "receipt" template
+SMS_TEMPLATE_ID_RECEIPT_LINK=...# DLT id for the receipt-with-link template
+SMS_TEMPLATE_ID_REMINDER=...    # optional, for payment reminders
+PUBLIC_BASE_URL=https://...     # where the bill link points; falls back to NEXTAUTH_URL
+```
+
+Unset, the Send by SMS button reports exactly which variables are missing
+rather than failing silently. Settings → Integrations shows the same thing
+at a glance.
+
+MSG91 is the default provider because its flow API maps directly onto the
+DLT model. Swapping to another (Gupshup, Kaleyra, Textlocal) means
+rewriting `src/lib/sms/provider.ts` and nothing else — everything above it
+deals in template keys and variables, never vendor payloads.
+
+### Why the templates say "Rs" and not "₹"
+
+SMS is billed per 160 characters in GSM-7. A single non-GSM character — a
+rupee sign, a curly quote, an em dash — switches the whole message to UCS-2
+at 70 characters per part, tripling the cost of every bill. There is a test
+asserting each shipped template stays inside one GSM-7 segment.
+
+### The public bill link
+
+`/bill/<token>` is a read-only page showing one invoice, reachable without
+signing in — the recipient has no account, so the token is the credential.
+
+- 128-bit random token, generated only when a bill is first shared
+- Serves `completed` bills only; a cancelled bill 404s
+- `noindex, nofollow` so it never reaches a search engine
+- No app navigation, no other invoice, no customer balance
+
+The link goes out over SMS, which is not a confidential channel and may sit
+in a phone's message log for years — hence a token long enough that
+guessing is hopeless rather than a short code.
+
 ## Branding
 
 Brand identity lives in two places, deliberately:
@@ -380,6 +446,26 @@ Extends the Phase 1 billing flow with the supply side, without changing it:
   image to a WhatsApp message yet. Adding one (headless rendering + hosting
   the resulting file for Gupshup's document-message API) is a real,
   reasonably-sized follow-up, not something faked here.
+- **Invoice PDF**: a real server-rendered A5 bill (`/api/invoices/[id]/pdf`,
+  tenant-checked), offered as a **PDF** button on the receipt screen and
+  attached automatically to emailed receipts when SMTP is configured. Built
+  with `@react-pdf/renderer` rather than headless Chrome so a self-hosted
+  container needs no browser.
+
+  Two consequences worth knowing. The layout in `src/lib/pdf/invoice-pdf.tsx`
+  **re-declares** the A5 bill — react-pdf renders its own primitives, so it
+  cannot share a tree with the HTML `ReceiptView`; the two are kept in step
+  by hand. And amounts read `Rs.` rather than `₹`: react-pdf's built-in
+  Helvetica has no rupee glyph and would print a blank box. Registering a
+  Unicode font (Noto Sans, OFL) in `render-invoice.tsx` and bundling the TTF
+  fixes that.
+
+  **WhatsApp cannot carry the attachment.** A `wa.me` deep link takes text
+  only, and Gupshup's document API needs a publicly reachable URL to fetch
+  the file from — a LAN-hosted app has none. Staff download the PDF and
+  attach it by hand; the mailto: fallback downloads it for them
+  automatically for the same reason.
+
 - **Email receipt/statement delivery**: same two-mode design as WhatsApp.
   Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD` and `SMTP_FROM`
   (see `.env.example`) to send through SMTP — a Gmail account needs an app

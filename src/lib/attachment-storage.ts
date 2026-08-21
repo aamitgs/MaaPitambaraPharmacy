@@ -25,6 +25,14 @@ const ROOTS = {
   itemPhotos: process.env.ITEM_PHOTO_STORAGE_DIR
     ? path.resolve(process.env.ITEM_PHOTO_STORAGE_DIR)
     : path.join(process.cwd(), "storage", "item-photos"),
+  // Brand logos differ from every other kind here: they are served by an
+  // UNAUTHENTICATED route (/api/brand/[file]), because the login screen
+  // shows the logo before there is a session and an emailed PDF embeds it
+  // for a recipient who has no account at all. Nothing confidential is ever
+  // stored under this root.
+  brandAssets: process.env.BRAND_ASSET_STORAGE_DIR
+    ? path.resolve(process.env.BRAND_ASSET_STORAGE_DIR)
+    : path.join(process.cwd(), "storage", "brand-assets"),
 } as const;
 
 export type AttachmentKind = keyof typeof ROOTS;

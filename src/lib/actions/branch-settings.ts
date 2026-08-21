@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole } from "@/lib/rbac";
+import { requirePermission } from "@/lib/rbac";
 
 /**
  * Just the tenant-wide license renewal window now — per-branch license
@@ -14,7 +14,7 @@ import { requireRole } from "@/lib/rbac";
  * that varies per branch.
  */
 export async function getLicenseExpiryWindow() {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("branches.manage");
   const tenant = await prisma.tenant.findUniqueOrThrow({ where: { id: session.user.tenantId } });
   return { licenseExpiryWindowDays: tenant.licenseExpiryWindowDays };
 }
@@ -24,7 +24,7 @@ const updateSchema = z.object({
 });
 
 export async function updateLicenseExpiryWindow(input: z.infer<typeof updateSchema>) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("branches.manage");
   const parsed = updateSchema.parse(input);
 
   await prisma.tenant.update({

@@ -1,14 +1,13 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { requireRole } from "@/lib/rbac";
+import { localDateWindow } from "@/lib/date-range";
+import { requirePermission } from "@/lib/rbac";
 import { getBranchFilter } from "@/lib/branch-scope";
 import type { StockLedgerType } from "@/lib/stock-ledger-labels";
 
 function dateWindow(from: string, to: string) {
-  const fromDate = new Date(from);
-  const toDate = new Date(to);
-  toDate.setHours(23, 59, 59, 999);
+  const { fromDate, toDate } = localDateWindow(from, to);
   return { fromDate, toDate };
 }
 
@@ -27,7 +26,7 @@ export interface SalesRegisterRow {
 
 /** Owner/Pharmacist only — reconciles against underlying invoice totals, not something Counter Staff needs. */
 export async function getSalesRegister(from: string, to: string): Promise<SalesRegisterRow[]> {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("reports.view");
   const branchFilter = await getBranchFilter(session.user.tenantId, session.user.role);
   const { fromDate, toDate } = dateWindow(from, to);
 
@@ -67,7 +66,7 @@ export interface PurchaseRegisterRow {
 }
 
 export async function getPurchaseRegister(from: string, to: string): Promise<PurchaseRegisterRow[]> {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("reports.view");
   const branchFilter = await getBranchFilter(session.user.tenantId, session.user.role);
   const { fromDate, toDate } = dateWindow(from, to);
 
@@ -110,13 +109,13 @@ export interface StockLedgerRow {
  * row, which doesn't fit a single WHERE clause.
  */
 export async function getStockLedger(from: string, to: string): Promise<StockLedgerRow[]> {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("reports.view");
   const tenantId = session.user.tenantId;
   const branchFilter = await getBranchFilter(tenantId, session.user.role);
   const { fromDate, toDate } = dateWindow(from, to);
   const dateFilter = { gte: fromDate, lte: toDate };
 
-  const [grnItems, saleItems, returnItems, transfers] = await Promise.all([
+  const [grnItems, saleItems, returnItems, transfers, salesReturnItems, adjustmentItems] = await Promise.all([
     prisma.grnItem.findMany({
       where: { grn: { tenantId, ...branchFilter, receivedAt: dateFilter } },
       include: { item: { select: { name: true } }, batch: { select: { batchNo: true } }, grn: { include: { branch: { select: { name: true } } } } },
@@ -142,9 +141,58 @@ export async function getStockLedger(from: string, to: string): Promise<StockLed
         items: { include: { item: { select: { name: true } }, batch: { select: { batchNo: true } } } },
       },
     }),
+    // Restocked customer returns. These already moved `currentQty` but had
+    // no ledger row, so stock could go up with nothing in the log
+    // explaining it. Only restocked lines count — a returned strip that was
+    // binned never re-entered stock.
+    prisma.salesReturnItem.findMany({
+      where: {
+        restock: true,
+        salesReturn: { tenantId, ...branchFilter, returnedAt: dateFilter },
+      },
+      include: {
+        item: { select: { name: true } },
+        batch: { select: { batchNo: true } },
+        salesReturn: { include: { branch: { select: { name: true } } } },
+      },
+    }),
+    prisma.stockAdjustmentItem.findMany({
+      where: { adjustment: { tenantId, ...branchFilter, adjustedAt: dateFilter } },
+      include: {
+        item: { select: { name: true } },
+        batch: { select: { batchNo: true } },
+        adjustment: { include: { branch: { select: { name: true } } } },
+      },
+    }),
   ]);
 
   const rows: StockLedgerRow[] = [];
+
+  for (const sr of salesReturnItems) {
+    rows.push({
+      date: sr.salesReturn.returnedAt,
+      branchName: sr.salesReturn.branch.name,
+      itemName: sr.item.name,
+      batchNo: sr.batch?.batchNo ?? "—",
+      type: "sales_return",
+      qtyChange: sr.qty,
+      reference: sr.salesReturn.returnNo,
+    });
+  }
+
+  for (const ai of adjustmentItems) {
+    rows.push({
+      date: ai.adjustment.adjustedAt,
+      branchName: ai.adjustment.branch.name,
+      itemName: ai.item.name,
+      batchNo: ai.batch.batchNo,
+      type: "adjustment",
+      // Already signed on the row — a write-off is negative, a found-at-count
+      // positive — so it passes straight through.
+      qtyChange: ai.qtyChange,
+      reference: `${ai.adjustment.adjustmentNo} (${ai.adjustment.reason})`,
+    });
+  }
 
   for (const gi of grnItems) {
     rows.push({

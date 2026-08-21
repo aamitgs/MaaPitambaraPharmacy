@@ -1,14 +1,13 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { requireRole } from "@/lib/rbac";
+import { localDateWindow } from "@/lib/date-range";
+import { requirePermission } from "@/lib/rbac";
 import { getBranchFilter } from "@/lib/branch-scope";
 import type { DiscountType } from "@/generated/prisma/client";
 
 function dateWindow(from: string, to: string) {
-  const fromDate = new Date(from);
-  const toDate = new Date(to);
-  toDate.setHours(23, 59, 59, 999);
+  const { fromDate, toDate } = localDateWindow(from, to);
   return { fromDate, toDate };
 }
 
@@ -65,7 +64,7 @@ export interface DiscountLine {
 
 /** Flat, unaggregated discount rows — what the CSV export offers, since a pivot elsewhere benefits more from raw rows than pre-summed tables. */
 export async function getDiscountLines(from: string, to: string): Promise<DiscountLine[]> {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("reports.view");
   const branchFilter = await getBranchFilter(session.user.tenantId, session.user.role);
   const { fromDate, toDate } = dateWindow(from, to);
 
@@ -105,7 +104,7 @@ export async function getDiscountLines(from: string, to: string): Promise<Discou
  * apply to the whole sale, not one item, so they're excluded from that cut.
  */
 export async function getDiscountReport(from: string, to: string): Promise<DiscountReport> {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("reports.view");
   const branchFilter = await getBranchFilter(session.user.tenantId, session.user.role);
   const { fromDate, toDate } = dateWindow(from, to);
 

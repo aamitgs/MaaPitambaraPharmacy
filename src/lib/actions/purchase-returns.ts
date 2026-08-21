@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole, requireSession } from "@/lib/rbac";
+import { requirePermission, requireSession } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 import {
   serializePurchaseReturnItem,
@@ -75,7 +75,7 @@ export async function getPurchaseReturn(id: string) {
 }
 
 export async function createPurchaseReturn(input: PurchaseReturnInput) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("purchasing.manage");
   const parsed = returnSchema.parse(input);
 
   const branchId = await resolveConcreteBranch(session.user.tenantId, session.user.role);

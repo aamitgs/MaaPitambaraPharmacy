@@ -67,6 +67,7 @@ export type SalesInvoiceMinAggregateOutputType = {
   prescriptionImageUrl: string | null
   pharmacistSignoffUserId: string | null
   pharmacistSignoffAt: Date | null
+  publicToken: string | null
   einvoiceIrn: string | null
   einvoiceAckNo: string | null
   einvoiceQrData: string | null
@@ -98,6 +99,7 @@ export type SalesInvoiceMaxAggregateOutputType = {
   prescriptionImageUrl: string | null
   pharmacistSignoffUserId: string | null
   pharmacistSignoffAt: Date | null
+  publicToken: string | null
   einvoiceIrn: string | null
   einvoiceAckNo: string | null
   einvoiceQrData: string | null
@@ -129,6 +131,7 @@ export type SalesInvoiceCountAggregateOutputType = {
   prescriptionImageUrl: number
   pharmacistSignoffUserId: number
   pharmacistSignoffAt: number
+  publicToken: number
   einvoiceIrn: number
   einvoiceAckNo: number
   einvoiceQrData: number
@@ -180,6 +183,7 @@ export type SalesInvoiceMinAggregateInputType = {
   prescriptionImageUrl?: true
   pharmacistSignoffUserId?: true
   pharmacistSignoffAt?: true
+  publicToken?: true
   einvoiceIrn?: true
   einvoiceAckNo?: true
   einvoiceQrData?: true
@@ -211,6 +215,7 @@ export type SalesInvoiceMaxAggregateInputType = {
   prescriptionImageUrl?: true
   pharmacistSignoffUserId?: true
   pharmacistSignoffAt?: true
+  publicToken?: true
   einvoiceIrn?: true
   einvoiceAckNo?: true
   einvoiceQrData?: true
@@ -242,6 +247,7 @@ export type SalesInvoiceCountAggregateInputType = {
   prescriptionImageUrl?: true
   pharmacistSignoffUserId?: true
   pharmacistSignoffAt?: true
+  publicToken?: true
   einvoiceIrn?: true
   einvoiceAckNo?: true
   einvoiceQrData?: true
@@ -360,6 +366,7 @@ export type SalesInvoiceGroupByOutputType = {
   prescriptionImageUrl: string | null
   pharmacistSignoffUserId: string | null
   pharmacistSignoffAt: Date | null
+  publicToken: string | null
   einvoiceIrn: string | null
   einvoiceAckNo: string | null
   einvoiceQrData: string | null
@@ -414,6 +421,7 @@ export type SalesInvoiceWhereInput = {
   prescriptionImageUrl?: Prisma.StringNullableFilter<"SalesInvoice"> | string | null
   pharmacistSignoffUserId?: Prisma.StringNullableFilter<"SalesInvoice"> | string | null
   pharmacistSignoffAt?: Prisma.DateTimeNullableFilter<"SalesInvoice"> | Date | string | null
+  publicToken?: Prisma.StringNullableFilter<"SalesInvoice"> | string | null
   einvoiceIrn?: Prisma.StringNullableFilter<"SalesInvoice"> | string | null
   einvoiceAckNo?: Prisma.StringNullableFilter<"SalesInvoice"> | string | null
   einvoiceQrData?: Prisma.StringNullableFilter<"SalesInvoice"> | string | null
@@ -428,8 +436,11 @@ export type SalesInvoiceWhereInput = {
   items?: Prisma.SalesInvoiceItemListRelationFilter
   discounts?: Prisma.DiscountListRelationFilter
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryListRelationFilter
+  salesReturns?: Prisma.SalesReturnListRelationFilter
   whatsappLogs?: Prisma.WhatsAppLogListRelationFilter
+  smsLogs?: Prisma.SmsLogListRelationFilter
   emailLogs?: Prisma.EmailLogListRelationFilter
+  promiseOrders?: Prisma.PromiseOrderListRelationFilter
 }
 
 export type SalesInvoiceOrderByWithRelationInput = {
@@ -455,6 +466,7 @@ export type SalesInvoiceOrderByWithRelationInput = {
   prescriptionImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   pharmacistSignoffUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   pharmacistSignoffAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  publicToken?: Prisma.SortOrderInput | Prisma.SortOrder
   einvoiceIrn?: Prisma.SortOrderInput | Prisma.SortOrder
   einvoiceAckNo?: Prisma.SortOrderInput | Prisma.SortOrder
   einvoiceQrData?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -469,13 +481,17 @@ export type SalesInvoiceOrderByWithRelationInput = {
   items?: Prisma.SalesInvoiceItemOrderByRelationAggregateInput
   discounts?: Prisma.DiscountOrderByRelationAggregateInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryOrderByRelationAggregateInput
+  salesReturns?: Prisma.SalesReturnOrderByRelationAggregateInput
   whatsappLogs?: Prisma.WhatsAppLogOrderByRelationAggregateInput
+  smsLogs?: Prisma.SmsLogOrderByRelationAggregateInput
   emailLogs?: Prisma.EmailLogOrderByRelationAggregateInput
+  promiseOrders?: Prisma.PromiseOrderOrderByRelationAggregateInput
 }
 
 export type SalesInvoiceWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   offlineClientId?: string
+  publicToken?: string
   tenantId_invoiceNo?: Prisma.SalesInvoiceTenantIdInvoiceNoCompoundUniqueInput
   AND?: Prisma.SalesInvoiceWhereInput | Prisma.SalesInvoiceWhereInput[]
   OR?: Prisma.SalesInvoiceWhereInput[]
@@ -514,9 +530,12 @@ export type SalesInvoiceWhereUniqueInput = Prisma.AtLeast<{
   items?: Prisma.SalesInvoiceItemListRelationFilter
   discounts?: Prisma.DiscountListRelationFilter
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryListRelationFilter
+  salesReturns?: Prisma.SalesReturnListRelationFilter
   whatsappLogs?: Prisma.WhatsAppLogListRelationFilter
+  smsLogs?: Prisma.SmsLogListRelationFilter
   emailLogs?: Prisma.EmailLogListRelationFilter
-}, "id" | "offlineClientId" | "tenantId_invoiceNo">
+  promiseOrders?: Prisma.PromiseOrderListRelationFilter
+}, "id" | "offlineClientId" | "publicToken" | "tenantId_invoiceNo">
 
 export type SalesInvoiceOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -541,6 +560,7 @@ export type SalesInvoiceOrderByWithAggregationInput = {
   prescriptionImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   pharmacistSignoffUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   pharmacistSignoffAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  publicToken?: Prisma.SortOrderInput | Prisma.SortOrder
   einvoiceIrn?: Prisma.SortOrderInput | Prisma.SortOrder
   einvoiceAckNo?: Prisma.SortOrderInput | Prisma.SortOrder
   einvoiceQrData?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -580,6 +600,7 @@ export type SalesInvoiceScalarWhereWithAggregatesInput = {
   prescriptionImageUrl?: Prisma.StringNullableWithAggregatesFilter<"SalesInvoice"> | string | null
   pharmacistSignoffUserId?: Prisma.StringNullableWithAggregatesFilter<"SalesInvoice"> | string | null
   pharmacistSignoffAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SalesInvoice"> | Date | string | null
+  publicToken?: Prisma.StringNullableWithAggregatesFilter<"SalesInvoice"> | string | null
   einvoiceIrn?: Prisma.StringNullableWithAggregatesFilter<"SalesInvoice"> | string | null
   einvoiceAckNo?: Prisma.StringNullableWithAggregatesFilter<"SalesInvoice"> | string | null
   einvoiceQrData?: Prisma.StringNullableWithAggregatesFilter<"SalesInvoice"> | string | null
@@ -606,6 +627,7 @@ export type SalesInvoiceCreateInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -620,8 +642,11 @@ export type SalesInvoiceCreateInput = {
   items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceUncheckedCreateInput = {
@@ -647,6 +672,7 @@ export type SalesInvoiceUncheckedCreateInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -656,8 +682,11 @@ export type SalesInvoiceUncheckedCreateInput = {
   items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceUpdateInput = {
@@ -678,6 +707,7 @@ export type SalesInvoiceUpdateInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -692,8 +722,11 @@ export type SalesInvoiceUpdateInput = {
   items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateInput = {
@@ -719,6 +752,7 @@ export type SalesInvoiceUncheckedUpdateInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -728,8 +762,11 @@ export type SalesInvoiceUncheckedUpdateInput = {
   items?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceCreateManyInput = {
@@ -755,6 +792,7 @@ export type SalesInvoiceCreateManyInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -781,6 +819,7 @@ export type SalesInvoiceUpdateManyMutationInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -812,6 +851,7 @@ export type SalesInvoiceUncheckedUpdateManyInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -833,6 +873,11 @@ export type SalesInvoiceOrderByRelationAggregateInput = {
 export type SalesInvoiceNullableScalarRelationFilter = {
   is?: Prisma.SalesInvoiceWhereInput | null
   isNot?: Prisma.SalesInvoiceWhereInput | null
+}
+
+export type SalesInvoiceScalarRelationFilter = {
+  is?: Prisma.SalesInvoiceWhereInput
+  isNot?: Prisma.SalesInvoiceWhereInput
 }
 
 export type SalesInvoiceTenantIdInvoiceNoCompoundUniqueInput = {
@@ -863,6 +908,7 @@ export type SalesInvoiceCountOrderByAggregateInput = {
   prescriptionImageUrl?: Prisma.SortOrder
   pharmacistSignoffUserId?: Prisma.SortOrder
   pharmacistSignoffAt?: Prisma.SortOrder
+  publicToken?: Prisma.SortOrder
   einvoiceIrn?: Prisma.SortOrder
   einvoiceAckNo?: Prisma.SortOrder
   einvoiceQrData?: Prisma.SortOrder
@@ -903,6 +949,7 @@ export type SalesInvoiceMaxOrderByAggregateInput = {
   prescriptionImageUrl?: Prisma.SortOrder
   pharmacistSignoffUserId?: Prisma.SortOrder
   pharmacistSignoffAt?: Prisma.SortOrder
+  publicToken?: Prisma.SortOrder
   einvoiceIrn?: Prisma.SortOrder
   einvoiceAckNo?: Prisma.SortOrder
   einvoiceQrData?: Prisma.SortOrder
@@ -934,6 +981,7 @@ export type SalesInvoiceMinOrderByAggregateInput = {
   prescriptionImageUrl?: Prisma.SortOrder
   pharmacistSignoffUserId?: Prisma.SortOrder
   pharmacistSignoffAt?: Prisma.SortOrder
+  publicToken?: Prisma.SortOrder
   einvoiceIrn?: Prisma.SortOrder
   einvoiceAckNo?: Prisma.SortOrder
   einvoiceQrData?: Prisma.SortOrder
@@ -949,11 +997,6 @@ export type SalesInvoiceSumOrderByAggregateInput = {
   discountAmount?: Prisma.SortOrder
   total?: Prisma.SortOrder
   roundOffAmount?: Prisma.SortOrder
-}
-
-export type SalesInvoiceScalarRelationFilter = {
-  is?: Prisma.SalesInvoiceWhereInput
-  isNot?: Prisma.SalesInvoiceWhereInput
 }
 
 export type SalesInvoiceCreateNestedManyWithoutTenantInput = {
@@ -1082,6 +1125,38 @@ export type SalesInvoiceUncheckedUpdateManyWithoutCustomerNestedInput = {
   deleteMany?: Prisma.SalesInvoiceScalarWhereInput | Prisma.SalesInvoiceScalarWhereInput[]
 }
 
+export type SalesInvoiceCreateNestedOneWithoutPromiseOrdersInput = {
+  create?: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutPromiseOrdersInput, Prisma.SalesInvoiceUncheckedCreateWithoutPromiseOrdersInput>
+  connectOrCreate?: Prisma.SalesInvoiceCreateOrConnectWithoutPromiseOrdersInput
+  connect?: Prisma.SalesInvoiceWhereUniqueInput
+}
+
+export type SalesInvoiceUpdateOneWithoutPromiseOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutPromiseOrdersInput, Prisma.SalesInvoiceUncheckedCreateWithoutPromiseOrdersInput>
+  connectOrCreate?: Prisma.SalesInvoiceCreateOrConnectWithoutPromiseOrdersInput
+  upsert?: Prisma.SalesInvoiceUpsertWithoutPromiseOrdersInput
+  disconnect?: Prisma.SalesInvoiceWhereInput | boolean
+  delete?: Prisma.SalesInvoiceWhereInput | boolean
+  connect?: Prisma.SalesInvoiceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SalesInvoiceUpdateToOneWithWhereWithoutPromiseOrdersInput, Prisma.SalesInvoiceUpdateWithoutPromiseOrdersInput>, Prisma.SalesInvoiceUncheckedUpdateWithoutPromiseOrdersInput>
+}
+
+export type SalesInvoiceCreateNestedOneWithoutSmsLogsInput = {
+  create?: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutSmsLogsInput, Prisma.SalesInvoiceUncheckedCreateWithoutSmsLogsInput>
+  connectOrCreate?: Prisma.SalesInvoiceCreateOrConnectWithoutSmsLogsInput
+  connect?: Prisma.SalesInvoiceWhereUniqueInput
+}
+
+export type SalesInvoiceUpdateOneWithoutSmsLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutSmsLogsInput, Prisma.SalesInvoiceUncheckedCreateWithoutSmsLogsInput>
+  connectOrCreate?: Prisma.SalesInvoiceCreateOrConnectWithoutSmsLogsInput
+  upsert?: Prisma.SalesInvoiceUpsertWithoutSmsLogsInput
+  disconnect?: Prisma.SalesInvoiceWhereInput | boolean
+  delete?: Prisma.SalesInvoiceWhereInput | boolean
+  connect?: Prisma.SalesInvoiceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SalesInvoiceUpdateToOneWithWhereWithoutSmsLogsInput, Prisma.SalesInvoiceUpdateWithoutSmsLogsInput>, Prisma.SalesInvoiceUncheckedUpdateWithoutSmsLogsInput>
+}
+
 export type SalesInvoiceCreateNestedOneWithoutEmailLogsInput = {
   create?: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutEmailLogsInput, Prisma.SalesInvoiceUncheckedCreateWithoutEmailLogsInput>
   connectOrCreate?: Prisma.SalesInvoiceCreateOrConnectWithoutEmailLogsInput
@@ -1096,6 +1171,20 @@ export type SalesInvoiceUpdateOneWithoutEmailLogsNestedInput = {
   delete?: Prisma.SalesInvoiceWhereInput | boolean
   connect?: Prisma.SalesInvoiceWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.SalesInvoiceUpdateToOneWithWhereWithoutEmailLogsInput, Prisma.SalesInvoiceUpdateWithoutEmailLogsInput>, Prisma.SalesInvoiceUncheckedUpdateWithoutEmailLogsInput>
+}
+
+export type SalesInvoiceCreateNestedOneWithoutSalesReturnsInput = {
+  create?: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutSalesReturnsInput, Prisma.SalesInvoiceUncheckedCreateWithoutSalesReturnsInput>
+  connectOrCreate?: Prisma.SalesInvoiceCreateOrConnectWithoutSalesReturnsInput
+  connect?: Prisma.SalesInvoiceWhereUniqueInput
+}
+
+export type SalesInvoiceUpdateOneRequiredWithoutSalesReturnsNestedInput = {
+  create?: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutSalesReturnsInput, Prisma.SalesInvoiceUncheckedCreateWithoutSalesReturnsInput>
+  connectOrCreate?: Prisma.SalesInvoiceCreateOrConnectWithoutSalesReturnsInput
+  upsert?: Prisma.SalesInvoiceUpsertWithoutSalesReturnsInput
+  connect?: Prisma.SalesInvoiceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SalesInvoiceUpdateToOneWithWhereWithoutSalesReturnsInput, Prisma.SalesInvoiceUpdateWithoutSalesReturnsInput>, Prisma.SalesInvoiceUncheckedUpdateWithoutSalesReturnsInput>
 }
 
 export type SalesInvoiceCreateNestedOneWithoutWhatsappLogsInput = {
@@ -1154,10 +1243,6 @@ export type SalesInvoiceUncheckedUpdateManyWithoutDoctorNestedInput = {
   update?: Prisma.SalesInvoiceUpdateWithWhereUniqueWithoutDoctorInput | Prisma.SalesInvoiceUpdateWithWhereUniqueWithoutDoctorInput[]
   updateMany?: Prisma.SalesInvoiceUpdateManyWithWhereWithoutDoctorInput | Prisma.SalesInvoiceUpdateManyWithWhereWithoutDoctorInput[]
   deleteMany?: Prisma.SalesInvoiceScalarWhereInput | Prisma.SalesInvoiceScalarWhereInput[]
-}
-
-export type EnumPaymentModeFieldUpdateOperationsInput = {
-  set?: $Enums.PaymentMode
 }
 
 export type EnumInvoiceStatusFieldUpdateOperationsInput = {
@@ -1266,6 +1351,7 @@ export type SalesInvoiceCreateWithoutTenantInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -1279,8 +1365,11 @@ export type SalesInvoiceCreateWithoutTenantInput = {
   items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceUncheckedCreateWithoutTenantInput = {
@@ -1305,6 +1394,7 @@ export type SalesInvoiceUncheckedCreateWithoutTenantInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -1314,8 +1404,11 @@ export type SalesInvoiceUncheckedCreateWithoutTenantInput = {
   items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceCreateOrConnectWithoutTenantInput = {
@@ -1370,6 +1463,7 @@ export type SalesInvoiceScalarWhereInput = {
   prescriptionImageUrl?: Prisma.StringNullableFilter<"SalesInvoice"> | string | null
   pharmacistSignoffUserId?: Prisma.StringNullableFilter<"SalesInvoice"> | string | null
   pharmacistSignoffAt?: Prisma.DateTimeNullableFilter<"SalesInvoice"> | Date | string | null
+  publicToken?: Prisma.StringNullableFilter<"SalesInvoice"> | string | null
   einvoiceIrn?: Prisma.StringNullableFilter<"SalesInvoice"> | string | null
   einvoiceAckNo?: Prisma.StringNullableFilter<"SalesInvoice"> | string | null
   einvoiceQrData?: Prisma.StringNullableFilter<"SalesInvoice"> | string | null
@@ -1396,6 +1490,7 @@ export type SalesInvoiceCreateWithoutBranchInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -1409,8 +1504,11 @@ export type SalesInvoiceCreateWithoutBranchInput = {
   items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceUncheckedCreateWithoutBranchInput = {
@@ -1435,6 +1533,7 @@ export type SalesInvoiceUncheckedCreateWithoutBranchInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -1444,8 +1543,11 @@ export type SalesInvoiceUncheckedCreateWithoutBranchInput = {
   items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceCreateOrConnectWithoutBranchInput = {
@@ -1492,6 +1594,7 @@ export type SalesInvoiceCreateWithoutCustomerInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -1505,8 +1608,11 @@ export type SalesInvoiceCreateWithoutCustomerInput = {
   items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceUncheckedCreateWithoutCustomerInput = {
@@ -1531,6 +1637,7 @@ export type SalesInvoiceUncheckedCreateWithoutCustomerInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -1540,8 +1647,11 @@ export type SalesInvoiceUncheckedCreateWithoutCustomerInput = {
   items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceCreateOrConnectWithoutCustomerInput = {
@@ -1570,6 +1680,350 @@ export type SalesInvoiceUpdateManyWithWhereWithoutCustomerInput = {
   data: Prisma.XOR<Prisma.SalesInvoiceUpdateManyMutationInput, Prisma.SalesInvoiceUncheckedUpdateManyWithoutCustomerInput>
 }
 
+export type SalesInvoiceCreateWithoutPromiseOrdersInput = {
+  id?: string
+  patientName?: string | null
+  patientAge?: number | null
+  patientPhone?: string | null
+  patientAddress?: string | null
+  invoiceNo: string
+  invoiceDate?: Date | string
+  offlineClientId?: string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  roundOffAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMode: $Enums.PaymentMode
+  status?: $Enums.InvoiceStatus
+  prescriptionImageUrl?: string | null
+  pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
+  einvoiceIrn?: string | null
+  einvoiceAckNo?: string | null
+  einvoiceQrData?: string | null
+  ewayBillNo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutSalesInvoicesInput
+  branch: Prisma.BranchCreateNestedOneWithoutSalesInvoicesInput
+  customer?: Prisma.CustomerCreateNestedOneWithoutSalesInvoicesInput
+  doctor?: Prisma.DoctorCreateNestedOneWithoutSalesInvoicesInput
+  pharmacistSignoff?: Prisma.UserCreateNestedOneWithoutSalesInvoicesSignedOffInput
+  items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+}
+
+export type SalesInvoiceUncheckedCreateWithoutPromiseOrdersInput = {
+  id?: string
+  tenantId: string
+  branchId: string
+  customerId?: string | null
+  doctorId?: string | null
+  patientName?: string | null
+  patientAge?: number | null
+  patientPhone?: string | null
+  patientAddress?: string | null
+  invoiceNo: string
+  invoiceDate?: Date | string
+  offlineClientId?: string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  roundOffAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMode: $Enums.PaymentMode
+  status?: $Enums.InvoiceStatus
+  prescriptionImageUrl?: string | null
+  pharmacistSignoffUserId?: string | null
+  pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
+  einvoiceIrn?: string | null
+  einvoiceAckNo?: string | null
+  einvoiceQrData?: string | null
+  ewayBillNo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+}
+
+export type SalesInvoiceCreateOrConnectWithoutPromiseOrdersInput = {
+  where: Prisma.SalesInvoiceWhereUniqueInput
+  create: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutPromiseOrdersInput, Prisma.SalesInvoiceUncheckedCreateWithoutPromiseOrdersInput>
+}
+
+export type SalesInvoiceUpsertWithoutPromiseOrdersInput = {
+  update: Prisma.XOR<Prisma.SalesInvoiceUpdateWithoutPromiseOrdersInput, Prisma.SalesInvoiceUncheckedUpdateWithoutPromiseOrdersInput>
+  create: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutPromiseOrdersInput, Prisma.SalesInvoiceUncheckedCreateWithoutPromiseOrdersInput>
+  where?: Prisma.SalesInvoiceWhereInput
+}
+
+export type SalesInvoiceUpdateToOneWithWhereWithoutPromiseOrdersInput = {
+  where?: Prisma.SalesInvoiceWhereInput
+  data: Prisma.XOR<Prisma.SalesInvoiceUpdateWithoutPromiseOrdersInput, Prisma.SalesInvoiceUncheckedUpdateWithoutPromiseOrdersInput>
+}
+
+export type SalesInvoiceUpdateWithoutPromiseOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  patientName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientAge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  patientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceNo?: Prisma.StringFieldUpdateOperationsInput | string
+  invoiceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offlineClientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  roundOffAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMode?: Prisma.EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+  status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+  prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ewayBillNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutSalesInvoicesNestedInput
+  branch?: Prisma.BranchUpdateOneRequiredWithoutSalesInvoicesNestedInput
+  customer?: Prisma.CustomerUpdateOneWithoutSalesInvoicesNestedInput
+  doctor?: Prisma.DoctorUpdateOneWithoutSalesInvoicesNestedInput
+  pharmacistSignoff?: Prisma.UserUpdateOneWithoutSalesInvoicesSignedOffNestedInput
+  items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+}
+
+export type SalesInvoiceUncheckedUpdateWithoutPromiseOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  doctorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientAge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  patientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceNo?: Prisma.StringFieldUpdateOperationsInput | string
+  invoiceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offlineClientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  roundOffAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMode?: Prisma.EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+  status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+  prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ewayBillNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+}
+
+export type SalesInvoiceCreateWithoutSmsLogsInput = {
+  id?: string
+  patientName?: string | null
+  patientAge?: number | null
+  patientPhone?: string | null
+  patientAddress?: string | null
+  invoiceNo: string
+  invoiceDate?: Date | string
+  offlineClientId?: string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  roundOffAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMode: $Enums.PaymentMode
+  status?: $Enums.InvoiceStatus
+  prescriptionImageUrl?: string | null
+  pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
+  einvoiceIrn?: string | null
+  einvoiceAckNo?: string | null
+  einvoiceQrData?: string | null
+  ewayBillNo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutSalesInvoicesInput
+  branch: Prisma.BranchCreateNestedOneWithoutSalesInvoicesInput
+  customer?: Prisma.CustomerCreateNestedOneWithoutSalesInvoicesInput
+  doctor?: Prisma.DoctorCreateNestedOneWithoutSalesInvoicesInput
+  pharmacistSignoff?: Prisma.UserCreateNestedOneWithoutSalesInvoicesSignedOffInput
+  items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
+}
+
+export type SalesInvoiceUncheckedCreateWithoutSmsLogsInput = {
+  id?: string
+  tenantId: string
+  branchId: string
+  customerId?: string | null
+  doctorId?: string | null
+  patientName?: string | null
+  patientAge?: number | null
+  patientPhone?: string | null
+  patientAddress?: string | null
+  invoiceNo: string
+  invoiceDate?: Date | string
+  offlineClientId?: string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  roundOffAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMode: $Enums.PaymentMode
+  status?: $Enums.InvoiceStatus
+  prescriptionImageUrl?: string | null
+  pharmacistSignoffUserId?: string | null
+  pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
+  einvoiceIrn?: string | null
+  einvoiceAckNo?: string | null
+  einvoiceQrData?: string | null
+  ewayBillNo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
+}
+
+export type SalesInvoiceCreateOrConnectWithoutSmsLogsInput = {
+  where: Prisma.SalesInvoiceWhereUniqueInput
+  create: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutSmsLogsInput, Prisma.SalesInvoiceUncheckedCreateWithoutSmsLogsInput>
+}
+
+export type SalesInvoiceUpsertWithoutSmsLogsInput = {
+  update: Prisma.XOR<Prisma.SalesInvoiceUpdateWithoutSmsLogsInput, Prisma.SalesInvoiceUncheckedUpdateWithoutSmsLogsInput>
+  create: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutSmsLogsInput, Prisma.SalesInvoiceUncheckedCreateWithoutSmsLogsInput>
+  where?: Prisma.SalesInvoiceWhereInput
+}
+
+export type SalesInvoiceUpdateToOneWithWhereWithoutSmsLogsInput = {
+  where?: Prisma.SalesInvoiceWhereInput
+  data: Prisma.XOR<Prisma.SalesInvoiceUpdateWithoutSmsLogsInput, Prisma.SalesInvoiceUncheckedUpdateWithoutSmsLogsInput>
+}
+
+export type SalesInvoiceUpdateWithoutSmsLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  patientName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientAge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  patientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceNo?: Prisma.StringFieldUpdateOperationsInput | string
+  invoiceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offlineClientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  roundOffAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMode?: Prisma.EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+  status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+  prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ewayBillNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutSalesInvoicesNestedInput
+  branch?: Prisma.BranchUpdateOneRequiredWithoutSalesInvoicesNestedInput
+  customer?: Prisma.CustomerUpdateOneWithoutSalesInvoicesNestedInput
+  doctor?: Prisma.DoctorUpdateOneWithoutSalesInvoicesNestedInput
+  pharmacistSignoff?: Prisma.UserUpdateOneWithoutSalesInvoicesSignedOffNestedInput
+  items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
+}
+
+export type SalesInvoiceUncheckedUpdateWithoutSmsLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  doctorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientAge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  patientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceNo?: Prisma.StringFieldUpdateOperationsInput | string
+  invoiceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offlineClientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  roundOffAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMode?: Prisma.EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+  status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+  prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ewayBillNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
+}
+
 export type SalesInvoiceCreateWithoutEmailLogsInput = {
   id?: string
   patientName?: string | null
@@ -1588,6 +2042,7 @@ export type SalesInvoiceCreateWithoutEmailLogsInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -1602,7 +2057,10 @@ export type SalesInvoiceCreateWithoutEmailLogsInput = {
   items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceUncheckedCreateWithoutEmailLogsInput = {
@@ -1628,6 +2086,7 @@ export type SalesInvoiceUncheckedCreateWithoutEmailLogsInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -1637,7 +2096,10 @@ export type SalesInvoiceUncheckedCreateWithoutEmailLogsInput = {
   items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceCreateOrConnectWithoutEmailLogsInput = {
@@ -1674,6 +2136,7 @@ export type SalesInvoiceUpdateWithoutEmailLogsInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1688,7 +2151,10 @@ export type SalesInvoiceUpdateWithoutEmailLogsInput = {
   items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateWithoutEmailLogsInput = {
@@ -1714,6 +2180,179 @@ export type SalesInvoiceUncheckedUpdateWithoutEmailLogsInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ewayBillNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
+}
+
+export type SalesInvoiceCreateWithoutSalesReturnsInput = {
+  id?: string
+  patientName?: string | null
+  patientAge?: number | null
+  patientPhone?: string | null
+  patientAddress?: string | null
+  invoiceNo: string
+  invoiceDate?: Date | string
+  offlineClientId?: string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  roundOffAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMode: $Enums.PaymentMode
+  status?: $Enums.InvoiceStatus
+  prescriptionImageUrl?: string | null
+  pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
+  einvoiceIrn?: string | null
+  einvoiceAckNo?: string | null
+  einvoiceQrData?: string | null
+  ewayBillNo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutSalesInvoicesInput
+  branch: Prisma.BranchCreateNestedOneWithoutSalesInvoicesInput
+  customer?: Prisma.CustomerCreateNestedOneWithoutSalesInvoicesInput
+  doctor?: Prisma.DoctorCreateNestedOneWithoutSalesInvoicesInput
+  pharmacistSignoff?: Prisma.UserCreateNestedOneWithoutSalesInvoicesSignedOffInput
+  items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
+}
+
+export type SalesInvoiceUncheckedCreateWithoutSalesReturnsInput = {
+  id?: string
+  tenantId: string
+  branchId: string
+  customerId?: string | null
+  doctorId?: string | null
+  patientName?: string | null
+  patientAge?: number | null
+  patientPhone?: string | null
+  patientAddress?: string | null
+  invoiceNo: string
+  invoiceDate?: Date | string
+  offlineClientId?: string | null
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  roundOffAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMode: $Enums.PaymentMode
+  status?: $Enums.InvoiceStatus
+  prescriptionImageUrl?: string | null
+  pharmacistSignoffUserId?: string | null
+  pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
+  einvoiceIrn?: string | null
+  einvoiceAckNo?: string | null
+  einvoiceQrData?: string | null
+  ewayBillNo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
+}
+
+export type SalesInvoiceCreateOrConnectWithoutSalesReturnsInput = {
+  where: Prisma.SalesInvoiceWhereUniqueInput
+  create: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutSalesReturnsInput, Prisma.SalesInvoiceUncheckedCreateWithoutSalesReturnsInput>
+}
+
+export type SalesInvoiceUpsertWithoutSalesReturnsInput = {
+  update: Prisma.XOR<Prisma.SalesInvoiceUpdateWithoutSalesReturnsInput, Prisma.SalesInvoiceUncheckedUpdateWithoutSalesReturnsInput>
+  create: Prisma.XOR<Prisma.SalesInvoiceCreateWithoutSalesReturnsInput, Prisma.SalesInvoiceUncheckedCreateWithoutSalesReturnsInput>
+  where?: Prisma.SalesInvoiceWhereInput
+}
+
+export type SalesInvoiceUpdateToOneWithWhereWithoutSalesReturnsInput = {
+  where?: Prisma.SalesInvoiceWhereInput
+  data: Prisma.XOR<Prisma.SalesInvoiceUpdateWithoutSalesReturnsInput, Prisma.SalesInvoiceUncheckedUpdateWithoutSalesReturnsInput>
+}
+
+export type SalesInvoiceUpdateWithoutSalesReturnsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  patientName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientAge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  patientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceNo?: Prisma.StringFieldUpdateOperationsInput | string
+  invoiceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offlineClientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  roundOffAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMode?: Prisma.EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+  status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+  prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ewayBillNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutSalesInvoicesNestedInput
+  branch?: Prisma.BranchUpdateOneRequiredWithoutSalesInvoicesNestedInput
+  customer?: Prisma.CustomerUpdateOneWithoutSalesInvoicesNestedInput
+  doctor?: Prisma.DoctorUpdateOneWithoutSalesInvoicesNestedInput
+  pharmacistSignoff?: Prisma.UserUpdateOneWithoutSalesInvoicesSignedOffNestedInput
+  items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
+}
+
+export type SalesInvoiceUncheckedUpdateWithoutSalesReturnsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  branchId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  doctorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientAge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  patientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceNo?: Prisma.StringFieldUpdateOperationsInput | string
+  invoiceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  offlineClientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  roundOffAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMode?: Prisma.EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+  status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+  prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1724,6 +2363,9 @@ export type SalesInvoiceUncheckedUpdateWithoutEmailLogsInput = {
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceCreateWithoutWhatsappLogsInput = {
@@ -1744,6 +2386,7 @@ export type SalesInvoiceCreateWithoutWhatsappLogsInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -1758,7 +2401,10 @@ export type SalesInvoiceCreateWithoutWhatsappLogsInput = {
   items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceUncheckedCreateWithoutWhatsappLogsInput = {
@@ -1784,6 +2430,7 @@ export type SalesInvoiceUncheckedCreateWithoutWhatsappLogsInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -1793,7 +2440,10 @@ export type SalesInvoiceUncheckedCreateWithoutWhatsappLogsInput = {
   items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceCreateOrConnectWithoutWhatsappLogsInput = {
@@ -1830,6 +2480,7 @@ export type SalesInvoiceUpdateWithoutWhatsappLogsInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1844,7 +2495,10 @@ export type SalesInvoiceUpdateWithoutWhatsappLogsInput = {
   items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateWithoutWhatsappLogsInput = {
@@ -1870,6 +2524,7 @@ export type SalesInvoiceUncheckedUpdateWithoutWhatsappLogsInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1879,7 +2534,10 @@ export type SalesInvoiceUncheckedUpdateWithoutWhatsappLogsInput = {
   items?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceCreateWithoutDoctorInput = {
@@ -1900,6 +2558,7 @@ export type SalesInvoiceCreateWithoutDoctorInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -1913,8 +2572,11 @@ export type SalesInvoiceCreateWithoutDoctorInput = {
   items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceUncheckedCreateWithoutDoctorInput = {
@@ -1939,6 +2601,7 @@ export type SalesInvoiceUncheckedCreateWithoutDoctorInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -1948,8 +2611,11 @@ export type SalesInvoiceUncheckedCreateWithoutDoctorInput = {
   items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceCreateOrConnectWithoutDoctorInput = {
@@ -1996,6 +2662,7 @@ export type SalesInvoiceCreateWithoutItemsInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -2009,8 +2676,11 @@ export type SalesInvoiceCreateWithoutItemsInput = {
   pharmacistSignoff?: Prisma.UserCreateNestedOneWithoutSalesInvoicesSignedOffInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceUncheckedCreateWithoutItemsInput = {
@@ -2036,6 +2706,7 @@ export type SalesInvoiceUncheckedCreateWithoutItemsInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -2044,8 +2715,11 @@ export type SalesInvoiceUncheckedCreateWithoutItemsInput = {
   updatedAt?: Date | string
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceCreateOrConnectWithoutItemsInput = {
@@ -2082,6 +2756,7 @@ export type SalesInvoiceUpdateWithoutItemsInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2095,8 +2770,11 @@ export type SalesInvoiceUpdateWithoutItemsInput = {
   pharmacistSignoff?: Prisma.UserUpdateOneWithoutSalesInvoicesSignedOffNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateWithoutItemsInput = {
@@ -2122,6 +2800,7 @@ export type SalesInvoiceUncheckedUpdateWithoutItemsInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2130,8 +2809,11 @@ export type SalesInvoiceUncheckedUpdateWithoutItemsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceCreateWithoutDiscountsInput = {
@@ -2152,6 +2834,7 @@ export type SalesInvoiceCreateWithoutDiscountsInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -2165,8 +2848,11 @@ export type SalesInvoiceCreateWithoutDiscountsInput = {
   pharmacistSignoff?: Prisma.UserCreateNestedOneWithoutSalesInvoicesSignedOffInput
   items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceUncheckedCreateWithoutDiscountsInput = {
@@ -2192,6 +2878,7 @@ export type SalesInvoiceUncheckedCreateWithoutDiscountsInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -2200,8 +2887,11 @@ export type SalesInvoiceUncheckedCreateWithoutDiscountsInput = {
   updatedAt?: Date | string
   items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceCreateOrConnectWithoutDiscountsInput = {
@@ -2238,6 +2928,7 @@ export type SalesInvoiceUpdateWithoutDiscountsInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2251,8 +2942,11 @@ export type SalesInvoiceUpdateWithoutDiscountsInput = {
   pharmacistSignoff?: Prisma.UserUpdateOneWithoutSalesInvoicesSignedOffNestedInput
   items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateWithoutDiscountsInput = {
@@ -2278,6 +2972,7 @@ export type SalesInvoiceUncheckedUpdateWithoutDiscountsInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2286,8 +2981,11 @@ export type SalesInvoiceUncheckedUpdateWithoutDiscountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceCreateWithoutPharmacistSignoffInput = {
@@ -2308,6 +3006,7 @@ export type SalesInvoiceCreateWithoutPharmacistSignoffInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -2321,8 +3020,11 @@ export type SalesInvoiceCreateWithoutPharmacistSignoffInput = {
   items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceUncheckedCreateWithoutPharmacistSignoffInput = {
@@ -2347,6 +3049,7 @@ export type SalesInvoiceUncheckedCreateWithoutPharmacistSignoffInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -2356,8 +3059,11 @@ export type SalesInvoiceUncheckedCreateWithoutPharmacistSignoffInput = {
   items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceCreateOrConnectWithoutPharmacistSignoffInput = {
@@ -2404,6 +3110,7 @@ export type SalesInvoiceCreateWithoutNarcoticRegisterEntriesInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -2417,8 +3124,11 @@ export type SalesInvoiceCreateWithoutNarcoticRegisterEntriesInput = {
   pharmacistSignoff?: Prisma.UserCreateNestedOneWithoutSalesInvoicesSignedOffInput
   items?: Prisma.SalesInvoiceItemCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
@@ -2444,6 +3154,7 @@ export type SalesInvoiceUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -2452,8 +3163,11 @@ export type SalesInvoiceUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
   updatedAt?: Date | string
   items?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutInvoiceInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutInvoiceInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutInvoiceInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutInvoiceInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutInvoiceInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
 export type SalesInvoiceCreateOrConnectWithoutNarcoticRegisterEntriesInput = {
@@ -2490,6 +3204,7 @@ export type SalesInvoiceUpdateWithoutNarcoticRegisterEntriesInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2503,8 +3218,11 @@ export type SalesInvoiceUpdateWithoutNarcoticRegisterEntriesInput = {
   pharmacistSignoff?: Prisma.UserUpdateOneWithoutSalesInvoicesSignedOffNestedInput
   items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
@@ -2530,6 +3248,7 @@ export type SalesInvoiceUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2538,8 +3257,11 @@ export type SalesInvoiceUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceCreateManyTenantInput = {
@@ -2564,6 +3286,7 @@ export type SalesInvoiceCreateManyTenantInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -2590,6 +3313,7 @@ export type SalesInvoiceUpdateWithoutTenantInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2603,8 +3327,11 @@ export type SalesInvoiceUpdateWithoutTenantInput = {
   items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateWithoutTenantInput = {
@@ -2629,6 +3356,7 @@ export type SalesInvoiceUncheckedUpdateWithoutTenantInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2638,8 +3366,11 @@ export type SalesInvoiceUncheckedUpdateWithoutTenantInput = {
   items?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateManyWithoutTenantInput = {
@@ -2664,6 +3395,7 @@ export type SalesInvoiceUncheckedUpdateManyWithoutTenantInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2694,6 +3426,7 @@ export type SalesInvoiceCreateManyBranchInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -2720,6 +3453,7 @@ export type SalesInvoiceUpdateWithoutBranchInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2733,8 +3467,11 @@ export type SalesInvoiceUpdateWithoutBranchInput = {
   items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateWithoutBranchInput = {
@@ -2759,6 +3496,7 @@ export type SalesInvoiceUncheckedUpdateWithoutBranchInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2768,8 +3506,11 @@ export type SalesInvoiceUncheckedUpdateWithoutBranchInput = {
   items?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateManyWithoutBranchInput = {
@@ -2794,6 +3535,7 @@ export type SalesInvoiceUncheckedUpdateManyWithoutBranchInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2824,6 +3566,7 @@ export type SalesInvoiceCreateManyCustomerInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -2850,6 +3593,7 @@ export type SalesInvoiceUpdateWithoutCustomerInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2863,8 +3607,11 @@ export type SalesInvoiceUpdateWithoutCustomerInput = {
   items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateWithoutCustomerInput = {
@@ -2889,6 +3636,7 @@ export type SalesInvoiceUncheckedUpdateWithoutCustomerInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2898,8 +3646,11 @@ export type SalesInvoiceUncheckedUpdateWithoutCustomerInput = {
   items?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateManyWithoutCustomerInput = {
@@ -2924,6 +3675,7 @@ export type SalesInvoiceUncheckedUpdateManyWithoutCustomerInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2954,6 +3706,7 @@ export type SalesInvoiceCreateManyDoctorInput = {
   prescriptionImageUrl?: string | null
   pharmacistSignoffUserId?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -2980,6 +3733,7 @@ export type SalesInvoiceUpdateWithoutDoctorInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2993,8 +3747,11 @@ export type SalesInvoiceUpdateWithoutDoctorInput = {
   items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateWithoutDoctorInput = {
@@ -3019,6 +3776,7 @@ export type SalesInvoiceUncheckedUpdateWithoutDoctorInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3028,8 +3786,11 @@ export type SalesInvoiceUncheckedUpdateWithoutDoctorInput = {
   items?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateManyWithoutDoctorInput = {
@@ -3054,6 +3815,7 @@ export type SalesInvoiceUncheckedUpdateManyWithoutDoctorInput = {
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3084,6 +3846,7 @@ export type SalesInvoiceCreateManyPharmacistSignoffInput = {
   status?: $Enums.InvoiceStatus
   prescriptionImageUrl?: string | null
   pharmacistSignoffAt?: Date | string | null
+  publicToken?: string | null
   einvoiceIrn?: string | null
   einvoiceAckNo?: string | null
   einvoiceQrData?: string | null
@@ -3110,6 +3873,7 @@ export type SalesInvoiceUpdateWithoutPharmacistSignoffInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3123,8 +3887,11 @@ export type SalesInvoiceUpdateWithoutPharmacistSignoffInput = {
   items?: Prisma.SalesInvoiceItemUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateWithoutPharmacistSignoffInput = {
@@ -3149,6 +3916,7 @@ export type SalesInvoiceUncheckedUpdateWithoutPharmacistSignoffInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3158,8 +3926,11 @@ export type SalesInvoiceUncheckedUpdateWithoutPharmacistSignoffInput = {
   items?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   discounts?: Prisma.DiscountUncheckedUpdateManyWithoutInvoiceNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutInvoiceNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutInvoiceNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutInvoiceNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffInput = {
@@ -3184,6 +3955,7 @@ export type SalesInvoiceUncheckedUpdateManyWithoutPharmacistSignoffInput = {
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   prescriptionImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pharmacistSignoffAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceIrn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceAckNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   einvoiceQrData?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3201,16 +3973,22 @@ export type SalesInvoiceCountOutputType = {
   items: number
   discounts: number
   narcoticRegisterEntries: number
+  salesReturns: number
   whatsappLogs: number
+  smsLogs: number
   emailLogs: number
+  promiseOrders: number
 }
 
 export type SalesInvoiceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   items?: boolean | SalesInvoiceCountOutputTypeCountItemsArgs
   discounts?: boolean | SalesInvoiceCountOutputTypeCountDiscountsArgs
   narcoticRegisterEntries?: boolean | SalesInvoiceCountOutputTypeCountNarcoticRegisterEntriesArgs
+  salesReturns?: boolean | SalesInvoiceCountOutputTypeCountSalesReturnsArgs
   whatsappLogs?: boolean | SalesInvoiceCountOutputTypeCountWhatsappLogsArgs
+  smsLogs?: boolean | SalesInvoiceCountOutputTypeCountSmsLogsArgs
   emailLogs?: boolean | SalesInvoiceCountOutputTypeCountEmailLogsArgs
+  promiseOrders?: boolean | SalesInvoiceCountOutputTypeCountPromiseOrdersArgs
 }
 
 /**
@@ -3247,6 +4025,13 @@ export type SalesInvoiceCountOutputTypeCountNarcoticRegisterEntriesArgs<ExtArgs 
 /**
  * SalesInvoiceCountOutputType without action
  */
+export type SalesInvoiceCountOutputTypeCountSalesReturnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalesReturnWhereInput
+}
+
+/**
+ * SalesInvoiceCountOutputType without action
+ */
 export type SalesInvoiceCountOutputTypeCountWhatsappLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.WhatsAppLogWhereInput
 }
@@ -3254,8 +4039,22 @@ export type SalesInvoiceCountOutputTypeCountWhatsappLogsArgs<ExtArgs extends run
 /**
  * SalesInvoiceCountOutputType without action
  */
+export type SalesInvoiceCountOutputTypeCountSmsLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SmsLogWhereInput
+}
+
+/**
+ * SalesInvoiceCountOutputType without action
+ */
 export type SalesInvoiceCountOutputTypeCountEmailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EmailLogWhereInput
+}
+
+/**
+ * SalesInvoiceCountOutputType without action
+ */
+export type SalesInvoiceCountOutputTypeCountPromiseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromiseOrderWhereInput
 }
 
 
@@ -3282,6 +4081,7 @@ export type SalesInvoiceSelect<ExtArgs extends runtime.Types.Extensions.Internal
   prescriptionImageUrl?: boolean
   pharmacistSignoffUserId?: boolean
   pharmacistSignoffAt?: boolean
+  publicToken?: boolean
   einvoiceIrn?: boolean
   einvoiceAckNo?: boolean
   einvoiceQrData?: boolean
@@ -3296,8 +4096,11 @@ export type SalesInvoiceSelect<ExtArgs extends runtime.Types.Extensions.Internal
   items?: boolean | Prisma.SalesInvoice$itemsArgs<ExtArgs>
   discounts?: boolean | Prisma.SalesInvoice$discountsArgs<ExtArgs>
   narcoticRegisterEntries?: boolean | Prisma.SalesInvoice$narcoticRegisterEntriesArgs<ExtArgs>
+  salesReturns?: boolean | Prisma.SalesInvoice$salesReturnsArgs<ExtArgs>
   whatsappLogs?: boolean | Prisma.SalesInvoice$whatsappLogsArgs<ExtArgs>
+  smsLogs?: boolean | Prisma.SalesInvoice$smsLogsArgs<ExtArgs>
   emailLogs?: boolean | Prisma.SalesInvoice$emailLogsArgs<ExtArgs>
+  promiseOrders?: boolean | Prisma.SalesInvoice$promiseOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.SalesInvoiceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["salesInvoice"]>
 
@@ -3324,6 +4127,7 @@ export type SalesInvoiceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   prescriptionImageUrl?: boolean
   pharmacistSignoffUserId?: boolean
   pharmacistSignoffAt?: boolean
+  publicToken?: boolean
   einvoiceIrn?: boolean
   einvoiceAckNo?: boolean
   einvoiceQrData?: boolean
@@ -3360,6 +4164,7 @@ export type SalesInvoiceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   prescriptionImageUrl?: boolean
   pharmacistSignoffUserId?: boolean
   pharmacistSignoffAt?: boolean
+  publicToken?: boolean
   einvoiceIrn?: boolean
   einvoiceAckNo?: boolean
   einvoiceQrData?: boolean
@@ -3396,6 +4201,7 @@ export type SalesInvoiceSelectScalar = {
   prescriptionImageUrl?: boolean
   pharmacistSignoffUserId?: boolean
   pharmacistSignoffAt?: boolean
+  publicToken?: boolean
   einvoiceIrn?: boolean
   einvoiceAckNo?: boolean
   einvoiceQrData?: boolean
@@ -3404,7 +4210,7 @@ export type SalesInvoiceSelectScalar = {
   updatedAt?: boolean
 }
 
-export type SalesInvoiceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "branchId" | "customerId" | "doctorId" | "patientName" | "patientAge" | "patientPhone" | "patientAddress" | "invoiceNo" | "invoiceDate" | "offlineClientId" | "subtotal" | "taxAmount" | "discountAmount" | "total" | "roundOffAmount" | "paymentMode" | "status" | "prescriptionImageUrl" | "pharmacistSignoffUserId" | "pharmacistSignoffAt" | "einvoiceIrn" | "einvoiceAckNo" | "einvoiceQrData" | "ewayBillNo" | "createdAt" | "updatedAt", ExtArgs["result"]["salesInvoice"]>
+export type SalesInvoiceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "branchId" | "customerId" | "doctorId" | "patientName" | "patientAge" | "patientPhone" | "patientAddress" | "invoiceNo" | "invoiceDate" | "offlineClientId" | "subtotal" | "taxAmount" | "discountAmount" | "total" | "roundOffAmount" | "paymentMode" | "status" | "prescriptionImageUrl" | "pharmacistSignoffUserId" | "pharmacistSignoffAt" | "publicToken" | "einvoiceIrn" | "einvoiceAckNo" | "einvoiceQrData" | "ewayBillNo" | "createdAt" | "updatedAt", ExtArgs["result"]["salesInvoice"]>
 export type SalesInvoiceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
@@ -3414,8 +4220,11 @@ export type SalesInvoiceInclude<ExtArgs extends runtime.Types.Extensions.Interna
   items?: boolean | Prisma.SalesInvoice$itemsArgs<ExtArgs>
   discounts?: boolean | Prisma.SalesInvoice$discountsArgs<ExtArgs>
   narcoticRegisterEntries?: boolean | Prisma.SalesInvoice$narcoticRegisterEntriesArgs<ExtArgs>
+  salesReturns?: boolean | Prisma.SalesInvoice$salesReturnsArgs<ExtArgs>
   whatsappLogs?: boolean | Prisma.SalesInvoice$whatsappLogsArgs<ExtArgs>
+  smsLogs?: boolean | Prisma.SalesInvoice$smsLogsArgs<ExtArgs>
   emailLogs?: boolean | Prisma.SalesInvoice$emailLogsArgs<ExtArgs>
+  promiseOrders?: boolean | Prisma.SalesInvoice$promiseOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.SalesInvoiceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SalesInvoiceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3444,8 +4253,11 @@ export type $SalesInvoicePayload<ExtArgs extends runtime.Types.Extensions.Intern
     items: Prisma.$SalesInvoiceItemPayload<ExtArgs>[]
     discounts: Prisma.$DiscountPayload<ExtArgs>[]
     narcoticRegisterEntries: Prisma.$NarcoticRegisterEntryPayload<ExtArgs>[]
+    salesReturns: Prisma.$SalesReturnPayload<ExtArgs>[]
     whatsappLogs: Prisma.$WhatsAppLogPayload<ExtArgs>[]
+    smsLogs: Prisma.$SmsLogPayload<ExtArgs>[]
     emailLogs: Prisma.$EmailLogPayload<ExtArgs>[]
+    promiseOrders: Prisma.$PromiseOrderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3470,6 +4282,13 @@ export type $SalesInvoicePayload<ExtArgs extends runtime.Types.Extensions.Intern
     prescriptionImageUrl: string | null
     pharmacistSignoffUserId: string | null
     pharmacistSignoffAt: Date | null
+    /**
+     * Unguessable token for the read-only public bill page. An SMS cannot
+     * carry a PDF, so the customer gets a link — and the recipient has no
+     * account, so the page cannot be behind the session. Generated lazily
+     * the first time a bill is shared, so bills nobody shares never get one.
+     */
+    publicToken: string | null
     einvoiceIrn: string | null
     einvoiceAckNo: string | null
     einvoiceQrData: string | null
@@ -3878,8 +4697,11 @@ export interface Prisma__SalesInvoiceClient<T, Null = never, ExtArgs extends run
   items<T extends Prisma.SalesInvoice$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalesInvoice$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesInvoiceItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   discounts<T extends Prisma.SalesInvoice$discountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalesInvoice$discountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DiscountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   narcoticRegisterEntries<T extends Prisma.SalesInvoice$narcoticRegisterEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalesInvoice$narcoticRegisterEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NarcoticRegisterEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  salesReturns<T extends Prisma.SalesInvoice$salesReturnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalesInvoice$salesReturnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesReturnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   whatsappLogs<T extends Prisma.SalesInvoice$whatsappLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalesInvoice$whatsappLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WhatsAppLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  smsLogs<T extends Prisma.SalesInvoice$smsLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalesInvoice$smsLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SmsLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailLogs<T extends Prisma.SalesInvoice$emailLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalesInvoice$emailLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promiseOrders<T extends Prisma.SalesInvoice$promiseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalesInvoice$promiseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromiseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3931,6 +4753,7 @@ export interface SalesInvoiceFieldRefs {
   readonly prescriptionImageUrl: Prisma.FieldRef<"SalesInvoice", 'String'>
   readonly pharmacistSignoffUserId: Prisma.FieldRef<"SalesInvoice", 'String'>
   readonly pharmacistSignoffAt: Prisma.FieldRef<"SalesInvoice", 'DateTime'>
+  readonly publicToken: Prisma.FieldRef<"SalesInvoice", 'String'>
   readonly einvoiceIrn: Prisma.FieldRef<"SalesInvoice", 'String'>
   readonly einvoiceAckNo: Prisma.FieldRef<"SalesInvoice", 'String'>
   readonly einvoiceQrData: Prisma.FieldRef<"SalesInvoice", 'String'>
@@ -4467,6 +5290,30 @@ export type SalesInvoice$narcoticRegisterEntriesArgs<ExtArgs extends runtime.Typ
 }
 
 /**
+ * SalesInvoice.salesReturns
+ */
+export type SalesInvoice$salesReturnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalesReturn
+   */
+  select?: Prisma.SalesReturnSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SalesReturn
+   */
+  omit?: Prisma.SalesReturnOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalesReturnInclude<ExtArgs> | null
+  where?: Prisma.SalesReturnWhereInput
+  orderBy?: Prisma.SalesReturnOrderByWithRelationInput | Prisma.SalesReturnOrderByWithRelationInput[]
+  cursor?: Prisma.SalesReturnWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalesReturnScalarFieldEnum | Prisma.SalesReturnScalarFieldEnum[]
+}
+
+/**
  * SalesInvoice.whatsappLogs
  */
 export type SalesInvoice$whatsappLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4491,6 +5338,30 @@ export type SalesInvoice$whatsappLogsArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
+ * SalesInvoice.smsLogs
+ */
+export type SalesInvoice$smsLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SmsLog
+   */
+  select?: Prisma.SmsLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SmsLog
+   */
+  omit?: Prisma.SmsLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SmsLogInclude<ExtArgs> | null
+  where?: Prisma.SmsLogWhereInput
+  orderBy?: Prisma.SmsLogOrderByWithRelationInput | Prisma.SmsLogOrderByWithRelationInput[]
+  cursor?: Prisma.SmsLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SmsLogScalarFieldEnum | Prisma.SmsLogScalarFieldEnum[]
+}
+
+/**
  * SalesInvoice.emailLogs
  */
 export type SalesInvoice$emailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4512,6 +5383,30 @@ export type SalesInvoice$emailLogsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.EmailLogScalarFieldEnum | Prisma.EmailLogScalarFieldEnum[]
+}
+
+/**
+ * SalesInvoice.promiseOrders
+ */
+export type SalesInvoice$promiseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromiseOrder
+   */
+  select?: Prisma.PromiseOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PromiseOrder
+   */
+  omit?: Prisma.PromiseOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromiseOrderInclude<ExtArgs> | null
+  where?: Prisma.PromiseOrderWhereInput
+  orderBy?: Prisma.PromiseOrderOrderByWithRelationInput | Prisma.PromiseOrderOrderByWithRelationInput[]
+  cursor?: Prisma.PromiseOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromiseOrderScalarFieldEnum | Prisma.PromiseOrderScalarFieldEnum[]
 }
 
 /**

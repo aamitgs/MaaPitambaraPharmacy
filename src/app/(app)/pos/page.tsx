@@ -11,6 +11,8 @@ export default async function PosPage() {
       doctors={data.doctors}
       branchId={data.branchId}
       staffDiscountCapPercent={data.staffDiscountCapPercent}
+      offlineSyncMaxHours={data.offlineSyncMaxHours}
+      wholesaleBillingEnabled={data.wholesaleBillingEnabled}
       role={data.role}
       schemes={data.schemes}
       tenantId={data.tenantId}

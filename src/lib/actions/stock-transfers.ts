@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole, requireSession } from "@/lib/rbac";
+import { requirePermission, requireSession } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 import { resolveConcreteBranch, resolveSelectedBranch } from "@/lib/branch-scope";
 import { serializeItem, serializeBatch } from "@/lib/serialize";
@@ -147,7 +147,7 @@ export async function createStockTransferRequest(input: CreateStockTransferInput
 }
 
 export async function approveStockTransfer(transferId: string) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("purchasing.manage");
   const tenantId = session.user.tenantId;
 
   const transfer = await prisma.stockTransfer.findFirst({
@@ -226,7 +226,7 @@ export async function approveStockTransfer(transferId: string) {
 }
 
 export async function rejectStockTransfer(transferId: string) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("purchasing.manage");
   const tenantId = session.user.tenantId;
 
   const transfer = await prisma.stockTransfer.findFirst({ where: { id: transferId, tenantId } });

@@ -1,7 +1,8 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { requireRole } from "@/lib/rbac";
+import { localDateWindow } from "@/lib/date-range";
+import { requirePermission } from "@/lib/rbac";
 import { getBranchFilter } from "@/lib/branch-scope";
 
 function round2(n: number) {
@@ -9,9 +10,7 @@ function round2(n: number) {
 }
 
 function dateWindow(from: string, to: string) {
-  const fromDate = new Date(from);
-  const toDate = new Date(to);
-  toDate.setHours(23, 59, 59, 999);
+  const { fromDate, toDate } = localDateWindow(from, to);
   return { fromDate, toDate };
 }
 
@@ -32,7 +31,7 @@ export interface MarginRow {
  * item can have been bought at different rates.
  */
 async function computeMarginLines(from: string, to: string) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("reports.view");
   const branchFilter = await getBranchFilter(session.user.tenantId, session.user.role);
   const { fromDate, toDate } = dateWindow(from, to);
 
@@ -130,7 +129,7 @@ export interface MoverRow {
  * surface an item that didn't sell at all.
  */
 export async function getMoverReport(from: string, to: string, thresholdQty: number): Promise<MoverRow[]> {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("reports.view");
   const tenantId = session.user.tenantId;
   const branchFilter = await getBranchFilter(tenantId, session.user.role);
   const { fromDate, toDate } = dateWindow(from, to);

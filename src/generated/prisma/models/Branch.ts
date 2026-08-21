@@ -323,6 +323,13 @@ export type BranchWhereInput = {
   batches?: Prisma.BatchListRelationFilter
   purchaseReturns?: Prisma.PurchaseReturnListRelationFilter
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryListRelationFilter
+  salesReturns?: Prisma.SalesReturnListRelationFilter
+  cashUps?: Prisma.CashUpListRelationFilter
+  stockAdjustments?: Prisma.StockAdjustmentListRelationFilter
+  heldSales?: Prisma.HeldSaleListRelationFilter
+  stockCounts?: Prisma.StockCountListRelationFilter
+  expenses?: Prisma.ExpenseListRelationFilter
+  promiseOrders?: Prisma.PromiseOrderListRelationFilter
   stockTransfersFrom?: Prisma.StockTransferListRelationFilter
   stockTransfersTo?: Prisma.StockTransferListRelationFilter
 }
@@ -353,6 +360,13 @@ export type BranchOrderByWithRelationInput = {
   batches?: Prisma.BatchOrderByRelationAggregateInput
   purchaseReturns?: Prisma.PurchaseReturnOrderByRelationAggregateInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryOrderByRelationAggregateInput
+  salesReturns?: Prisma.SalesReturnOrderByRelationAggregateInput
+  cashUps?: Prisma.CashUpOrderByRelationAggregateInput
+  stockAdjustments?: Prisma.StockAdjustmentOrderByRelationAggregateInput
+  heldSales?: Prisma.HeldSaleOrderByRelationAggregateInput
+  stockCounts?: Prisma.StockCountOrderByRelationAggregateInput
+  expenses?: Prisma.ExpenseOrderByRelationAggregateInput
+  promiseOrders?: Prisma.PromiseOrderOrderByRelationAggregateInput
   stockTransfersFrom?: Prisma.StockTransferOrderByRelationAggregateInput
   stockTransfersTo?: Prisma.StockTransferOrderByRelationAggregateInput
 }
@@ -386,6 +400,13 @@ export type BranchWhereUniqueInput = Prisma.AtLeast<{
   batches?: Prisma.BatchListRelationFilter
   purchaseReturns?: Prisma.PurchaseReturnListRelationFilter
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryListRelationFilter
+  salesReturns?: Prisma.SalesReturnListRelationFilter
+  cashUps?: Prisma.CashUpListRelationFilter
+  stockAdjustments?: Prisma.StockAdjustmentListRelationFilter
+  heldSales?: Prisma.HeldSaleListRelationFilter
+  stockCounts?: Prisma.StockCountListRelationFilter
+  expenses?: Prisma.ExpenseListRelationFilter
+  promiseOrders?: Prisma.PromiseOrderListRelationFilter
   stockTransfersFrom?: Prisma.StockTransferListRelationFilter
   stockTransfersTo?: Prisma.StockTransferListRelationFilter
 }, "id">
@@ -465,6 +486,13 @@ export type BranchCreateInput = {
   batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
 }
@@ -494,6 +522,13 @@ export type BranchUncheckedCreateInput = {
   batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
 }
@@ -523,6 +558,13 @@ export type BranchUpdateInput = {
   batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
 }
@@ -552,6 +594,13 @@ export type BranchUncheckedUpdateInput = {
   batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
 }
@@ -744,10 +793,6 @@ export type BranchUncheckedUpdateManyWithoutTenantNestedInput = {
   deleteMany?: Prisma.BranchScalarWhereInput | Prisma.BranchScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type BranchCreateNestedOneWithoutBatchesInput = {
   create?: Prisma.XOR<Prisma.BranchCreateWithoutBatchesInput, Prisma.BranchUncheckedCreateWithoutBatchesInput>
   connectOrCreate?: Prisma.BranchCreateOrConnectWithoutBatchesInput
@@ -760,6 +805,104 @@ export type BranchUpdateOneRequiredWithoutBatchesNestedInput = {
   upsert?: Prisma.BranchUpsertWithoutBatchesInput
   connect?: Prisma.BranchWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutBatchesInput, Prisma.BranchUpdateWithoutBatchesInput>, Prisma.BranchUncheckedUpdateWithoutBatchesInput>
+}
+
+export type BranchCreateNestedOneWithoutPromiseOrdersInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutPromiseOrdersInput, Prisma.BranchUncheckedCreateWithoutPromiseOrdersInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutPromiseOrdersInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutPromiseOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutPromiseOrdersInput, Prisma.BranchUncheckedCreateWithoutPromiseOrdersInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutPromiseOrdersInput
+  upsert?: Prisma.BranchUpsertWithoutPromiseOrdersInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutPromiseOrdersInput, Prisma.BranchUpdateWithoutPromiseOrdersInput>, Prisma.BranchUncheckedUpdateWithoutPromiseOrdersInput>
+}
+
+export type BranchCreateNestedOneWithoutExpensesInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutExpensesInput, Prisma.BranchUncheckedCreateWithoutExpensesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutExpensesInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutExpensesNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutExpensesInput, Prisma.BranchUncheckedCreateWithoutExpensesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutExpensesInput
+  upsert?: Prisma.BranchUpsertWithoutExpensesInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutExpensesInput, Prisma.BranchUpdateWithoutExpensesInput>, Prisma.BranchUncheckedUpdateWithoutExpensesInput>
+}
+
+export type BranchCreateNestedOneWithoutSalesReturnsInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutSalesReturnsInput, Prisma.BranchUncheckedCreateWithoutSalesReturnsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutSalesReturnsInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutSalesReturnsNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutSalesReturnsInput, Prisma.BranchUncheckedCreateWithoutSalesReturnsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutSalesReturnsInput
+  upsert?: Prisma.BranchUpsertWithoutSalesReturnsInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutSalesReturnsInput, Prisma.BranchUpdateWithoutSalesReturnsInput>, Prisma.BranchUncheckedUpdateWithoutSalesReturnsInput>
+}
+
+export type BranchCreateNestedOneWithoutStockCountsInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutStockCountsInput, Prisma.BranchUncheckedCreateWithoutStockCountsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutStockCountsInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutStockCountsNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutStockCountsInput, Prisma.BranchUncheckedCreateWithoutStockCountsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutStockCountsInput
+  upsert?: Prisma.BranchUpsertWithoutStockCountsInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutStockCountsInput, Prisma.BranchUpdateWithoutStockCountsInput>, Prisma.BranchUncheckedUpdateWithoutStockCountsInput>
+}
+
+export type BranchCreateNestedOneWithoutHeldSalesInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutHeldSalesInput, Prisma.BranchUncheckedCreateWithoutHeldSalesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutHeldSalesInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutHeldSalesNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutHeldSalesInput, Prisma.BranchUncheckedCreateWithoutHeldSalesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutHeldSalesInput
+  upsert?: Prisma.BranchUpsertWithoutHeldSalesInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutHeldSalesInput, Prisma.BranchUpdateWithoutHeldSalesInput>, Prisma.BranchUncheckedUpdateWithoutHeldSalesInput>
+}
+
+export type BranchCreateNestedOneWithoutStockAdjustmentsInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutStockAdjustmentsInput, Prisma.BranchUncheckedCreateWithoutStockAdjustmentsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutStockAdjustmentsInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutStockAdjustmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutStockAdjustmentsInput, Prisma.BranchUncheckedCreateWithoutStockAdjustmentsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutStockAdjustmentsInput
+  upsert?: Prisma.BranchUpsertWithoutStockAdjustmentsInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutStockAdjustmentsInput, Prisma.BranchUpdateWithoutStockAdjustmentsInput>, Prisma.BranchUncheckedUpdateWithoutStockAdjustmentsInput>
+}
+
+export type BranchCreateNestedOneWithoutCashUpsInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutCashUpsInput, Prisma.BranchUncheckedCreateWithoutCashUpsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutCashUpsInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutCashUpsNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutCashUpsInput, Prisma.BranchUncheckedCreateWithoutCashUpsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutCashUpsInput
+  upsert?: Prisma.BranchUpsertWithoutCashUpsInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutCashUpsInput, Prisma.BranchUpdateWithoutCashUpsInput>, Prisma.BranchUncheckedUpdateWithoutCashUpsInput>
 }
 
 export type BranchCreateNestedOneWithoutSalesInvoicesInput = {
@@ -884,6 +1027,13 @@ export type BranchCreateWithoutTenantInput = {
   batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
 }
@@ -912,6 +1062,13 @@ export type BranchUncheckedCreateWithoutTenantInput = {
   batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
 }
@@ -990,6 +1147,13 @@ export type BranchCreateWithoutBatchesInput = {
   grns?: Prisma.GrnCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
 }
@@ -1018,6 +1182,13 @@ export type BranchUncheckedCreateWithoutBatchesInput = {
   grns?: Prisma.GrnUncheckedCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
 }
@@ -1062,6 +1233,13 @@ export type BranchUpdateWithoutBatchesInput = {
   grns?: Prisma.GrnUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
 }
@@ -1090,6 +1268,1105 @@ export type BranchUncheckedUpdateWithoutBatchesInput = {
   grns?: Prisma.GrnUncheckedUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchCreateWithoutPromiseOrdersInput = {
+  id?: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutBranchesInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchUncheckedCreateWithoutPromiseOrdersInput = {
+  id?: string
+  tenantId: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchCreateOrConnectWithoutPromiseOrdersInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutPromiseOrdersInput, Prisma.BranchUncheckedCreateWithoutPromiseOrdersInput>
+}
+
+export type BranchUpsertWithoutPromiseOrdersInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutPromiseOrdersInput, Prisma.BranchUncheckedUpdateWithoutPromiseOrdersInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutPromiseOrdersInput, Prisma.BranchUncheckedCreateWithoutPromiseOrdersInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutPromiseOrdersInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutPromiseOrdersInput, Prisma.BranchUncheckedUpdateWithoutPromiseOrdersInput>
+}
+
+export type BranchUpdateWithoutPromiseOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutBranchesNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutPromiseOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchCreateWithoutExpensesInput = {
+  id?: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutBranchesInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchUncheckedCreateWithoutExpensesInput = {
+  id?: string
+  tenantId: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchCreateOrConnectWithoutExpensesInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutExpensesInput, Prisma.BranchUncheckedCreateWithoutExpensesInput>
+}
+
+export type BranchUpsertWithoutExpensesInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutExpensesInput, Prisma.BranchUncheckedUpdateWithoutExpensesInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutExpensesInput, Prisma.BranchUncheckedCreateWithoutExpensesInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutExpensesInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutExpensesInput, Prisma.BranchUncheckedUpdateWithoutExpensesInput>
+}
+
+export type BranchUpdateWithoutExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutBranchesNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchCreateWithoutSalesReturnsInput = {
+  id?: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutBranchesInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchUncheckedCreateWithoutSalesReturnsInput = {
+  id?: string
+  tenantId: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchCreateOrConnectWithoutSalesReturnsInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutSalesReturnsInput, Prisma.BranchUncheckedCreateWithoutSalesReturnsInput>
+}
+
+export type BranchUpsertWithoutSalesReturnsInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutSalesReturnsInput, Prisma.BranchUncheckedUpdateWithoutSalesReturnsInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutSalesReturnsInput, Prisma.BranchUncheckedCreateWithoutSalesReturnsInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutSalesReturnsInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutSalesReturnsInput, Prisma.BranchUncheckedUpdateWithoutSalesReturnsInput>
+}
+
+export type BranchUpdateWithoutSalesReturnsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutBranchesNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutSalesReturnsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchCreateWithoutStockCountsInput = {
+  id?: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutBranchesInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchUncheckedCreateWithoutStockCountsInput = {
+  id?: string
+  tenantId: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchCreateOrConnectWithoutStockCountsInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutStockCountsInput, Prisma.BranchUncheckedCreateWithoutStockCountsInput>
+}
+
+export type BranchUpsertWithoutStockCountsInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutStockCountsInput, Prisma.BranchUncheckedUpdateWithoutStockCountsInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutStockCountsInput, Prisma.BranchUncheckedCreateWithoutStockCountsInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutStockCountsInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutStockCountsInput, Prisma.BranchUncheckedUpdateWithoutStockCountsInput>
+}
+
+export type BranchUpdateWithoutStockCountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutBranchesNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutStockCountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchCreateWithoutHeldSalesInput = {
+  id?: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutBranchesInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchUncheckedCreateWithoutHeldSalesInput = {
+  id?: string
+  tenantId: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchCreateOrConnectWithoutHeldSalesInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutHeldSalesInput, Prisma.BranchUncheckedCreateWithoutHeldSalesInput>
+}
+
+export type BranchUpsertWithoutHeldSalesInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutHeldSalesInput, Prisma.BranchUncheckedUpdateWithoutHeldSalesInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutHeldSalesInput, Prisma.BranchUncheckedCreateWithoutHeldSalesInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutHeldSalesInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutHeldSalesInput, Prisma.BranchUncheckedUpdateWithoutHeldSalesInput>
+}
+
+export type BranchUpdateWithoutHeldSalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutBranchesNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutHeldSalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchCreateWithoutStockAdjustmentsInput = {
+  id?: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutBranchesInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchUncheckedCreateWithoutStockAdjustmentsInput = {
+  id?: string
+  tenantId: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchCreateOrConnectWithoutStockAdjustmentsInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutStockAdjustmentsInput, Prisma.BranchUncheckedCreateWithoutStockAdjustmentsInput>
+}
+
+export type BranchUpsertWithoutStockAdjustmentsInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutStockAdjustmentsInput, Prisma.BranchUncheckedUpdateWithoutStockAdjustmentsInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutStockAdjustmentsInput, Prisma.BranchUncheckedCreateWithoutStockAdjustmentsInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutStockAdjustmentsInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutStockAdjustmentsInput, Prisma.BranchUncheckedUpdateWithoutStockAdjustmentsInput>
+}
+
+export type BranchUpdateWithoutStockAdjustmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutBranchesNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutStockAdjustmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchCreateWithoutCashUpsInput = {
+  id?: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutBranchesInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchUncheckedCreateWithoutCashUpsInput = {
+  id?: string
+  tenantId: string
+  name: string
+  licensedAddress: string
+  phone?: string | null
+  landline?: string | null
+  gstin?: string | null
+  pan?: string | null
+  drugLicenseRetailNo?: string | null
+  drugLicenseWholesaleNo?: string | null
+  pharmacistName?: string | null
+  pharmacistRegistrationNo?: string | null
+  narcoticLicenseNo?: string | null
+  fssaiNo?: string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: boolean
+  ewayBillThreshold?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutBranchInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutBranchInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
+  stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
+  stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
+}
+
+export type BranchCreateOrConnectWithoutCashUpsInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutCashUpsInput, Prisma.BranchUncheckedCreateWithoutCashUpsInput>
+}
+
+export type BranchUpsertWithoutCashUpsInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutCashUpsInput, Prisma.BranchUncheckedUpdateWithoutCashUpsInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutCashUpsInput, Prisma.BranchUncheckedCreateWithoutCashUpsInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutCashUpsInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutCashUpsInput, Prisma.BranchUncheckedUpdateWithoutCashUpsInput>
+}
+
+export type BranchUpdateWithoutCashUpsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutBranchesNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
+  stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
+  stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutCashUpsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  licensedAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseRetailNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  drugLicenseWholesaleNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pharmacistRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  narcoticLicenseNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fssaiNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseExpiryDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  einvoiceEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ewayBillThreshold?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutBranchNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
 }
@@ -1118,6 +2395,13 @@ export type BranchCreateWithoutSalesInvoicesInput = {
   batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
 }
@@ -1146,6 +2430,13 @@ export type BranchUncheckedCreateWithoutSalesInvoicesInput = {
   batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
 }
@@ -1190,6 +2481,13 @@ export type BranchUpdateWithoutSalesInvoicesInput = {
   batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
 }
@@ -1218,6 +2516,13 @@ export type BranchUncheckedUpdateWithoutSalesInvoicesInput = {
   batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
 }
@@ -1246,6 +2551,13 @@ export type BranchCreateWithoutPurchaseOrdersInput = {
   batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
 }
@@ -1274,6 +2586,13 @@ export type BranchUncheckedCreateWithoutPurchaseOrdersInput = {
   batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
 }
@@ -1318,6 +2637,13 @@ export type BranchUpdateWithoutPurchaseOrdersInput = {
   batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
 }
@@ -1346,6 +2672,13 @@ export type BranchUncheckedUpdateWithoutPurchaseOrdersInput = {
   batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
 }
@@ -1374,6 +2707,13 @@ export type BranchCreateWithoutGrnsInput = {
   batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
 }
@@ -1402,6 +2742,13 @@ export type BranchUncheckedCreateWithoutGrnsInput = {
   batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
 }
@@ -1446,6 +2793,13 @@ export type BranchUpdateWithoutGrnsInput = {
   batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
 }
@@ -1474,6 +2828,13 @@ export type BranchUncheckedUpdateWithoutGrnsInput = {
   batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
 }
@@ -1502,6 +2863,13 @@ export type BranchCreateWithoutPurchaseReturnsInput = {
   grns?: Prisma.GrnCreateNestedManyWithoutBranchInput
   batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
 }
@@ -1530,6 +2898,13 @@ export type BranchUncheckedCreateWithoutPurchaseReturnsInput = {
   grns?: Prisma.GrnUncheckedCreateNestedManyWithoutBranchInput
   batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
 }
@@ -1574,6 +2949,13 @@ export type BranchUpdateWithoutPurchaseReturnsInput = {
   grns?: Prisma.GrnUpdateManyWithoutBranchNestedInput
   batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
 }
@@ -1602,6 +2984,13 @@ export type BranchUncheckedUpdateWithoutPurchaseReturnsInput = {
   grns?: Prisma.GrnUncheckedUpdateManyWithoutBranchNestedInput
   batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
 }
@@ -1631,6 +3020,13 @@ export type BranchCreateWithoutStockTransfersFromInput = {
   batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
   stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
 }
 
@@ -1659,6 +3055,13 @@ export type BranchUncheckedCreateWithoutStockTransfersFromInput = {
   batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
   stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
 }
 
@@ -1692,6 +3095,13 @@ export type BranchCreateWithoutStockTransfersToInput = {
   batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
 }
 
@@ -1720,6 +3130,13 @@ export type BranchUncheckedCreateWithoutStockTransfersToInput = {
   batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
 }
 
@@ -1764,6 +3181,13 @@ export type BranchUpdateWithoutStockTransfersFromInput = {
   batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
 }
 
@@ -1792,6 +3216,13 @@ export type BranchUncheckedUpdateWithoutStockTransfersFromInput = {
   batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
 }
 
@@ -1831,6 +3262,13 @@ export type BranchUpdateWithoutStockTransfersToInput = {
   batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
 }
 
@@ -1859,6 +3297,13 @@ export type BranchUncheckedUpdateWithoutStockTransfersToInput = {
   batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
 }
 
@@ -1886,6 +3331,13 @@ export type BranchCreateWithoutNarcoticRegisterEntriesInput = {
   grns?: Prisma.GrnCreateNestedManyWithoutBranchInput
   batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferCreateNestedManyWithoutToBranchInput
 }
@@ -1914,6 +3366,13 @@ export type BranchUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
   grns?: Prisma.GrnUncheckedCreateNestedManyWithoutBranchInput
   batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutBranchInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutBranchInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutBranchInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutBranchInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutBranchInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutBranchInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutBranchInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutBranchInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedCreateNestedManyWithoutFromBranchInput
   stockTransfersTo?: Prisma.StockTransferUncheckedCreateNestedManyWithoutToBranchInput
 }
@@ -1958,6 +3417,13 @@ export type BranchUpdateWithoutNarcoticRegisterEntriesInput = {
   grns?: Prisma.GrnUpdateManyWithoutBranchNestedInput
   batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
 }
@@ -1986,6 +3452,13 @@ export type BranchUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
   grns?: Prisma.GrnUncheckedUpdateManyWithoutBranchNestedInput
   batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
 }
@@ -2034,6 +3507,13 @@ export type BranchUpdateWithoutTenantInput = {
   batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUpdateManyWithoutToBranchNestedInput
 }
@@ -2062,6 +3542,13 @@ export type BranchUncheckedUpdateWithoutTenantInput = {
   batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutBranchNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutBranchNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutBranchNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutBranchNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutBranchNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutBranchNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutBranchNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutBranchNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutBranchNestedInput
   stockTransfersFrom?: Prisma.StockTransferUncheckedUpdateManyWithoutFromBranchNestedInput
   stockTransfersTo?: Prisma.StockTransferUncheckedUpdateManyWithoutToBranchNestedInput
 }
@@ -2098,6 +3585,13 @@ export type BranchCountOutputType = {
   batches: number
   purchaseReturns: number
   narcoticRegisterEntries: number
+  salesReturns: number
+  cashUps: number
+  stockAdjustments: number
+  heldSales: number
+  stockCounts: number
+  expenses: number
+  promiseOrders: number
   stockTransfersFrom: number
   stockTransfersTo: number
 }
@@ -2109,6 +3603,13 @@ export type BranchCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   batches?: boolean | BranchCountOutputTypeCountBatchesArgs
   purchaseReturns?: boolean | BranchCountOutputTypeCountPurchaseReturnsArgs
   narcoticRegisterEntries?: boolean | BranchCountOutputTypeCountNarcoticRegisterEntriesArgs
+  salesReturns?: boolean | BranchCountOutputTypeCountSalesReturnsArgs
+  cashUps?: boolean | BranchCountOutputTypeCountCashUpsArgs
+  stockAdjustments?: boolean | BranchCountOutputTypeCountStockAdjustmentsArgs
+  heldSales?: boolean | BranchCountOutputTypeCountHeldSalesArgs
+  stockCounts?: boolean | BranchCountOutputTypeCountStockCountsArgs
+  expenses?: boolean | BranchCountOutputTypeCountExpensesArgs
+  promiseOrders?: boolean | BranchCountOutputTypeCountPromiseOrdersArgs
   stockTransfersFrom?: boolean | BranchCountOutputTypeCountStockTransfersFromArgs
   stockTransfersTo?: boolean | BranchCountOutputTypeCountStockTransfersToArgs
 }
@@ -2168,6 +3669,55 @@ export type BranchCountOutputTypeCountNarcoticRegisterEntriesArgs<ExtArgs extend
 /**
  * BranchCountOutputType without action
  */
+export type BranchCountOutputTypeCountSalesReturnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalesReturnWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountCashUpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CashUpWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountStockAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockAdjustmentWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountHeldSalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HeldSaleWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountStockCountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockCountWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExpenseWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountPromiseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromiseOrderWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
 export type BranchCountOutputTypeCountStockTransfersFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.StockTransferWhereInput
 }
@@ -2206,6 +3756,13 @@ export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   batches?: boolean | Prisma.Branch$batchesArgs<ExtArgs>
   purchaseReturns?: boolean | Prisma.Branch$purchaseReturnsArgs<ExtArgs>
   narcoticRegisterEntries?: boolean | Prisma.Branch$narcoticRegisterEntriesArgs<ExtArgs>
+  salesReturns?: boolean | Prisma.Branch$salesReturnsArgs<ExtArgs>
+  cashUps?: boolean | Prisma.Branch$cashUpsArgs<ExtArgs>
+  stockAdjustments?: boolean | Prisma.Branch$stockAdjustmentsArgs<ExtArgs>
+  heldSales?: boolean | Prisma.Branch$heldSalesArgs<ExtArgs>
+  stockCounts?: boolean | Prisma.Branch$stockCountsArgs<ExtArgs>
+  expenses?: boolean | Prisma.Branch$expensesArgs<ExtArgs>
+  promiseOrders?: boolean | Prisma.Branch$promiseOrdersArgs<ExtArgs>
   stockTransfersFrom?: boolean | Prisma.Branch$stockTransfersFromArgs<ExtArgs>
   stockTransfersTo?: boolean | Prisma.Branch$stockTransfersToArgs<ExtArgs>
   _count?: boolean | Prisma.BranchCountOutputTypeDefaultArgs<ExtArgs>
@@ -2285,6 +3842,13 @@ export type BranchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   batches?: boolean | Prisma.Branch$batchesArgs<ExtArgs>
   purchaseReturns?: boolean | Prisma.Branch$purchaseReturnsArgs<ExtArgs>
   narcoticRegisterEntries?: boolean | Prisma.Branch$narcoticRegisterEntriesArgs<ExtArgs>
+  salesReturns?: boolean | Prisma.Branch$salesReturnsArgs<ExtArgs>
+  cashUps?: boolean | Prisma.Branch$cashUpsArgs<ExtArgs>
+  stockAdjustments?: boolean | Prisma.Branch$stockAdjustmentsArgs<ExtArgs>
+  heldSales?: boolean | Prisma.Branch$heldSalesArgs<ExtArgs>
+  stockCounts?: boolean | Prisma.Branch$stockCountsArgs<ExtArgs>
+  expenses?: boolean | Prisma.Branch$expensesArgs<ExtArgs>
+  promiseOrders?: boolean | Prisma.Branch$promiseOrdersArgs<ExtArgs>
   stockTransfersFrom?: boolean | Prisma.Branch$stockTransfersFromArgs<ExtArgs>
   stockTransfersTo?: boolean | Prisma.Branch$stockTransfersToArgs<ExtArgs>
   _count?: boolean | Prisma.BranchCountOutputTypeDefaultArgs<ExtArgs>
@@ -2306,6 +3870,13 @@ export type $BranchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     batches: Prisma.$BatchPayload<ExtArgs>[]
     purchaseReturns: Prisma.$PurchaseReturnPayload<ExtArgs>[]
     narcoticRegisterEntries: Prisma.$NarcoticRegisterEntryPayload<ExtArgs>[]
+    salesReturns: Prisma.$SalesReturnPayload<ExtArgs>[]
+    cashUps: Prisma.$CashUpPayload<ExtArgs>[]
+    stockAdjustments: Prisma.$StockAdjustmentPayload<ExtArgs>[]
+    heldSales: Prisma.$HeldSalePayload<ExtArgs>[]
+    stockCounts: Prisma.$StockCountPayload<ExtArgs>[]
+    expenses: Prisma.$ExpensePayload<ExtArgs>[]
+    promiseOrders: Prisma.$PromiseOrderPayload<ExtArgs>[]
     stockTransfersFrom: Prisma.$StockTransferPayload<ExtArgs>[]
     stockTransfersTo: Prisma.$StockTransferPayload<ExtArgs>[]
   }
@@ -2729,6 +4300,13 @@ export interface Prisma__BranchClient<T, Null = never, ExtArgs extends runtime.T
   batches<T extends Prisma.Branch$batchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$batchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   purchaseReturns<T extends Prisma.Branch$purchaseReturnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$purchaseReturnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseReturnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   narcoticRegisterEntries<T extends Prisma.Branch$narcoticRegisterEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$narcoticRegisterEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NarcoticRegisterEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  salesReturns<T extends Prisma.Branch$salesReturnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$salesReturnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesReturnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cashUps<T extends Prisma.Branch$cashUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$cashUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CashUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockAdjustments<T extends Prisma.Branch$stockAdjustmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$stockAdjustmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockAdjustmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  heldSales<T extends Prisma.Branch$heldSalesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$heldSalesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HeldSalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockCounts<T extends Prisma.Branch$stockCountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$stockCountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockCountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  expenses<T extends Prisma.Branch$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promiseOrders<T extends Prisma.Branch$promiseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$promiseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromiseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockTransfersFrom<T extends Prisma.Branch$stockTransfersFromArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$stockTransfersFromArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockTransfersTo<T extends Prisma.Branch$stockTransfersToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$stockTransfersToArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -3320,6 +4898,174 @@ export type Branch$narcoticRegisterEntriesArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.NarcoticRegisterEntryScalarFieldEnum | Prisma.NarcoticRegisterEntryScalarFieldEnum[]
+}
+
+/**
+ * Branch.salesReturns
+ */
+export type Branch$salesReturnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalesReturn
+   */
+  select?: Prisma.SalesReturnSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SalesReturn
+   */
+  omit?: Prisma.SalesReturnOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalesReturnInclude<ExtArgs> | null
+  where?: Prisma.SalesReturnWhereInput
+  orderBy?: Prisma.SalesReturnOrderByWithRelationInput | Prisma.SalesReturnOrderByWithRelationInput[]
+  cursor?: Prisma.SalesReturnWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalesReturnScalarFieldEnum | Prisma.SalesReturnScalarFieldEnum[]
+}
+
+/**
+ * Branch.cashUps
+ */
+export type Branch$cashUpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CashUp
+   */
+  select?: Prisma.CashUpSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CashUp
+   */
+  omit?: Prisma.CashUpOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CashUpInclude<ExtArgs> | null
+  where?: Prisma.CashUpWhereInput
+  orderBy?: Prisma.CashUpOrderByWithRelationInput | Prisma.CashUpOrderByWithRelationInput[]
+  cursor?: Prisma.CashUpWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CashUpScalarFieldEnum | Prisma.CashUpScalarFieldEnum[]
+}
+
+/**
+ * Branch.stockAdjustments
+ */
+export type Branch$stockAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockAdjustment
+   */
+  select?: Prisma.StockAdjustmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockAdjustment
+   */
+  omit?: Prisma.StockAdjustmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockAdjustmentInclude<ExtArgs> | null
+  where?: Prisma.StockAdjustmentWhereInput
+  orderBy?: Prisma.StockAdjustmentOrderByWithRelationInput | Prisma.StockAdjustmentOrderByWithRelationInput[]
+  cursor?: Prisma.StockAdjustmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockAdjustmentScalarFieldEnum | Prisma.StockAdjustmentScalarFieldEnum[]
+}
+
+/**
+ * Branch.heldSales
+ */
+export type Branch$heldSalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HeldSale
+   */
+  select?: Prisma.HeldSaleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HeldSale
+   */
+  omit?: Prisma.HeldSaleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HeldSaleInclude<ExtArgs> | null
+  where?: Prisma.HeldSaleWhereInput
+  orderBy?: Prisma.HeldSaleOrderByWithRelationInput | Prisma.HeldSaleOrderByWithRelationInput[]
+  cursor?: Prisma.HeldSaleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HeldSaleScalarFieldEnum | Prisma.HeldSaleScalarFieldEnum[]
+}
+
+/**
+ * Branch.stockCounts
+ */
+export type Branch$stockCountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockCount
+   */
+  select?: Prisma.StockCountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockCount
+   */
+  omit?: Prisma.StockCountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockCountInclude<ExtArgs> | null
+  where?: Prisma.StockCountWhereInput
+  orderBy?: Prisma.StockCountOrderByWithRelationInput | Prisma.StockCountOrderByWithRelationInput[]
+  cursor?: Prisma.StockCountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockCountScalarFieldEnum | Prisma.StockCountScalarFieldEnum[]
+}
+
+/**
+ * Branch.expenses
+ */
+export type Branch$expensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Expense
+   */
+  select?: Prisma.ExpenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Expense
+   */
+  omit?: Prisma.ExpenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExpenseInclude<ExtArgs> | null
+  where?: Prisma.ExpenseWhereInput
+  orderBy?: Prisma.ExpenseOrderByWithRelationInput | Prisma.ExpenseOrderByWithRelationInput[]
+  cursor?: Prisma.ExpenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExpenseScalarFieldEnum | Prisma.ExpenseScalarFieldEnum[]
+}
+
+/**
+ * Branch.promiseOrders
+ */
+export type Branch$promiseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromiseOrder
+   */
+  select?: Prisma.PromiseOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PromiseOrder
+   */
+  omit?: Prisma.PromiseOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromiseOrderInclude<ExtArgs> | null
+  where?: Prisma.PromiseOrderWhereInput
+  orderBy?: Prisma.PromiseOrderOrderByWithRelationInput | Prisma.PromiseOrderOrderByWithRelationInput[]
+  cursor?: Prisma.PromiseOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromiseOrderScalarFieldEnum | Prisma.PromiseOrderScalarFieldEnum[]
 }
 
 /**

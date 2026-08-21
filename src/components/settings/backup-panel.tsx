@@ -4,7 +4,10 @@ import { useState, useTransition } from "react";
 import { format, formatDistanceToNow } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Separator } from "@/components/ui/separator";
 import { createManualBackup } from "@/lib/actions/backup";
+import { RestorePanel } from "./restore-panel";
+import { DataWorkbookPanel } from "./data-workbook-panel";
 import { toast } from "sonner";
 import { AlertTriangle, CheckCircle2, DownloadCloud, Loader2 } from "lucide-react";
 
@@ -19,10 +22,13 @@ export function BackupPanel({
   lastBackupAt,
   lastBackupStatus,
   isStale,
+  canRestore,
 }: {
   lastBackupAt: Date | null;
   lastBackupStatus: string | null;
   isStale: boolean;
+  /** Restore is owner-only — a pharmacist may back up but not overwrite. */
+  canRestore: boolean;
 }) {
   const [pending, startTransition] = useTransition();
   const [status, setStatus] = useState({ lastBackupAt, lastBackupStatus, isStale });
@@ -41,7 +47,7 @@ export function BackupPanel({
         a.remove();
         URL.revokeObjectURL(url);
         setStatus({ lastBackupAt: new Date(), lastBackupStatus: "success", isStale: false });
-        toast.success("Backup downloaded");
+        toast.success(`Backup downloaded — ${result.totalRows.toLocaleString()} rows`);
       } catch (e) {
         setStatus((s) => ({ ...s, lastBackupStatus: "failed" }));
         toast.error(e instanceof Error ? e.message : "Backup failed");
@@ -54,9 +60,10 @@ export function BackupPanel({
       <div>
         <h2 className="text-sm font-medium">Local backup</h2>
         <p className="text-sm text-muted-foreground">
-          Exports items, batches, invoices, customers, and doctors as an AES-256 encrypted file
-          that downloads to this device. Keep the file and your <code>BACKUP_ENCRYPTION_KEY</code>{" "}
-          together somewhere safe — both are needed to restore.
+          Exports everything this pharmacy owns — stock, sales, purchases, returns, ledgers,
+          registers, staff and settings — as an AES-256 encrypted file that downloads to this
+          device. Keep the file and your <code>BACKUP_ENCRYPTION_KEY</code> together somewhere
+          safe: both are needed to restore.
         </p>
       </div>
 
@@ -98,6 +105,15 @@ export function BackupPanel({
           the README for a sample crontab entry.
         </p>
       </div>
+
+      {canRestore && (
+        <>
+          <Separator />
+          <RestorePanel />
+          <Separator />
+          <DataWorkbookPanel />
+        </>
+      )}
     </div>
   );
 }

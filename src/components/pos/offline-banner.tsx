@@ -15,6 +15,7 @@ const STATUS_LABEL: Record<PendingSale["status"], string> = {
   synced: "Synced",
   conflict: "Conflict — needs review",
   failed: "Failed — will retry",
+  stale: "Held — too old to post by itself",
 };
 
 const STATUS_COLOR: Record<PendingSale["status"], string> = {
@@ -23,6 +24,7 @@ const STATUS_COLOR: Record<PendingSale["status"], string> = {
   synced: "bg-success/15 text-success",
   conflict: "bg-destructive/15 text-destructive",
   failed: "bg-destructive/10 text-destructive",
+  stale: "bg-warning/25 text-warning-foreground",
 };
 
 /**
@@ -37,12 +39,16 @@ export function OfflineBanner({
   pendingSales,
   onRetrySync,
   onDiscard,
+  onPostAnyway,
 }: {
   isOnline: boolean;
   syncing: boolean;
   pendingSales: PendingSale[];
   onRetrySync: () => void;
   onDiscard: (localId: string) => void;
+  /// Posts one held sale despite its age — a deliberate, per-sale decision,
+  /// never a bulk "sync everything anyway" button.
+  onPostAnyway: (localId: string) => void;
 }) {
   const [open, setOpen] = useState(false);
   const unsynced = pendingSales.filter((s) => s.status !== "synced");
@@ -100,7 +106,9 @@ export function OfflineBanner({
                         {sale.summary.itemCount} item{sale.summary.itemCount === 1 ? "" : "s"} · ₹
                         {sale.summary.total.toFixed(2)} · {sale.summary.paymentMode}
                       </span>
-                      {(sale.status === "conflict" || sale.status === "failed") && (
+                      {(sale.status === "conflict" ||
+                        sale.status === "failed" ||
+                        sale.status === "stale") && (
                         <Button
                           size="icon-sm"
                           variant="ghost"
@@ -112,7 +120,24 @@ export function OfflineBanner({
                       )}
                     </div>
                     {sale.message && (
-                      <div className="mt-1 text-destructive">{sale.message}</div>
+                      <div
+                        className={cn(
+                          "mt-1",
+                          sale.status === "stale" ? "text-warning-foreground" : "text-destructive"
+                        )}
+                      >
+                        {sale.message}
+                      </div>
+                    )}
+                    {sale.status === "stale" && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="mt-1.5 h-7 w-full text-xs"
+                        onClick={() => onPostAnyway(sale.localId)}
+                      >
+                        Post it anyway
+                      </Button>
                     )}
                     {sale.invoiceNo && (
                       <div className="mt-1 text-success">Synced as {sale.invoiceNo}</div>

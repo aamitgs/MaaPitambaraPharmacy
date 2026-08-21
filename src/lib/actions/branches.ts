@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole, requireSession } from "@/lib/rbac";
+import { requirePermission, requireSession } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 import type { LicenseType } from "@/lib/license-types";
 
@@ -45,7 +45,7 @@ export type BranchFieldsInput = z.infer<typeof branchFieldsSchema>;
 
 /** Opening a second (or third...) branch is an ownership decision, not day-to-day compliance upkeep. */
 export async function createBranch(input: BranchFieldsInput) {
-  const session = await requireRole(["owner"]);
+  const session = await requirePermission("branches.manage");
   const parsed = branchFieldsSchema.parse(input);
   const cleanExpiryDates = parsed.licenseExpiryDates
     ? Object.fromEntries(Object.entries(parsed.licenseExpiryDates).filter(([, v]) => v))
@@ -86,7 +86,7 @@ export async function createBranch(input: BranchFieldsInput) {
 }
 
 export async function getBranch(branchId: string) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("branches.manage");
   const branch = await prisma.branch.findFirst({
     where: { id: branchId, tenantId: session.user.tenantId },
   });
@@ -115,7 +115,7 @@ export async function getBranch(branchId: string) {
 
 /** Editing an existing branch's compliance profile is day-to-day upkeep — Owner or Pharmacist, matching the rest of the compliance surface. */
 export async function updateBranch(branchId: string, input: BranchFieldsInput) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("branches.manage");
   const parsed = branchFieldsSchema.parse(input);
 
   const branch = await prisma.branch.findFirst({

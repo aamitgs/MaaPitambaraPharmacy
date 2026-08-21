@@ -1,0 +1,364 @@
+"use server";
+
+import { z } from "zod";
+import { revalidatePath } from "next/cache";
+import { prisma } from "@/lib/prisma";
+import { requirePermission } from "@/lib/rbac";
+import { writeAuditLog } from "@/lib/audit";
+import { resolveTaxRate, type SlabLookup, type ResolvedRate } from "@/lib/tax/resolve";
+
+/**
+ * The GST slab master.
+ *
+ * Gated on `compliance.manage` rather than `items.manage`: changing a rate
+ * changes what every future bill charges and what gets filed, which is a
+ * different kind of decision from editing a product name.
+ */
+
+export type TaxSlabSummary = {
+  id: string;
+  name: string;
+  description: string | null;
+  isActive: boolean;
+  sortOrder: number;
+  /** Rate in force today; null when none has started yet. */
+  currentRate: number | null;
+  /** The next scheduled change, if one is dated ahead. */
+  upcoming: { rate: number; effectiveFrom: string } | null;
+  rates: { id: string; rate: number; effectiveFrom: string; note: string | null }[];
+  itemCount: number;
+  hsnCodes: string[];
+};
+
+export async function listTaxSlabs(): Promise<TaxSlabSummary[]> {
+  const session = await requirePermission("compliance.manage");
+  const now = new Date();
+
+  const slabs = await prisma.taxSlab.findMany({
+    where: { tenantId: session.user.tenantId },
+    orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+    include: {
+      rates: { orderBy: { effectiveFrom: "desc" } },
+      hsnMappings: { select: { hsnCode: true } },
+      _count: { select: { items: true } },
+    },
+  });
+
+  return slabs.map((s) => {
+    const started = s.rates.filter((r) => r.effectiveFrom <= now);
+    const future = s.rates.filter((r) => r.effectiveFrom > now);
+    // Rates come back newest-first, so the head of each list is the one
+    // that matters: the latest that has started, and the soonest to come.
+    const current = started[0] ?? null;
+    const next = future[future.length - 1] ?? null;
+    return {
+      id: s.id,
+      name: s.name,
+      description: s.description,
+      isActive: s.isActive,
+      sortOrder: s.sortOrder,
+      currentRate: current ? Number(current.rate) : null,
+      upcoming: next
+        ? { rate: Number(next.rate), effectiveFrom: next.effectiveFrom.toISOString() }
+        : null,
+      rates: s.rates.map((r) => ({
+        id: r.id,
+        rate: Number(r.rate),
+        effectiveFrom: r.effectiveFrom.toISOString(),
+        note: r.note,
+      })),
+      itemCount: s._count.items,
+      hsnCodes: s.hsnMappings.map((m) => m.hsnCode).sort(),
+    };
+  });
+}
+
+const slabSchema = z.object({
+  name: z.string().trim().min(1, "Give the slab a name").max(60),
+  description: z.string().trim().max(200).optional(),
+  sortOrder: z.coerce.number().int().min(0).max(999).default(0),
+});
+
+export async function createTaxSlab(input: z.infer<typeof slabSchema>) {
+  const session = await requirePermission("compliance.manage");
+  const parsed = slabSchema.parse(input);
+
+  const clash = await prisma.taxSlab.findFirst({
+    where: { tenantId: session.user.tenantId, name: parsed.name },
+    select: { id: true },
+  });
+  if (clash) throw new Error(`A slab called "${parsed.name}" already exists.`);
+
+  const slab = await prisma.taxSlab.create({
+    data: {
+      tenantId: session.user.tenantId,
+      name: parsed.name,
+      description: parsed.description || null,
+      sortOrder: parsed.sortOrder,
+    },
+  });
+
+  await writeAuditLog({
+    tenantId: session.user.tenantId,
+    userId: session.user.id,
+    action: "taxSlab.create",
+    entity: "TaxSlab",
+    entityId: slab.id,
+    after: { name: parsed.name },
+  });
+
+  revalidatePath("/tax-slabs");
+  return { id: slab.id };
+}
+
+const rateSchema = z.object({
+  slabId: z.string().min(1),
+  rate: z.coerce.number().min(0).max(100),
+  /** Local date string, YYYY-MM-DD. */
+  effectiveFrom: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Pick a date"),
+  note: z.string().trim().max(200).optional(),
+});
+
+/**
+ * Adds a rate to a slab from a date.
+ *
+ * A rate is never edited in place — a superseded one has to stay readable,
+ * because explaining a two-year-old invoice means knowing what was in
+ * force then. Correcting a mistake means adding another dated row.
+ */
+export async function addTaxSlabRate(input: z.infer<typeof rateSchema>) {
+  const session = await requirePermission("compliance.manage");
+  const parsed = rateSchema.parse(input);
+
+  const slab = await prisma.taxSlab.findFirst({
+    where: { id: parsed.slabId, tenantId: session.user.tenantId },
+    include: { rates: true },
+  });
+  if (!slab) throw new Error("Slab not found");
+
+  // Parsed as local midnight: a rate that starts "on the 22nd" must start
+  // at the beginning of the shop's 22nd, not 05:30 into it.
+  const [y, m, d] = parsed.effectiveFrom.split("-").map(Number);
+  const effectiveFrom = new Date(y, m - 1, d);
+
+  const duplicate = slab.rates.find(
+    (r) => r.effectiveFrom.getTime() === effectiveFrom.getTime()
+  );
+  if (duplicate) {
+    throw new Error(
+      `${slab.name} already has a rate starting ${parsed.effectiveFrom}. Pick another date, or a different slab.`
+    );
+  }
+
+  const rate = await prisma.taxSlabRate.create({
+    data: {
+      slabId: slab.id,
+      rate: parsed.rate,
+      effectiveFrom,
+      note: parsed.note || null,
+      createdByUserId: session.user.id,
+    },
+  });
+
+  await writeAuditLog({
+    tenantId: session.user.tenantId,
+    userId: session.user.id,
+    action: "taxSlab.addRate",
+    entity: "TaxSlab",
+    entityId: slab.id,
+    after: {
+      slab: slab.name,
+      rate: parsed.rate,
+      effectiveFrom: parsed.effectiveFrom,
+      note: parsed.note ?? null,
+    },
+  });
+
+  revalidatePath("/tax-slabs");
+  revalidatePath("/pos");
+  return { id: rate.id };
+}
+
+const mappingSchema = z.object({
+  hsnCode: z.string().trim().min(2, "An HSN code is at least 2 digits").max(8),
+  slabId: z.string().min(1),
+  note: z.string().trim().max(200).optional(),
+});
+
+export async function setHsnMapping(input: z.infer<typeof mappingSchema>) {
+  const session = await requirePermission("compliance.manage");
+  const parsed = mappingSchema.parse(input);
+  const tenantId = session.user.tenantId;
+
+  const slab = await prisma.taxSlab.findFirst({
+    where: { id: parsed.slabId, tenantId },
+    select: { id: true, name: true },
+  });
+  if (!slab) throw new Error("Slab not found");
+
+  const before = await prisma.hsnTaxMapping.findFirst({
+    where: { tenantId, hsnCode: parsed.hsnCode },
+    include: { slab: { select: { name: true } } },
+  });
+
+  await prisma.hsnTaxMapping.upsert({
+    where: { tenantId_hsnCode: { tenantId, hsnCode: parsed.hsnCode } },
+    create: { tenantId, hsnCode: parsed.hsnCode, slabId: slab.id, note: parsed.note || null },
+    update: { slabId: slab.id, note: parsed.note || null },
+  });
+
+  await writeAuditLog({
+    tenantId,
+    userId: session.user.id,
+    action: "taxSlab.mapHsn",
+    entity: "HsnTaxMapping",
+    entityId: parsed.hsnCode,
+    before: before ? { slab: before.slab.name } : undefined,
+    after: { hsnCode: parsed.hsnCode, slab: slab.name },
+  });
+
+  revalidatePath("/tax-slabs");
+  revalidatePath("/pos");
+}
+
+export async function removeHsnMapping(hsnCode: string) {
+  const session = await requirePermission("compliance.manage");
+  const tenantId = session.user.tenantId;
+  await prisma.hsnTaxMapping.deleteMany({ where: { tenantId, hsnCode } });
+  await writeAuditLog({
+    tenantId,
+    userId: session.user.id,
+    action: "taxSlab.unmapHsn",
+    entity: "HsnTaxMapping",
+    entityId: hsnCode,
+    before: { hsnCode },
+  });
+  revalidatePath("/tax-slabs");
+}
+
+/** Reclassifies one item. Audited, because it changes what it is taxed at. */
+export async function setItemTaxSlab(itemId: string, slabId: string | null) {
+  const session = await requirePermission("compliance.manage");
+  const tenantId = session.user.tenantId;
+
+  const item = await prisma.item.findFirst({
+    where: { id: itemId, tenantId },
+    include: { taxSlab: { select: { name: true } } },
+  });
+  if (!item) throw new Error("Item not found");
+
+  const slab = slabId
+    ? await prisma.taxSlab.findFirst({
+        where: { id: slabId, tenantId },
+        select: { id: true, name: true },
+      })
+    : null;
+  if (slabId && !slab) throw new Error("Slab not found");
+
+  await prisma.item.update({ where: { id: itemId }, data: { taxSlabId: slab?.id ?? null } });
+
+  await writeAuditLog({
+    tenantId,
+    userId: session.user.id,
+    action: "item.taxReclassify",
+    entity: "Item",
+    entityId: itemId,
+    before: { item: item.name, slab: item.taxSlab?.name ?? null },
+    after: { slab: slab?.name ?? null },
+  });
+
+  revalidatePath("/items");
+  revalidatePath("/tax-slabs");
+}
+
+/** Everything the resolver needs, loaded once. */
+export async function loadTaxContext(tenantId: string) {
+  const [slabs, mappings] = await Promise.all([
+    prisma.taxSlab.findMany({
+      where: { tenantId, isActive: true },
+      include: { rates: true },
+    }),
+    prisma.hsnTaxMapping.findMany({ where: { tenantId } }),
+  ]);
+
+  const slabsById = new Map<string, SlabLookup>(
+    slabs.map((s) => [
+      s.id,
+      {
+        id: s.id,
+        name: s.name,
+        rates: s.rates.map((r) => ({ rate: Number(r.rate), effectiveFrom: r.effectiveFrom })),
+      },
+    ])
+  );
+  const hsnToSlabId = new Map(mappings.map((m) => [m.hsnCode, m.slabId]));
+  return { slabsById, hsnToSlabId };
+}
+
+/** Resolves one item's rate, for previews and checks. */
+export async function resolveRateForItem(
+  itemId: string,
+  asOf: Date = new Date()
+): Promise<ResolvedRate> {
+  const session = await requirePermission("compliance.manage");
+  const item = await prisma.item.findFirstOrThrow({
+    where: { id: itemId, tenantId: session.user.tenantId },
+    select: { taxSlabId: true, hsnCode: true, taxRate: true },
+  });
+  const ctx = await loadTaxContext(session.user.tenantId);
+  return resolveTaxRate({
+    itemSlabId: item.taxSlabId,
+    hsnCode: item.hsnCode,
+    legacyTaxRate: Number(item.taxRate),
+    ...ctx,
+    asOf,
+  });
+}
+
+/**
+ * Removes a rate that has not taken effect yet.
+ *
+ * Rates are otherwise insert-only, and that rule exists to protect the
+ * *past*: a superseded rate has to stay readable because it explains what
+ * an old invoice charged. A future-dated rate has never applied to
+ * anything, so deleting it destroys no such explanation — and leaving a
+ * mistaken one in place is a trap that springs silently on its start date.
+ *
+ * A rate already in force stays put. Correcting that means adding another
+ * dated row, so the trail shows what happened.
+ */
+export async function deleteScheduledTaxRate(rateId: string) {
+  const session = await requirePermission("compliance.manage");
+  const tenantId = session.user.tenantId;
+
+  const rate = await prisma.taxSlabRate.findFirst({
+    where: { id: rateId, slab: { tenantId } },
+    include: { slab: { select: { id: true, name: true } } },
+  });
+  if (!rate) throw new Error("Rate not found");
+
+  if (rate.effectiveFrom <= new Date()) {
+    throw new Error(
+      "That rate is already in force and cannot be removed — a past rate is what explains the " +
+        "invoices charged under it. Add a new dated rate to supersede it instead."
+    );
+  }
+
+  await prisma.taxSlabRate.delete({ where: { id: rateId } });
+
+  await writeAuditLog({
+    tenantId,
+    userId: session.user.id,
+    action: "taxSlab.deleteScheduledRate",
+    entity: "TaxSlab",
+    entityId: rate.slab.id,
+    before: {
+      slab: rate.slab.name,
+      rate: Number(rate.rate),
+      effectiveFrom: rate.effectiveFrom.toISOString().slice(0, 10),
+      note: rate.note,
+    },
+  });
+
+  revalidatePath("/tax-slabs");
+}

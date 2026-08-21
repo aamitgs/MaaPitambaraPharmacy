@@ -1,9 +1,10 @@
 "use server";
 
 import { z } from "zod";
+import { localDateWindow } from "@/lib/date-range";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole } from "@/lib/rbac";
+import { requirePermission } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 import { getBranchFilter } from "@/lib/branch-scope";
 
@@ -16,12 +17,10 @@ import { getBranchFilter } from "@/lib/branch-scope";
  * branches" for a tenant-wide view.
  */
 export async function listNarcoticRegisterEntries(from: string, to: string) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("compliance.manage");
   const branchFilter = await getBranchFilter(session.user.tenantId, session.user.role);
 
-  const fromDate = new Date(from);
-  const toDate = new Date(to);
-  toDate.setHours(23, 59, 59, 999);
+  const { fromDate, toDate } = localDateWindow(from, to);
 
   const entries = await prisma.narcoticRegisterEntry.findMany({
     where: { tenantId: session.user.tenantId, ...branchFilter, dispensedAt: { gte: fromDate, lte: toDate } },
@@ -71,7 +70,7 @@ export type NarcoticReversalInput = z.infer<typeof reversalSchema>;
  * this tamper-evident register.
  */
 export async function createNarcoticReversal(originalEntryId: string, input: NarcoticReversalInput) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("compliance.manage");
   const parsed = reversalSchema.parse(input);
 
   const original = await prisma.narcoticRegisterEntry.findFirst({

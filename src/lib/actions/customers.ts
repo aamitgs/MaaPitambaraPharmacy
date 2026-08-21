@@ -1,10 +1,12 @@
 "use server";
 
 import { z } from "zod";
+import { localDateWindow } from "@/lib/date-range";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole, requireSession } from "@/lib/rbac";
+import { requirePermission, requireSession } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
+import { normalizePhone } from "@/lib/customer-identity";
 import {
   serializeCustomer,
   serializeCustomerLedgerEntry,
@@ -65,6 +67,10 @@ const customerSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
   phone: z.string().trim().optional(),
   creditLimit: z.coerce.number().min(0).optional(),
+  creditTermDays: z.coerce.number().int().min(0).max(365).optional(),
+  /// Set once the counter has been shown who already uses this number and
+  /// has said to add the record anyway — families really do share a phone.
+  allowDuplicatePhone: z.boolean().optional(),
 });
 
 export type CustomerInput = z.infer<typeof customerSchema>;
@@ -72,12 +78,30 @@ export type CustomerInput = z.infer<typeof customerSchema>;
 export async function createCustomer(input: CustomerInput) {
   const session = await requireSession();
   const parsed = customerSchema.parse(input);
+
+  // Catching a duplicate here is worth far more than merging one later:
+  // once both records have bills against them, someone has to reconcile
+  // two balances by hand. Blocked rather than warned, but overridable —
+  // a mother and son on one phone are a real pair of customers.
+  const phoneKey = normalizePhone(parsed.phone);
+  if (phoneKey && !parsed.allowDuplicatePhone) {
+    const existing = await prisma.customer.findMany({
+      where: { tenantId: session.user.tenantId },
+      select: { id: true, name: true, phone: true },
+    });
+    const clash = existing.find((c) => normalizePhone(c.phone) === phoneKey);
+    if (clash) {
+      throw new Error(`DUPLICATE_PHONE:${clash.name}`);
+    }
+  }
+
   const customer = await prisma.customer.create({
     data: {
       tenantId: session.user.tenantId,
       name: parsed.name,
       phone: parsed.phone,
       creditLimit: parsed.creditLimit,
+      creditTermDays: parsed.creditTermDays ?? null,
     },
   });
   revalidatePath("/customers");
@@ -95,7 +119,7 @@ const paymentSchema = z.object({
 export type CustomerPaymentInput = z.infer<typeof paymentSchema>;
 
 export async function recordCustomerPayment(customerId: string, input: CustomerPaymentInput) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("customers.manage");
   const parsed = paymentSchema.parse(input);
 
   const customer = await prisma.customer.findFirst({
@@ -140,7 +164,7 @@ export async function recordCustomerPayment(customerId: string, input: CustomerP
 
 export interface CustomerStatementLine {
   date: string;
-  type: "sale" | "payment";
+  type: "sale" | "payment" | "return" | "adjustment";
   description: string;
   debit: number;
   credit: number;
@@ -163,15 +187,13 @@ export interface CustomerStatement {
  * Running balance then walks forward through entries in [from, to].
  */
 export async function getCustomerStatement(customerId: string, from: string, to: string): Promise<CustomerStatement> {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("customers.manage");
   const customer = await prisma.customer.findFirst({
     where: { id: customerId, tenantId: session.user.tenantId },
   });
   if (!customer) throw new Error("Customer not found");
 
-  const fromDate = new Date(from);
-  const toDate = new Date(to);
-  toDate.setHours(23, 59, 59, 999);
+  const { fromDate, toDate } = localDateWindow(from, to);
 
   const [openingAgg, entries] = await Promise.all([
     prisma.customerLedgerEntry.aggregate({

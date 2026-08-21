@@ -1,7 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { getDiscountLines } from "@/lib/actions/discount-report";
 import { defaultMonthRange } from "@/lib/date-range";
-import { toCsv } from "@/lib/csv";
+import {
+  exportResponse,
+  formatFromRequest,
+  type ExportColumn,
+} from "@/lib/export-response";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -12,18 +16,18 @@ export async function GET(request: NextRequest) {
 
   const rows = await getDiscountLines(from, to);
 
-  const csv = toCsv(rows, [
+  const columns: ExportColumn<(typeof rows)[number]>[] = [
     { key: "date", label: "Date" },
     { key: "staffName", label: "Staff" },
     { key: (r) => r.itemName ?? "—", label: "Item" },
-    { key: "type", label: "Discount type" },
-    { key: "amount", label: "Amount (₹)" },
-  ]);
+    { key: "type", label: "Discount type" , type: "money" },
+    { key: "amount", label: "Amount (₹)" , type: "money" },
+  ];
 
-  return new NextResponse(csv, {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="discount-report-${from}-to-${to}.csv"`,
-    },
+  return exportResponse({
+    format: formatFromRequest(searchParams),
+    rows: rows,
+    columns,
+    filename: `discount-report-${from}-to-${to}`,
   });
 }

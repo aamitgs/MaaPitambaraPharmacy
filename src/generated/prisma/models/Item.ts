@@ -28,11 +28,13 @@ export type AggregateItem = {
 
 export type ItemAvgAggregateOutputType = {
   taxRate: runtime.Decimal | null
+  unitsPerPack: number | null
   reorderLevel: number | null
 }
 
 export type ItemSumAggregateOutputType = {
   taxRate: runtime.Decimal | null
+  unitsPerPack: number | null
   reorderLevel: number | null
 }
 
@@ -45,9 +47,14 @@ export type ItemMinAggregateOutputType = {
   composition: string | null
   scheduleClass: $Enums.ScheduleClass | null
   hsnCode: string | null
+  taxSlabId: string | null
+  barcode: string | null
   taxRate: runtime.Decimal | null
   unit: string | null
   packSize: string | null
+  unitsPerPack: number | null
+  allowLooseSale: boolean | null
+  isActive: boolean | null
   reorderLevel: number | null
   imageUrl: string | null
   createdAt: Date | null
@@ -63,9 +70,14 @@ export type ItemMaxAggregateOutputType = {
   composition: string | null
   scheduleClass: $Enums.ScheduleClass | null
   hsnCode: string | null
+  taxSlabId: string | null
+  barcode: string | null
   taxRate: runtime.Decimal | null
   unit: string | null
   packSize: string | null
+  unitsPerPack: number | null
+  allowLooseSale: boolean | null
+  isActive: boolean | null
   reorderLevel: number | null
   imageUrl: string | null
   createdAt: Date | null
@@ -81,9 +93,14 @@ export type ItemCountAggregateOutputType = {
   composition: number
   scheduleClass: number
   hsnCode: number
+  taxSlabId: number
+  barcode: number
   taxRate: number
   unit: number
   packSize: number
+  unitsPerPack: number
+  allowLooseSale: number
+  isActive: number
   reorderLevel: number
   imageUrl: number
   createdAt: number
@@ -94,11 +111,13 @@ export type ItemCountAggregateOutputType = {
 
 export type ItemAvgAggregateInputType = {
   taxRate?: true
+  unitsPerPack?: true
   reorderLevel?: true
 }
 
 export type ItemSumAggregateInputType = {
   taxRate?: true
+  unitsPerPack?: true
   reorderLevel?: true
 }
 
@@ -111,9 +130,14 @@ export type ItemMinAggregateInputType = {
   composition?: true
   scheduleClass?: true
   hsnCode?: true
+  taxSlabId?: true
+  barcode?: true
   taxRate?: true
   unit?: true
   packSize?: true
+  unitsPerPack?: true
+  allowLooseSale?: true
+  isActive?: true
   reorderLevel?: true
   imageUrl?: true
   createdAt?: true
@@ -129,9 +153,14 @@ export type ItemMaxAggregateInputType = {
   composition?: true
   scheduleClass?: true
   hsnCode?: true
+  taxSlabId?: true
+  barcode?: true
   taxRate?: true
   unit?: true
   packSize?: true
+  unitsPerPack?: true
+  allowLooseSale?: true
+  isActive?: true
   reorderLevel?: true
   imageUrl?: true
   createdAt?: true
@@ -147,9 +176,14 @@ export type ItemCountAggregateInputType = {
   composition?: true
   scheduleClass?: true
   hsnCode?: true
+  taxSlabId?: true
+  barcode?: true
   taxRate?: true
   unit?: true
   packSize?: true
+  unitsPerPack?: true
+  allowLooseSale?: true
+  isActive?: true
   reorderLevel?: true
   imageUrl?: true
   createdAt?: true
@@ -252,9 +286,14 @@ export type ItemGroupByOutputType = {
   composition: string | null
   scheduleClass: $Enums.ScheduleClass
   hsnCode: string | null
+  taxSlabId: string | null
+  barcode: string | null
   taxRate: runtime.Decimal
   unit: string
   packSize: string | null
+  unitsPerPack: number
+  allowLooseSale: boolean
+  isActive: boolean
   reorderLevel: number
   imageUrl: string | null
   createdAt: Date
@@ -293,9 +332,14 @@ export type ItemWhereInput = {
   composition?: Prisma.StringNullableFilter<"Item"> | string | null
   scheduleClass?: Prisma.EnumScheduleClassFilter<"Item"> | $Enums.ScheduleClass
   hsnCode?: Prisma.StringNullableFilter<"Item"> | string | null
+  taxSlabId?: Prisma.StringNullableFilter<"Item"> | string | null
+  barcode?: Prisma.StringNullableFilter<"Item"> | string | null
   taxRate?: Prisma.DecimalFilter<"Item"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFilter<"Item"> | string
   packSize?: Prisma.StringNullableFilter<"Item"> | string | null
+  unitsPerPack?: Prisma.IntFilter<"Item"> | number
+  allowLooseSale?: Prisma.BoolFilter<"Item"> | boolean
+  isActive?: Prisma.BoolFilter<"Item"> | boolean
   reorderLevel?: Prisma.IntFilter<"Item"> | number
   imageUrl?: Prisma.StringNullableFilter<"Item"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Item"> | Date | string
@@ -306,8 +350,13 @@ export type ItemWhereInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemListRelationFilter
   grnItems?: Prisma.GrnItemListRelationFilter
   purchaseReturnItems?: Prisma.PurchaseReturnItemListRelationFilter
+  salesReturnItems?: Prisma.SalesReturnItemListRelationFilter
   stockTransferItems?: Prisma.StockTransferItemListRelationFilter
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemListRelationFilter
+  stockCountLines?: Prisma.StockCountLineListRelationFilter
+  taxSlab?: Prisma.XOR<Prisma.TaxSlabNullableScalarRelationFilter, Prisma.TaxSlabWhereInput> | null
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryListRelationFilter
+  promiseOrders?: Prisma.PromiseOrderListRelationFilter
 }
 
 export type ItemOrderByWithRelationInput = {
@@ -319,9 +368,14 @@ export type ItemOrderByWithRelationInput = {
   composition?: Prisma.SortOrderInput | Prisma.SortOrder
   scheduleClass?: Prisma.SortOrder
   hsnCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxSlabId?: Prisma.SortOrderInput | Prisma.SortOrder
+  barcode?: Prisma.SortOrderInput | Prisma.SortOrder
   taxRate?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   packSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
+  allowLooseSale?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   reorderLevel?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -332,12 +386,18 @@ export type ItemOrderByWithRelationInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemOrderByRelationAggregateInput
   grnItems?: Prisma.GrnItemOrderByRelationAggregateInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemOrderByRelationAggregateInput
+  salesReturnItems?: Prisma.SalesReturnItemOrderByRelationAggregateInput
   stockTransferItems?: Prisma.StockTransferItemOrderByRelationAggregateInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemOrderByRelationAggregateInput
+  stockCountLines?: Prisma.StockCountLineOrderByRelationAggregateInput
+  taxSlab?: Prisma.TaxSlabOrderByWithRelationInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryOrderByRelationAggregateInput
+  promiseOrders?: Prisma.PromiseOrderOrderByRelationAggregateInput
 }
 
 export type ItemWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  tenantId_barcode?: Prisma.ItemTenantIdBarcodeCompoundUniqueInput
   AND?: Prisma.ItemWhereInput | Prisma.ItemWhereInput[]
   OR?: Prisma.ItemWhereInput[]
   NOT?: Prisma.ItemWhereInput | Prisma.ItemWhereInput[]
@@ -348,9 +408,14 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<{
   composition?: Prisma.StringNullableFilter<"Item"> | string | null
   scheduleClass?: Prisma.EnumScheduleClassFilter<"Item"> | $Enums.ScheduleClass
   hsnCode?: Prisma.StringNullableFilter<"Item"> | string | null
+  taxSlabId?: Prisma.StringNullableFilter<"Item"> | string | null
+  barcode?: Prisma.StringNullableFilter<"Item"> | string | null
   taxRate?: Prisma.DecimalFilter<"Item"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFilter<"Item"> | string
   packSize?: Prisma.StringNullableFilter<"Item"> | string | null
+  unitsPerPack?: Prisma.IntFilter<"Item"> | number
+  allowLooseSale?: Prisma.BoolFilter<"Item"> | boolean
+  isActive?: Prisma.BoolFilter<"Item"> | boolean
   reorderLevel?: Prisma.IntFilter<"Item"> | number
   imageUrl?: Prisma.StringNullableFilter<"Item"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Item"> | Date | string
@@ -361,9 +426,14 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<{
   purchaseOrderItems?: Prisma.PurchaseOrderItemListRelationFilter
   grnItems?: Prisma.GrnItemListRelationFilter
   purchaseReturnItems?: Prisma.PurchaseReturnItemListRelationFilter
+  salesReturnItems?: Prisma.SalesReturnItemListRelationFilter
   stockTransferItems?: Prisma.StockTransferItemListRelationFilter
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemListRelationFilter
+  stockCountLines?: Prisma.StockCountLineListRelationFilter
+  taxSlab?: Prisma.XOR<Prisma.TaxSlabNullableScalarRelationFilter, Prisma.TaxSlabWhereInput> | null
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryListRelationFilter
-}, "id">
+  promiseOrders?: Prisma.PromiseOrderListRelationFilter
+}, "id" | "tenantId_barcode">
 
 export type ItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -374,9 +444,14 @@ export type ItemOrderByWithAggregationInput = {
   composition?: Prisma.SortOrderInput | Prisma.SortOrder
   scheduleClass?: Prisma.SortOrder
   hsnCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxSlabId?: Prisma.SortOrderInput | Prisma.SortOrder
+  barcode?: Prisma.SortOrderInput | Prisma.SortOrder
   taxRate?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   packSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
+  allowLooseSale?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   reorderLevel?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -400,9 +475,14 @@ export type ItemScalarWhereWithAggregatesInput = {
   composition?: Prisma.StringNullableWithAggregatesFilter<"Item"> | string | null
   scheduleClass?: Prisma.EnumScheduleClassWithAggregatesFilter<"Item"> | $Enums.ScheduleClass
   hsnCode?: Prisma.StringNullableWithAggregatesFilter<"Item"> | string | null
+  taxSlabId?: Prisma.StringNullableWithAggregatesFilter<"Item"> | string | null
+  barcode?: Prisma.StringNullableWithAggregatesFilter<"Item"> | string | null
   taxRate?: Prisma.DecimalWithAggregatesFilter<"Item"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringWithAggregatesFilter<"Item"> | string
   packSize?: Prisma.StringNullableWithAggregatesFilter<"Item"> | string | null
+  unitsPerPack?: Prisma.IntWithAggregatesFilter<"Item"> | number
+  allowLooseSale?: Prisma.BoolWithAggregatesFilter<"Item"> | boolean
+  isActive?: Prisma.BoolWithAggregatesFilter<"Item"> | boolean
   reorderLevel?: Prisma.IntWithAggregatesFilter<"Item"> | number
   imageUrl?: Prisma.StringNullableWithAggregatesFilter<"Item"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Item"> | Date | string
@@ -417,9 +497,13 @@ export type ItemCreateInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -430,8 +514,13 @@ export type ItemCreateInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateInput = {
@@ -443,9 +532,14 @@ export type ItemUncheckedCreateInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -455,8 +549,12 @@ export type ItemUncheckedCreateInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemUpdateInput = {
@@ -467,9 +565,13 @@ export type ItemUpdateInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -480,8 +582,13 @@ export type ItemUpdateInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateInput = {
@@ -493,9 +600,14 @@ export type ItemUncheckedUpdateInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -505,8 +617,12 @@ export type ItemUncheckedUpdateInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateManyInput = {
@@ -518,9 +634,14 @@ export type ItemCreateManyInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -535,9 +656,13 @@ export type ItemUpdateManyMutationInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -553,9 +678,14 @@ export type ItemUncheckedUpdateManyInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -572,6 +702,11 @@ export type ItemOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type ItemTenantIdBarcodeCompoundUniqueInput = {
+  tenantId: string
+  barcode: string
+}
+
 export type ItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
@@ -581,9 +716,14 @@ export type ItemCountOrderByAggregateInput = {
   composition?: Prisma.SortOrder
   scheduleClass?: Prisma.SortOrder
   hsnCode?: Prisma.SortOrder
+  taxSlabId?: Prisma.SortOrder
+  barcode?: Prisma.SortOrder
   taxRate?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   packSize?: Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
+  allowLooseSale?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   reorderLevel?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -592,6 +732,7 @@ export type ItemCountOrderByAggregateInput = {
 
 export type ItemAvgOrderByAggregateInput = {
   taxRate?: Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
   reorderLevel?: Prisma.SortOrder
 }
 
@@ -604,9 +745,14 @@ export type ItemMaxOrderByAggregateInput = {
   composition?: Prisma.SortOrder
   scheduleClass?: Prisma.SortOrder
   hsnCode?: Prisma.SortOrder
+  taxSlabId?: Prisma.SortOrder
+  barcode?: Prisma.SortOrder
   taxRate?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   packSize?: Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
+  allowLooseSale?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   reorderLevel?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -622,9 +768,14 @@ export type ItemMinOrderByAggregateInput = {
   composition?: Prisma.SortOrder
   scheduleClass?: Prisma.SortOrder
   hsnCode?: Prisma.SortOrder
+  taxSlabId?: Prisma.SortOrder
+  barcode?: Prisma.SortOrder
   taxRate?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   packSize?: Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
+  allowLooseSale?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   reorderLevel?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -633,12 +784,18 @@ export type ItemMinOrderByAggregateInput = {
 
 export type ItemSumOrderByAggregateInput = {
   taxRate?: Prisma.SortOrder
+  unitsPerPack?: Prisma.SortOrder
   reorderLevel?: Prisma.SortOrder
 }
 
 export type ItemScalarRelationFilter = {
   is?: Prisma.ItemWhereInput
   isNot?: Prisma.ItemWhereInput
+}
+
+export type ItemNullableScalarRelationFilter = {
+  is?: Prisma.ItemWhereInput | null
+  isNot?: Prisma.ItemWhereInput | null
 }
 
 export type ItemCreateNestedManyWithoutTenantInput = {
@@ -699,6 +856,106 @@ export type ItemUpdateOneRequiredWithoutBatchesNestedInput = {
   upsert?: Prisma.ItemUpsertWithoutBatchesInput
   connect?: Prisma.ItemWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutBatchesInput, Prisma.ItemUpdateWithoutBatchesInput>, Prisma.ItemUncheckedUpdateWithoutBatchesInput>
+}
+
+export type ItemCreateNestedOneWithoutPromiseOrdersInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutPromiseOrdersInput, Prisma.ItemUncheckedCreateWithoutPromiseOrdersInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutPromiseOrdersInput
+  connect?: Prisma.ItemWhereUniqueInput
+}
+
+export type ItemUpdateOneWithoutPromiseOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutPromiseOrdersInput, Prisma.ItemUncheckedCreateWithoutPromiseOrdersInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutPromiseOrdersInput
+  upsert?: Prisma.ItemUpsertWithoutPromiseOrdersInput
+  disconnect?: Prisma.ItemWhereInput | boolean
+  delete?: Prisma.ItemWhereInput | boolean
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutPromiseOrdersInput, Prisma.ItemUpdateWithoutPromiseOrdersInput>, Prisma.ItemUncheckedUpdateWithoutPromiseOrdersInput>
+}
+
+export type ItemCreateNestedManyWithoutTaxSlabInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutTaxSlabInput, Prisma.ItemUncheckedCreateWithoutTaxSlabInput> | Prisma.ItemCreateWithoutTaxSlabInput[] | Prisma.ItemUncheckedCreateWithoutTaxSlabInput[]
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutTaxSlabInput | Prisma.ItemCreateOrConnectWithoutTaxSlabInput[]
+  createMany?: Prisma.ItemCreateManyTaxSlabInputEnvelope
+  connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+}
+
+export type ItemUncheckedCreateNestedManyWithoutTaxSlabInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutTaxSlabInput, Prisma.ItemUncheckedCreateWithoutTaxSlabInput> | Prisma.ItemCreateWithoutTaxSlabInput[] | Prisma.ItemUncheckedCreateWithoutTaxSlabInput[]
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutTaxSlabInput | Prisma.ItemCreateOrConnectWithoutTaxSlabInput[]
+  createMany?: Prisma.ItemCreateManyTaxSlabInputEnvelope
+  connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+}
+
+export type ItemUpdateManyWithoutTaxSlabNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutTaxSlabInput, Prisma.ItemUncheckedCreateWithoutTaxSlabInput> | Prisma.ItemCreateWithoutTaxSlabInput[] | Prisma.ItemUncheckedCreateWithoutTaxSlabInput[]
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutTaxSlabInput | Prisma.ItemCreateOrConnectWithoutTaxSlabInput[]
+  upsert?: Prisma.ItemUpsertWithWhereUniqueWithoutTaxSlabInput | Prisma.ItemUpsertWithWhereUniqueWithoutTaxSlabInput[]
+  createMany?: Prisma.ItemCreateManyTaxSlabInputEnvelope
+  set?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  disconnect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  delete?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  update?: Prisma.ItemUpdateWithWhereUniqueWithoutTaxSlabInput | Prisma.ItemUpdateWithWhereUniqueWithoutTaxSlabInput[]
+  updateMany?: Prisma.ItemUpdateManyWithWhereWithoutTaxSlabInput | Prisma.ItemUpdateManyWithWhereWithoutTaxSlabInput[]
+  deleteMany?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[]
+}
+
+export type ItemUncheckedUpdateManyWithoutTaxSlabNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutTaxSlabInput, Prisma.ItemUncheckedCreateWithoutTaxSlabInput> | Prisma.ItemCreateWithoutTaxSlabInput[] | Prisma.ItemUncheckedCreateWithoutTaxSlabInput[]
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutTaxSlabInput | Prisma.ItemCreateOrConnectWithoutTaxSlabInput[]
+  upsert?: Prisma.ItemUpsertWithWhereUniqueWithoutTaxSlabInput | Prisma.ItemUpsertWithWhereUniqueWithoutTaxSlabInput[]
+  createMany?: Prisma.ItemCreateManyTaxSlabInputEnvelope
+  set?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  disconnect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  delete?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  update?: Prisma.ItemUpdateWithWhereUniqueWithoutTaxSlabInput | Prisma.ItemUpdateWithWhereUniqueWithoutTaxSlabInput[]
+  updateMany?: Prisma.ItemUpdateManyWithWhereWithoutTaxSlabInput | Prisma.ItemUpdateManyWithWhereWithoutTaxSlabInput[]
+  deleteMany?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[]
+}
+
+export type ItemCreateNestedOneWithoutSalesReturnItemsInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutSalesReturnItemsInput, Prisma.ItemUncheckedCreateWithoutSalesReturnItemsInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutSalesReturnItemsInput
+  connect?: Prisma.ItemWhereUniqueInput
+}
+
+export type ItemUpdateOneRequiredWithoutSalesReturnItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutSalesReturnItemsInput, Prisma.ItemUncheckedCreateWithoutSalesReturnItemsInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutSalesReturnItemsInput
+  upsert?: Prisma.ItemUpsertWithoutSalesReturnItemsInput
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutSalesReturnItemsInput, Prisma.ItemUpdateWithoutSalesReturnItemsInput>, Prisma.ItemUncheckedUpdateWithoutSalesReturnItemsInput>
+}
+
+export type ItemCreateNestedOneWithoutStockCountLinesInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutStockCountLinesInput, Prisma.ItemUncheckedCreateWithoutStockCountLinesInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutStockCountLinesInput
+  connect?: Prisma.ItemWhereUniqueInput
+}
+
+export type ItemUpdateOneRequiredWithoutStockCountLinesNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutStockCountLinesInput, Prisma.ItemUncheckedCreateWithoutStockCountLinesInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutStockCountLinesInput
+  upsert?: Prisma.ItemUpsertWithoutStockCountLinesInput
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutStockCountLinesInput, Prisma.ItemUpdateWithoutStockCountLinesInput>, Prisma.ItemUncheckedUpdateWithoutStockCountLinesInput>
+}
+
+export type ItemCreateNestedOneWithoutStockAdjustmentItemsInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutStockAdjustmentItemsInput, Prisma.ItemUncheckedCreateWithoutStockAdjustmentItemsInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutStockAdjustmentItemsInput
+  connect?: Prisma.ItemWhereUniqueInput
+}
+
+export type ItemUpdateOneRequiredWithoutStockAdjustmentItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutStockAdjustmentItemsInput, Prisma.ItemUncheckedCreateWithoutStockAdjustmentItemsInput>
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutStockAdjustmentItemsInput
+  upsert?: Prisma.ItemUpsertWithoutStockAdjustmentItemsInput
+  connect?: Prisma.ItemWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ItemUpdateToOneWithWhereWithoutStockAdjustmentItemsInput, Prisma.ItemUpdateWithoutStockAdjustmentItemsInput>, Prisma.ItemUncheckedUpdateWithoutStockAdjustmentItemsInput>
 }
 
 export type ItemCreateNestedOneWithoutSalesInvoiceItemsInput = {
@@ -793,9 +1050,13 @@ export type ItemCreateWithoutTenantInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -805,8 +1066,13 @@ export type ItemCreateWithoutTenantInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutTenantInput = {
@@ -817,9 +1083,14 @@ export type ItemUncheckedCreateWithoutTenantInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -829,8 +1100,12 @@ export type ItemUncheckedCreateWithoutTenantInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutTenantInput = {
@@ -871,9 +1146,14 @@ export type ItemScalarWhereInput = {
   composition?: Prisma.StringNullableFilter<"Item"> | string | null
   scheduleClass?: Prisma.EnumScheduleClassFilter<"Item"> | $Enums.ScheduleClass
   hsnCode?: Prisma.StringNullableFilter<"Item"> | string | null
+  taxSlabId?: Prisma.StringNullableFilter<"Item"> | string | null
+  barcode?: Prisma.StringNullableFilter<"Item"> | string | null
   taxRate?: Prisma.DecimalFilter<"Item"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFilter<"Item"> | string
   packSize?: Prisma.StringNullableFilter<"Item"> | string | null
+  unitsPerPack?: Prisma.IntFilter<"Item"> | number
+  allowLooseSale?: Prisma.BoolFilter<"Item"> | boolean
+  isActive?: Prisma.BoolFilter<"Item"> | boolean
   reorderLevel?: Prisma.IntFilter<"Item"> | number
   imageUrl?: Prisma.StringNullableFilter<"Item"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Item"> | Date | string
@@ -888,9 +1168,13 @@ export type ItemCreateWithoutBatchesInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -900,8 +1184,13 @@ export type ItemCreateWithoutBatchesInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutBatchesInput = {
@@ -913,9 +1202,14 @@ export type ItemUncheckedCreateWithoutBatchesInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -924,8 +1218,12 @@ export type ItemUncheckedCreateWithoutBatchesInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutBatchesInput = {
@@ -952,9 +1250,13 @@ export type ItemUpdateWithoutBatchesInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -964,8 +1266,13 @@ export type ItemUpdateWithoutBatchesInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutBatchesInput = {
@@ -977,9 +1284,14 @@ export type ItemUncheckedUpdateWithoutBatchesInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -988,8 +1300,696 @@ export type ItemUncheckedUpdateWithoutBatchesInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemCreateWithoutPromiseOrdersInput = {
+  id?: string
+  name: string
+  genericName?: string | null
+  manufacturer?: string | null
+  composition?: string | null
+  scheduleClass?: $Enums.ScheduleClass
+  hsnCode?: string | null
+  barcode?: string | null
+  taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: string
+  packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
+  reorderLevel?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutItemsInput
+  batches?: Prisma.BatchCreateNestedManyWithoutItemInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutItemInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
+  grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
+  stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+}
+
+export type ItemUncheckedCreateWithoutPromiseOrdersInput = {
+  id?: string
+  tenantId: string
+  name: string
+  genericName?: string | null
+  manufacturer?: string | null
+  composition?: string | null
+  scheduleClass?: $Enums.ScheduleClass
+  hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
+  taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: string
+  packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
+  reorderLevel?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutItemInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutItemInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
+  grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+}
+
+export type ItemCreateOrConnectWithoutPromiseOrdersInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutPromiseOrdersInput, Prisma.ItemUncheckedCreateWithoutPromiseOrdersInput>
+}
+
+export type ItemUpsertWithoutPromiseOrdersInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutPromiseOrdersInput, Prisma.ItemUncheckedUpdateWithoutPromiseOrdersInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutPromiseOrdersInput, Prisma.ItemUncheckedCreateWithoutPromiseOrdersInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutPromiseOrdersInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutPromiseOrdersInput, Prisma.ItemUncheckedUpdateWithoutPromiseOrdersInput>
+}
+
+export type ItemUpdateWithoutPromiseOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manufacturer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutItemsNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutItemNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutItemNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
+  grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutPromiseOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manufacturer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutItemNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutItemNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
+  grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemCreateWithoutTaxSlabInput = {
+  id?: string
+  name: string
+  genericName?: string | null
+  manufacturer?: string | null
+  composition?: string | null
+  scheduleClass?: $Enums.ScheduleClass
+  hsnCode?: string | null
+  barcode?: string | null
+  taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: string
+  packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
+  reorderLevel?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutItemsInput
+  batches?: Prisma.BatchCreateNestedManyWithoutItemInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutItemInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
+  grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
+  stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
+}
+
+export type ItemUncheckedCreateWithoutTaxSlabInput = {
+  id?: string
+  tenantId: string
+  name: string
+  genericName?: string | null
+  manufacturer?: string | null
+  composition?: string | null
+  scheduleClass?: $Enums.ScheduleClass
+  hsnCode?: string | null
+  barcode?: string | null
+  taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: string
+  packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
+  reorderLevel?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutItemInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutItemInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
+  grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
+}
+
+export type ItemCreateOrConnectWithoutTaxSlabInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutTaxSlabInput, Prisma.ItemUncheckedCreateWithoutTaxSlabInput>
+}
+
+export type ItemCreateManyTaxSlabInputEnvelope = {
+  data: Prisma.ItemCreateManyTaxSlabInput | Prisma.ItemCreateManyTaxSlabInput[]
+  skipDuplicates?: boolean
+}
+
+export type ItemUpsertWithWhereUniqueWithoutTaxSlabInput = {
+  where: Prisma.ItemWhereUniqueInput
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutTaxSlabInput, Prisma.ItemUncheckedUpdateWithoutTaxSlabInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutTaxSlabInput, Prisma.ItemUncheckedCreateWithoutTaxSlabInput>
+}
+
+export type ItemUpdateWithWhereUniqueWithoutTaxSlabInput = {
+  where: Prisma.ItemWhereUniqueInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutTaxSlabInput, Prisma.ItemUncheckedUpdateWithoutTaxSlabInput>
+}
+
+export type ItemUpdateManyWithWhereWithoutTaxSlabInput = {
+  where: Prisma.ItemScalarWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateManyMutationInput, Prisma.ItemUncheckedUpdateManyWithoutTaxSlabInput>
+}
+
+export type ItemCreateWithoutSalesReturnItemsInput = {
+  id?: string
+  name: string
+  genericName?: string | null
+  manufacturer?: string | null
+  composition?: string | null
+  scheduleClass?: $Enums.ScheduleClass
+  hsnCode?: string | null
+  barcode?: string | null
+  taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: string
+  packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
+  reorderLevel?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutItemsInput
+  batches?: Prisma.BatchCreateNestedManyWithoutItemInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutItemInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
+  grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
+}
+
+export type ItemUncheckedCreateWithoutSalesReturnItemsInput = {
+  id?: string
+  tenantId: string
+  name: string
+  genericName?: string | null
+  manufacturer?: string | null
+  composition?: string | null
+  scheduleClass?: $Enums.ScheduleClass
+  hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
+  taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: string
+  packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
+  reorderLevel?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutItemInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutItemInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
+  grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
+}
+
+export type ItemCreateOrConnectWithoutSalesReturnItemsInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutSalesReturnItemsInput, Prisma.ItemUncheckedCreateWithoutSalesReturnItemsInput>
+}
+
+export type ItemUpsertWithoutSalesReturnItemsInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutSalesReturnItemsInput, Prisma.ItemUncheckedUpdateWithoutSalesReturnItemsInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutSalesReturnItemsInput, Prisma.ItemUncheckedCreateWithoutSalesReturnItemsInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutSalesReturnItemsInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutSalesReturnItemsInput, Prisma.ItemUncheckedUpdateWithoutSalesReturnItemsInput>
+}
+
+export type ItemUpdateWithoutSalesReturnItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manufacturer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutItemsNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutItemNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutItemNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
+  grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutSalesReturnItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manufacturer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutItemNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutItemNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
+  grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemCreateWithoutStockCountLinesInput = {
+  id?: string
+  name: string
+  genericName?: string | null
+  manufacturer?: string | null
+  composition?: string | null
+  scheduleClass?: $Enums.ScheduleClass
+  hsnCode?: string | null
+  barcode?: string | null
+  taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: string
+  packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
+  reorderLevel?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutItemsInput
+  batches?: Prisma.BatchCreateNestedManyWithoutItemInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutItemInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
+  grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
+  stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
+}
+
+export type ItemUncheckedCreateWithoutStockCountLinesInput = {
+  id?: string
+  tenantId: string
+  name: string
+  genericName?: string | null
+  manufacturer?: string | null
+  composition?: string | null
+  scheduleClass?: $Enums.ScheduleClass
+  hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
+  taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: string
+  packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
+  reorderLevel?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutItemInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutItemInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
+  grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
+}
+
+export type ItemCreateOrConnectWithoutStockCountLinesInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutStockCountLinesInput, Prisma.ItemUncheckedCreateWithoutStockCountLinesInput>
+}
+
+export type ItemUpsertWithoutStockCountLinesInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutStockCountLinesInput, Prisma.ItemUncheckedUpdateWithoutStockCountLinesInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutStockCountLinesInput, Prisma.ItemUncheckedCreateWithoutStockCountLinesInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutStockCountLinesInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutStockCountLinesInput, Prisma.ItemUncheckedUpdateWithoutStockCountLinesInput>
+}
+
+export type ItemUpdateWithoutStockCountLinesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manufacturer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutItemsNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutItemNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutItemNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
+  grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutStockCountLinesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manufacturer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutItemNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutItemNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
+  grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemCreateWithoutStockAdjustmentItemsInput = {
+  id?: string
+  name: string
+  genericName?: string | null
+  manufacturer?: string | null
+  composition?: string | null
+  scheduleClass?: $Enums.ScheduleClass
+  hsnCode?: string | null
+  barcode?: string | null
+  taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: string
+  packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
+  reorderLevel?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutItemsInput
+  batches?: Prisma.BatchCreateNestedManyWithoutItemInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutItemInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
+  grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
+  stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
+}
+
+export type ItemUncheckedCreateWithoutStockAdjustmentItemsInput = {
+  id?: string
+  tenantId: string
+  name: string
+  genericName?: string | null
+  manufacturer?: string | null
+  composition?: string | null
+  scheduleClass?: $Enums.ScheduleClass
+  hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
+  taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: string
+  packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
+  reorderLevel?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutItemInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutItemInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
+  grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
+}
+
+export type ItemCreateOrConnectWithoutStockAdjustmentItemsInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutStockAdjustmentItemsInput, Prisma.ItemUncheckedCreateWithoutStockAdjustmentItemsInput>
+}
+
+export type ItemUpsertWithoutStockAdjustmentItemsInput = {
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutStockAdjustmentItemsInput, Prisma.ItemUncheckedUpdateWithoutStockAdjustmentItemsInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutStockAdjustmentItemsInput, Prisma.ItemUncheckedCreateWithoutStockAdjustmentItemsInput>
+  where?: Prisma.ItemWhereInput
+}
+
+export type ItemUpdateToOneWithWhereWithoutStockAdjustmentItemsInput = {
+  where?: Prisma.ItemWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutStockAdjustmentItemsInput, Prisma.ItemUncheckedUpdateWithoutStockAdjustmentItemsInput>
+}
+
+export type ItemUpdateWithoutStockAdjustmentItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manufacturer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutItemsNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutItemNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutItemNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
+  grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutStockAdjustmentItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manufacturer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutItemNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutItemNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
+  grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutSalesInvoiceItemsInput = {
@@ -1000,9 +2000,13 @@ export type ItemCreateWithoutSalesInvoiceItemsInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1012,8 +2016,13 @@ export type ItemCreateWithoutSalesInvoiceItemsInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutSalesInvoiceItemsInput = {
@@ -1025,9 +2034,14 @@ export type ItemUncheckedCreateWithoutSalesInvoiceItemsInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1036,8 +2050,12 @@ export type ItemUncheckedCreateWithoutSalesInvoiceItemsInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutSalesInvoiceItemsInput = {
@@ -1064,9 +2082,13 @@ export type ItemUpdateWithoutSalesInvoiceItemsInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1076,8 +2098,13 @@ export type ItemUpdateWithoutSalesInvoiceItemsInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutSalesInvoiceItemsInput = {
@@ -1089,9 +2116,14 @@ export type ItemUncheckedUpdateWithoutSalesInvoiceItemsInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1100,8 +2132,12 @@ export type ItemUncheckedUpdateWithoutSalesInvoiceItemsInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutPurchaseOrderItemsInput = {
@@ -1112,9 +2148,13 @@ export type ItemCreateWithoutPurchaseOrderItemsInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1124,8 +2164,13 @@ export type ItemCreateWithoutPurchaseOrderItemsInput = {
   salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutPurchaseOrderItemsInput = {
@@ -1137,9 +2182,14 @@ export type ItemUncheckedCreateWithoutPurchaseOrderItemsInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1148,8 +2198,12 @@ export type ItemUncheckedCreateWithoutPurchaseOrderItemsInput = {
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutPurchaseOrderItemsInput = {
@@ -1176,9 +2230,13 @@ export type ItemUpdateWithoutPurchaseOrderItemsInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1188,8 +2246,13 @@ export type ItemUpdateWithoutPurchaseOrderItemsInput = {
   salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutPurchaseOrderItemsInput = {
@@ -1201,9 +2264,14 @@ export type ItemUncheckedUpdateWithoutPurchaseOrderItemsInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1212,8 +2280,12 @@ export type ItemUncheckedUpdateWithoutPurchaseOrderItemsInput = {
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutGrnItemsInput = {
@@ -1224,9 +2296,13 @@ export type ItemCreateWithoutGrnItemsInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1236,8 +2312,13 @@ export type ItemCreateWithoutGrnItemsInput = {
   salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutItemInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutGrnItemsInput = {
@@ -1249,9 +2330,14 @@ export type ItemUncheckedCreateWithoutGrnItemsInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1260,8 +2346,12 @@ export type ItemUncheckedCreateWithoutGrnItemsInput = {
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutItemInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutGrnItemsInput = {
@@ -1288,9 +2378,13 @@ export type ItemUpdateWithoutGrnItemsInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1300,8 +2394,13 @@ export type ItemUpdateWithoutGrnItemsInput = {
   salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutItemNestedInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutGrnItemsInput = {
@@ -1313,9 +2412,14 @@ export type ItemUncheckedUpdateWithoutGrnItemsInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1324,8 +2428,12 @@ export type ItemUncheckedUpdateWithoutGrnItemsInput = {
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutItemNestedInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutPurchaseReturnItemsInput = {
@@ -1336,9 +2444,13 @@ export type ItemCreateWithoutPurchaseReturnItemsInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1348,8 +2460,13 @@ export type ItemCreateWithoutPurchaseReturnItemsInput = {
   salesInvoiceItems?: Prisma.SalesInvoiceItemCreateNestedManyWithoutItemInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutPurchaseReturnItemsInput = {
@@ -1361,9 +2478,14 @@ export type ItemUncheckedCreateWithoutPurchaseReturnItemsInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1372,8 +2494,12 @@ export type ItemUncheckedCreateWithoutPurchaseReturnItemsInput = {
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedCreateNestedManyWithoutItemInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutPurchaseReturnItemsInput = {
@@ -1400,9 +2526,13 @@ export type ItemUpdateWithoutPurchaseReturnItemsInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1412,8 +2542,13 @@ export type ItemUpdateWithoutPurchaseReturnItemsInput = {
   salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutItemNestedInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutPurchaseReturnItemsInput = {
@@ -1425,9 +2560,14 @@ export type ItemUncheckedUpdateWithoutPurchaseReturnItemsInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1436,8 +2576,12 @@ export type ItemUncheckedUpdateWithoutPurchaseReturnItemsInput = {
   salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutItemNestedInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutStockTransferItemsInput = {
@@ -1448,9 +2592,13 @@ export type ItemCreateWithoutStockTransferItemsInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1461,7 +2609,12 @@ export type ItemCreateWithoutStockTransferItemsInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutStockTransferItemsInput = {
@@ -1473,9 +2626,14 @@ export type ItemUncheckedCreateWithoutStockTransferItemsInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1485,7 +2643,11 @@ export type ItemUncheckedCreateWithoutStockTransferItemsInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutStockTransferItemsInput = {
@@ -1512,9 +2674,13 @@ export type ItemUpdateWithoutStockTransferItemsInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1525,7 +2691,12 @@ export type ItemUpdateWithoutStockTransferItemsInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutStockTransferItemsInput = {
@@ -1537,9 +2708,14 @@ export type ItemUncheckedUpdateWithoutStockTransferItemsInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1549,7 +2725,11 @@ export type ItemUncheckedUpdateWithoutStockTransferItemsInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateWithoutNarcoticRegisterEntriesInput = {
@@ -1560,9 +2740,13 @@ export type ItemCreateWithoutNarcoticRegisterEntriesInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1573,7 +2757,12 @@ export type ItemCreateWithoutNarcoticRegisterEntriesInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineCreateNestedManyWithoutItemInput
+  taxSlab?: Prisma.TaxSlabCreateNestedOneWithoutItemsInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutItemInput
 }
 
 export type ItemUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
@@ -1585,9 +2774,14 @@ export type ItemUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1597,7 +2791,11 @@ export type ItemUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutItemInput
   grnItems?: Prisma.GrnItemUncheckedCreateNestedManyWithoutItemInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedCreateNestedManyWithoutItemInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedCreateNestedManyWithoutItemInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedCreateNestedManyWithoutItemInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutItemInput
+  stockCountLines?: Prisma.StockCountLineUncheckedCreateNestedManyWithoutItemInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutItemInput
 }
 
 export type ItemCreateOrConnectWithoutNarcoticRegisterEntriesInput = {
@@ -1624,9 +2822,13 @@ export type ItemUpdateWithoutNarcoticRegisterEntriesInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1637,7 +2839,12 @@ export type ItemUpdateWithoutNarcoticRegisterEntriesInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
@@ -1649,9 +2856,14 @@ export type ItemUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1661,7 +2873,11 @@ export type ItemUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemCreateManyTenantInput = {
@@ -1672,9 +2888,14 @@ export type ItemCreateManyTenantInput = {
   composition?: string | null
   scheduleClass?: $Enums.ScheduleClass
   hsnCode?: string | null
+  taxSlabId?: string | null
+  barcode?: string | null
   taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: string
   packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: number
   imageUrl?: string | null
   createdAt?: Date | string
@@ -1689,9 +2910,13 @@ export type ItemUpdateWithoutTenantInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1701,8 +2926,13 @@ export type ItemUpdateWithoutTenantInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  taxSlab?: Prisma.TaxSlabUpdateOneWithoutItemsNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutTenantInput = {
@@ -1713,9 +2943,14 @@ export type ItemUncheckedUpdateWithoutTenantInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1725,8 +2960,12 @@ export type ItemUncheckedUpdateWithoutTenantInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
   grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
   purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
   stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
   narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
 }
 
 export type ItemUncheckedUpdateManyWithoutTenantInput = {
@@ -1737,9 +2976,124 @@ export type ItemUncheckedUpdateManyWithoutTenantInput = {
   composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
   hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSlabId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ItemCreateManyTaxSlabInput = {
+  id?: string
+  tenantId: string
+  name: string
+  genericName?: string | null
+  manufacturer?: string | null
+  composition?: string | null
+  scheduleClass?: $Enums.ScheduleClass
+  hsnCode?: string | null
+  barcode?: string | null
+  taxRate?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: string
+  packSize?: string | null
+  unitsPerPack?: number
+  allowLooseSale?: boolean
+  isActive?: boolean
+  reorderLevel?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ItemUpdateWithoutTaxSlabInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manufacturer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutItemsNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutItemNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUpdateManyWithoutItemNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutItemNestedInput
+  grnItems?: Prisma.GrnItemUpdateManyWithoutItemNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUpdateManyWithoutItemNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUpdateManyWithoutItemNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutTaxSlabInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manufacturer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutItemNestedInput
+  salesInvoiceItems?: Prisma.SalesInvoiceItemUncheckedUpdateManyWithoutItemNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutItemNestedInput
+  grnItems?: Prisma.GrnItemUncheckedUpdateManyWithoutItemNestedInput
+  purchaseReturnItems?: Prisma.PurchaseReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  salesReturnItems?: Prisma.SalesReturnItemUncheckedUpdateManyWithoutItemNestedInput
+  stockTransferItems?: Prisma.StockTransferItemUncheckedUpdateManyWithoutItemNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutItemNestedInput
+  stockCountLines?: Prisma.StockCountLineUncheckedUpdateManyWithoutItemNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutItemNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutItemNestedInput
+}
+
+export type ItemUncheckedUpdateManyWithoutTaxSlabInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  genericName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manufacturer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  composition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scheduleClass?: Prisma.EnumScheduleClassFieldUpdateOperationsInput | $Enums.ScheduleClass
+  hsnCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxRate?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  packSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitsPerPack?: Prisma.IntFieldUpdateOperationsInput | number
+  allowLooseSale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reorderLevel?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1757,8 +3111,12 @@ export type ItemCountOutputType = {
   purchaseOrderItems: number
   grnItems: number
   purchaseReturnItems: number
+  salesReturnItems: number
   stockTransferItems: number
+  stockAdjustmentItems: number
+  stockCountLines: number
   narcoticRegisterEntries: number
+  promiseOrders: number
 }
 
 export type ItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1767,8 +3125,12 @@ export type ItemCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   purchaseOrderItems?: boolean | ItemCountOutputTypeCountPurchaseOrderItemsArgs
   grnItems?: boolean | ItemCountOutputTypeCountGrnItemsArgs
   purchaseReturnItems?: boolean | ItemCountOutputTypeCountPurchaseReturnItemsArgs
+  salesReturnItems?: boolean | ItemCountOutputTypeCountSalesReturnItemsArgs
   stockTransferItems?: boolean | ItemCountOutputTypeCountStockTransferItemsArgs
+  stockAdjustmentItems?: boolean | ItemCountOutputTypeCountStockAdjustmentItemsArgs
+  stockCountLines?: boolean | ItemCountOutputTypeCountStockCountLinesArgs
   narcoticRegisterEntries?: boolean | ItemCountOutputTypeCountNarcoticRegisterEntriesArgs
+  promiseOrders?: boolean | ItemCountOutputTypeCountPromiseOrdersArgs
 }
 
 /**
@@ -1819,6 +3181,13 @@ export type ItemCountOutputTypeCountPurchaseReturnItemsArgs<ExtArgs extends runt
 /**
  * ItemCountOutputType without action
  */
+export type ItemCountOutputTypeCountSalesReturnItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalesReturnItemWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
 export type ItemCountOutputTypeCountStockTransferItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.StockTransferItemWhereInput
 }
@@ -1826,8 +3195,29 @@ export type ItemCountOutputTypeCountStockTransferItemsArgs<ExtArgs extends runti
 /**
  * ItemCountOutputType without action
  */
+export type ItemCountOutputTypeCountStockAdjustmentItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockAdjustmentItemWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountStockCountLinesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockCountLineWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
 export type ItemCountOutputTypeCountNarcoticRegisterEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.NarcoticRegisterEntryWhereInput
+}
+
+/**
+ * ItemCountOutputType without action
+ */
+export type ItemCountOutputTypeCountPromiseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromiseOrderWhereInput
 }
 
 
@@ -1840,9 +3230,14 @@ export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   composition?: boolean
   scheduleClass?: boolean
   hsnCode?: boolean
+  taxSlabId?: boolean
+  barcode?: boolean
   taxRate?: boolean
   unit?: boolean
   packSize?: boolean
+  unitsPerPack?: boolean
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: boolean
   imageUrl?: boolean
   createdAt?: boolean
@@ -1853,8 +3248,13 @@ export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   purchaseOrderItems?: boolean | Prisma.Item$purchaseOrderItemsArgs<ExtArgs>
   grnItems?: boolean | Prisma.Item$grnItemsArgs<ExtArgs>
   purchaseReturnItems?: boolean | Prisma.Item$purchaseReturnItemsArgs<ExtArgs>
+  salesReturnItems?: boolean | Prisma.Item$salesReturnItemsArgs<ExtArgs>
   stockTransferItems?: boolean | Prisma.Item$stockTransferItemsArgs<ExtArgs>
+  stockAdjustmentItems?: boolean | Prisma.Item$stockAdjustmentItemsArgs<ExtArgs>
+  stockCountLines?: boolean | Prisma.Item$stockCountLinesArgs<ExtArgs>
+  taxSlab?: boolean | Prisma.Item$taxSlabArgs<ExtArgs>
   narcoticRegisterEntries?: boolean | Prisma.Item$narcoticRegisterEntriesArgs<ExtArgs>
+  promiseOrders?: boolean | Prisma.Item$promiseOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["item"]>
 
@@ -1867,14 +3267,20 @@ export type ItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   composition?: boolean
   scheduleClass?: boolean
   hsnCode?: boolean
+  taxSlabId?: boolean
+  barcode?: boolean
   taxRate?: boolean
   unit?: boolean
   packSize?: boolean
+  unitsPerPack?: boolean
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: boolean
   imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  taxSlab?: boolean | Prisma.Item$taxSlabArgs<ExtArgs>
 }, ExtArgs["result"]["item"]>
 
 export type ItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1886,14 +3292,20 @@ export type ItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   composition?: boolean
   scheduleClass?: boolean
   hsnCode?: boolean
+  taxSlabId?: boolean
+  barcode?: boolean
   taxRate?: boolean
   unit?: boolean
   packSize?: boolean
+  unitsPerPack?: boolean
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: boolean
   imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  taxSlab?: boolean | Prisma.Item$taxSlabArgs<ExtArgs>
 }, ExtArgs["result"]["item"]>
 
 export type ItemSelectScalar = {
@@ -1905,16 +3317,21 @@ export type ItemSelectScalar = {
   composition?: boolean
   scheduleClass?: boolean
   hsnCode?: boolean
+  taxSlabId?: boolean
+  barcode?: boolean
   taxRate?: boolean
   unit?: boolean
   packSize?: boolean
+  unitsPerPack?: boolean
+  allowLooseSale?: boolean
+  isActive?: boolean
   reorderLevel?: boolean
   imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "genericName" | "manufacturer" | "composition" | "scheduleClass" | "hsnCode" | "taxRate" | "unit" | "packSize" | "reorderLevel" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["item"]>
+export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "genericName" | "manufacturer" | "composition" | "scheduleClass" | "hsnCode" | "taxSlabId" | "barcode" | "taxRate" | "unit" | "packSize" | "unitsPerPack" | "allowLooseSale" | "isActive" | "reorderLevel" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["item"]>
 export type ItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   batches?: boolean | Prisma.Item$batchesArgs<ExtArgs>
@@ -1922,15 +3339,22 @@ export type ItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   purchaseOrderItems?: boolean | Prisma.Item$purchaseOrderItemsArgs<ExtArgs>
   grnItems?: boolean | Prisma.Item$grnItemsArgs<ExtArgs>
   purchaseReturnItems?: boolean | Prisma.Item$purchaseReturnItemsArgs<ExtArgs>
+  salesReturnItems?: boolean | Prisma.Item$salesReturnItemsArgs<ExtArgs>
   stockTransferItems?: boolean | Prisma.Item$stockTransferItemsArgs<ExtArgs>
+  stockAdjustmentItems?: boolean | Prisma.Item$stockAdjustmentItemsArgs<ExtArgs>
+  stockCountLines?: boolean | Prisma.Item$stockCountLinesArgs<ExtArgs>
+  taxSlab?: boolean | Prisma.Item$taxSlabArgs<ExtArgs>
   narcoticRegisterEntries?: boolean | Prisma.Item$narcoticRegisterEntriesArgs<ExtArgs>
+  promiseOrders?: boolean | Prisma.Item$promiseOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.ItemCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  taxSlab?: boolean | Prisma.Item$taxSlabArgs<ExtArgs>
 }
 export type ItemIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  taxSlab?: boolean | Prisma.Item$taxSlabArgs<ExtArgs>
 }
 
 export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1942,8 +3366,13 @@ export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     purchaseOrderItems: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
     grnItems: Prisma.$GrnItemPayload<ExtArgs>[]
     purchaseReturnItems: Prisma.$PurchaseReturnItemPayload<ExtArgs>[]
+    salesReturnItems: Prisma.$SalesReturnItemPayload<ExtArgs>[]
     stockTransferItems: Prisma.$StockTransferItemPayload<ExtArgs>[]
+    stockAdjustmentItems: Prisma.$StockAdjustmentItemPayload<ExtArgs>[]
+    stockCountLines: Prisma.$StockCountLinePayload<ExtArgs>[]
+    taxSlab: Prisma.$TaxSlabPayload<ExtArgs> | null
     narcoticRegisterEntries: Prisma.$NarcoticRegisterEntryPayload<ExtArgs>[]
+    promiseOrders: Prisma.$PromiseOrderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1954,9 +3383,47 @@ export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     composition: string | null
     scheduleClass: $Enums.ScheduleClass
     hsnCode: string | null
+    /**
+     * Explicit GST slab for this item — the most specific answer, overriding
+     * the HSN mapping. Null means "resolve from HSN".
+     */
+    taxSlabId: string | null
+    /**
+     * EAN-13 / UPC printed on the pack, or a shop-assigned code for loose
+     * items. Unique per tenant so a scan resolves to exactly one item —
+     * nullable because most Indian pharmacy stock is entered by name and
+     * only some packs carry a scannable code.
+     */
+    barcode: string | null
+    /**
+     * The rate this item carried before slabs existed. Still the last
+     * fallback in resolution, so nothing broke on the day slabs shipped —
+     * but a slab or HSN mapping supersedes it.
+     */
     taxRate: runtime.Decimal
     unit: string
+    /**
+     * Free text as printed on the carton, e.g. "10 tablets". Kept for the
+     * bill; `unitsPerPack` is the number the stock maths uses.
+     */
     packSize: string | null
+    /**
+     * Sellable units in one pack. 1 means the pack is the unit — a bottle of
+     * syrup — and no loose sale is possible.
+     */
+    unitsPerPack: number
+    /**
+     * Whether the counter may break a pack. Off by default: most stock is
+     * sold whole, and a strip broken by accident cannot be un-broken.
+     */
+    allowLooseSale: boolean
+    /**
+     * Retired, not deleted. A discontinued medicine still has to appear in
+     * last year's sales, in the GST return that reported it, and in the
+     * expiry alerts for whatever is still on the shelf — so it is hidden
+     * from anything forward-looking and kept everywhere backward-looking.
+     */
+    isActive: boolean
     reorderLevel: number
     imageUrl: string | null
     createdAt: Date
@@ -2361,8 +3828,13 @@ export interface Prisma__ItemClient<T, Null = never, ExtArgs extends runtime.Typ
   purchaseOrderItems<T extends Prisma.Item$purchaseOrderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$purchaseOrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   grnItems<T extends Prisma.Item$grnItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$grnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GrnItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   purchaseReturnItems<T extends Prisma.Item$purchaseReturnItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$purchaseReturnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseReturnItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  salesReturnItems<T extends Prisma.Item$salesReturnItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$salesReturnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesReturnItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockTransferItems<T extends Prisma.Item$stockTransferItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$stockTransferItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockAdjustmentItems<T extends Prisma.Item$stockAdjustmentItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$stockAdjustmentItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockAdjustmentItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockCountLines<T extends Prisma.Item$stockCountLinesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$stockCountLinesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockCountLinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  taxSlab<T extends Prisma.Item$taxSlabArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$taxSlabArgs<ExtArgs>>): Prisma.Prisma__TaxSlabClient<runtime.Types.Result.GetResult<Prisma.$TaxSlabPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   narcoticRegisterEntries<T extends Prisma.Item$narcoticRegisterEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$narcoticRegisterEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NarcoticRegisterEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promiseOrders<T extends Prisma.Item$promiseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Item$promiseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromiseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2400,9 +3872,14 @@ export interface ItemFieldRefs {
   readonly composition: Prisma.FieldRef<"Item", 'String'>
   readonly scheduleClass: Prisma.FieldRef<"Item", 'ScheduleClass'>
   readonly hsnCode: Prisma.FieldRef<"Item", 'String'>
+  readonly taxSlabId: Prisma.FieldRef<"Item", 'String'>
+  readonly barcode: Prisma.FieldRef<"Item", 'String'>
   readonly taxRate: Prisma.FieldRef<"Item", 'Decimal'>
   readonly unit: Prisma.FieldRef<"Item", 'String'>
   readonly packSize: Prisma.FieldRef<"Item", 'String'>
+  readonly unitsPerPack: Prisma.FieldRef<"Item", 'Int'>
+  readonly allowLooseSale: Prisma.FieldRef<"Item", 'Boolean'>
+  readonly isActive: Prisma.FieldRef<"Item", 'Boolean'>
   readonly reorderLevel: Prisma.FieldRef<"Item", 'Int'>
   readonly imageUrl: Prisma.FieldRef<"Item", 'String'>
   readonly createdAt: Prisma.FieldRef<"Item", 'DateTime'>
@@ -2928,6 +4405,30 @@ export type Item$purchaseReturnItemsArgs<ExtArgs extends runtime.Types.Extension
 }
 
 /**
+ * Item.salesReturnItems
+ */
+export type Item$salesReturnItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalesReturnItem
+   */
+  select?: Prisma.SalesReturnItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SalesReturnItem
+   */
+  omit?: Prisma.SalesReturnItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalesReturnItemInclude<ExtArgs> | null
+  where?: Prisma.SalesReturnItemWhereInput
+  orderBy?: Prisma.SalesReturnItemOrderByWithRelationInput | Prisma.SalesReturnItemOrderByWithRelationInput[]
+  cursor?: Prisma.SalesReturnItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalesReturnItemScalarFieldEnum | Prisma.SalesReturnItemScalarFieldEnum[]
+}
+
+/**
  * Item.stockTransferItems
  */
 export type Item$stockTransferItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2952,6 +4453,73 @@ export type Item$stockTransferItemsArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
+ * Item.stockAdjustmentItems
+ */
+export type Item$stockAdjustmentItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockAdjustmentItem
+   */
+  select?: Prisma.StockAdjustmentItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockAdjustmentItem
+   */
+  omit?: Prisma.StockAdjustmentItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockAdjustmentItemInclude<ExtArgs> | null
+  where?: Prisma.StockAdjustmentItemWhereInput
+  orderBy?: Prisma.StockAdjustmentItemOrderByWithRelationInput | Prisma.StockAdjustmentItemOrderByWithRelationInput[]
+  cursor?: Prisma.StockAdjustmentItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockAdjustmentItemScalarFieldEnum | Prisma.StockAdjustmentItemScalarFieldEnum[]
+}
+
+/**
+ * Item.stockCountLines
+ */
+export type Item$stockCountLinesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockCountLine
+   */
+  select?: Prisma.StockCountLineSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockCountLine
+   */
+  omit?: Prisma.StockCountLineOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockCountLineInclude<ExtArgs> | null
+  where?: Prisma.StockCountLineWhereInput
+  orderBy?: Prisma.StockCountLineOrderByWithRelationInput | Prisma.StockCountLineOrderByWithRelationInput[]
+  cursor?: Prisma.StockCountLineWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockCountLineScalarFieldEnum | Prisma.StockCountLineScalarFieldEnum[]
+}
+
+/**
+ * Item.taxSlab
+ */
+export type Item$taxSlabArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TaxSlab
+   */
+  select?: Prisma.TaxSlabSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TaxSlab
+   */
+  omit?: Prisma.TaxSlabOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaxSlabInclude<ExtArgs> | null
+  where?: Prisma.TaxSlabWhereInput
+}
+
+/**
  * Item.narcoticRegisterEntries
  */
 export type Item$narcoticRegisterEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2973,6 +4541,30 @@ export type Item$narcoticRegisterEntriesArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.NarcoticRegisterEntryScalarFieldEnum | Prisma.NarcoticRegisterEntryScalarFieldEnum[]
+}
+
+/**
+ * Item.promiseOrders
+ */
+export type Item$promiseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromiseOrder
+   */
+  select?: Prisma.PromiseOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PromiseOrder
+   */
+  omit?: Prisma.PromiseOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromiseOrderInclude<ExtArgs> | null
+  where?: Prisma.PromiseOrderWhereInput
+  orderBy?: Prisma.PromiseOrderOrderByWithRelationInput | Prisma.PromiseOrderOrderByWithRelationInput[]
+  cursor?: Prisma.PromiseOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromiseOrderScalarFieldEnum | Prisma.PromiseOrderScalarFieldEnum[]
 }
 
 /**

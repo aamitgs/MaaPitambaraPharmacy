@@ -40,6 +40,7 @@ export type SupplierMinAggregateOutputType = {
   id: string | null
   tenantId: string | null
   name: string | null
+  phone: string | null
   gstin: string | null
   address: string | null
   paymentTermsDays: number | null
@@ -52,6 +53,7 @@ export type SupplierMaxAggregateOutputType = {
   id: string | null
   tenantId: string | null
   name: string | null
+  phone: string | null
   gstin: string | null
   address: string | null
   paymentTermsDays: number | null
@@ -64,6 +66,7 @@ export type SupplierCountAggregateOutputType = {
   id: number
   tenantId: number
   name: number
+  phone: number
   gstin: number
   address: number
   paymentTermsDays: number
@@ -88,6 +91,7 @@ export type SupplierMinAggregateInputType = {
   id?: true
   tenantId?: true
   name?: true
+  phone?: true
   gstin?: true
   address?: true
   paymentTermsDays?: true
@@ -100,6 +104,7 @@ export type SupplierMaxAggregateInputType = {
   id?: true
   tenantId?: true
   name?: true
+  phone?: true
   gstin?: true
   address?: true
   paymentTermsDays?: true
@@ -112,6 +117,7 @@ export type SupplierCountAggregateInputType = {
   id?: true
   tenantId?: true
   name?: true
+  phone?: true
   gstin?: true
   address?: true
   paymentTermsDays?: true
@@ -211,6 +217,7 @@ export type SupplierGroupByOutputType = {
   id: string
   tenantId: string
   name: string
+  phone: string | null
   gstin: string | null
   address: string | null
   paymentTermsDays: number | null
@@ -246,6 +253,7 @@ export type SupplierWhereInput = {
   id?: Prisma.StringFilter<"Supplier"> | string
   tenantId?: Prisma.StringFilter<"Supplier"> | string
   name?: Prisma.StringFilter<"Supplier"> | string
+  phone?: Prisma.StringNullableFilter<"Supplier"> | string | null
   gstin?: Prisma.StringNullableFilter<"Supplier"> | string | null
   address?: Prisma.StringNullableFilter<"Supplier"> | string | null
   paymentTermsDays?: Prisma.IntNullableFilter<"Supplier"> | number | null
@@ -263,6 +271,7 @@ export type SupplierOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
   gstin?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentTermsDays?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -283,6 +292,7 @@ export type SupplierWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SupplierWhereInput | Prisma.SupplierWhereInput[]
   tenantId?: Prisma.StringFilter<"Supplier"> | string
   name?: Prisma.StringFilter<"Supplier"> | string
+  phone?: Prisma.StringNullableFilter<"Supplier"> | string | null
   gstin?: Prisma.StringNullableFilter<"Supplier"> | string | null
   address?: Prisma.StringNullableFilter<"Supplier"> | string | null
   paymentTermsDays?: Prisma.IntNullableFilter<"Supplier"> | number | null
@@ -300,6 +310,7 @@ export type SupplierOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
   gstin?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentTermsDays?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -320,6 +331,7 @@ export type SupplierScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Supplier"> | string
   tenantId?: Prisma.StringWithAggregatesFilter<"Supplier"> | string
   name?: Prisma.StringWithAggregatesFilter<"Supplier"> | string
+  phone?: Prisma.StringNullableWithAggregatesFilter<"Supplier"> | string | null
   gstin?: Prisma.StringNullableWithAggregatesFilter<"Supplier"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"Supplier"> | string | null
   paymentTermsDays?: Prisma.IntNullableWithAggregatesFilter<"Supplier"> | number | null
@@ -331,6 +343,7 @@ export type SupplierScalarWhereWithAggregatesInput = {
 export type SupplierCreateInput = {
   id?: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -348,6 +361,7 @@ export type SupplierUncheckedCreateInput = {
   id?: string
   tenantId: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -363,6 +377,7 @@ export type SupplierUncheckedCreateInput = {
 export type SupplierUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -380,6 +395,7 @@ export type SupplierUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -396,6 +412,7 @@ export type SupplierCreateManyInput = {
   id?: string
   tenantId: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -407,6 +424,7 @@ export type SupplierCreateManyInput = {
 export type SupplierUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -419,6 +437,7 @@ export type SupplierUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -441,6 +460,7 @@ export type SupplierCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   gstin?: Prisma.SortOrder
   address?: Prisma.SortOrder
   paymentTermsDays?: Prisma.SortOrder
@@ -458,6 +478,7 @@ export type SupplierMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   gstin?: Prisma.SortOrder
   address?: Prisma.SortOrder
   paymentTermsDays?: Prisma.SortOrder
@@ -470,6 +491,7 @@ export type SupplierMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   gstin?: Prisma.SortOrder
   address?: Prisma.SortOrder
   paymentTermsDays?: Prisma.SortOrder
@@ -589,6 +611,7 @@ export type SupplierUpdateOneRequiredWithoutLedgerEntriesNestedInput = {
 export type SupplierCreateWithoutTenantInput = {
   id?: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -604,6 +627,7 @@ export type SupplierCreateWithoutTenantInput = {
 export type SupplierUncheckedCreateWithoutTenantInput = {
   id?: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -649,6 +673,7 @@ export type SupplierScalarWhereInput = {
   id?: Prisma.StringFilter<"Supplier"> | string
   tenantId?: Prisma.StringFilter<"Supplier"> | string
   name?: Prisma.StringFilter<"Supplier"> | string
+  phone?: Prisma.StringNullableFilter<"Supplier"> | string | null
   gstin?: Prisma.StringNullableFilter<"Supplier"> | string | null
   address?: Prisma.StringNullableFilter<"Supplier"> | string | null
   paymentTermsDays?: Prisma.IntNullableFilter<"Supplier"> | number | null
@@ -660,6 +685,7 @@ export type SupplierScalarWhereInput = {
 export type SupplierCreateWithoutPurchaseOrdersInput = {
   id?: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -676,6 +702,7 @@ export type SupplierUncheckedCreateWithoutPurchaseOrdersInput = {
   id?: string
   tenantId: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -706,6 +733,7 @@ export type SupplierUpdateToOneWithWhereWithoutPurchaseOrdersInput = {
 export type SupplierUpdateWithoutPurchaseOrdersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -722,6 +750,7 @@ export type SupplierUncheckedUpdateWithoutPurchaseOrdersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -736,6 +765,7 @@ export type SupplierUncheckedUpdateWithoutPurchaseOrdersInput = {
 export type SupplierCreateWithoutGrnsInput = {
   id?: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -752,6 +782,7 @@ export type SupplierUncheckedCreateWithoutGrnsInput = {
   id?: string
   tenantId: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -782,6 +813,7 @@ export type SupplierUpdateToOneWithWhereWithoutGrnsInput = {
 export type SupplierUpdateWithoutGrnsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -798,6 +830,7 @@ export type SupplierUncheckedUpdateWithoutGrnsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -812,6 +845,7 @@ export type SupplierUncheckedUpdateWithoutGrnsInput = {
 export type SupplierCreateWithoutPurchaseReturnsInput = {
   id?: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -828,6 +862,7 @@ export type SupplierUncheckedCreateWithoutPurchaseReturnsInput = {
   id?: string
   tenantId: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -858,6 +893,7 @@ export type SupplierUpdateToOneWithWhereWithoutPurchaseReturnsInput = {
 export type SupplierUpdateWithoutPurchaseReturnsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -874,6 +910,7 @@ export type SupplierUncheckedUpdateWithoutPurchaseReturnsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -888,6 +925,7 @@ export type SupplierUncheckedUpdateWithoutPurchaseReturnsInput = {
 export type SupplierCreateWithoutLedgerEntriesInput = {
   id?: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -904,6 +942,7 @@ export type SupplierUncheckedCreateWithoutLedgerEntriesInput = {
   id?: string
   tenantId: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -934,6 +973,7 @@ export type SupplierUpdateToOneWithWhereWithoutLedgerEntriesInput = {
 export type SupplierUpdateWithoutLedgerEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -950,6 +990,7 @@ export type SupplierUncheckedUpdateWithoutLedgerEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -964,6 +1005,7 @@ export type SupplierUncheckedUpdateWithoutLedgerEntriesInput = {
 export type SupplierCreateManyTenantInput = {
   id?: string
   name: string
+  phone?: string | null
   gstin?: string | null
   address?: string | null
   paymentTermsDays?: number | null
@@ -975,6 +1017,7 @@ export type SupplierCreateManyTenantInput = {
 export type SupplierUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -990,6 +1033,7 @@ export type SupplierUpdateWithoutTenantInput = {
 export type SupplierUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1005,6 +1049,7 @@ export type SupplierUncheckedUpdateWithoutTenantInput = {
 export type SupplierUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gstin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentTermsDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1075,6 +1120,7 @@ export type SupplierSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   tenantId?: boolean
   name?: boolean
+  phone?: boolean
   gstin?: boolean
   address?: boolean
   paymentTermsDays?: boolean
@@ -1093,6 +1139,7 @@ export type SupplierSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   tenantId?: boolean
   name?: boolean
+  phone?: boolean
   gstin?: boolean
   address?: boolean
   paymentTermsDays?: boolean
@@ -1106,6 +1153,7 @@ export type SupplierSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   tenantId?: boolean
   name?: boolean
+  phone?: boolean
   gstin?: boolean
   address?: boolean
   paymentTermsDays?: boolean
@@ -1119,6 +1167,7 @@ export type SupplierSelectScalar = {
   id?: boolean
   tenantId?: boolean
   name?: boolean
+  phone?: boolean
   gstin?: boolean
   address?: boolean
   paymentTermsDays?: boolean
@@ -1127,7 +1176,7 @@ export type SupplierSelectScalar = {
   createdAt?: boolean
 }
 
-export type SupplierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "gstin" | "address" | "paymentTermsDays" | "documentImageUrl" | "outstandingBalance" | "createdAt", ExtArgs["result"]["supplier"]>
+export type SupplierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "phone" | "gstin" | "address" | "paymentTermsDays" | "documentImageUrl" | "outstandingBalance" | "createdAt", ExtArgs["result"]["supplier"]>
 export type SupplierInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   purchaseOrders?: boolean | Prisma.Supplier$purchaseOrdersArgs<ExtArgs>
@@ -1156,6 +1205,13 @@ export type $SupplierPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id: string
     tenantId: string
     name: string
+    /**
+     * The distributor's contact number, as printed on their invoice.
+     * Free-form: a distributor's letterhead often carries two numbers and a
+     * landline, and normalising that would lose information the counter
+     * needs when chasing a delivery.
+     */
+    phone: string | null
     gstin: string | null
     address: string | null
     paymentTermsDays: number | null
@@ -1593,6 +1649,7 @@ export interface SupplierFieldRefs {
   readonly id: Prisma.FieldRef<"Supplier", 'String'>
   readonly tenantId: Prisma.FieldRef<"Supplier", 'String'>
   readonly name: Prisma.FieldRef<"Supplier", 'String'>
+  readonly phone: Prisma.FieldRef<"Supplier", 'String'>
   readonly gstin: Prisma.FieldRef<"Supplier", 'String'>
   readonly address: Prisma.FieldRef<"Supplier", 'String'>
   readonly paymentTermsDays: Prisma.FieldRef<"Supplier", 'Int'>

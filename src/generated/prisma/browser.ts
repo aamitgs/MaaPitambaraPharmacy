@@ -43,6 +43,72 @@ export type Batch = Prisma.BatchModel
  */
 export type Customer = Prisma.CustomerModel
 /**
+ * Model PromiseOrder
+ * A medicine a customer asked for that was not in stock.
+ * 
+ * The daily counter conversation — "we don't have it, leave your number
+ * and we'll call when it comes in" — which otherwise lives on a scrap of
+ * paper by the till and is honoured only if the right person is on shift.
+ * 
+ * Availability is deliberately NOT stored as a status. A flag set when
+ * stock arrives goes stale the moment that stock is sold to somebody
+ * else; the list computes what is on the shelf right now instead, so it
+ * can never promise something that has already gone.
+ */
+export type PromiseOrder = Prisma.PromiseOrderModel
+/**
+ * Model ExpenseCategory
+ * What money was spent on. A table rather than an enum so a pharmacy can
+ * add its own without a migration — and a table rather than a free-text
+ * column so the same cost does not end up as "Rent", "rent" and "RENT",
+ * which is what makes a profit figure untrustworthy.
+ */
+export type ExpenseCategory = Prisma.ExpenseCategoryModel
+/**
+ * Model Expense
+ * Money out that is not a purchase of stock.
+ * 
+ * Stock purchases already live in the GRN and supplier ledger; putting
+ * them here too would double-count them in the profit figure. This is
+ * rent, salaries, electricity, licence renewals — the costs that stand
+ * between gross margin and what the owner actually keeps.
+ */
+export type Expense = Prisma.ExpenseModel
+/**
+ * Model TaxSlab
+ * A named GST bucket an item belongs to — "Nil-rated", "Standard
+ * medicines", "Industrial formulations".
+ * 
+ * Membership is a property of the product and rarely changes; the rate
+ * under the bucket is what moves. Keeping the two apart is what allowed
+ * GST 2.0 (most medicines 12% -> 5%, Sept 2025) to be a one-row change
+ * rather than a re-tagging of the whole item master.
+ */
+export type TaxSlab = Prisma.TaxSlabModel
+/**
+ * Model TaxSlabRate
+ * What a slab costs from a given date. Insert-only in practice: a
+ * superseded rate is never edited, because a report explaining a
+ * two-year-old invoice needs the rate that was actually in force then.
+ */
+export type TaxSlabRate = Prisma.TaxSlabRateModel
+/**
+ * Model HsnTaxMapping
+ * HSN code -> slab. The middle tier of resolution.
+ * 
+ * HSN is used rather than a separate "product category" because in Indian
+ * GST the HSN *is* the classification — rates are legally defined against
+ * it. A parallel category taxonomy would be a second thing to keep in
+ * agreement with the first.
+ */
+export type HsnTaxMapping = Prisma.HsnTaxMappingModel
+/**
+ * Model SmsLog
+ * One attempt to send an SMS. Mirrors WhatsAppLog: the same question —
+ * "did the customer get their bill?" — has to be answerable per channel.
+ */
+export type SmsLog = Prisma.SmsLogModel
+/**
  * Model EmailLog
  * Deliberately a separate table from WhatsAppLog rather than one generic
  * MessageLog: WhatsAppLog already holds live rows, and collapsing the two
@@ -50,6 +116,77 @@ export type Customer = Prisma.CustomerModel
  * generalising if a third channel (SMS) ever appears.
  */
 export type EmailLog = Prisma.EmailLogModel
+/**
+ * Model Note
+ * Shared counter notepad: shift handovers, reminders, standing
+ * instructions. Tenant-wide rather than per-user on purpose — the point of
+ * a notepad by the till is that the next person on shift reads it.
+ */
+export type Note = Prisma.NoteModel
+/**
+ * Model SalesReturn
+ * 
+ */
+export type SalesReturn = Prisma.SalesReturnModel
+/**
+ * Model SalesReturnItem
+ * 
+ */
+export type SalesReturnItem = Prisma.SalesReturnItemModel
+/**
+ * Model StockCount
+ * A physical stocktake: what the shelf actually holds, against what the
+ * system believes.
+ * 
+ * Opening a count freezes the system quantity per batch so the target
+ * stops moving while someone walks the shelves. Posting it then adjusts
+ * each batch to the counted figure — measured against stock *at posting
+ * time*, not against the frozen snapshot, because trade may have
+ * continued during the count. Lines where the two disagree are flagged
+ * rather than silently reconciled.
+ */
+export type StockCount = Prisma.StockCountModel
+/**
+ * Model StockCountLine
+ * 
+ */
+export type StockCountLine = Prisma.StockCountLineModel
+/**
+ * Model HeldSale
+ * A cart parked mid-sale so the counter can serve the next customer.
+ * 
+ * Server-side rather than in the browser: a hold has to survive a crashed
+ * tab, and on a two-till counter the person who resumes the sale is often
+ * not the one who parked it.
+ * 
+ * The cart is stored as JSON on purpose. A hold is a scratch pad, not a
+ * record — it has no reporting value, and normalising it into line rows
+ * would mean a migration every time the cart gains a field. Crucially it
+ * reserves no stock: nothing is sold until the sale completes, so a
+ * forgotten hold can never make an item unavailable.
+ */
+export type HeldSale = Prisma.HeldSaleModel
+/**
+ * Model StockAdjustment
+ * A stock movement that is neither a sale nor a purchase.
+ * 
+ * Before this existed an expired batch had no way off the books: it sat in
+ * `currentQty` forever, inflating stock value and the margin report, with
+ * no disposal record — which the Drugs & Cosmetics Act expects for
+ * destroyed drugs. Adjustments are insert-only; a mistake is corrected by
+ * a second, opposite adjustment so the trail stays intact.
+ */
+export type StockAdjustment = Prisma.StockAdjustmentModel
+/**
+ * Model StockAdjustmentItem
+ * 
+ */
+export type StockAdjustmentItem = Prisma.StockAdjustmentItemModel
+/**
+ * Model CashUp
+ * 
+ */
+export type CashUp = Prisma.CashUpModel
 /**
  * Model WhatsAppLog
  * 
@@ -95,6 +232,13 @@ export type SalesInvoiceItem = Prisma.SalesInvoiceItemModel
  * 
  */
 export type Discount = Prisma.DiscountModel
+/**
+ * Model Role
+ * Owner-definable role. The three seeded system roles reproduce the
+ * permissions the app shipped with; custom roles are additive on top.
+ * Deliberately not deletable while anyone still holds them.
+ */
+export type Role = Prisma.RoleModel
 /**
  * Model User
  * 
@@ -165,3 +309,50 @@ export type StockTransferItem = Prisma.StockTransferItemModel
  * 
  */
 export type NarcoticRegisterEntry = Prisma.NarcoticRegisterEntryModel
+/**
+ * Model ErrorLog
+ * Exceptions that reached a user, kept where someone can actually see them.
+ * 
+ * On a shop PC nobody reads the server console, so an error that only
+ * lands there is an error nobody knows about. These rows are what the
+ * owner sees on the Security screen, and what turns "it did something
+ * funny yesterday" into a timestamp and a stack.
+ */
+export type ErrorLog = Prisma.ErrorLogModel
+/**
+ * Model UserSession
+ * One signed-in device.
+ * 
+ * The session itself is a JWT, which is stateless by design — that is
+ * what makes it fast, and also what makes it impossible to end. Without
+ * a record like this, a session on a lost phone or a shared counter PC
+ * runs until it expires on its own and nobody can see that it exists.
+ * 
+ * The token carries this row's id. Every request checks the row, so
+ * revoking one is immediate rather than waiting out the token.
+ */
+export type UserSession = Prisma.UserSessionModel
+/**
+ * Model SaltAlias
+ * Two spellings of the same active ingredient.
+ * 
+ * Manufacturers write the same salt a dozen ways — "Cetirizine
+ * Hydrochloride", "Cetirizine HCl", "Cetirizine Dihydrochloride" — and a
+ * substitute is only found when the two spellings resolve to one name.
+ * The app ships a short built-in list; this is how a pharmacy extends it
+ * with the ones its own suppliers actually use.
+ * 
+ * Deliberately editable, and deliberately not automatic: declaring two
+ * salts equivalent is a clinical statement, not a spelling correction.
+ */
+export type SaltAlias = Prisma.SaltAliasModel
+/**
+ * Model TrustedDevice
+ * A device the user has chosen to stop being asked for an OTP on.
+ * 
+ * Skips the *second* factor only — the password is always still required,
+ * so a stolen laptop is no worse off than a stolen password. The cookie
+ * holds a random token; only its hash is stored, so a leak of this table
+ * cannot be replayed as a login.
+ */
+export type TrustedDevice = Prisma.TrustedDeviceModel

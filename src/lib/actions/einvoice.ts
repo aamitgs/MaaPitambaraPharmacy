@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole } from "@/lib/rbac";
+import { requirePermission } from "@/lib/rbac";
 import { runEinvoiceAttempt, runEwayBillAttemptForInvoice, runEwayBillAttemptForGrn } from "@/lib/gsp/engine";
 
 async function assertInvoiceInTenant(invoiceId: string, tenantId: string) {
@@ -16,7 +16,7 @@ async function assertGrnInTenant(grnId: string, tenantId: string) {
 }
 
 export async function retryEinvoice(invoiceId: string) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("purchasing.manage");
   await assertInvoiceInTenant(invoiceId, session.user.tenantId);
   const result = await runEinvoiceAttempt(invoiceId);
   revalidatePath(`/invoices/${invoiceId}/receipt`);
@@ -24,7 +24,7 @@ export async function retryEinvoice(invoiceId: string) {
 }
 
 export async function retryEwayBillForInvoice(invoiceId: string) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("purchasing.manage");
   await assertInvoiceInTenant(invoiceId, session.user.tenantId);
   const result = await runEwayBillAttemptForInvoice(invoiceId);
   revalidatePath(`/invoices/${invoiceId}/receipt`);
@@ -32,7 +32,7 @@ export async function retryEwayBillForInvoice(invoiceId: string) {
 }
 
 export async function retryEwayBillForGrn(grnId: string) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("purchasing.manage");
   await assertGrnInTenant(grnId, session.user.tenantId);
   const result = await runEwayBillAttemptForGrn(grnId);
   revalidatePath(`/grn/${grnId}`);

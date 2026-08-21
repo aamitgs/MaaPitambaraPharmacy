@@ -83,6 +83,10 @@ export function buildOfflineReceiptData(params: {
         manufacturer: line.manufacturer,
         hsnCode: catalogItem?.hsnCode ?? null,
         packSize: catalogItem?.packSize ?? null,
+        isLooseSale: line.isLooseSale,
+        priceBasis: line.priceBasis ?? "mrp",
+        unitsPerPack: line.unitsPerPack,
+        unit: catalogItem?.unit ?? "unit",
         batchNo: line.batchNo,
         expiryDate: line.expiryDate ? new Date(line.expiryDate) : null,
         // The cart line carries no MRP — the batch picker works off sale

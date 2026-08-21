@@ -5,8 +5,16 @@ import type { CompleteSaleInput } from "@/lib/actions/pos";
 export interface ReceiptHeader {
   tenant: {
     pharmacyName: string;
-    invoiceFooterText: string | null;
-    invoiceTermsText: string | null;
+    invoiceHeaderText: string;
+    invoiceFooterText: string;
+    invoiceTermsText: string;
+    // Cached with the rest of the header so an offline bill still prints
+    // the pharmacy's own logo. The URL points at the public /api/brand
+    // route, which a service worker can cache like any other asset.
+    logoHorizontal: string;
+    logoIcon: string;
+    showLogo: boolean;
+    paperDefault: string;
   };
   branch: {
     name: string;
@@ -36,7 +44,15 @@ export interface PosCacheRecord {
   updatedAt: number;
 }
 
-export type PendingSaleStatus = "pending" | "syncing" | "synced" | "conflict" | "failed";
+export type PendingSaleStatus =
+  | "pending"
+  | "syncing"
+  | "synced"
+  | "conflict"
+  | "failed"
+  /// Queued too long ago to post by itself. Never discarded — the sale
+  /// really happened — but it waits for someone to look at it.
+  | "stale";
 
 export interface PendingSale {
   localId: string;

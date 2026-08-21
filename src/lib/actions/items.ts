@@ -3,10 +3,11 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requireRole, requireSession } from "@/lib/rbac";
+import { hasPermission, requirePermission, requireSession } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 import { serializeItem, serializeBatch } from "@/lib/serialize";
 import { getBranchFilter, resolveConcreteBranch } from "@/lib/branch-scope";
+import { buildInternalBarcode } from "@/lib/barcode/internal-code";
 
 const scheduleClassEnum = z.enum(["none", "H", "H1", "X", "G"]);
 
@@ -17,9 +18,25 @@ const itemSchema = z.object({
   composition: z.string().trim().optional(),
   scheduleClass: scheduleClassEnum,
   hsnCode: z.string().trim().optional(),
+  // Normalised to null when blank: "" would collide with another blank
+  // item under the per-tenant unique index, where NULLs coexist freely.
+  barcode: z
+    .string()
+    .trim()
+    .max(64)
+    .optional()
+    .transform((v) => (v ? v : undefined)),
   taxRate: z.coerce.number().min(0).max(100),
+  // Empty string from the <select> means "resolve from HSN".
+  taxSlabId: z
+    .string()
+    .trim()
+    .optional()
+    .transform((v) => (v ? v : null)),
   unit: z.string().trim().min(1),
   packSize: z.string().trim().optional(),
+  unitsPerPack: z.coerce.number().int().min(1).max(1000).default(1),
+  allowLooseSale: z.boolean().default(false),
   reorderLevel: z.coerce.number().int().min(0),
   // Relative path returned by /api/uploads/item-photo. Nullable so the
   // form can clear an existing photo, not just replace it.
@@ -36,6 +53,13 @@ const batchSchema = z.object({
   mrp: z.coerce.number().positive(),
   purchaseRate: z.coerce.number().min(0),
   saleRate: z.coerce.number().positive(),
+  // Three states, and they mean different things: absent leaves the stored
+  // PTR alone (the field is not rendered for staff who may not see it),
+  // null clears it, a number sets it.
+  ptr: z
+    .union([z.literal(""), z.null(), z.coerce.number().positive()])
+    .optional()
+    .transform((v) => (v === "" ? null : v)),
   currentQty: z.coerce.number().int().min(0),
   rackLocation: z.string().trim().optional(),
 });
@@ -92,9 +116,26 @@ export async function getItem(id: string) {
   };
 }
 
+/**
+ * Turns the unique-barcode violation into something a counter can act on.
+ * The raw Prisma message names the index, which tells staff nothing about
+ * which pack is already using the code.
+ */
+async function assertBarcodeFree(tenantId: string, barcode: string | undefined, excludeId?: string) {
+  if (!barcode) return;
+  const clash = await prisma.item.findFirst({
+    where: { tenantId, barcode, ...(excludeId ? { id: { not: excludeId } } : {}) },
+    select: { name: true },
+  });
+  if (clash) {
+    throw new Error(`That barcode is already on "${clash.name}".`);
+  }
+}
+
 export async function createItem(input: ItemInput) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("items.manage");
   const parsed = itemSchema.parse(input);
+  await assertBarcodeFree(session.user.tenantId, parsed.barcode);
 
   const item = await prisma.item.create({
     data: { ...parsed, tenantId: session.user.tenantId },
@@ -114,13 +155,14 @@ export async function createItem(input: ItemInput) {
 }
 
 export async function updateItem(id: string, input: ItemInput) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("items.manage");
   const parsed = itemSchema.parse(input);
 
   const before = await prisma.item.findFirst({
     where: { id, tenantId: session.user.tenantId },
   });
   if (!before) throw new Error("Item not found");
+  await assertBarcodeFree(session.user.tenantId, parsed.barcode, id);
 
   const item = await prisma.item.update({
     where: { id },
@@ -143,7 +185,7 @@ export async function updateItem(id: string, input: ItemInput) {
 }
 
 export async function createBatch(input: BatchInput) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("items.manage");
   const parsed = batchSchema.parse(input);
 
   const item = await prisma.item.findFirst({
@@ -153,6 +195,13 @@ export async function createBatch(input: BatchInput) {
 
   const branchId = await resolveConcreteBranch(session.user.tenantId, session.user.role);
   if (!branchId) throw new Error("No branch configured for this pharmacy yet.");
+
+  // PTR is what a wholesale buyer pays. Setting it is as commercially
+  // consequential as billing at it, so it carries the same permission.
+  const mayPricePtr = await hasPermission("sales.wholesale");
+  if (parsed.ptr != null && !mayPricePtr) {
+    throw new Error("You are not allowed to set wholesale prices (PTR).");
+  }
 
   const batch = await prisma.batch.create({
     data: {
@@ -164,6 +213,7 @@ export async function createBatch(input: BatchInput) {
       mrp: parsed.mrp,
       purchaseRate: parsed.purchaseRate,
       saleRate: parsed.saleRate,
+      ptr: mayPricePtr ? (parsed.ptr ?? null) : null,
       currentQty: parsed.currentQty,
       rackLocation: parsed.rackLocation,
     },
@@ -184,13 +234,22 @@ export async function createBatch(input: BatchInput) {
 }
 
 export async function updateBatch(id: string, input: BatchInput) {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("items.manage");
   const parsed = batchSchema.parse(input);
 
   const before = await prisma.batch.findFirst({
     where: { id, item: { tenantId: session.user.tenantId } },
   });
   if (!before) throw new Error("Batch not found");
+
+  // Undefined means the form never rendered the field, so the stored PTR is
+  // left exactly as it was rather than being quietly wiped. Submitting the
+  // value it already holds is not a change and needs no permission.
+  const mayPricePtr = await hasPermission("sales.wholesale");
+  const currentPtr = before.ptr === null ? null : Number(before.ptr);
+  if (parsed.ptr !== undefined && parsed.ptr !== currentPtr && !mayPricePtr) {
+    throw new Error("You are not allowed to change wholesale prices (PTR).");
+  }
 
   const batch = await prisma.batch.update({
     where: { id },
@@ -201,6 +260,7 @@ export async function updateBatch(id: string, input: BatchInput) {
       mrp: parsed.mrp,
       purchaseRate: parsed.purchaseRate,
       saleRate: parsed.saleRate,
+      ptr: mayPricePtr ? parsed.ptr : undefined,
       currentQty: parsed.currentQty,
       rackLocation: parsed.rackLocation,
     },
@@ -219,4 +279,106 @@ export async function updateBatch(id: string, input: BatchInput) {
   revalidatePath(`/items/${parsed.itemId}`);
   revalidatePath("/items");
   return serializeBatch(batch);
+}
+
+/**
+ * Retire an item, or bring it back.
+ *
+ * Never a delete: the item is referenced by every invoice line that ever
+ * sold it, by the GST returns already filed, and by the batches still on
+ * the shelf. Retiring hides it from the counter and from reordering while
+ * leaving all of that intact — expiry alerts included, because stock that
+ * is no longer sold is exactly the stock that gets forgotten.
+ */
+export async function setItemActive(id: string, isActive: boolean) {
+  const session = await requirePermission("items.manage");
+
+  const before = await prisma.item.findFirst({
+    where: { id, tenantId: session.user.tenantId },
+    select: { id: true, name: true, isActive: true },
+  });
+  if (!before) throw new Error("Item not found");
+
+  const item = await prisma.item.update({ where: { id }, data: { isActive } });
+
+  await writeAuditLog({
+    tenantId: session.user.tenantId,
+    userId: session.user.id,
+    action: isActive ? "item.restore" : "item.retire",
+    entity: "Item",
+    entityId: id,
+    before: { isActive: before.isActive },
+    after: { isActive },
+  });
+
+  revalidatePath(`/items/${id}`);
+  revalidatePath("/items");
+  return serializeItem(item);
+}
+
+/**
+ * How much stock is still sitting under a retired item — the number the
+ * pharmacist needs before retiring one, because it does not disappear.
+ */
+export async function getItemStockOnHand(id: string) {
+  const session = await requireSession();
+  const branchFilter = await getBranchFilter(session.user.tenantId, session.user.role);
+  const batches = await prisma.batch.findMany({
+    where: { itemId: id, item: { tenantId: session.user.tenantId }, ...branchFilter },
+    select: { currentQty: true },
+  });
+  return batches.reduce((sum, b) => sum + b.currentQty, 0);
+}
+
+/**
+ * Issues an internal barcode for an item that arrived without one — loose
+ * strips, repacked bottles, anything the distributor did not label.
+ *
+ * Never overwrites a barcode that is already there: if the pack has a
+ * printed code, that code is the one on the shelf, and replacing it in the
+ * database would leave every existing pack unscannable.
+ */
+export async function assignInternalBarcode(itemId: string) {
+  const session = await requirePermission("items.manage");
+
+  const item = await prisma.item.findFirst({
+    where: { id: itemId, tenantId: session.user.tenantId },
+    select: { id: true, name: true, barcode: true },
+  });
+  if (!item) throw new Error("Item not found");
+  if (item.barcode) {
+    throw new Error(
+      `${item.name} already has the barcode ${item.barcode}. Clear it on the item first if it is wrong.`
+    );
+  }
+
+  // Randomised codes clash about as often as two cuids do, but the unique
+  // index is per tenant and the cost of getting it wrong is two items
+  // scanning as one another, so retry rather than assume.
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const candidate = buildInternalBarcode();
+    const clash = await prisma.item.findFirst({
+      where: { tenantId: session.user.tenantId, barcode: candidate },
+      select: { id: true },
+    });
+    if (clash) continue;
+
+    const updated = await prisma.item.update({
+      where: { id: itemId },
+      data: { barcode: candidate },
+    });
+    await writeAuditLog({
+      tenantId: session.user.tenantId,
+      userId: session.user.id,
+      action: "item.barcode.assign",
+      entity: "Item",
+      entityId: itemId,
+      after: { barcode: candidate },
+    });
+    revalidatePath(`/items/${itemId}`);
+    revalidatePath("/items");
+    return serializeItem(updated);
+  }
+
+  throw new Error("Could not generate a free barcode. Try again.");
 }

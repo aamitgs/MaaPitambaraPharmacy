@@ -1,11 +1,15 @@
 import Link from "next/link";
+import { Users } from "lucide-react";
 import { listCustomers } from "@/lib/actions/customers";
+import { getDuplicateCustomers } from "@/lib/actions/customer-merge";
+import { Button } from "@/components/ui/button";
 import { CustomerForm } from "@/components/customers/customer-form";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export default async function CustomersPage() {
-  const customers = await listCustomers();
+  const [customers, duplicates] = await Promise.all([listCustomers(), getDuplicateCustomers()]);
+  const duplicateRecords = duplicates.reduce((n, g) => n + g.members.length, 0);
 
   return (
     <div className="space-y-4 p-6">
@@ -16,7 +20,16 @@ export default async function CustomersPage() {
             {customers.length} customer{customers.length === 1 ? "" : "s"}
           </p>
         </div>
-        <CustomerForm />
+        <div className="flex items-center gap-2">
+          {duplicates.length > 0 && (
+            <Button asChild variant="outline" size="sm">
+              <Link href="/customers/duplicates">
+                <Users /> {duplicateRecords} possible duplicates
+              </Link>
+            </Button>
+          )}
+          <CustomerForm />
+        </div>
       </div>
 
       <div className="rounded-lg border">

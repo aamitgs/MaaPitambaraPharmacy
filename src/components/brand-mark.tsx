@@ -1,70 +1,67 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { BRAND } from "@/lib/brand";
 
 /**
- * The supplied Maa Pitambara Pharmacy artwork, served from `public/`.
- * Each file is the original trimmed to its content — the supplied PNGs
- * carry transparent margin (345px under the stacked wordmark, 392px beside
- * the horizontal one), which would otherwise show up as unexplained gaps
- * that CSS can't close:
- *   logo-icon.png        the roundel on its own  (also src/app/icon.png,
- *                        public/icon-192.png and icon-512.png, resized for
- *                        the favicon and the PWA manifest)
- *   logo-stacked.png     roundel above the wordmark — the login screen
- *   logo-horizontal.png  roundel beside the wordmark — spare, for wide headers
+ * The pharmacy's artwork, in its three lockups:
  *
- * Both components take `alt=""` by default: each is rendered next to text
- * that already names the pharmacy (the sidebar heading, the login card's
- * title), so announcing the logo again would just repeat it.
+ *   BrandMark             the roundel on its own — collapsed sidebar
+ *   BrandLockupHorizontal roundel beside the wordmark — app chrome, bills
+ *   BrandLockup           roundel above the wordmark — the login screen
+ *
+ * Each takes its `src` as a prop rather than resolving branding itself.
+ * That is deliberate: both consumers (the app shell and the login form) are
+ * client components, so an async server component could not be rendered
+ * inside them. The server resolves the URL once via getBranding() and
+ * threads it down, which also means one database read per request instead
+ * of one per logo.
+ *
+ * Plain `<img>` rather than next/image: an uploaded logo is a runtime
+ * database value pointing at an API route, so there is no build-time size
+ * to optimise against.
+ *
+ * `alt=""` by default — every lockup renders beside text that already names
+ * the pharmacy, so announcing the logo would just repeat it.
  */
-export function BrandMark({ className, alt = "" }: { className?: string; alt?: string }) {
-  return (
-    <Image
-      src="/logo-icon.png"
-      alt={alt}
-      width={256}
-      height={256}
-      priority
-      className={cn("h-6 w-6 shrink-0 object-contain", className)}
-    />
-  );
-}
-
-/**
- * Horizontal lockup — roundel beside the wordmark. The app-chrome logo:
- * it carries the name itself, so wherever this is used there is no separate
- * pharmacy-name text next to it.
- */
-export function BrandLockupHorizontal({
+export function BrandMark({
+  src,
   className,
   alt = "",
 }: {
+  src: string;
   className?: string;
   alt?: string;
 }) {
   return (
-    <Image
-      src="/logo-horizontal.png"
-      alt={alt}
-      width={1348}
-      height={440}
-      priority
-      className={cn("h-9 w-auto object-contain", className)}
-    />
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img src={src} alt={alt} className={cn("h-6 w-6 shrink-0 object-contain", className)} />
   );
 }
 
-/** Stacked lockup — roundel above the wordmark — as used on the login screen. */
-export function BrandLockup({ className, alt = "" }: { className?: string; alt?: string }) {
+export function BrandLockupHorizontal({
+  src,
+  className,
+  alt = "",
+}: {
+  src: string;
+  className?: string;
+  alt?: string;
+}) {
   return (
-    <Image
-      src="/logo-stacked.png"
-      alt={alt}
-      width={946}
-      height={1129}
-      priority
-      className={cn("h-auto w-44 object-contain", className)}
-    />
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img src={src} alt={alt} className={cn("h-9 w-auto object-contain", className)} />
+  );
+}
+
+export function BrandLockup({
+  src,
+  className,
+  alt = "",
+}: {
+  src: string;
+  className?: string;
+  alt?: string;
+}) {
+  return (
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img src={src} alt={alt} className={cn("h-auto w-44 object-contain", className)} />
   );
 }

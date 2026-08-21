@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Download } from "lucide-react";
+import { InvoiceFilters } from "@/components/invoices/invoice-filters";
 
 const PAYMENT_LABELS: Record<string, string> = {
   cash: "Cash",
@@ -13,8 +14,27 @@ const PAYMENT_LABELS: Record<string, string> = {
   credit: "Credit",
 };
 
-export default async function InvoicesPage() {
-  const invoices = await listInvoices();
+export default async function InvoicesPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | undefined>>;
+}) {
+  const params = await searchParams;
+  const { invoices, matchCount, shownCount, matchedTotal, totalExcludesCancelled } =
+    await listInvoices({
+    q: params.q,
+    medicine: params.medicine,
+    from: params.from,
+    to: params.to,
+    paymentMode: params.paymentMode,
+    status: params.status,
+  });
+  const filtered = Object.keys(params).length > 0;
+  // The export has to carry the same filter, or "export" quietly means
+  // something different from what is on screen.
+  const exportQuery = new URLSearchParams(
+    Object.entries(params).filter(([, v]) => v) as [string, string][]
+  ).toString();
 
   return (
     <div className="space-y-4 p-6">
@@ -22,15 +42,29 @@ export default async function InvoicesPage() {
         <div>
           <h1 className="text-lg font-semibold">Invoices</h1>
           <p className="text-sm text-muted-foreground">
-            {invoices.length} invoice{invoices.length === 1 ? "" : "s"}
+            {filtered ? (
+              <>
+                {matchCount} match{matchCount === 1 ? "" : "es"}
+                {shownCount < matchCount && ` · showing the latest ${shownCount}`} · ₹
+                {matchedTotal.toFixed(2)}{" "}
+                {totalExcludesCancelled ? "billed" : "in these bills"}
+              </>
+            ) : (
+              <>
+                {matchCount} invoice{matchCount === 1 ? "" : "s"}
+                {shownCount < matchCount && ` · showing the latest ${shownCount}`}
+              </>
+            )}
           </p>
         </div>
         <Button asChild variant="outline" size="sm">
-          <a href="/api/export/sales" download>
+          <a href={`/api/export/sales${exportQuery ? `?${exportQuery}` : ""}`} download>
             <Download className="h-4 w-4" /> Export CSV
           </a>
         </Button>
       </div>
+
+      <InvoiceFilters />
 
       <div className="rounded-lg border">
         <Table>

@@ -27,7 +27,13 @@ const columns = columnHelper.columns([
     header: "Item",
     cell: ({ row }) => (
       <div>
-        <Link href={`/items/${row.original.id}`} className="font-medium hover:underline">
+        <Link
+          href={`/items/${row.original.id}`}
+          className={cn(
+            "font-medium hover:underline",
+            !row.original.isActive && "text-muted-foreground"
+          )}
+        >
           {row.original.name}
         </Link>
         {row.original.genericName && (
@@ -76,6 +82,13 @@ const columns = columnHelper.columns([
     cell: ({ row }) => {
       const it = row.original;
       const badges: React.ReactNode[] = [];
+      if (!it.isActive) {
+        badges.push(
+          <Badge key="retired" variant="outline" className="text-muted-foreground">
+            Retired
+          </Badge>
+        );
+      }
       if (it.outOfStock) {
         badges.push(
           <Badge key="oos" className="bg-destructive/10 text-destructive hover:bg-destructive/10">
@@ -113,29 +126,47 @@ const columns = columnHelper.columns([
 
 export function ItemsTable({ items }: { items: ItemWithFlags[] }) {
   const [search, setSearch] = useState("");
+  // Hidden by default: the master list is a working list. Retired items are
+  // one checkbox away because stock left under them still has to be found.
+  const [showRetired, setShowRetired] = useState(false);
+  const retiredCount = useMemo(() => items.filter((it) => !it.isActive).length, [items]);
 
   const filteredItems = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return items;
-    return items.filter(
+    const visible = showRetired ? items : items.filter((it) => it.isActive);
+    if (!q) return visible;
+    return visible.filter(
       (it) =>
         it.name.toLowerCase().includes(q) ||
         (it.genericName?.toLowerCase().includes(q) ?? false) ||
         (it.manufacturer?.toLowerCase().includes(q) ?? false)
     );
-  }, [items, search]);
+  }, [items, search, showRetired]);
 
   const table = useTable({ features, columns, data: filteredItems });
 
   return (
     <div className="space-y-3">
-      <Input
-        placeholder="Search items by name, generic name, or manufacturer…"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="max-w-sm"
-        autoFocus
-      />
+      <div className="flex flex-wrap items-center gap-3">
+        <Input
+          placeholder="Search items by name, generic name, or manufacturer…"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="max-w-sm"
+          autoFocus
+        />
+        {retiredCount > 0 && (
+          <label className="flex items-center gap-2 text-sm text-muted-foreground">
+            <input
+              type="checkbox"
+              checked={showRetired}
+              onChange={(e) => setShowRetired(e.target.checked)}
+              className="h-4 w-4 accent-primary"
+            />
+            Show {retiredCount} retired
+          </label>
+        )}
+      </div>
       <div className="rounded-lg border">
         <Table>
           <TableHeader>

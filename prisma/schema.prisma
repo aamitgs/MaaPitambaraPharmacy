@@ -19,8 +19,44 @@ model Tenant {
   id                      String   @id @default(cuid())
   pharmacyName            String
   tenantType              String   @default("retail")
-  logoUrl                 String?
+
+  // ---- White-label branding, owner-editable at /branding ----
+  // Everything here is nullable and falls back to src/lib/brand.ts, which
+  // stays the build-time identity (what the browser tab says before anyone
+  // signs in, and the values the seed writes). Read through
+  // getBranding() — never off the Tenant row directly, or a consumer will
+  // miss the fallback.
+  /// Compact form for the PWA home-screen label and tight layouts.
+  brandShortName          String?
+  brandTagline            String?
+  brandDescription        String?
+  /// Paths under the brandAssets storage root, served by the PUBLIC
+  /// /api/brand/[variant] route: the login screen and an emailed PDF both
+  /// need the logo before there is a session to authorise it.
+  logoIconUrl             String?
+  logoHorizontalUrl       String?
+  logoStackedUrl          String?
+  /// Hex. Converted to OKLCH and injected as CSS variables at render, so
+  /// every existing `bg-brand-maroon` class picks a change up without a
+  /// rebuild.
   primaryColor            String?
+  accentColor             String?
+  surfaceColor            String?
+  /// Printed above the item table on every bill.
+  invoiceHeaderText       String?
+  /// 58mm | 80mm | a5 | a4 — which paper the print screen opens on.
+  invoicePaperDefault     String?
+  showLogoOnInvoice       Boolean  @default(true)
+  /// Payee VPA for the scan-and-pay QR printed on every bill.
+  upiId                   String?
+  supportEmail            String?
+  websiteUrl              String?
+  /// Counter hours, shown on the dashboard panel.
+  hoursHeadline           String?
+  hoursNote               String?
+  /// Cache-buster for the public logo route — a swapped logo must not sit
+  /// stale in a browser that already fetched the old one.
+  brandingUpdatedAt       DateTime?
   invoiceFooterText       String?
   // Printed under a "Terms & Conditions" heading on the bill, separate from
   // the goodwill footer above it: a returns policy and a jurisdiction clause
@@ -31,6 +67,20 @@ model Tenant {
   staffDiscountCapPercent Decimal  @default(10) @db.Decimal(5, 2)
   managerPinHash          String?
   nearExpiryWindowDays    Int      @default(90)
+  /// How long a sale queued while offline may wait before it stops syncing
+  /// by itself. A bill rung up on Monday and posted on Thursday claims
+  /// Monday's stock at Monday's prices, and lands in the wrong GST period.
+  /// Twelve hours covers a power cut or a dead line without spanning a
+  /// day's trade.
+  offlineSyncMaxHours     Int      @default(12)
+  /// Wholesale billing. Off by default, and while it is off nothing about
+  /// PTR appears anywhere — a retail counter should not carry the
+  /// vocabulary of a distributor. Turning it on reveals the PTR field on
+  /// GRN and the MRP/PTR choice at the till.
+  wholesaleBillingEnabled Boolean @default(false)
+  /// How many days after a sale a customer return is still accepted.
+  /// Owner-editable; 0 disables sales returns entirely.
+  salesReturnWindowDays   Int      @default(15)
   // Separate from nearExpiryWindowDays (batch stock expiry) — licence
   // renewal lead time is a different business concern with its own
   // sensible default.
@@ -62,7 +112,22 @@ model Tenant {
 
   customerLedgerEntries CustomerLedgerEntry[]
   whatsappLogs          WhatsAppLog[]
+  smsLogs               SmsLog[]
   emailLogs             EmailLog[]
+  taxSlabs              TaxSlab[]
+  hsnTaxMappings        HsnTaxMapping[]
+  expenseCategories     ExpenseCategory[]
+  expenses              Expense[]
+  promiseOrders         PromiseOrder[]
+  salesReturns          SalesReturn[]
+  cashUps               CashUp[]
+  stockAdjustments      StockAdjustment[]
+  heldSales             HeldSale[]
+  stockCounts           StockCount[]
+  notes                 Note[]
+  roles                 Role[]
+
+  saltAliases SaltAlias[]
 
   @@map("tenants")
 }
@@ -110,6 +175,13 @@ model Branch {
   purchaseReturns PurchaseReturn[]
 
   narcoticRegisterEntries NarcoticRegisterEntry[]
+  salesReturns            SalesReturn[]
+  cashUps                 CashUp[]
+  stockAdjustments        StockAdjustment[]
+  heldSales               HeldSale[]
+  stockCounts             StockCount[]
+  expenses                Expense[]
+  promiseOrders           PromiseOrder[]
   stockTransfersFrom      StockTransfer[]         @relation("StockTransferFrom")
   stockTransfersTo        StockTransfer[]         @relation("StockTransferTo")
 
@@ -138,9 +210,33 @@ model Item {
   composition   String?
   scheduleClass ScheduleClass @default(none)
   hsnCode       String?
+  /// Explicit GST slab for this item — the most specific answer, overriding
+  /// the HSN mapping. Null means "resolve from HSN".
+  taxSlabId     String?
+  /// EAN-13 / UPC printed on the pack, or a shop-assigned code for loose
+  /// items. Unique per tenant so a scan resolves to exactly one item —
+  /// nullable because most Indian pharmacy stock is entered by name and
+  /// only some packs carry a scannable code.
+  barcode       String?
+  /// The rate this item carried before slabs existed. Still the last
+  /// fallback in resolution, so nothing broke on the day slabs shipped —
+  /// but a slab or HSN mapping supersedes it.
   taxRate       Decimal       @default(0) @db.Decimal(5, 2)
   unit          String        @default("unit")
+  /// Free text as printed on the carton, e.g. "10 tablets". Kept for the
+  /// bill; `unitsPerPack` is the number the stock maths uses.
   packSize      String?
+  /// Sellable units in one pack. 1 means the pack is the unit — a bottle of
+  /// syrup — and no loose sale is possible.
+  unitsPerPack  Int           @default(1)
+  /// Whether the counter may break a pack. Off by default: most stock is
+  /// sold whole, and a strip broken by accident cannot be un-broken.
+  allowLooseSale Boolean      @default(false)
+  /// Retired, not deleted. A discontinued medicine still has to appear in
+  /// last year's sales, in the GST return that reported it, and in the
+  /// expiry alerts for whatever is still on the shelf — so it is hidden
+  /// from anything forward-looking and kept everywhere backward-looking.
+  isActive     Boolean   @default(true)
   reorderLevel  Int           @default(10)
   // Photo of the strip/carton, captured when adding the item. Look-alike
   // brand names are a real dispensing hazard, so the picture is there to
@@ -155,13 +251,21 @@ model Item {
   purchaseOrderItems  PurchaseOrderItem[]
   grnItems            GrnItem[]
   purchaseReturnItems PurchaseReturnItem[]
+  salesReturnItems    SalesReturnItem[]
   stockTransferItems  StockTransferItem[]
+  stockAdjustmentItems StockAdjustmentItem[]
+  stockCountLines      StockCountLine[]
+  taxSlab              TaxSlab?             @relation(fields: [taxSlabId], references: [id])
 
   narcoticRegisterEntries NarcoticRegisterEntry[]
 
+  @@unique([tenantId, barcode])
   @@index([tenantId])
   @@index([tenantId, name])
+  @@index([tenantId, barcode])
   @@map("items")
+  promiseOrders        PromiseOrder[]
+
 }
 
 model Batch {
@@ -176,19 +280,32 @@ model Batch {
   mfgDate      DateTime?
   expiryDate   DateTime
   mrp          Decimal   @db.Decimal(10, 2)
+  /// Price To Retailer — what a wholesale buyer pays, printed on the
+  /// distributor's invoice. Distinct from `purchaseRate` (what this
+  /// pharmacy paid) and from `saleRate` (its retail price). Null on stock
+  /// that is only ever sold retail.
+  ptr          Decimal?  @db.Decimal(10, 2)
   purchaseRate Decimal   @db.Decimal(10, 2)
   saleRate     Decimal   @db.Decimal(10, 2)
+  /// Unopened packs.
   currentQty   Int       @default(0)
+  /// Units left in the single opened pack. Always less than the item's
+  /// unitsPerPack — as soon as it would reach a full pack it becomes one,
+  /// so the same stock has exactly one representation.
+  looseUnits   Int       @default(0)
   rackLocation String?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
   item                Item                 @relation(fields: [itemId], references: [id], onDelete: Cascade)
   branch              Branch               @relation(fields: [branchId], references: [id])
+  salesReturnItems    SalesReturnItem[]
   salesInvoiceItems   SalesInvoiceItem[]
   grnItems            GrnItem[]
   purchaseReturnItems PurchaseReturnItem[]
   stockTransferItems  StockTransferItem[]
+  stockAdjustmentItems StockAdjustmentItem[]
+  stockCountLines      StockCountLine[]
 
   narcoticRegisterEntries NarcoticRegisterEntry[]
 
@@ -209,6 +326,9 @@ model Customer {
   name          String
   phone         String?
   creditLimit   Decimal? @db.Decimal(10, 2)
+  /// Days a credit sale may stay unpaid before it counts as overdue.
+  /// Null means the pharmacy has set no term, so nothing is chased.
+  creditTermDays Int?
   // Cached for convenience only — never written to directly by app code.
   // The real balance is always SUM(CustomerLedgerEntry.amount) for this
   // customer (credit sales positive, payments negative); see
@@ -226,12 +346,15 @@ model Customer {
   salesInvoices SalesInvoice[]
   ledgerEntries CustomerLedgerEntry[]
   whatsappLogs  WhatsAppLog[]
+  smsLogs       SmsLog[]
   emailLogs     EmailLog[]
 
   @@index([tenantId])
   @@index([tenantId, phone])
   @@index([loyaltyTierId])
   @@map("customers")
+  promiseOrders PromiseOrder[]
+
 }
 
 enum WhatsAppMessageType {
@@ -247,6 +370,236 @@ enum WhatsAppStatus {
   // Business API credentials are set. The app cannot confirm delivery from
   // there, so this is deliberately not "sent".
   handed_off
+}
+
+/// Which price a sale line was billed on.
+enum PriceBasis {
+  /// Retail — the item's own sale rate, derived from MRP.
+  mrp
+  /// Wholesale — Price To Retailer, for sales to another shop.
+  ptr
+}
+
+enum PromiseOrderStatus {
+  open
+  fulfilled
+  cancelled
+}
+
+/// A medicine a customer asked for that was not in stock.
+///
+/// The daily counter conversation — "we don't have it, leave your number
+/// and we'll call when it comes in" — which otherwise lives on a scrap of
+/// paper by the till and is honoured only if the right person is on shift.
+///
+/// Availability is deliberately NOT stored as a status. A flag set when
+/// stock arrives goes stale the moment that stock is sold to somebody
+/// else; the list computes what is on the shelf right now instead, so it
+/// can never promise something that has already gone.
+model PromiseOrder {
+  id            String              @id @default(cuid())
+  tenantId      String
+  branchId      String
+  /// Set when the medicine is already in the item master. Null when the
+  /// pharmacy has never stocked it — the request is still worth recording,
+  /// it just cannot be matched against inventory automatically.
+  itemId        String?
+  /// What the customer actually asked for, in their words. Kept even when
+  /// an item is linked, because "the blue inhaler" is how they will ask
+  /// again.
+  requestedName String
+  qty           Int                 @default(1)
+  customerId    String?
+  /// For a walk-in who left a number but is not on file.
+  contactName   String?
+  phone         String?
+  note          String?
+  status        PromiseOrderStatus  @default(open)
+  /// Last time the customer was told it had arrived, so nobody rings twice.
+  notifiedAt    DateTime?
+  /// The sale that satisfied it, when it was closed by billing.
+  fulfilledInvoiceId String?
+  fulfilledAt   DateTime?
+  cancelledReason String?
+  takenByUserId String
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  tenant   Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch   Branch        @relation(fields: [branchId], references: [id])
+  item     Item?         @relation(fields: [itemId], references: [id])
+  customer Customer?     @relation(fields: [customerId], references: [id])
+  invoice  SalesInvoice? @relation(fields: [fulfilledInvoiceId], references: [id])
+  takenBy  User          @relation("PromiseOrderTakenBy", fields: [takenByUserId], references: [id])
+
+  @@index([tenantId, status])
+  @@index([itemId])
+  @@map("promise_orders")
+}
+
+/// What money was spent on. A table rather than an enum so a pharmacy can
+/// add its own without a migration — and a table rather than a free-text
+/// column so the same cost does not end up as "Rent", "rent" and "RENT",
+/// which is what makes a profit figure untrustworthy.
+model ExpenseCategory {
+  id        String    @id @default(cuid())
+  tenantId  String
+  name      String
+  /// Recurring costs are the ones worth watching month to month.
+  isRecurring Boolean @default(false)
+  sortOrder Int       @default(0)
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+
+  tenant   Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  expenses Expense[]
+
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@map("expense_categories")
+}
+
+/// Money out that is not a purchase of stock.
+///
+/// Stock purchases already live in the GRN and supplier ledger; putting
+/// them here too would double-count them in the profit figure. This is
+/// rent, salaries, electricity, licence renewals — the costs that stand
+/// between gross margin and what the owner actually keeps.
+model Expense {
+  id          String   @id @default(cuid())
+  tenantId    String
+  branchId    String
+  categoryId  String
+  /// The date the cost belongs to, which is not always when it was
+  /// entered — a March electricity bill paid in April is a March cost.
+  incurredOn  DateTime
+  amount      Decimal  @db.Decimal(12, 2)
+  /// How it was paid, for reconciling against the till and the bank.
+  paymentMode PaymentMode @default(cash)
+  payee       String?
+  note        String?
+  /// Bill or receipt photo, in the purchase-invoice store.
+  documentUrl String?
+  recordedByUserId String
+  createdAt   DateTime @default(now())
+
+  tenant     Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch     Branch          @relation(fields: [branchId], references: [id])
+  category   ExpenseCategory @relation(fields: [categoryId], references: [id])
+  recordedBy User            @relation("ExpenseRecordedBy", fields: [recordedByUserId], references: [id])
+
+  @@index([tenantId, incurredOn])
+  @@index([categoryId])
+  @@map("expenses")
+}
+
+/// A named GST bucket an item belongs to — "Nil-rated", "Standard
+/// medicines", "Industrial formulations".
+///
+/// Membership is a property of the product and rarely changes; the rate
+/// under the bucket is what moves. Keeping the two apart is what allowed
+/// GST 2.0 (most medicines 12% -> 5%, Sept 2025) to be a one-row change
+/// rather than a re-tagging of the whole item master.
+model TaxSlab {
+  id          String   @id @default(cuid())
+  tenantId    String
+  name        String
+  description String?
+  /// Display order in pickers; lowest first.
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  tenant       Tenant            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  rates        TaxSlabRate[]
+  items        Item[]
+  hsnMappings  HsnTaxMapping[]
+
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@map("tax_slabs")
+}
+
+/// What a slab costs from a given date. Insert-only in practice: a
+/// superseded rate is never edited, because a report explaining a
+/// two-year-old invoice needs the rate that was actually in force then.
+model TaxSlabRate {
+  id              String   @id @default(cuid())
+  slabId          String
+  rate            Decimal  @db.Decimal(5, 2)
+  /// Inclusive. Applies until the next rate for this slab begins.
+  effectiveFrom   DateTime
+  note            String?
+  createdByUserId String?
+  createdAt       DateTime @default(now())
+
+  slab      TaxSlab @relation(fields: [slabId], references: [id], onDelete: Cascade)
+  createdBy User?   @relation("TaxRateCreatedBy", fields: [createdByUserId], references: [id])
+
+  @@unique([slabId, effectiveFrom])
+  @@index([slabId])
+  @@map("tax_slab_rates")
+}
+
+/// HSN code -> slab. The middle tier of resolution.
+///
+/// HSN is used rather than a separate "product category" because in Indian
+/// GST the HSN *is* the classification — rates are legally defined against
+/// it. A parallel category taxonomy would be a second thing to keep in
+/// agreement with the first.
+model HsnTaxMapping {
+  id        String   @id @default(cuid())
+  tenantId  String
+  hsnCode   String
+  slabId    String
+  note      String?
+  createdAt DateTime @default(now())
+
+  tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  slab   TaxSlab @relation(fields: [slabId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, hsnCode])
+  @@index([tenantId])
+  @@map("hsn_tax_mappings")
+}
+
+enum SmsMessageType {
+  receipt
+  statement
+  reminder
+}
+
+enum SmsStatus {
+  sent
+  failed
+}
+
+/// One attempt to send an SMS. Mirrors WhatsAppLog: the same question —
+/// "did the customer get their bill?" — has to be answerable per channel.
+model SmsLog {
+  id          String         @id @default(cuid())
+  tenantId    String
+  customerId  String?
+  invoiceId   String?
+  phone       String
+  messageType SmsMessageType
+  status      SmsStatus
+  /// Provider error text, or why it was not sent. Kept apart from `status`
+  /// so staff can see the reason, not just the failure.
+  note        String?
+  /// The DLT template the message was sent under. Recorded because a
+  /// rejected send is nearly always a template mismatch, and knowing which
+  /// one was used is the whole diagnosis.
+  templateKey String?
+  sentAt      DateTime       @default(now())
+
+  tenant   Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  customer Customer?     @relation(fields: [customerId], references: [id])
+  invoice  SalesInvoice? @relation(fields: [invoiceId], references: [id])
+
+  @@index([tenantId])
+  @@index([invoiceId])
+  @@map("sms_logs")
 }
 
 enum EmailStatus {
@@ -280,6 +633,317 @@ model EmailLog {
   @@map("email_logs")
 }
 
+enum NoteShift {
+  morning
+  evening
+  night
+}
+
+enum NoteCategory {
+  to_order
+  to_call
+  handover
+  stock
+  payment
+  instruction
+  question
+  general
+}
+
+/// Shared counter notepad: shift handovers, reminders, standing
+/// instructions. Tenant-wide rather than per-user on purpose — the point of
+/// a notepad by the till is that the next person on shift reads it.
+model Note {
+  id           String    @id @default(cuid())
+  tenantId     String
+  authorUserId String
+  body         String
+  /// Which shift wrote it, derived from the clock at creation and stored so
+  /// a later change to the shift windows can't silently recolour history.
+  /// Null means an owner wrote it — owners work across shifts.
+  shift        NoteShift?
+  category     NoteCategory @default(general)
+  /// Owner-only flag; drives the second owner colour.
+  priority     Boolean   @default(false)
+  /// Pinned notes sort first and stay on the dashboard card.
+  pinned       Boolean   @default(false)
+  /// Set to turn a note into a reminder; overdue ones are flagged.
+  dueAt        DateTime?
+  /// Kept rather than deleted so a completed handover note stays readable.
+  doneAt       DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  author User   @relation("NoteAuthor", fields: [authorUserId], references: [id])
+
+  @@index([tenantId, doneAt])
+  @@map("notes")
+}
+
+/// A customer return against a sale — the credit-note side of billing,
+/// separate from PurchaseReturn (stock going back to a distributor).
+/// Insert-only: a mistake is corrected by a fresh document, never by editing
+/// one that has already been handed to a customer.
+enum RefundMethod {
+  cash
+  upi
+  card
+  credit_account
+}
+
+model SalesReturn {
+  id             String   @id @default(cuid())
+  tenantId       String
+  branchId       String
+  salesInvoiceId String
+  returnNo       String
+  returnedAt     DateTime @default(now())
+  createdByUserId String
+  reason         String
+  refundMethod   RefundMethod
+  subtotal       Decimal  @db.Decimal(12, 2)
+  taxAmount      Decimal  @db.Decimal(12, 2)
+  total          Decimal  @db.Decimal(12, 2)
+
+  tenant    Tenant            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch    Branch            @relation(fields: [branchId], references: [id])
+  invoice   SalesInvoice      @relation(fields: [salesInvoiceId], references: [id])
+  createdBy User              @relation("SalesReturnCreatedBy", fields: [createdByUserId], references: [id])
+  items     SalesReturnItem[]
+
+  @@unique([tenantId, returnNo])
+  @@index([tenantId, returnedAt])
+  @@index([salesInvoiceId])
+  @@map("sales_returns")
+}
+
+model SalesReturnItem {
+  id            String  @id @default(cuid())
+  salesReturnId String
+  /// The sold line this reverses, so the qty already returned can be capped
+  /// against what was actually sold.
+  invoiceItemId String
+  itemId        String
+  batchId       String
+  qty           Int
+  /// Decided per line at the counter: a sealed strip goes back into the
+  /// batch it came from, anything doubtful is written off. Stored so a later
+  /// stock query shows why the number moved.
+  restock       Boolean @default(true)
+  rate          Decimal @db.Decimal(10, 2)
+  taxRate       Decimal @db.Decimal(5, 2)
+  lineTotal     Decimal @db.Decimal(12, 2)
+
+  salesReturn SalesReturn      @relation(fields: [salesReturnId], references: [id], onDelete: Cascade)
+  invoiceItem SalesInvoiceItem @relation(fields: [invoiceItemId], references: [id])
+  item        Item             @relation(fields: [itemId], references: [id])
+  batch       Batch            @relation(fields: [batchId], references: [id])
+
+  @@index([salesReturnId])
+  @@index([invoiceItemId])
+  @@map("sales_return_items")
+}
+
+/// A shift's till reconciliation: what the app says should be in the
+/// drawer, what was actually counted, and the difference.
+///
+/// Insert-only, and the computed figures are stored rather than re-derived
+/// on view: a cash-up is a statement about a moment, and a later refund
+/// backdated into the period must not silently rewrite a count somebody
+/// already signed off.
+enum StockCountStatus {
+  in_progress
+  completed
+  cancelled
+}
+
+/// A physical stocktake: what the shelf actually holds, against what the
+/// system believes.
+///
+/// Opening a count freezes the system quantity per batch so the target
+/// stops moving while someone walks the shelves. Posting it then adjusts
+/// each batch to the counted figure — measured against stock *at posting
+/// time*, not against the frozen snapshot, because trade may have
+/// continued during the count. Lines where the two disagree are flagged
+/// rather than silently reconciled.
+model StockCount {
+  id                String           @id @default(cuid())
+  tenantId          String
+  branchId          String
+  countNo           String
+  status            StockCountStatus @default(in_progress)
+  note              String?
+  startedByUserId   String
+  startedAt         DateTime         @default(now())
+  completedByUserId String?
+  completedAt       DateTime?
+  /// The adjustment this count posted. Set only once completed, and only
+  /// when something actually differed.
+  adjustmentId      String?          @unique
+
+  tenant      Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch      Branch           @relation(fields: [branchId], references: [id])
+  startedBy   User             @relation("StockCountStartedBy", fields: [startedByUserId], references: [id])
+  completedBy User?            @relation("StockCountCompletedBy", fields: [completedByUserId], references: [id])
+  lines       StockCountLine[]
+
+  @@unique([tenantId, countNo])
+  @@index([tenantId, startedAt])
+  @@map("stock_counts")
+}
+
+model StockCountLine {
+  id      String @id @default(cuid())
+  countId String
+  itemId  String
+  batchId String
+  /// System quantity when the count was opened — frozen so the target does
+  /// not move while the shelves are walked.
+  expectedQty Int
+  /// Null until someone has actually counted this batch. Distinct from 0,
+  /// which means "counted, and there are none".
+  countedQty  Int?
+  unitCost    Decimal @db.Decimal(10, 2)
+
+  count StockCount @relation(fields: [countId], references: [id], onDelete: Cascade)
+  item  Item       @relation(fields: [itemId], references: [id])
+  batch Batch      @relation(fields: [batchId], references: [id])
+
+  @@unique([countId, batchId])
+  @@index([countId])
+  @@map("stock_count_lines")
+}
+
+/// A cart parked mid-sale so the counter can serve the next customer.
+///
+/// Server-side rather than in the browser: a hold has to survive a crashed
+/// tab, and on a two-till counter the person who resumes the sale is often
+/// not the one who parked it.
+///
+/// The cart is stored as JSON on purpose. A hold is a scratch pad, not a
+/// record — it has no reporting value, and normalising it into line rows
+/// would mean a migration every time the cart gains a field. Crucially it
+/// reserves no stock: nothing is sold until the sale completes, so a
+/// forgotten hold can never make an item unavailable.
+model HeldSale {
+  id             String   @id @default(cuid())
+  tenantId       String
+  branchId       String
+  /// What staff will recognise it by — a customer name, or "blue kurta".
+  label          String
+  cart           Json
+  itemCount      Int
+  estimatedTotal Decimal  @db.Decimal(12, 2)
+  heldByUserId   String
+  createdAt      DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch @relation(fields: [branchId], references: [id])
+  heldBy User   @relation("HeldSaleBy", fields: [heldByUserId], references: [id])
+
+  @@index([tenantId, branchId, createdAt])
+  @@map("held_sales")
+}
+
+/// Why stock left the books without being sold or returned to a supplier.
+enum StockAdjustmentReason {
+  /// Past expiry — must be destroyed, and the record kept.
+  expired
+  /// Broken, spoiled, cold-chain failure.
+  damaged
+  /// Missing at count, suspected theft.
+  lost
+  /// Present at count but not on the system.
+  found
+  /// Given to a doctor or patient at no charge.
+  sample
+  /// Plain correction after a physical count.
+  recount
+}
+
+/// A stock movement that is neither a sale nor a purchase.
+///
+/// Before this existed an expired batch had no way off the books: it sat in
+/// `currentQty` forever, inflating stock value and the margin report, with
+/// no disposal record — which the Drugs & Cosmetics Act expects for
+/// destroyed drugs. Adjustments are insert-only; a mistake is corrected by
+/// a second, opposite adjustment so the trail stays intact.
+model StockAdjustment {
+  id               String                @id @default(cuid())
+  tenantId         String
+  branchId         String
+  adjustmentNo     String
+  reason           StockAdjustmentReason
+  note             String?
+  /// Reference to the destruction certificate / disposal witness record,
+  /// for expired stock that has physically been destroyed.
+  disposalRef      String?
+  adjustedAt       DateTime              @default(now())
+  adjustedByUserId String
+  createdAt        DateTime              @default(now())
+
+  tenant   Tenant                @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch   Branch                @relation(fields: [branchId], references: [id])
+  adjustedBy User                @relation("StockAdjustmentBy", fields: [adjustedByUserId], references: [id])
+  items    StockAdjustmentItem[]
+
+  @@unique([tenantId, adjustmentNo])
+  @@index([tenantId, adjustedAt])
+  @@map("stock_adjustments")
+}
+
+model StockAdjustmentItem {
+  id           String  @id @default(cuid())
+  adjustmentId String
+  itemId       String
+  batchId      String
+  /// Signed. Negative writes stock off, positive puts it back.
+  qtyChange    Int
+  /// Purchase rate at the moment of adjustment — the batch's rate can be
+  /// edited later, and a write-off's value must not move with it.
+  unitCost     Decimal @db.Decimal(10, 2)
+
+  adjustment StockAdjustment @relation(fields: [adjustmentId], references: [id], onDelete: Cascade)
+  item       Item            @relation(fields: [itemId], references: [id])
+  batch      Batch           @relation(fields: [batchId], references: [id])
+
+  @@index([adjustmentId])
+  @@index([batchId])
+  @@map("stock_adjustment_items")
+}
+
+model CashUp {
+  id            String   @id @default(cuid())
+  tenantId      String
+  branchId      String
+  periodStart   DateTime
+  periodEnd     DateTime
+  openingFloat  Decimal  @db.Decimal(12, 2)
+  /// Takings by mode, as at the moment of counting.
+  cashSales     Decimal  @db.Decimal(12, 2)
+  upiSales      Decimal  @db.Decimal(12, 2)
+  cardSales     Decimal  @db.Decimal(12, 2)
+  creditSales   Decimal  @db.Decimal(12, 2)
+  cashRefunds   Decimal  @db.Decimal(12, 2)
+  otherRefunds  Decimal  @db.Decimal(12, 2)
+  /// openingFloat + cashSales − cashRefunds.
+  expectedCash  Decimal  @db.Decimal(12, 2)
+  countedCash   Decimal  @db.Decimal(12, 2)
+  /// countedCash − expectedCash. Negative is short.
+  variance      Decimal  @db.Decimal(12, 2)
+  note          String?
+  countedByUserId String
+  closedAt      DateTime @default(now())
+
+  tenant    Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch    Branch @relation(fields: [branchId], references: [id])
+  countedBy User   @relation("CashUpCountedBy", fields: [countedByUserId], references: [id])
+
+  @@index([tenantId, closedAt])
+  @@map("cash_ups")
+}
+
 model WhatsAppLog {
   id          String               @id @default(cuid())
   tenantId    String
@@ -307,6 +971,11 @@ model WhatsAppLog {
 enum CustomerLedgerEntryType {
   sale
   payment
+  return
+  /// A correction that is neither of the above — currently a cancelled
+  /// credit sale, posted as a reversing entry so the statement shows both
+  /// the charge and its removal rather than the charge silently vanishing.
+  adjustment
 }
 
 model CustomerLedgerEntry {
@@ -318,6 +987,10 @@ model CustomerLedgerEntry {
   // are negative (decrease what they owe). Outstanding balance for a
   // customer is simply SUM(amount) over their entries.
   amount        Decimal  @db.Decimal(12, 2)
+  /// When this charge falls due. Set on credit sales from the customer's
+  /// term at the time of sale — copied rather than derived, so changing
+  /// the term later does not silently re-age history.
+  dueDate       DateTime?
   referenceId   String?
   referenceType String?
   note          String?
@@ -479,6 +1152,11 @@ model SalesInvoice {
   // call must never block or fail the checkout transaction itself. Null
   // until (and unless) generation succeeds; a manual retry action is
   // available from the receipt screen.
+  /// Unguessable token for the read-only public bill page. An SMS cannot
+  /// carry a PDF, so the customer gets a link — and the recipient has no
+  /// account, so the page cannot be behind the session. Generated lazily
+  /// the first time a bill is shared, so bills nobody shares never get one.
+  publicToken             String?  @unique
   einvoiceIrn             String?
   einvoiceAckNo           String?
   // The signed QR payload string returned by the IRP — rendered as an
@@ -498,12 +1176,16 @@ model SalesInvoice {
   items                   SalesInvoiceItem[]
   discounts               Discount[]
   narcoticRegisterEntries NarcoticRegisterEntry[]
+  salesReturns            SalesReturn[]
   whatsappLogs            WhatsAppLog[]
+  smsLogs                 SmsLog[]
   emailLogs               EmailLog[]
 
   @@unique([tenantId, invoiceNo])
   @@index([tenantId, invoiceDate])
   @@map("sales_invoices")
+  promiseOrders           PromiseOrder[]
+
 }
 
 model SalesInvoiceItem {
@@ -512,6 +1194,17 @@ model SalesInvoiceItem {
   itemId         String
   batchId        String
   qty            Int
+  /// Which price this line was billed on. Recorded rather than inferred:
+  /// a batch's PTR can be edited later, and a past invoice must still be
+  /// explainable.
+  priceBasis     PriceBasis @default(mrp)
+  /// True when `qty` counts loose units rather than packs. The rate is then
+  /// the per-unit price, and the bill says so — a customer must be able to
+  /// see they were charged for 4 tablets, not 4 strips.
+  isLooseSale    Boolean @default(false)
+  /// Snapshot of the item's unitsPerPack at the time of sale, so a later
+  /// change to the pack size cannot rewrite what a past bill meant.
+  unitsPerPack   Int     @default(1)
   rate           Decimal @db.Decimal(10, 2)
   taxRate        Decimal @db.Decimal(5, 2)
   discountAmount Decimal @default(0) @db.Decimal(10, 2)
@@ -520,6 +1213,7 @@ model SalesInvoiceItem {
   item      Item         @relation(fields: [itemId], references: [id])
   batch     Batch        @relation(fields: [batchId], references: [id])
   discounts Discount[]
+  returnItems SalesReturnItem[]
 
   @@index([invoiceId])
   @@index([itemId])
@@ -583,12 +1277,40 @@ enum UserRole {
   counter_staff
 }
 
+/// Owner-definable role. The three seeded system roles reproduce the
+/// permissions the app shipped with; custom roles are additive on top.
+/// Deliberately not deletable while anyone still holds them.
+model Role {
+  id          String   @id @default(cuid())
+  tenantId    String
+  name        String
+  /// Permission keys from src/lib/permissions.ts. An unknown key simply
+  /// grants nothing, so a stale role can never widen access.
+  permissions String[]
+  /// System roles can be reassigned but not renamed or deleted.
+  isSystem    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  users  User[]
+
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@map("roles")
+}
+
 model User {
   id           String   @id @default(cuid())
   tenantId     String
   name         String
   email        String
+  /// Kept as the coarse identity the session carries and the owner
+  /// short-circuit relies on. Fine-grained access comes from `roleRef`.
   role         UserRole
+  roleId       String?
+  /// Deactivated staff keep their history but cannot sign in.
+  isActive     Boolean  @default(true)
   phone        String?
   licenseNo    String?
   passwordHash String
@@ -598,6 +1320,15 @@ model User {
   updatedAt    DateTime @updatedAt
 
   tenant            Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  roleRef           Role?      @relation(fields: [roleId], references: [id])
+  /// Consecutive failed sign-in attempts — password OR authenticator code.
+  /// Both count towards the same total: a correct password followed by a
+  /// brute-forced 6-digit code is the more dangerous of the two paths.
+  failedLoginCount  Int       @default(0)
+  lastFailedLoginAt DateTime?
+  /// Set once the threshold is passed; sign-in is refused until it elapses.
+  lockedUntil       DateTime?
+
   auditLogs         AuditLog[]
   discountsApplied  Discount[] @relation("DiscountAppliedBy")
   discountsApproved Discount[] @relation("DiscountApprovedBy")
@@ -611,9 +1342,23 @@ model User {
 
   stockTransfersRequested StockTransfer[] @relation("StockTransferRequestedBy")
   stockTransfersApproved  StockTransfer[] @relation("StockTransferApprovedBy")
+  notes                   Note[]          @relation("NoteAuthor")
+  salesReturns            SalesReturn[]   @relation("SalesReturnCreatedBy")
+  cashUps                 CashUp[]        @relation("CashUpCountedBy")
+  stockAdjustments        StockAdjustment[] @relation("StockAdjustmentBy")
+  heldSales               HeldSale[]      @relation("HeldSaleBy")
+  stockCountsStarted      StockCount[]    @relation("StockCountStartedBy")
+  stockCountsCompleted    StockCount[]    @relation("StockCountCompletedBy")
+  taxRatesCreated         TaxSlabRate[]   @relation("TaxRateCreatedBy")
+  expensesRecorded        Expense[]       @relation("ExpenseRecordedBy")
+  promiseOrdersTaken      PromiseOrder[]  @relation("PromiseOrderTakenBy")
 
   @@unique([tenantId, email])
+  sessions UserSession[]
+
   @@index([tenantId])
+  trustedDevices TrustedDevice[]
+
   @@map("users")
 }
 
@@ -671,6 +1416,11 @@ model Supplier {
   id                 String   @id @default(cuid())
   tenantId           String
   name               String
+  /// The distributor's contact number, as printed on their invoice.
+  /// Free-form: a distributor's letterhead often carries two numbers and a
+  /// landline, and normalising that would lose information the counter
+  /// needs when chasing a delivery.
+  phone              String?
   gstin              String?
   address            String?
   paymentTermsDays   Int?
@@ -751,6 +1501,9 @@ model Grn {
   branchId            String
   purchaseOrderId     String?
   supplierId          String
+  /// The distributor's own invoice number. Unique per supplier, not
+  /// globally: two distributors independently numbering their invoices
+  /// "1024" is normal, and rejecting the second would be wrong.
   supplierInvoiceNo   String
   supplierInvoiceDate DateTime
   receivedAt          DateTime @default(now())
@@ -770,6 +1523,9 @@ model Grn {
   items           GrnItem[]
   purchaseReturns PurchaseReturn[]
 
+  // Receiving the same distributor invoice twice would double the stock
+  // and double what is owed, with nothing on screen to explain either.
+  @@unique([tenantId, supplierId, supplierInvoiceNo])
   @@index([tenantId])
   @@index([tenantId, receivedAt])
   @@index([purchaseOrderId])
@@ -860,6 +1616,10 @@ model SupplierLedgerEntry {
   // returns are negative (decrease what we owe). Outstanding balance for a
   // supplier is simply SUM(amount) over their entries.
   amount        Decimal                 @db.Decimal(12, 2)
+  /// When this purchase falls due, from the supplier's payment terms at
+  /// the time of receipt. Copied rather than derived, so renegotiating
+  /// terms later does not silently re-age invoices already agreed.
+  dueDate       DateTime?
   referenceId   String?
   referenceType String?
   note          String?
@@ -970,4 +1730,118 @@ model NarcoticRegisterEntry {
   @@index([tenantId, dispensedAt])
   @@index([invoiceId])
   @@map("narcotic_register_entries")
+}
+
+/// Exceptions that reached a user, kept where someone can actually see them.
+///
+/// On a shop PC nobody reads the server console, so an error that only
+/// lands there is an error nobody knows about. These rows are what the
+/// owner sees on the Security screen, and what turns "it did something
+/// funny yesterday" into a timestamp and a stack.
+model ErrorLog {
+  id         String   @id @default(cuid())
+  tenantId   String?
+  userId     String?
+  /// "server-action", "route", "client" — where it was caught.
+  source     String
+  /// The action or path that failed, e.g. "completeSale" or "/api/health".
+  context    String
+  message    String
+  stack      String?
+  /// Set when the same error keeps happening, so a repeating fault is one
+  /// row with a count rather than ten thousand rows.
+  occurrences Int     @default(1)
+  firstSeenAt DateTime @default(now())
+  lastSeenAt  DateTime @default(now())
+  resolvedAt  DateTime?
+
+  @@index([tenantId, lastSeenAt])
+  @@index([tenantId, resolvedAt])
+  @@map("error_logs")
+}
+
+/// One signed-in device.
+///
+/// The session itself is a JWT, which is stateless by design — that is
+/// what makes it fast, and also what makes it impossible to end. Without
+/// a record like this, a session on a lost phone or a shared counter PC
+/// runs until it expires on its own and nobody can see that it exists.
+///
+/// The token carries this row's id. Every request checks the row, so
+/// revoking one is immediate rather than waiting out the token.
+model UserSession {
+  id           String   @id @default(cuid())
+  userId       String
+  tenantId     String
+  /// As reported by the browser. Only ever shown back to the person whose
+  /// session it is, to help them recognise which device this was.
+  userAgent    String?
+  /// Truncated to the network, never the full address — enough to tell
+  /// "the shop" from "somewhere else" without keeping a location log.
+  ipPrefix     String?
+  createdAt    DateTime @default(now())
+  lastSeenAt   DateTime @default(now())
+  revokedAt    DateTime?
+  /// Who ended it, when it was not the person themselves.
+  revokedByUserId String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, revokedAt])
+  @@index([tenantId])
+  @@map("user_sessions")
+}
+
+/// Two spellings of the same active ingredient.
+///
+/// Manufacturers write the same salt a dozen ways — "Cetirizine
+/// Hydrochloride", "Cetirizine HCl", "Cetirizine Dihydrochloride" — and a
+/// substitute is only found when the two spellings resolve to one name.
+/// The app ships a short built-in list; this is how a pharmacy extends it
+/// with the ones its own suppliers actually use.
+///
+/// Deliberately editable, and deliberately not automatic: declaring two
+/// salts equivalent is a clinical statement, not a spelling correction.
+model SaltAlias {
+  id       String @id @default(cuid())
+  tenantId String
+  /// The spelling as it appears on labels, lower-cased.
+  alias    String
+  /// The name it should be treated as.
+  canonical String
+  createdAt DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, alias])
+  @@index([tenantId])
+  @@map("salt_aliases")
+}
+
+/// A device the user has chosen to stop being asked for an OTP on.
+///
+/// Skips the *second* factor only — the password is always still required,
+/// so a stolen laptop is no worse off than a stolen password. The cookie
+/// holds a random token; only its hash is stored, so a leak of this table
+/// cannot be replayed as a login.
+model TrustedDevice {
+  id        String    @id @default(cuid())
+  userId    String
+  /// SHA-256 of the cookie token. Unique so a collision cannot silently
+  /// grant one user's trust to another.
+  tokenHash String    @unique
+  /// "Chrome on Mac" — shown on the security screen so the owner can tell
+  /// which device to revoke.
+  label     String?
+  /// Network only, never the full address. Enough to recognise the shop.
+  ip        String?
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+  lastUsedAt DateTime @default(now())
+  revokedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("trusted_devices")
 }

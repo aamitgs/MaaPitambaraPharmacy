@@ -262,6 +262,7 @@ export type GrnOrderByWithRelationInput = {
 
 export type GrnWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  tenantId_supplierId_supplierInvoiceNo?: Prisma.GrnTenantIdSupplierIdSupplierInvoiceNoCompoundUniqueInput
   AND?: Prisma.GrnWhereInput | Prisma.GrnWhereInput[]
   OR?: Prisma.GrnWhereInput[]
   NOT?: Prisma.GrnWhereInput | Prisma.GrnWhereInput[]
@@ -282,7 +283,7 @@ export type GrnWhereUniqueInput = Prisma.AtLeast<{
   receivedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   items?: Prisma.GrnItemListRelationFilter
   purchaseReturns?: Prisma.PurchaseReturnListRelationFilter
-}, "id">
+}, "id" | "tenantId_supplierId_supplierInvoiceNo">
 
 export type GrnOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -427,6 +428,12 @@ export type GrnListRelationFilter = {
 
 export type GrnOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type GrnTenantIdSupplierIdSupplierInvoiceNoCompoundUniqueInput = {
+  tenantId: string
+  supplierId: string
+  supplierInvoiceNo: string
 }
 
 export type GrnCountOrderByAggregateInput = {
@@ -1607,6 +1614,11 @@ export type $GrnPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     branchId: string
     purchaseOrderId: string | null
     supplierId: string
+    /**
+     * The distributor's own invoice number. Unique per supplier, not
+     * globally: two distributors independently numbering their invoices
+     * "1024" is normal, and rejecting the second would be wrong.
+     */
     supplierInvoiceNo: string
     supplierInvoiceDate: Date
     receivedAt: Date

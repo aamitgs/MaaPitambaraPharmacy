@@ -29,12 +29,16 @@ export type AggregateTenant = {
 export type TenantAvgAggregateOutputType = {
   staffDiscountCapPercent: runtime.Decimal | null
   nearExpiryWindowDays: number | null
+  offlineSyncMaxHours: number | null
+  salesReturnWindowDays: number | null
   licenseExpiryWindowDays: number | null
 }
 
 export type TenantSumAggregateOutputType = {
   staffDiscountCapPercent: runtime.Decimal | null
   nearExpiryWindowDays: number | null
+  offlineSyncMaxHours: number | null
+  salesReturnWindowDays: number | null
   licenseExpiryWindowDays: number | null
 }
 
@@ -42,13 +46,32 @@ export type TenantMinAggregateOutputType = {
   id: string | null
   pharmacyName: string | null
   tenantType: string | null
-  logoUrl: string | null
+  brandShortName: string | null
+  brandTagline: string | null
+  brandDescription: string | null
+  logoIconUrl: string | null
+  logoHorizontalUrl: string | null
+  logoStackedUrl: string | null
   primaryColor: string | null
+  accentColor: string | null
+  surfaceColor: string | null
+  invoiceHeaderText: string | null
+  invoicePaperDefault: string | null
+  showLogoOnInvoice: boolean | null
+  upiId: string | null
+  supportEmail: string | null
+  websiteUrl: string | null
+  hoursHeadline: string | null
+  hoursNote: string | null
+  brandingUpdatedAt: Date | null
   invoiceFooterText: string | null
   invoiceTermsText: string | null
   staffDiscountCapPercent: runtime.Decimal | null
   managerPinHash: string | null
   nearExpiryWindowDays: number | null
+  offlineSyncMaxHours: number | null
+  wholesaleBillingEnabled: boolean | null
+  salesReturnWindowDays: number | null
   licenseExpiryWindowDays: number | null
   createdAt: Date | null
 }
@@ -57,13 +80,32 @@ export type TenantMaxAggregateOutputType = {
   id: string | null
   pharmacyName: string | null
   tenantType: string | null
-  logoUrl: string | null
+  brandShortName: string | null
+  brandTagline: string | null
+  brandDescription: string | null
+  logoIconUrl: string | null
+  logoHorizontalUrl: string | null
+  logoStackedUrl: string | null
   primaryColor: string | null
+  accentColor: string | null
+  surfaceColor: string | null
+  invoiceHeaderText: string | null
+  invoicePaperDefault: string | null
+  showLogoOnInvoice: boolean | null
+  upiId: string | null
+  supportEmail: string | null
+  websiteUrl: string | null
+  hoursHeadline: string | null
+  hoursNote: string | null
+  brandingUpdatedAt: Date | null
   invoiceFooterText: string | null
   invoiceTermsText: string | null
   staffDiscountCapPercent: runtime.Decimal | null
   managerPinHash: string | null
   nearExpiryWindowDays: number | null
+  offlineSyncMaxHours: number | null
+  wholesaleBillingEnabled: boolean | null
+  salesReturnWindowDays: number | null
   licenseExpiryWindowDays: number | null
   createdAt: Date | null
 }
@@ -72,13 +114,32 @@ export type TenantCountAggregateOutputType = {
   id: number
   pharmacyName: number
   tenantType: number
-  logoUrl: number
+  brandShortName: number
+  brandTagline: number
+  brandDescription: number
+  logoIconUrl: number
+  logoHorizontalUrl: number
+  logoStackedUrl: number
   primaryColor: number
+  accentColor: number
+  surfaceColor: number
+  invoiceHeaderText: number
+  invoicePaperDefault: number
+  showLogoOnInvoice: number
+  upiId: number
+  supportEmail: number
+  websiteUrl: number
+  hoursHeadline: number
+  hoursNote: number
+  brandingUpdatedAt: number
   invoiceFooterText: number
   invoiceTermsText: number
   staffDiscountCapPercent: number
   managerPinHash: number
   nearExpiryWindowDays: number
+  offlineSyncMaxHours: number
+  wholesaleBillingEnabled: number
+  salesReturnWindowDays: number
   licenseExpiryWindowDays: number
   createdAt: number
   _all: number
@@ -88,12 +149,16 @@ export type TenantCountAggregateOutputType = {
 export type TenantAvgAggregateInputType = {
   staffDiscountCapPercent?: true
   nearExpiryWindowDays?: true
+  offlineSyncMaxHours?: true
+  salesReturnWindowDays?: true
   licenseExpiryWindowDays?: true
 }
 
 export type TenantSumAggregateInputType = {
   staffDiscountCapPercent?: true
   nearExpiryWindowDays?: true
+  offlineSyncMaxHours?: true
+  salesReturnWindowDays?: true
   licenseExpiryWindowDays?: true
 }
 
@@ -101,13 +166,32 @@ export type TenantMinAggregateInputType = {
   id?: true
   pharmacyName?: true
   tenantType?: true
-  logoUrl?: true
+  brandShortName?: true
+  brandTagline?: true
+  brandDescription?: true
+  logoIconUrl?: true
+  logoHorizontalUrl?: true
+  logoStackedUrl?: true
   primaryColor?: true
+  accentColor?: true
+  surfaceColor?: true
+  invoiceHeaderText?: true
+  invoicePaperDefault?: true
+  showLogoOnInvoice?: true
+  upiId?: true
+  supportEmail?: true
+  websiteUrl?: true
+  hoursHeadline?: true
+  hoursNote?: true
+  brandingUpdatedAt?: true
   invoiceFooterText?: true
   invoiceTermsText?: true
   staffDiscountCapPercent?: true
   managerPinHash?: true
   nearExpiryWindowDays?: true
+  offlineSyncMaxHours?: true
+  wholesaleBillingEnabled?: true
+  salesReturnWindowDays?: true
   licenseExpiryWindowDays?: true
   createdAt?: true
 }
@@ -116,13 +200,32 @@ export type TenantMaxAggregateInputType = {
   id?: true
   pharmacyName?: true
   tenantType?: true
-  logoUrl?: true
+  brandShortName?: true
+  brandTagline?: true
+  brandDescription?: true
+  logoIconUrl?: true
+  logoHorizontalUrl?: true
+  logoStackedUrl?: true
   primaryColor?: true
+  accentColor?: true
+  surfaceColor?: true
+  invoiceHeaderText?: true
+  invoicePaperDefault?: true
+  showLogoOnInvoice?: true
+  upiId?: true
+  supportEmail?: true
+  websiteUrl?: true
+  hoursHeadline?: true
+  hoursNote?: true
+  brandingUpdatedAt?: true
   invoiceFooterText?: true
   invoiceTermsText?: true
   staffDiscountCapPercent?: true
   managerPinHash?: true
   nearExpiryWindowDays?: true
+  offlineSyncMaxHours?: true
+  wholesaleBillingEnabled?: true
+  salesReturnWindowDays?: true
   licenseExpiryWindowDays?: true
   createdAt?: true
 }
@@ -131,13 +234,32 @@ export type TenantCountAggregateInputType = {
   id?: true
   pharmacyName?: true
   tenantType?: true
-  logoUrl?: true
+  brandShortName?: true
+  brandTagline?: true
+  brandDescription?: true
+  logoIconUrl?: true
+  logoHorizontalUrl?: true
+  logoStackedUrl?: true
   primaryColor?: true
+  accentColor?: true
+  surfaceColor?: true
+  invoiceHeaderText?: true
+  invoicePaperDefault?: true
+  showLogoOnInvoice?: true
+  upiId?: true
+  supportEmail?: true
+  websiteUrl?: true
+  hoursHeadline?: true
+  hoursNote?: true
+  brandingUpdatedAt?: true
   invoiceFooterText?: true
   invoiceTermsText?: true
   staffDiscountCapPercent?: true
   managerPinHash?: true
   nearExpiryWindowDays?: true
+  offlineSyncMaxHours?: true
+  wholesaleBillingEnabled?: true
+  salesReturnWindowDays?: true
   licenseExpiryWindowDays?: true
   createdAt?: true
   _all?: true
@@ -233,13 +355,32 @@ export type TenantGroupByOutputType = {
   id: string
   pharmacyName: string
   tenantType: string
-  logoUrl: string | null
+  brandShortName: string | null
+  brandTagline: string | null
+  brandDescription: string | null
+  logoIconUrl: string | null
+  logoHorizontalUrl: string | null
+  logoStackedUrl: string | null
   primaryColor: string | null
+  accentColor: string | null
+  surfaceColor: string | null
+  invoiceHeaderText: string | null
+  invoicePaperDefault: string | null
+  showLogoOnInvoice: boolean
+  upiId: string | null
+  supportEmail: string | null
+  websiteUrl: string | null
+  hoursHeadline: string | null
+  hoursNote: string | null
+  brandingUpdatedAt: Date | null
   invoiceFooterText: string | null
   invoiceTermsText: string | null
   staffDiscountCapPercent: runtime.Decimal
   managerPinHash: string | null
   nearExpiryWindowDays: number
+  offlineSyncMaxHours: number
+  wholesaleBillingEnabled: boolean
+  salesReturnWindowDays: number
   licenseExpiryWindowDays: number
   createdAt: Date
   _count: TenantCountAggregateOutputType | null
@@ -271,13 +412,32 @@ export type TenantWhereInput = {
   id?: Prisma.StringFilter<"Tenant"> | string
   pharmacyName?: Prisma.StringFilter<"Tenant"> | string
   tenantType?: Prisma.StringFilter<"Tenant"> | string
-  logoUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  brandShortName?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  brandTagline?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  brandDescription?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  logoIconUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  logoHorizontalUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  logoStackedUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
   primaryColor?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  accentColor?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  surfaceColor?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  invoiceHeaderText?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  invoicePaperDefault?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  showLogoOnInvoice?: Prisma.BoolFilter<"Tenant"> | boolean
+  upiId?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  supportEmail?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  websiteUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  hoursHeadline?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  hoursNote?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  brandingUpdatedAt?: Prisma.DateTimeNullableFilter<"Tenant"> | Date | string | null
   invoiceFooterText?: Prisma.StringNullableFilter<"Tenant"> | string | null
   invoiceTermsText?: Prisma.StringNullableFilter<"Tenant"> | string | null
   staffDiscountCapPercent?: Prisma.DecimalFilter<"Tenant"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.StringNullableFilter<"Tenant"> | string | null
   nearExpiryWindowDays?: Prisma.IntFilter<"Tenant"> | number
+  offlineSyncMaxHours?: Prisma.IntFilter<"Tenant"> | number
+  wholesaleBillingEnabled?: Prisma.BoolFilter<"Tenant"> | boolean
+  salesReturnWindowDays?: Prisma.IntFilter<"Tenant"> | number
   licenseExpiryWindowDays?: Prisma.IntFilter<"Tenant"> | number
   createdAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   branches?: Prisma.BranchListRelationFilter
@@ -301,20 +461,53 @@ export type TenantWhereInput = {
   coupons?: Prisma.CouponListRelationFilter
   customerLedgerEntries?: Prisma.CustomerLedgerEntryListRelationFilter
   whatsappLogs?: Prisma.WhatsAppLogListRelationFilter
+  smsLogs?: Prisma.SmsLogListRelationFilter
   emailLogs?: Prisma.EmailLogListRelationFilter
+  taxSlabs?: Prisma.TaxSlabListRelationFilter
+  hsnTaxMappings?: Prisma.HsnTaxMappingListRelationFilter
+  expenseCategories?: Prisma.ExpenseCategoryListRelationFilter
+  expenses?: Prisma.ExpenseListRelationFilter
+  promiseOrders?: Prisma.PromiseOrderListRelationFilter
+  salesReturns?: Prisma.SalesReturnListRelationFilter
+  cashUps?: Prisma.CashUpListRelationFilter
+  stockAdjustments?: Prisma.StockAdjustmentListRelationFilter
+  heldSales?: Prisma.HeldSaleListRelationFilter
+  stockCounts?: Prisma.StockCountListRelationFilter
+  notes?: Prisma.NoteListRelationFilter
+  roles?: Prisma.RoleListRelationFilter
+  saltAliases?: Prisma.SaltAliasListRelationFilter
 }
 
 export type TenantOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   pharmacyName?: Prisma.SortOrder
   tenantType?: Prisma.SortOrder
-  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  brandShortName?: Prisma.SortOrderInput | Prisma.SortOrder
+  brandTagline?: Prisma.SortOrderInput | Prisma.SortOrder
+  brandDescription?: Prisma.SortOrderInput | Prisma.SortOrder
+  logoIconUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  logoHorizontalUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  logoStackedUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   primaryColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  accentColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  surfaceColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  invoiceHeaderText?: Prisma.SortOrderInput | Prisma.SortOrder
+  invoicePaperDefault?: Prisma.SortOrderInput | Prisma.SortOrder
+  showLogoOnInvoice?: Prisma.SortOrder
+  upiId?: Prisma.SortOrderInput | Prisma.SortOrder
+  supportEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  websiteUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  hoursHeadline?: Prisma.SortOrderInput | Prisma.SortOrder
+  hoursNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  brandingUpdatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   invoiceFooterText?: Prisma.SortOrderInput | Prisma.SortOrder
   invoiceTermsText?: Prisma.SortOrderInput | Prisma.SortOrder
   staffDiscountCapPercent?: Prisma.SortOrder
   managerPinHash?: Prisma.SortOrderInput | Prisma.SortOrder
   nearExpiryWindowDays?: Prisma.SortOrder
+  offlineSyncMaxHours?: Prisma.SortOrder
+  wholesaleBillingEnabled?: Prisma.SortOrder
+  salesReturnWindowDays?: Prisma.SortOrder
   licenseExpiryWindowDays?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   branches?: Prisma.BranchOrderByRelationAggregateInput
@@ -338,7 +531,21 @@ export type TenantOrderByWithRelationInput = {
   coupons?: Prisma.CouponOrderByRelationAggregateInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryOrderByRelationAggregateInput
   whatsappLogs?: Prisma.WhatsAppLogOrderByRelationAggregateInput
+  smsLogs?: Prisma.SmsLogOrderByRelationAggregateInput
   emailLogs?: Prisma.EmailLogOrderByRelationAggregateInput
+  taxSlabs?: Prisma.TaxSlabOrderByRelationAggregateInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingOrderByRelationAggregateInput
+  expenseCategories?: Prisma.ExpenseCategoryOrderByRelationAggregateInput
+  expenses?: Prisma.ExpenseOrderByRelationAggregateInput
+  promiseOrders?: Prisma.PromiseOrderOrderByRelationAggregateInput
+  salesReturns?: Prisma.SalesReturnOrderByRelationAggregateInput
+  cashUps?: Prisma.CashUpOrderByRelationAggregateInput
+  stockAdjustments?: Prisma.StockAdjustmentOrderByRelationAggregateInput
+  heldSales?: Prisma.HeldSaleOrderByRelationAggregateInput
+  stockCounts?: Prisma.StockCountOrderByRelationAggregateInput
+  notes?: Prisma.NoteOrderByRelationAggregateInput
+  roles?: Prisma.RoleOrderByRelationAggregateInput
+  saltAliases?: Prisma.SaltAliasOrderByRelationAggregateInput
 }
 
 export type TenantWhereUniqueInput = Prisma.AtLeast<{
@@ -348,13 +555,32 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.TenantWhereInput | Prisma.TenantWhereInput[]
   pharmacyName?: Prisma.StringFilter<"Tenant"> | string
   tenantType?: Prisma.StringFilter<"Tenant"> | string
-  logoUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  brandShortName?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  brandTagline?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  brandDescription?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  logoIconUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  logoHorizontalUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  logoStackedUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
   primaryColor?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  accentColor?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  surfaceColor?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  invoiceHeaderText?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  invoicePaperDefault?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  showLogoOnInvoice?: Prisma.BoolFilter<"Tenant"> | boolean
+  upiId?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  supportEmail?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  websiteUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  hoursHeadline?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  hoursNote?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  brandingUpdatedAt?: Prisma.DateTimeNullableFilter<"Tenant"> | Date | string | null
   invoiceFooterText?: Prisma.StringNullableFilter<"Tenant"> | string | null
   invoiceTermsText?: Prisma.StringNullableFilter<"Tenant"> | string | null
   staffDiscountCapPercent?: Prisma.DecimalFilter<"Tenant"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.StringNullableFilter<"Tenant"> | string | null
   nearExpiryWindowDays?: Prisma.IntFilter<"Tenant"> | number
+  offlineSyncMaxHours?: Prisma.IntFilter<"Tenant"> | number
+  wholesaleBillingEnabled?: Prisma.BoolFilter<"Tenant"> | boolean
+  salesReturnWindowDays?: Prisma.IntFilter<"Tenant"> | number
   licenseExpiryWindowDays?: Prisma.IntFilter<"Tenant"> | number
   createdAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   branches?: Prisma.BranchListRelationFilter
@@ -378,20 +604,53 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   coupons?: Prisma.CouponListRelationFilter
   customerLedgerEntries?: Prisma.CustomerLedgerEntryListRelationFilter
   whatsappLogs?: Prisma.WhatsAppLogListRelationFilter
+  smsLogs?: Prisma.SmsLogListRelationFilter
   emailLogs?: Prisma.EmailLogListRelationFilter
+  taxSlabs?: Prisma.TaxSlabListRelationFilter
+  hsnTaxMappings?: Prisma.HsnTaxMappingListRelationFilter
+  expenseCategories?: Prisma.ExpenseCategoryListRelationFilter
+  expenses?: Prisma.ExpenseListRelationFilter
+  promiseOrders?: Prisma.PromiseOrderListRelationFilter
+  salesReturns?: Prisma.SalesReturnListRelationFilter
+  cashUps?: Prisma.CashUpListRelationFilter
+  stockAdjustments?: Prisma.StockAdjustmentListRelationFilter
+  heldSales?: Prisma.HeldSaleListRelationFilter
+  stockCounts?: Prisma.StockCountListRelationFilter
+  notes?: Prisma.NoteListRelationFilter
+  roles?: Prisma.RoleListRelationFilter
+  saltAliases?: Prisma.SaltAliasListRelationFilter
 }, "id">
 
 export type TenantOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   pharmacyName?: Prisma.SortOrder
   tenantType?: Prisma.SortOrder
-  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  brandShortName?: Prisma.SortOrderInput | Prisma.SortOrder
+  brandTagline?: Prisma.SortOrderInput | Prisma.SortOrder
+  brandDescription?: Prisma.SortOrderInput | Prisma.SortOrder
+  logoIconUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  logoHorizontalUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  logoStackedUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   primaryColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  accentColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  surfaceColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  invoiceHeaderText?: Prisma.SortOrderInput | Prisma.SortOrder
+  invoicePaperDefault?: Prisma.SortOrderInput | Prisma.SortOrder
+  showLogoOnInvoice?: Prisma.SortOrder
+  upiId?: Prisma.SortOrderInput | Prisma.SortOrder
+  supportEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  websiteUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  hoursHeadline?: Prisma.SortOrderInput | Prisma.SortOrder
+  hoursNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  brandingUpdatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   invoiceFooterText?: Prisma.SortOrderInput | Prisma.SortOrder
   invoiceTermsText?: Prisma.SortOrderInput | Prisma.SortOrder
   staffDiscountCapPercent?: Prisma.SortOrder
   managerPinHash?: Prisma.SortOrderInput | Prisma.SortOrder
   nearExpiryWindowDays?: Prisma.SortOrder
+  offlineSyncMaxHours?: Prisma.SortOrder
+  wholesaleBillingEnabled?: Prisma.SortOrder
+  salesReturnWindowDays?: Prisma.SortOrder
   licenseExpiryWindowDays?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.TenantCountOrderByAggregateInput
@@ -408,13 +667,32 @@ export type TenantScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
   pharmacyName?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
   tenantType?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
-  logoUrl?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  brandShortName?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  brandTagline?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  brandDescription?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  logoIconUrl?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  logoHorizontalUrl?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  logoStackedUrl?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
   primaryColor?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  accentColor?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  surfaceColor?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  invoiceHeaderText?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  invoicePaperDefault?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  showLogoOnInvoice?: Prisma.BoolWithAggregatesFilter<"Tenant"> | boolean
+  upiId?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  supportEmail?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  websiteUrl?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  hoursHeadline?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  hoursNote?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  brandingUpdatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Tenant"> | Date | string | null
   invoiceFooterText?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
   invoiceTermsText?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
   staffDiscountCapPercent?: Prisma.DecimalWithAggregatesFilter<"Tenant"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
   nearExpiryWindowDays?: Prisma.IntWithAggregatesFilter<"Tenant"> | number
+  offlineSyncMaxHours?: Prisma.IntWithAggregatesFilter<"Tenant"> | number
+  wholesaleBillingEnabled?: Prisma.BoolWithAggregatesFilter<"Tenant"> | boolean
+  salesReturnWindowDays?: Prisma.IntWithAggregatesFilter<"Tenant"> | number
   licenseExpiryWindowDays?: Prisma.IntWithAggregatesFilter<"Tenant"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Tenant"> | Date | string
 }
@@ -423,13 +701,32 @@ export type TenantCreateInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -453,20 +750,53 @@ export type TenantCreateInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -490,20 +820,53 @@ export type TenantUncheckedCreateInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -527,20 +890,53 @@ export type TenantUpdateInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -564,20 +960,53 @@ export type TenantUncheckedUpdateInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateManyInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
 }
@@ -586,13 +1015,32 @@ export type TenantUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -601,13 +1049,32 @@ export type TenantUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -616,13 +1083,32 @@ export type TenantCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   pharmacyName?: Prisma.SortOrder
   tenantType?: Prisma.SortOrder
-  logoUrl?: Prisma.SortOrder
+  brandShortName?: Prisma.SortOrder
+  brandTagline?: Prisma.SortOrder
+  brandDescription?: Prisma.SortOrder
+  logoIconUrl?: Prisma.SortOrder
+  logoHorizontalUrl?: Prisma.SortOrder
+  logoStackedUrl?: Prisma.SortOrder
   primaryColor?: Prisma.SortOrder
+  accentColor?: Prisma.SortOrder
+  surfaceColor?: Prisma.SortOrder
+  invoiceHeaderText?: Prisma.SortOrder
+  invoicePaperDefault?: Prisma.SortOrder
+  showLogoOnInvoice?: Prisma.SortOrder
+  upiId?: Prisma.SortOrder
+  supportEmail?: Prisma.SortOrder
+  websiteUrl?: Prisma.SortOrder
+  hoursHeadline?: Prisma.SortOrder
+  hoursNote?: Prisma.SortOrder
+  brandingUpdatedAt?: Prisma.SortOrder
   invoiceFooterText?: Prisma.SortOrder
   invoiceTermsText?: Prisma.SortOrder
   staffDiscountCapPercent?: Prisma.SortOrder
   managerPinHash?: Prisma.SortOrder
   nearExpiryWindowDays?: Prisma.SortOrder
+  offlineSyncMaxHours?: Prisma.SortOrder
+  wholesaleBillingEnabled?: Prisma.SortOrder
+  salesReturnWindowDays?: Prisma.SortOrder
   licenseExpiryWindowDays?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -630,6 +1116,8 @@ export type TenantCountOrderByAggregateInput = {
 export type TenantAvgOrderByAggregateInput = {
   staffDiscountCapPercent?: Prisma.SortOrder
   nearExpiryWindowDays?: Prisma.SortOrder
+  offlineSyncMaxHours?: Prisma.SortOrder
+  salesReturnWindowDays?: Prisma.SortOrder
   licenseExpiryWindowDays?: Prisma.SortOrder
 }
 
@@ -637,13 +1125,32 @@ export type TenantMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   pharmacyName?: Prisma.SortOrder
   tenantType?: Prisma.SortOrder
-  logoUrl?: Prisma.SortOrder
+  brandShortName?: Prisma.SortOrder
+  brandTagline?: Prisma.SortOrder
+  brandDescription?: Prisma.SortOrder
+  logoIconUrl?: Prisma.SortOrder
+  logoHorizontalUrl?: Prisma.SortOrder
+  logoStackedUrl?: Prisma.SortOrder
   primaryColor?: Prisma.SortOrder
+  accentColor?: Prisma.SortOrder
+  surfaceColor?: Prisma.SortOrder
+  invoiceHeaderText?: Prisma.SortOrder
+  invoicePaperDefault?: Prisma.SortOrder
+  showLogoOnInvoice?: Prisma.SortOrder
+  upiId?: Prisma.SortOrder
+  supportEmail?: Prisma.SortOrder
+  websiteUrl?: Prisma.SortOrder
+  hoursHeadline?: Prisma.SortOrder
+  hoursNote?: Prisma.SortOrder
+  brandingUpdatedAt?: Prisma.SortOrder
   invoiceFooterText?: Prisma.SortOrder
   invoiceTermsText?: Prisma.SortOrder
   staffDiscountCapPercent?: Prisma.SortOrder
   managerPinHash?: Prisma.SortOrder
   nearExpiryWindowDays?: Prisma.SortOrder
+  offlineSyncMaxHours?: Prisma.SortOrder
+  wholesaleBillingEnabled?: Prisma.SortOrder
+  salesReturnWindowDays?: Prisma.SortOrder
   licenseExpiryWindowDays?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -652,13 +1159,32 @@ export type TenantMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   pharmacyName?: Prisma.SortOrder
   tenantType?: Prisma.SortOrder
-  logoUrl?: Prisma.SortOrder
+  brandShortName?: Prisma.SortOrder
+  brandTagline?: Prisma.SortOrder
+  brandDescription?: Prisma.SortOrder
+  logoIconUrl?: Prisma.SortOrder
+  logoHorizontalUrl?: Prisma.SortOrder
+  logoStackedUrl?: Prisma.SortOrder
   primaryColor?: Prisma.SortOrder
+  accentColor?: Prisma.SortOrder
+  surfaceColor?: Prisma.SortOrder
+  invoiceHeaderText?: Prisma.SortOrder
+  invoicePaperDefault?: Prisma.SortOrder
+  showLogoOnInvoice?: Prisma.SortOrder
+  upiId?: Prisma.SortOrder
+  supportEmail?: Prisma.SortOrder
+  websiteUrl?: Prisma.SortOrder
+  hoursHeadline?: Prisma.SortOrder
+  hoursNote?: Prisma.SortOrder
+  brandingUpdatedAt?: Prisma.SortOrder
   invoiceFooterText?: Prisma.SortOrder
   invoiceTermsText?: Prisma.SortOrder
   staffDiscountCapPercent?: Prisma.SortOrder
   managerPinHash?: Prisma.SortOrder
   nearExpiryWindowDays?: Prisma.SortOrder
+  offlineSyncMaxHours?: Prisma.SortOrder
+  wholesaleBillingEnabled?: Prisma.SortOrder
+  salesReturnWindowDays?: Prisma.SortOrder
   licenseExpiryWindowDays?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -666,6 +1192,8 @@ export type TenantMinOrderByAggregateInput = {
 export type TenantSumOrderByAggregateInput = {
   staffDiscountCapPercent?: Prisma.SortOrder
   nearExpiryWindowDays?: Prisma.SortOrder
+  offlineSyncMaxHours?: Prisma.SortOrder
+  salesReturnWindowDays?: Prisma.SortOrder
   licenseExpiryWindowDays?: Prisma.SortOrder
 }
 
@@ -680,6 +1208,14 @@ export type StringFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type DecimalFieldUpdateOperationsInput = {
@@ -744,6 +1280,90 @@ export type TenantUpdateOneRequiredWithoutCustomersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutCustomersInput, Prisma.TenantUpdateWithoutCustomersInput>, Prisma.TenantUncheckedUpdateWithoutCustomersInput>
 }
 
+export type TenantCreateNestedOneWithoutPromiseOrdersInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutPromiseOrdersInput, Prisma.TenantUncheckedCreateWithoutPromiseOrdersInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutPromiseOrdersInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutPromiseOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutPromiseOrdersInput, Prisma.TenantUncheckedCreateWithoutPromiseOrdersInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutPromiseOrdersInput
+  upsert?: Prisma.TenantUpsertWithoutPromiseOrdersInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutPromiseOrdersInput, Prisma.TenantUpdateWithoutPromiseOrdersInput>, Prisma.TenantUncheckedUpdateWithoutPromiseOrdersInput>
+}
+
+export type TenantCreateNestedOneWithoutExpenseCategoriesInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutExpenseCategoriesInput, Prisma.TenantUncheckedCreateWithoutExpenseCategoriesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutExpenseCategoriesInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutExpenseCategoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutExpenseCategoriesInput, Prisma.TenantUncheckedCreateWithoutExpenseCategoriesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutExpenseCategoriesInput
+  upsert?: Prisma.TenantUpsertWithoutExpenseCategoriesInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutExpenseCategoriesInput, Prisma.TenantUpdateWithoutExpenseCategoriesInput>, Prisma.TenantUncheckedUpdateWithoutExpenseCategoriesInput>
+}
+
+export type TenantCreateNestedOneWithoutExpensesInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutExpensesInput, Prisma.TenantUncheckedCreateWithoutExpensesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutExpensesInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutExpensesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutExpensesInput, Prisma.TenantUncheckedCreateWithoutExpensesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutExpensesInput
+  upsert?: Prisma.TenantUpsertWithoutExpensesInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutExpensesInput, Prisma.TenantUpdateWithoutExpensesInput>, Prisma.TenantUncheckedUpdateWithoutExpensesInput>
+}
+
+export type TenantCreateNestedOneWithoutTaxSlabsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutTaxSlabsInput, Prisma.TenantUncheckedCreateWithoutTaxSlabsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutTaxSlabsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutTaxSlabsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutTaxSlabsInput, Prisma.TenantUncheckedCreateWithoutTaxSlabsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutTaxSlabsInput
+  upsert?: Prisma.TenantUpsertWithoutTaxSlabsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutTaxSlabsInput, Prisma.TenantUpdateWithoutTaxSlabsInput>, Prisma.TenantUncheckedUpdateWithoutTaxSlabsInput>
+}
+
+export type TenantCreateNestedOneWithoutHsnTaxMappingsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutHsnTaxMappingsInput, Prisma.TenantUncheckedCreateWithoutHsnTaxMappingsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutHsnTaxMappingsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutHsnTaxMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutHsnTaxMappingsInput, Prisma.TenantUncheckedCreateWithoutHsnTaxMappingsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutHsnTaxMappingsInput
+  upsert?: Prisma.TenantUpsertWithoutHsnTaxMappingsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutHsnTaxMappingsInput, Prisma.TenantUpdateWithoutHsnTaxMappingsInput>, Prisma.TenantUncheckedUpdateWithoutHsnTaxMappingsInput>
+}
+
+export type TenantCreateNestedOneWithoutSmsLogsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutSmsLogsInput, Prisma.TenantUncheckedCreateWithoutSmsLogsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutSmsLogsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutSmsLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutSmsLogsInput, Prisma.TenantUncheckedCreateWithoutSmsLogsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutSmsLogsInput
+  upsert?: Prisma.TenantUpsertWithoutSmsLogsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutSmsLogsInput, Prisma.TenantUpdateWithoutSmsLogsInput>, Prisma.TenantUncheckedUpdateWithoutSmsLogsInput>
+}
+
 export type TenantCreateNestedOneWithoutEmailLogsInput = {
   create?: Prisma.XOR<Prisma.TenantCreateWithoutEmailLogsInput, Prisma.TenantUncheckedCreateWithoutEmailLogsInput>
   connectOrCreate?: Prisma.TenantCreateOrConnectWithoutEmailLogsInput
@@ -756,6 +1376,90 @@ export type TenantUpdateOneRequiredWithoutEmailLogsNestedInput = {
   upsert?: Prisma.TenantUpsertWithoutEmailLogsInput
   connect?: Prisma.TenantWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutEmailLogsInput, Prisma.TenantUpdateWithoutEmailLogsInput>, Prisma.TenantUncheckedUpdateWithoutEmailLogsInput>
+}
+
+export type TenantCreateNestedOneWithoutNotesInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutNotesInput, Prisma.TenantUncheckedCreateWithoutNotesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutNotesInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutNotesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutNotesInput, Prisma.TenantUncheckedCreateWithoutNotesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutNotesInput
+  upsert?: Prisma.TenantUpsertWithoutNotesInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutNotesInput, Prisma.TenantUpdateWithoutNotesInput>, Prisma.TenantUncheckedUpdateWithoutNotesInput>
+}
+
+export type TenantCreateNestedOneWithoutSalesReturnsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutSalesReturnsInput, Prisma.TenantUncheckedCreateWithoutSalesReturnsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutSalesReturnsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutSalesReturnsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutSalesReturnsInput, Prisma.TenantUncheckedCreateWithoutSalesReturnsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutSalesReturnsInput
+  upsert?: Prisma.TenantUpsertWithoutSalesReturnsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutSalesReturnsInput, Prisma.TenantUpdateWithoutSalesReturnsInput>, Prisma.TenantUncheckedUpdateWithoutSalesReturnsInput>
+}
+
+export type TenantCreateNestedOneWithoutStockCountsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutStockCountsInput, Prisma.TenantUncheckedCreateWithoutStockCountsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutStockCountsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutStockCountsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutStockCountsInput, Prisma.TenantUncheckedCreateWithoutStockCountsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutStockCountsInput
+  upsert?: Prisma.TenantUpsertWithoutStockCountsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutStockCountsInput, Prisma.TenantUpdateWithoutStockCountsInput>, Prisma.TenantUncheckedUpdateWithoutStockCountsInput>
+}
+
+export type TenantCreateNestedOneWithoutHeldSalesInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutHeldSalesInput, Prisma.TenantUncheckedCreateWithoutHeldSalesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutHeldSalesInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutHeldSalesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutHeldSalesInput, Prisma.TenantUncheckedCreateWithoutHeldSalesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutHeldSalesInput
+  upsert?: Prisma.TenantUpsertWithoutHeldSalesInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutHeldSalesInput, Prisma.TenantUpdateWithoutHeldSalesInput>, Prisma.TenantUncheckedUpdateWithoutHeldSalesInput>
+}
+
+export type TenantCreateNestedOneWithoutStockAdjustmentsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutStockAdjustmentsInput, Prisma.TenantUncheckedCreateWithoutStockAdjustmentsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutStockAdjustmentsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutStockAdjustmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutStockAdjustmentsInput, Prisma.TenantUncheckedCreateWithoutStockAdjustmentsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutStockAdjustmentsInput
+  upsert?: Prisma.TenantUpsertWithoutStockAdjustmentsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutStockAdjustmentsInput, Prisma.TenantUpdateWithoutStockAdjustmentsInput>, Prisma.TenantUncheckedUpdateWithoutStockAdjustmentsInput>
+}
+
+export type TenantCreateNestedOneWithoutCashUpsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutCashUpsInput, Prisma.TenantUncheckedCreateWithoutCashUpsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutCashUpsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutCashUpsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutCashUpsInput, Prisma.TenantUncheckedCreateWithoutCashUpsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutCashUpsInput
+  upsert?: Prisma.TenantUpsertWithoutCashUpsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutCashUpsInput, Prisma.TenantUpdateWithoutCashUpsInput>, Prisma.TenantUncheckedUpdateWithoutCashUpsInput>
 }
 
 export type TenantCreateNestedOneWithoutWhatsappLogsInput = {
@@ -868,6 +1572,20 @@ export type TenantUpdateOneRequiredWithoutDiscountsNestedInput = {
   upsert?: Prisma.TenantUpsertWithoutDiscountsInput
   connect?: Prisma.TenantWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutDiscountsInput, Prisma.TenantUpdateWithoutDiscountsInput>, Prisma.TenantUncheckedUpdateWithoutDiscountsInput>
+}
+
+export type TenantCreateNestedOneWithoutRolesInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutRolesInput, Prisma.TenantUncheckedCreateWithoutRolesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRolesInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutRolesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutRolesInput, Prisma.TenantUncheckedCreateWithoutRolesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRolesInput
+  upsert?: Prisma.TenantUpsertWithoutRolesInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutRolesInput, Prisma.TenantUpdateWithoutRolesInput>, Prisma.TenantUncheckedUpdateWithoutRolesInput>
 }
 
 export type TenantCreateNestedOneWithoutUsersInput = {
@@ -1010,17 +1728,50 @@ export type TenantUpdateOneRequiredWithoutNarcoticRegisterEntriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutNarcoticRegisterEntriesInput, Prisma.TenantUpdateWithoutNarcoticRegisterEntriesInput>, Prisma.TenantUncheckedUpdateWithoutNarcoticRegisterEntriesInput>
 }
 
+export type TenantCreateNestedOneWithoutSaltAliasesInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutSaltAliasesInput, Prisma.TenantUncheckedCreateWithoutSaltAliasesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutSaltAliasesInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutSaltAliasesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutSaltAliasesInput, Prisma.TenantUncheckedCreateWithoutSaltAliasesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutSaltAliasesInput
+  upsert?: Prisma.TenantUpsertWithoutSaltAliasesInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutSaltAliasesInput, Prisma.TenantUpdateWithoutSaltAliasesInput>, Prisma.TenantUncheckedUpdateWithoutSaltAliasesInput>
+}
+
 export type TenantCreateWithoutBranchesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   items?: Prisma.ItemCreateNestedManyWithoutTenantInput
@@ -1043,20 +1794,53 @@ export type TenantCreateWithoutBranchesInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutBranchesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
@@ -1079,7 +1863,21 @@ export type TenantUncheckedCreateWithoutBranchesInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutBranchesInput = {
@@ -1102,13 +1900,32 @@ export type TenantUpdateWithoutBranchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
@@ -1131,20 +1948,53 @@ export type TenantUpdateWithoutBranchesInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutBranchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
@@ -1167,20 +2017,53 @@ export type TenantUncheckedUpdateWithoutBranchesInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutItemsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -1203,20 +2086,53 @@ export type TenantCreateWithoutItemsInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutItemsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -1239,7 +2155,21 @@ export type TenantUncheckedCreateWithoutItemsInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutItemsInput = {
@@ -1262,13 +2192,32 @@ export type TenantUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -1291,20 +2240,53 @@ export type TenantUpdateWithoutItemsInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -1327,20 +2309,53 @@ export type TenantUncheckedUpdateWithoutItemsInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutCustomersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -1363,20 +2378,53 @@ export type TenantCreateWithoutCustomersInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutCustomersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -1399,7 +2447,21 @@ export type TenantUncheckedCreateWithoutCustomersInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutCustomersInput = {
@@ -1422,13 +2484,32 @@ export type TenantUpdateWithoutCustomersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -1451,20 +2532,53 @@ export type TenantUpdateWithoutCustomersInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutCustomersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -1487,20 +2601,53 @@ export type TenantUncheckedUpdateWithoutCustomersInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
-export type TenantCreateWithoutEmailLogsInput = {
+export type TenantCreateWithoutPromiseOrdersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -1524,19 +2671,52 @@ export type TenantCreateWithoutEmailLogsInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
-export type TenantUncheckedCreateWithoutEmailLogsInput = {
+export type TenantUncheckedCreateWithoutPromiseOrdersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -1560,6 +2740,1772 @@ export type TenantUncheckedCreateWithoutEmailLogsInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutPromiseOrdersInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutPromiseOrdersInput, Prisma.TenantUncheckedCreateWithoutPromiseOrdersInput>
+}
+
+export type TenantUpsertWithoutPromiseOrdersInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutPromiseOrdersInput, Prisma.TenantUncheckedUpdateWithoutPromiseOrdersInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutPromiseOrdersInput, Prisma.TenantUncheckedCreateWithoutPromiseOrdersInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutPromiseOrdersInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutPromiseOrdersInput, Prisma.TenantUncheckedUpdateWithoutPromiseOrdersInput>
+}
+
+export type TenantUpdateWithoutPromiseOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutPromiseOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutExpenseCategoriesInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutExpenseCategoriesInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutExpenseCategoriesInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutExpenseCategoriesInput, Prisma.TenantUncheckedCreateWithoutExpenseCategoriesInput>
+}
+
+export type TenantUpsertWithoutExpenseCategoriesInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutExpenseCategoriesInput, Prisma.TenantUncheckedUpdateWithoutExpenseCategoriesInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutExpenseCategoriesInput, Prisma.TenantUncheckedCreateWithoutExpenseCategoriesInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutExpenseCategoriesInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutExpenseCategoriesInput, Prisma.TenantUncheckedUpdateWithoutExpenseCategoriesInput>
+}
+
+export type TenantUpdateWithoutExpenseCategoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutExpenseCategoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutExpensesInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutExpensesInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutExpensesInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutExpensesInput, Prisma.TenantUncheckedCreateWithoutExpensesInput>
+}
+
+export type TenantUpsertWithoutExpensesInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutExpensesInput, Prisma.TenantUncheckedUpdateWithoutExpensesInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutExpensesInput, Prisma.TenantUncheckedCreateWithoutExpensesInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutExpensesInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutExpensesInput, Prisma.TenantUncheckedUpdateWithoutExpensesInput>
+}
+
+export type TenantUpdateWithoutExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutTaxSlabsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutTaxSlabsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutTaxSlabsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutTaxSlabsInput, Prisma.TenantUncheckedCreateWithoutTaxSlabsInput>
+}
+
+export type TenantUpsertWithoutTaxSlabsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutTaxSlabsInput, Prisma.TenantUncheckedUpdateWithoutTaxSlabsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutTaxSlabsInput, Prisma.TenantUncheckedCreateWithoutTaxSlabsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutTaxSlabsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutTaxSlabsInput, Prisma.TenantUncheckedUpdateWithoutTaxSlabsInput>
+}
+
+export type TenantUpdateWithoutTaxSlabsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutTaxSlabsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutHsnTaxMappingsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutHsnTaxMappingsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutHsnTaxMappingsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutHsnTaxMappingsInput, Prisma.TenantUncheckedCreateWithoutHsnTaxMappingsInput>
+}
+
+export type TenantUpsertWithoutHsnTaxMappingsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutHsnTaxMappingsInput, Prisma.TenantUncheckedUpdateWithoutHsnTaxMappingsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutHsnTaxMappingsInput, Prisma.TenantUncheckedCreateWithoutHsnTaxMappingsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutHsnTaxMappingsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutHsnTaxMappingsInput, Prisma.TenantUncheckedUpdateWithoutHsnTaxMappingsInput>
+}
+
+export type TenantUpdateWithoutHsnTaxMappingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutHsnTaxMappingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutSmsLogsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutSmsLogsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutSmsLogsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutSmsLogsInput, Prisma.TenantUncheckedCreateWithoutSmsLogsInput>
+}
+
+export type TenantUpsertWithoutSmsLogsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutSmsLogsInput, Prisma.TenantUncheckedUpdateWithoutSmsLogsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutSmsLogsInput, Prisma.TenantUncheckedCreateWithoutSmsLogsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutSmsLogsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutSmsLogsInput, Prisma.TenantUncheckedUpdateWithoutSmsLogsInput>
+}
+
+export type TenantUpdateWithoutSmsLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutSmsLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutEmailLogsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutEmailLogsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutEmailLogsInput = {
@@ -1582,13 +4528,32 @@ export type TenantUpdateWithoutEmailLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -1612,19 +4577,52 @@ export type TenantUpdateWithoutEmailLogsInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutEmailLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -1648,19 +4646,52 @@ export type TenantUncheckedUpdateWithoutEmailLogsInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
-export type TenantCreateWithoutWhatsappLogsInput = {
+export type TenantCreateWithoutNotesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -1683,20 +4714,53 @@ export type TenantCreateWithoutWhatsappLogsInput = {
   loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
-export type TenantUncheckedCreateWithoutWhatsappLogsInput = {
+export type TenantUncheckedCreateWithoutNotesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -1719,7 +4783,1773 @@ export type TenantUncheckedCreateWithoutWhatsappLogsInput = {
   loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutNotesInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutNotesInput, Prisma.TenantUncheckedCreateWithoutNotesInput>
+}
+
+export type TenantUpsertWithoutNotesInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutNotesInput, Prisma.TenantUncheckedUpdateWithoutNotesInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutNotesInput, Prisma.TenantUncheckedCreateWithoutNotesInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutNotesInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutNotesInput, Prisma.TenantUncheckedUpdateWithoutNotesInput>
+}
+
+export type TenantUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutSalesReturnsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutSalesReturnsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutSalesReturnsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutSalesReturnsInput, Prisma.TenantUncheckedCreateWithoutSalesReturnsInput>
+}
+
+export type TenantUpsertWithoutSalesReturnsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutSalesReturnsInput, Prisma.TenantUncheckedUpdateWithoutSalesReturnsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutSalesReturnsInput, Prisma.TenantUncheckedCreateWithoutSalesReturnsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutSalesReturnsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutSalesReturnsInput, Prisma.TenantUncheckedUpdateWithoutSalesReturnsInput>
+}
+
+export type TenantUpdateWithoutSalesReturnsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutSalesReturnsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutStockCountsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutStockCountsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutStockCountsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutStockCountsInput, Prisma.TenantUncheckedCreateWithoutStockCountsInput>
+}
+
+export type TenantUpsertWithoutStockCountsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutStockCountsInput, Prisma.TenantUncheckedUpdateWithoutStockCountsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutStockCountsInput, Prisma.TenantUncheckedCreateWithoutStockCountsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutStockCountsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutStockCountsInput, Prisma.TenantUncheckedUpdateWithoutStockCountsInput>
+}
+
+export type TenantUpdateWithoutStockCountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutStockCountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutHeldSalesInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutHeldSalesInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutHeldSalesInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutHeldSalesInput, Prisma.TenantUncheckedCreateWithoutHeldSalesInput>
+}
+
+export type TenantUpsertWithoutHeldSalesInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutHeldSalesInput, Prisma.TenantUncheckedUpdateWithoutHeldSalesInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutHeldSalesInput, Prisma.TenantUncheckedCreateWithoutHeldSalesInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutHeldSalesInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutHeldSalesInput, Prisma.TenantUncheckedUpdateWithoutHeldSalesInput>
+}
+
+export type TenantUpdateWithoutHeldSalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutHeldSalesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutStockAdjustmentsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutStockAdjustmentsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutStockAdjustmentsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutStockAdjustmentsInput, Prisma.TenantUncheckedCreateWithoutStockAdjustmentsInput>
+}
+
+export type TenantUpsertWithoutStockAdjustmentsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutStockAdjustmentsInput, Prisma.TenantUncheckedUpdateWithoutStockAdjustmentsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutStockAdjustmentsInput, Prisma.TenantUncheckedCreateWithoutStockAdjustmentsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutStockAdjustmentsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutStockAdjustmentsInput, Prisma.TenantUncheckedUpdateWithoutStockAdjustmentsInput>
+}
+
+export type TenantUpdateWithoutStockAdjustmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutStockAdjustmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutCashUpsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutCashUpsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutCashUpsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutCashUpsInput, Prisma.TenantUncheckedCreateWithoutCashUpsInput>
+}
+
+export type TenantUpsertWithoutCashUpsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutCashUpsInput, Prisma.TenantUncheckedUpdateWithoutCashUpsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutCashUpsInput, Prisma.TenantUncheckedCreateWithoutCashUpsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutCashUpsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutCashUpsInput, Prisma.TenantUncheckedUpdateWithoutCashUpsInput>
+}
+
+export type TenantUpdateWithoutCashUpsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutCashUpsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutWhatsappLogsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutWhatsappLogsInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutWhatsappLogsInput = {
@@ -1742,13 +6572,32 @@ export type TenantUpdateWithoutWhatsappLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -1771,20 +6620,53 @@ export type TenantUpdateWithoutWhatsappLogsInput = {
   loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutWhatsappLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -1807,20 +6689,53 @@ export type TenantUncheckedUpdateWithoutWhatsappLogsInput = {
   loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutCustomerLedgerEntriesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -1843,20 +6758,53 @@ export type TenantCreateWithoutCustomerLedgerEntriesInput = {
   loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutCustomerLedgerEntriesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -1879,7 +6827,21 @@ export type TenantUncheckedCreateWithoutCustomerLedgerEntriesInput = {
   loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutCustomerLedgerEntriesInput = {
@@ -1902,13 +6864,32 @@ export type TenantUpdateWithoutCustomerLedgerEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -1931,20 +6912,53 @@ export type TenantUpdateWithoutCustomerLedgerEntriesInput = {
   loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutCustomerLedgerEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -1967,20 +6981,53 @@ export type TenantUncheckedUpdateWithoutCustomerLedgerEntriesInput = {
   loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSchemesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -2003,20 +7050,53 @@ export type TenantCreateWithoutSchemesInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutSchemesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -2039,7 +7119,21 @@ export type TenantUncheckedCreateWithoutSchemesInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutSchemesInput = {
@@ -2062,13 +7156,32 @@ export type TenantUpdateWithoutSchemesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -2091,20 +7204,53 @@ export type TenantUpdateWithoutSchemesInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutSchemesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -2127,20 +7273,53 @@ export type TenantUncheckedUpdateWithoutSchemesInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutLoyaltyTiersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -2163,20 +7342,53 @@ export type TenantCreateWithoutLoyaltyTiersInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutLoyaltyTiersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -2199,7 +7411,21 @@ export type TenantUncheckedCreateWithoutLoyaltyTiersInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutLoyaltyTiersInput = {
@@ -2222,13 +7448,32 @@ export type TenantUpdateWithoutLoyaltyTiersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -2251,20 +7496,53 @@ export type TenantUpdateWithoutLoyaltyTiersInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutLoyaltyTiersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -2287,20 +7565,53 @@ export type TenantUncheckedUpdateWithoutLoyaltyTiersInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutCouponsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -2323,20 +7634,53 @@ export type TenantCreateWithoutCouponsInput = {
   loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutCouponsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -2359,7 +7703,21 @@ export type TenantUncheckedCreateWithoutCouponsInput = {
   loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutCouponsInput = {
@@ -2382,13 +7740,32 @@ export type TenantUpdateWithoutCouponsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -2411,20 +7788,53 @@ export type TenantUpdateWithoutCouponsInput = {
   loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutCouponsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -2447,20 +7857,53 @@ export type TenantUncheckedUpdateWithoutCouponsInput = {
   loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutDoctorsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -2483,20 +7926,53 @@ export type TenantCreateWithoutDoctorsInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutDoctorsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -2519,7 +7995,21 @@ export type TenantUncheckedCreateWithoutDoctorsInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutDoctorsInput = {
@@ -2542,13 +8032,32 @@ export type TenantUpdateWithoutDoctorsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -2571,20 +8080,53 @@ export type TenantUpdateWithoutDoctorsInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutDoctorsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -2607,20 +8149,53 @@ export type TenantUncheckedUpdateWithoutDoctorsInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSalesInvoicesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -2643,20 +8218,53 @@ export type TenantCreateWithoutSalesInvoicesInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutSalesInvoicesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -2679,7 +8287,21 @@ export type TenantUncheckedCreateWithoutSalesInvoicesInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutSalesInvoicesInput = {
@@ -2702,13 +8324,32 @@ export type TenantUpdateWithoutSalesInvoicesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -2731,20 +8372,53 @@ export type TenantUpdateWithoutSalesInvoicesInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutSalesInvoicesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -2767,20 +8441,53 @@ export type TenantUncheckedUpdateWithoutSalesInvoicesInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutDiscountsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -2803,20 +8510,53 @@ export type TenantCreateWithoutDiscountsInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutDiscountsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -2839,7 +8579,21 @@ export type TenantUncheckedCreateWithoutDiscountsInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutDiscountsInput = {
@@ -2862,13 +8616,32 @@ export type TenantUpdateWithoutDiscountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -2891,20 +8664,53 @@ export type TenantUpdateWithoutDiscountsInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutDiscountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -2927,20 +8733,345 @@ export type TenantUncheckedUpdateWithoutDiscountsInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutRolesInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutRolesInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutRolesInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutRolesInput, Prisma.TenantUncheckedCreateWithoutRolesInput>
+}
+
+export type TenantUpsertWithoutRolesInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutRolesInput, Prisma.TenantUncheckedUpdateWithoutRolesInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutRolesInput, Prisma.TenantUncheckedCreateWithoutRolesInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutRolesInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutRolesInput, Prisma.TenantUncheckedUpdateWithoutRolesInput>
+}
+
+export type TenantUpdateWithoutRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutUsersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -2963,20 +9094,53 @@ export type TenantCreateWithoutUsersInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutUsersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -2999,7 +9163,21 @@ export type TenantUncheckedCreateWithoutUsersInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutUsersInput = {
@@ -3022,13 +9200,32 @@ export type TenantUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -3051,20 +9248,53 @@ export type TenantUpdateWithoutUsersInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -3087,20 +9317,53 @@ export type TenantUncheckedUpdateWithoutUsersInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutAuditLogsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -3123,20 +9386,53 @@ export type TenantCreateWithoutAuditLogsInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutAuditLogsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -3159,7 +9455,21 @@ export type TenantUncheckedCreateWithoutAuditLogsInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutAuditLogsInput = {
@@ -3182,13 +9492,32 @@ export type TenantUpdateWithoutAuditLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -3211,20 +9540,53 @@ export type TenantUpdateWithoutAuditLogsInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutAuditLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -3247,20 +9609,53 @@ export type TenantUncheckedUpdateWithoutAuditLogsInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutBackupLogsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -3283,20 +9678,53 @@ export type TenantCreateWithoutBackupLogsInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutBackupLogsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -3319,7 +9747,21 @@ export type TenantUncheckedCreateWithoutBackupLogsInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutBackupLogsInput = {
@@ -3342,13 +9784,32 @@ export type TenantUpdateWithoutBackupLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -3371,20 +9832,53 @@ export type TenantUpdateWithoutBackupLogsInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutBackupLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -3407,20 +9901,53 @@ export type TenantUncheckedUpdateWithoutBackupLogsInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSuppliersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -3443,20 +9970,53 @@ export type TenantCreateWithoutSuppliersInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutSuppliersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -3479,7 +10039,21 @@ export type TenantUncheckedCreateWithoutSuppliersInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutSuppliersInput = {
@@ -3502,13 +10076,32 @@ export type TenantUpdateWithoutSuppliersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -3531,20 +10124,53 @@ export type TenantUpdateWithoutSuppliersInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutSuppliersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -3567,20 +10193,53 @@ export type TenantUncheckedUpdateWithoutSuppliersInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutPurchaseOrdersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -3603,20 +10262,53 @@ export type TenantCreateWithoutPurchaseOrdersInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutPurchaseOrdersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -3639,7 +10331,21 @@ export type TenantUncheckedCreateWithoutPurchaseOrdersInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutPurchaseOrdersInput = {
@@ -3662,13 +10368,32 @@ export type TenantUpdateWithoutPurchaseOrdersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -3691,20 +10416,53 @@ export type TenantUpdateWithoutPurchaseOrdersInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutPurchaseOrdersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -3727,20 +10485,53 @@ export type TenantUncheckedUpdateWithoutPurchaseOrdersInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutGrnsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -3763,20 +10554,53 @@ export type TenantCreateWithoutGrnsInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutGrnsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -3799,7 +10623,21 @@ export type TenantUncheckedCreateWithoutGrnsInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutGrnsInput = {
@@ -3822,13 +10660,32 @@ export type TenantUpdateWithoutGrnsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -3851,20 +10708,53 @@ export type TenantUpdateWithoutGrnsInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutGrnsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -3887,20 +10777,53 @@ export type TenantUncheckedUpdateWithoutGrnsInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutPurchaseReturnsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -3923,20 +10846,53 @@ export type TenantCreateWithoutPurchaseReturnsInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutPurchaseReturnsInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -3959,7 +10915,21 @@ export type TenantUncheckedCreateWithoutPurchaseReturnsInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutPurchaseReturnsInput = {
@@ -3982,13 +10952,32 @@ export type TenantUpdateWithoutPurchaseReturnsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -4011,20 +11000,53 @@ export type TenantUpdateWithoutPurchaseReturnsInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutPurchaseReturnsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -4047,20 +11069,53 @@ export type TenantUncheckedUpdateWithoutPurchaseReturnsInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSupplierLedgerEntriesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -4083,20 +11138,53 @@ export type TenantCreateWithoutSupplierLedgerEntriesInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutSupplierLedgerEntriesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -4119,7 +11207,21 @@ export type TenantUncheckedCreateWithoutSupplierLedgerEntriesInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutSupplierLedgerEntriesInput = {
@@ -4142,13 +11244,32 @@ export type TenantUpdateWithoutSupplierLedgerEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -4171,20 +11292,53 @@ export type TenantUpdateWithoutSupplierLedgerEntriesInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutSupplierLedgerEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -4207,20 +11361,53 @@ export type TenantUncheckedUpdateWithoutSupplierLedgerEntriesInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutStockTransfersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -4243,20 +11430,53 @@ export type TenantCreateWithoutStockTransfersInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutStockTransfersInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -4279,7 +11499,21 @@ export type TenantUncheckedCreateWithoutStockTransfersInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutStockTransfersInput = {
@@ -4302,13 +11536,32 @@ export type TenantUpdateWithoutStockTransfersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -4331,20 +11584,53 @@ export type TenantUpdateWithoutStockTransfersInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutStockTransfersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -4367,20 +11653,53 @@ export type TenantUncheckedUpdateWithoutStockTransfersInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutNarcoticRegisterEntriesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
@@ -4403,20 +11722,53 @@ export type TenantCreateWithoutNarcoticRegisterEntriesInput = {
   coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
   id?: string
   pharmacyName: string
   tenantType?: string
-  logoUrl?: string | null
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
   primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
   invoiceFooterText?: string | null
   invoiceTermsText?: string | null
   staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: string | null
   nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
   licenseExpiryWindowDays?: number
   createdAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
@@ -4439,7 +11791,21 @@ export type TenantUncheckedCreateWithoutNarcoticRegisterEntriesInput = {
   coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
   emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+  saltAliases?: Prisma.SaltAliasUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantCreateOrConnectWithoutNarcoticRegisterEntriesInput = {
@@ -4462,13 +11828,32 @@ export type TenantUpdateWithoutNarcoticRegisterEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
@@ -4491,20 +11876,53 @@ export type TenantUpdateWithoutNarcoticRegisterEntriesInput = {
   coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
   tenantType?: Prisma.StringFieldUpdateOperationsInput | string
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
@@ -4527,7 +11945,313 @@ export type TenantUncheckedUpdateWithoutNarcoticRegisterEntriesInput = {
   coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
   customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
   emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
+  saltAliases?: Prisma.SaltAliasUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutSaltAliasesInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleCreateNestedManyWithoutTenantInput
+}
+
+export type TenantUncheckedCreateWithoutSaltAliasesInput = {
+  id?: string
+  pharmacyName: string
+  tenantType?: string
+  brandShortName?: string | null
+  brandTagline?: string | null
+  brandDescription?: string | null
+  logoIconUrl?: string | null
+  logoHorizontalUrl?: string | null
+  logoStackedUrl?: string | null
+  primaryColor?: string | null
+  accentColor?: string | null
+  surfaceColor?: string | null
+  invoiceHeaderText?: string | null
+  invoicePaperDefault?: string | null
+  showLogoOnInvoice?: boolean
+  upiId?: string | null
+  supportEmail?: string | null
+  websiteUrl?: string | null
+  hoursHeadline?: string | null
+  hoursNote?: string | null
+  brandingUpdatedAt?: Date | string | null
+  invoiceFooterText?: string | null
+  invoiceTermsText?: string | null
+  staffDiscountCapPercent?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: string | null
+  nearExpiryWindowDays?: number
+  offlineSyncMaxHours?: number
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: number
+  licenseExpiryWindowDays?: number
+  createdAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutTenantInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutTenantInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutTenantInput
+  doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutTenantInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedCreateNestedManyWithoutTenantInput
+  discounts?: Prisma.DiscountUncheckedCreateNestedManyWithoutTenantInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  backupLogs?: Prisma.BackupLogUncheckedCreateNestedManyWithoutTenantInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutTenantInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutTenantInput
+  grns?: Prisma.GrnUncheckedCreateNestedManyWithoutTenantInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutTenantInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  stockTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutTenantInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedCreateNestedManyWithoutTenantInput
+  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutTenantInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedCreateNestedManyWithoutTenantInput
+  coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutTenantInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedCreateNestedManyWithoutTenantInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutTenantInput
+  smsLogs?: Prisma.SmsLogUncheckedCreateNestedManyWithoutTenantInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutTenantInput
+  taxSlabs?: Prisma.TaxSlabUncheckedCreateNestedManyWithoutTenantInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedCreateNestedManyWithoutTenantInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedCreateNestedManyWithoutTenantInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutTenantInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedCreateNestedManyWithoutTenantInput
+  salesReturns?: Prisma.SalesReturnUncheckedCreateNestedManyWithoutTenantInput
+  cashUps?: Prisma.CashUpUncheckedCreateNestedManyWithoutTenantInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutTenantInput
+  heldSales?: Prisma.HeldSaleUncheckedCreateNestedManyWithoutTenantInput
+  stockCounts?: Prisma.StockCountUncheckedCreateNestedManyWithoutTenantInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutTenantInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutSaltAliasesInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutSaltAliasesInput, Prisma.TenantUncheckedCreateWithoutSaltAliasesInput>
+}
+
+export type TenantUpsertWithoutSaltAliasesInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutSaltAliasesInput, Prisma.TenantUncheckedUpdateWithoutSaltAliasesInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutSaltAliasesInput, Prisma.TenantUncheckedCreateWithoutSaltAliasesInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutSaltAliasesInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutSaltAliasesInput, Prisma.TenantUncheckedUpdateWithoutSaltAliasesInput>
+}
+
+export type TenantUpdateWithoutSaltAliasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutSaltAliasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pharmacyName?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantType?: Prisma.StringFieldUpdateOperationsInput | string
+  brandShortName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandTagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoIconUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoHorizontalUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoStackedUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accentColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  surfaceColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceHeaderText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoicePaperDefault?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showLogoOnInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  upiId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursHeadline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hoursNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandingUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceFooterText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  invoiceTermsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffDiscountCapPercent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  managerPinHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nearExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  offlineSyncMaxHours?: Prisma.IntFieldUpdateOperationsInput | number
+  wholesaleBillingEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  salesReturnWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  licenseExpiryWindowDays?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutTenantNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutTenantNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutTenantNestedInput
+  doctors?: Prisma.DoctorUncheckedUpdateManyWithoutTenantNestedInput
+  salesInvoices?: Prisma.SalesInvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  discounts?: Prisma.DiscountUncheckedUpdateManyWithoutTenantNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  backupLogs?: Prisma.BackupLogUncheckedUpdateManyWithoutTenantNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  grns?: Prisma.GrnUncheckedUpdateManyWithoutTenantNestedInput
+  purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutTenantNestedInput
+  supplierLedgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  stockTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutTenantNestedInput
+  narcoticRegisterEntries?: Prisma.NarcoticRegisterEntryUncheckedUpdateManyWithoutTenantNestedInput
+  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutTenantNestedInput
+  loyaltyTiers?: Prisma.LoyaltyTierUncheckedUpdateManyWithoutTenantNestedInput
+  coupons?: Prisma.CouponUncheckedUpdateManyWithoutTenantNestedInput
+  customerLedgerEntries?: Prisma.CustomerLedgerEntryUncheckedUpdateManyWithoutTenantNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutTenantNestedInput
+  smsLogs?: Prisma.SmsLogUncheckedUpdateManyWithoutTenantNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutTenantNestedInput
+  taxSlabs?: Prisma.TaxSlabUncheckedUpdateManyWithoutTenantNestedInput
+  hsnTaxMappings?: Prisma.HsnTaxMappingUncheckedUpdateManyWithoutTenantNestedInput
+  expenseCategories?: Prisma.ExpenseCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutTenantNestedInput
+  promiseOrders?: Prisma.PromiseOrderUncheckedUpdateManyWithoutTenantNestedInput
+  salesReturns?: Prisma.SalesReturnUncheckedUpdateManyWithoutTenantNestedInput
+  cashUps?: Prisma.CashUpUncheckedUpdateManyWithoutTenantNestedInput
+  stockAdjustments?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutTenantNestedInput
+  heldSales?: Prisma.HeldSaleUncheckedUpdateManyWithoutTenantNestedInput
+  stockCounts?: Prisma.StockCountUncheckedUpdateManyWithoutTenantNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutTenantNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 
@@ -4557,7 +12281,21 @@ export type TenantCountOutputType = {
   coupons: number
   customerLedgerEntries: number
   whatsappLogs: number
+  smsLogs: number
   emailLogs: number
+  taxSlabs: number
+  hsnTaxMappings: number
+  expenseCategories: number
+  expenses: number
+  promiseOrders: number
+  salesReturns: number
+  cashUps: number
+  stockAdjustments: number
+  heldSales: number
+  stockCounts: number
+  notes: number
+  roles: number
+  saltAliases: number
 }
 
 export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4582,7 +12320,21 @@ export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   coupons?: boolean | TenantCountOutputTypeCountCouponsArgs
   customerLedgerEntries?: boolean | TenantCountOutputTypeCountCustomerLedgerEntriesArgs
   whatsappLogs?: boolean | TenantCountOutputTypeCountWhatsappLogsArgs
+  smsLogs?: boolean | TenantCountOutputTypeCountSmsLogsArgs
   emailLogs?: boolean | TenantCountOutputTypeCountEmailLogsArgs
+  taxSlabs?: boolean | TenantCountOutputTypeCountTaxSlabsArgs
+  hsnTaxMappings?: boolean | TenantCountOutputTypeCountHsnTaxMappingsArgs
+  expenseCategories?: boolean | TenantCountOutputTypeCountExpenseCategoriesArgs
+  expenses?: boolean | TenantCountOutputTypeCountExpensesArgs
+  promiseOrders?: boolean | TenantCountOutputTypeCountPromiseOrdersArgs
+  salesReturns?: boolean | TenantCountOutputTypeCountSalesReturnsArgs
+  cashUps?: boolean | TenantCountOutputTypeCountCashUpsArgs
+  stockAdjustments?: boolean | TenantCountOutputTypeCountStockAdjustmentsArgs
+  heldSales?: boolean | TenantCountOutputTypeCountHeldSalesArgs
+  stockCounts?: boolean | TenantCountOutputTypeCountStockCountsArgs
+  notes?: boolean | TenantCountOutputTypeCountNotesArgs
+  roles?: boolean | TenantCountOutputTypeCountRolesArgs
+  saltAliases?: boolean | TenantCountOutputTypeCountSaltAliasesArgs
 }
 
 /**
@@ -4745,8 +12497,106 @@ export type TenantCountOutputTypeCountWhatsappLogsArgs<ExtArgs extends runtime.T
 /**
  * TenantCountOutputType without action
  */
+export type TenantCountOutputTypeCountSmsLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SmsLogWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
 export type TenantCountOutputTypeCountEmailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EmailLogWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountTaxSlabsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaxSlabWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountHsnTaxMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HsnTaxMappingWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountExpenseCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExpenseCategoryWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExpenseWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountPromiseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromiseOrderWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountSalesReturnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalesReturnWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountCashUpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CashUpWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountStockAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockAdjustmentWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountHeldSalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HeldSaleWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountStockCountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockCountWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NoteWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoleWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountSaltAliasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SaltAliasWhereInput
 }
 
 
@@ -4754,13 +12604,32 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   id?: boolean
   pharmacyName?: boolean
   tenantType?: boolean
-  logoUrl?: boolean
+  brandShortName?: boolean
+  brandTagline?: boolean
+  brandDescription?: boolean
+  logoIconUrl?: boolean
+  logoHorizontalUrl?: boolean
+  logoStackedUrl?: boolean
   primaryColor?: boolean
+  accentColor?: boolean
+  surfaceColor?: boolean
+  invoiceHeaderText?: boolean
+  invoicePaperDefault?: boolean
+  showLogoOnInvoice?: boolean
+  upiId?: boolean
+  supportEmail?: boolean
+  websiteUrl?: boolean
+  hoursHeadline?: boolean
+  hoursNote?: boolean
+  brandingUpdatedAt?: boolean
   invoiceFooterText?: boolean
   invoiceTermsText?: boolean
   staffDiscountCapPercent?: boolean
   managerPinHash?: boolean
   nearExpiryWindowDays?: boolean
+  offlineSyncMaxHours?: boolean
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: boolean
   licenseExpiryWindowDays?: boolean
   createdAt?: boolean
   branches?: boolean | Prisma.Tenant$branchesArgs<ExtArgs>
@@ -4784,7 +12653,21 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   coupons?: boolean | Prisma.Tenant$couponsArgs<ExtArgs>
   customerLedgerEntries?: boolean | Prisma.Tenant$customerLedgerEntriesArgs<ExtArgs>
   whatsappLogs?: boolean | Prisma.Tenant$whatsappLogsArgs<ExtArgs>
+  smsLogs?: boolean | Prisma.Tenant$smsLogsArgs<ExtArgs>
   emailLogs?: boolean | Prisma.Tenant$emailLogsArgs<ExtArgs>
+  taxSlabs?: boolean | Prisma.Tenant$taxSlabsArgs<ExtArgs>
+  hsnTaxMappings?: boolean | Prisma.Tenant$hsnTaxMappingsArgs<ExtArgs>
+  expenseCategories?: boolean | Prisma.Tenant$expenseCategoriesArgs<ExtArgs>
+  expenses?: boolean | Prisma.Tenant$expensesArgs<ExtArgs>
+  promiseOrders?: boolean | Prisma.Tenant$promiseOrdersArgs<ExtArgs>
+  salesReturns?: boolean | Prisma.Tenant$salesReturnsArgs<ExtArgs>
+  cashUps?: boolean | Prisma.Tenant$cashUpsArgs<ExtArgs>
+  stockAdjustments?: boolean | Prisma.Tenant$stockAdjustmentsArgs<ExtArgs>
+  heldSales?: boolean | Prisma.Tenant$heldSalesArgs<ExtArgs>
+  stockCounts?: boolean | Prisma.Tenant$stockCountsArgs<ExtArgs>
+  notes?: boolean | Prisma.Tenant$notesArgs<ExtArgs>
+  roles?: boolean | Prisma.Tenant$rolesArgs<ExtArgs>
+  saltAliases?: boolean | Prisma.Tenant$saltAliasesArgs<ExtArgs>
   _count?: boolean | Prisma.TenantCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tenant"]>
 
@@ -4792,13 +12675,32 @@ export type TenantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   pharmacyName?: boolean
   tenantType?: boolean
-  logoUrl?: boolean
+  brandShortName?: boolean
+  brandTagline?: boolean
+  brandDescription?: boolean
+  logoIconUrl?: boolean
+  logoHorizontalUrl?: boolean
+  logoStackedUrl?: boolean
   primaryColor?: boolean
+  accentColor?: boolean
+  surfaceColor?: boolean
+  invoiceHeaderText?: boolean
+  invoicePaperDefault?: boolean
+  showLogoOnInvoice?: boolean
+  upiId?: boolean
+  supportEmail?: boolean
+  websiteUrl?: boolean
+  hoursHeadline?: boolean
+  hoursNote?: boolean
+  brandingUpdatedAt?: boolean
   invoiceFooterText?: boolean
   invoiceTermsText?: boolean
   staffDiscountCapPercent?: boolean
   managerPinHash?: boolean
   nearExpiryWindowDays?: boolean
+  offlineSyncMaxHours?: boolean
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: boolean
   licenseExpiryWindowDays?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["tenant"]>
@@ -4807,13 +12709,32 @@ export type TenantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   pharmacyName?: boolean
   tenantType?: boolean
-  logoUrl?: boolean
+  brandShortName?: boolean
+  brandTagline?: boolean
+  brandDescription?: boolean
+  logoIconUrl?: boolean
+  logoHorizontalUrl?: boolean
+  logoStackedUrl?: boolean
   primaryColor?: boolean
+  accentColor?: boolean
+  surfaceColor?: boolean
+  invoiceHeaderText?: boolean
+  invoicePaperDefault?: boolean
+  showLogoOnInvoice?: boolean
+  upiId?: boolean
+  supportEmail?: boolean
+  websiteUrl?: boolean
+  hoursHeadline?: boolean
+  hoursNote?: boolean
+  brandingUpdatedAt?: boolean
   invoiceFooterText?: boolean
   invoiceTermsText?: boolean
   staffDiscountCapPercent?: boolean
   managerPinHash?: boolean
   nearExpiryWindowDays?: boolean
+  offlineSyncMaxHours?: boolean
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: boolean
   licenseExpiryWindowDays?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["tenant"]>
@@ -4822,18 +12743,37 @@ export type TenantSelectScalar = {
   id?: boolean
   pharmacyName?: boolean
   tenantType?: boolean
-  logoUrl?: boolean
+  brandShortName?: boolean
+  brandTagline?: boolean
+  brandDescription?: boolean
+  logoIconUrl?: boolean
+  logoHorizontalUrl?: boolean
+  logoStackedUrl?: boolean
   primaryColor?: boolean
+  accentColor?: boolean
+  surfaceColor?: boolean
+  invoiceHeaderText?: boolean
+  invoicePaperDefault?: boolean
+  showLogoOnInvoice?: boolean
+  upiId?: boolean
+  supportEmail?: boolean
+  websiteUrl?: boolean
+  hoursHeadline?: boolean
+  hoursNote?: boolean
+  brandingUpdatedAt?: boolean
   invoiceFooterText?: boolean
   invoiceTermsText?: boolean
   staffDiscountCapPercent?: boolean
   managerPinHash?: boolean
   nearExpiryWindowDays?: boolean
+  offlineSyncMaxHours?: boolean
+  wholesaleBillingEnabled?: boolean
+  salesReturnWindowDays?: boolean
   licenseExpiryWindowDays?: boolean
   createdAt?: boolean
 }
 
-export type TenantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pharmacyName" | "tenantType" | "logoUrl" | "primaryColor" | "invoiceFooterText" | "invoiceTermsText" | "staffDiscountCapPercent" | "managerPinHash" | "nearExpiryWindowDays" | "licenseExpiryWindowDays" | "createdAt", ExtArgs["result"]["tenant"]>
+export type TenantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pharmacyName" | "tenantType" | "brandShortName" | "brandTagline" | "brandDescription" | "logoIconUrl" | "logoHorizontalUrl" | "logoStackedUrl" | "primaryColor" | "accentColor" | "surfaceColor" | "invoiceHeaderText" | "invoicePaperDefault" | "showLogoOnInvoice" | "upiId" | "supportEmail" | "websiteUrl" | "hoursHeadline" | "hoursNote" | "brandingUpdatedAt" | "invoiceFooterText" | "invoiceTermsText" | "staffDiscountCapPercent" | "managerPinHash" | "nearExpiryWindowDays" | "offlineSyncMaxHours" | "wholesaleBillingEnabled" | "salesReturnWindowDays" | "licenseExpiryWindowDays" | "createdAt", ExtArgs["result"]["tenant"]>
 export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   branches?: boolean | Prisma.Tenant$branchesArgs<ExtArgs>
   items?: boolean | Prisma.Tenant$itemsArgs<ExtArgs>
@@ -4856,7 +12796,21 @@ export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   coupons?: boolean | Prisma.Tenant$couponsArgs<ExtArgs>
   customerLedgerEntries?: boolean | Prisma.Tenant$customerLedgerEntriesArgs<ExtArgs>
   whatsappLogs?: boolean | Prisma.Tenant$whatsappLogsArgs<ExtArgs>
+  smsLogs?: boolean | Prisma.Tenant$smsLogsArgs<ExtArgs>
   emailLogs?: boolean | Prisma.Tenant$emailLogsArgs<ExtArgs>
+  taxSlabs?: boolean | Prisma.Tenant$taxSlabsArgs<ExtArgs>
+  hsnTaxMappings?: boolean | Prisma.Tenant$hsnTaxMappingsArgs<ExtArgs>
+  expenseCategories?: boolean | Prisma.Tenant$expenseCategoriesArgs<ExtArgs>
+  expenses?: boolean | Prisma.Tenant$expensesArgs<ExtArgs>
+  promiseOrders?: boolean | Prisma.Tenant$promiseOrdersArgs<ExtArgs>
+  salesReturns?: boolean | Prisma.Tenant$salesReturnsArgs<ExtArgs>
+  cashUps?: boolean | Prisma.Tenant$cashUpsArgs<ExtArgs>
+  stockAdjustments?: boolean | Prisma.Tenant$stockAdjustmentsArgs<ExtArgs>
+  heldSales?: boolean | Prisma.Tenant$heldSalesArgs<ExtArgs>
+  stockCounts?: boolean | Prisma.Tenant$stockCountsArgs<ExtArgs>
+  notes?: boolean | Prisma.Tenant$notesArgs<ExtArgs>
+  roles?: boolean | Prisma.Tenant$rolesArgs<ExtArgs>
+  saltAliases?: boolean | Prisma.Tenant$saltAliasesArgs<ExtArgs>
   _count?: boolean | Prisma.TenantCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TenantIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -4886,19 +12840,98 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     coupons: Prisma.$CouponPayload<ExtArgs>[]
     customerLedgerEntries: Prisma.$CustomerLedgerEntryPayload<ExtArgs>[]
     whatsappLogs: Prisma.$WhatsAppLogPayload<ExtArgs>[]
+    smsLogs: Prisma.$SmsLogPayload<ExtArgs>[]
     emailLogs: Prisma.$EmailLogPayload<ExtArgs>[]
+    taxSlabs: Prisma.$TaxSlabPayload<ExtArgs>[]
+    hsnTaxMappings: Prisma.$HsnTaxMappingPayload<ExtArgs>[]
+    expenseCategories: Prisma.$ExpenseCategoryPayload<ExtArgs>[]
+    expenses: Prisma.$ExpensePayload<ExtArgs>[]
+    promiseOrders: Prisma.$PromiseOrderPayload<ExtArgs>[]
+    salesReturns: Prisma.$SalesReturnPayload<ExtArgs>[]
+    cashUps: Prisma.$CashUpPayload<ExtArgs>[]
+    stockAdjustments: Prisma.$StockAdjustmentPayload<ExtArgs>[]
+    heldSales: Prisma.$HeldSalePayload<ExtArgs>[]
+    stockCounts: Prisma.$StockCountPayload<ExtArgs>[]
+    notes: Prisma.$NotePayload<ExtArgs>[]
+    roles: Prisma.$RolePayload<ExtArgs>[]
+    saltAliases: Prisma.$SaltAliasPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     pharmacyName: string
     tenantType: string
-    logoUrl: string | null
+    /**
+     * Compact form for the PWA home-screen label and tight layouts.
+     */
+    brandShortName: string | null
+    brandTagline: string | null
+    brandDescription: string | null
+    /**
+     * Paths under the brandAssets storage root, served by the PUBLIC
+     * /api/brand/[variant] route: the login screen and an emailed PDF both
+     * need the logo before there is a session to authorise it.
+     */
+    logoIconUrl: string | null
+    logoHorizontalUrl: string | null
+    logoStackedUrl: string | null
+    /**
+     * Hex. Converted to OKLCH and injected as CSS variables at render, so
+     * every existing `bg-brand-maroon` class picks a change up without a
+     * rebuild.
+     */
     primaryColor: string | null
+    accentColor: string | null
+    surfaceColor: string | null
+    /**
+     * Printed above the item table on every bill.
+     */
+    invoiceHeaderText: string | null
+    /**
+     * 58mm | 80mm | a5 | a4 — which paper the print screen opens on.
+     */
+    invoicePaperDefault: string | null
+    showLogoOnInvoice: boolean
+    /**
+     * Payee VPA for the scan-and-pay QR printed on every bill.
+     */
+    upiId: string | null
+    supportEmail: string | null
+    websiteUrl: string | null
+    /**
+     * Counter hours, shown on the dashboard panel.
+     */
+    hoursHeadline: string | null
+    hoursNote: string | null
+    /**
+     * Cache-buster for the public logo route — a swapped logo must not sit
+     * stale in a browser that already fetched the old one.
+     */
+    brandingUpdatedAt: Date | null
     invoiceFooterText: string | null
     invoiceTermsText: string | null
     staffDiscountCapPercent: runtime.Decimal
     managerPinHash: string | null
     nearExpiryWindowDays: number
+    /**
+     * How long a sale queued while offline may wait before it stops syncing
+     * by itself. A bill rung up on Monday and posted on Thursday claims
+     * Monday's stock at Monday's prices, and lands in the wrong GST period.
+     * Twelve hours covers a power cut or a dead line without spanning a
+     * day's trade.
+     */
+    offlineSyncMaxHours: number
+    /**
+     * Wholesale billing. Off by default, and while it is off nothing about
+     * PTR appears anywhere — a retail counter should not carry the
+     * vocabulary of a distributor. Turning it on reveals the PTR field on
+     * GRN and the MRP/PTR choice at the till.
+     */
+    wholesaleBillingEnabled: boolean
+    /**
+     * How many days after a sale a customer return is still accepted.
+     * Owner-editable; 0 disables sales returns entirely.
+     */
+    salesReturnWindowDays: number
     licenseExpiryWindowDays: number
     createdAt: Date
   }, ExtArgs["result"]["tenant"]>
@@ -5316,7 +13349,21 @@ export interface Prisma__TenantClient<T, Null = never, ExtArgs extends runtime.T
   coupons<T extends Prisma.Tenant$couponsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$couponsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   customerLedgerEntries<T extends Prisma.Tenant$customerLedgerEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$customerLedgerEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomerLedgerEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   whatsappLogs<T extends Prisma.Tenant$whatsappLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$whatsappLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WhatsAppLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  smsLogs<T extends Prisma.Tenant$smsLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$smsLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SmsLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailLogs<T extends Prisma.Tenant$emailLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$emailLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  taxSlabs<T extends Prisma.Tenant$taxSlabsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$taxSlabsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaxSlabPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  hsnTaxMappings<T extends Prisma.Tenant$hsnTaxMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$hsnTaxMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HsnTaxMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  expenseCategories<T extends Prisma.Tenant$expenseCategoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$expenseCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  expenses<T extends Prisma.Tenant$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promiseOrders<T extends Prisma.Tenant$promiseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$promiseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromiseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  salesReturns<T extends Prisma.Tenant$salesReturnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$salesReturnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesReturnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cashUps<T extends Prisma.Tenant$cashUpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$cashUpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CashUpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockAdjustments<T extends Prisma.Tenant$stockAdjustmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$stockAdjustmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockAdjustmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  heldSales<T extends Prisma.Tenant$heldSalesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$heldSalesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HeldSalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockCounts<T extends Prisma.Tenant$stockCountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$stockCountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockCountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notes<T extends Prisma.Tenant$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roles<T extends Prisma.Tenant$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  saltAliases<T extends Prisma.Tenant$saltAliasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$saltAliasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SaltAliasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5349,13 +13396,32 @@ export interface TenantFieldRefs {
   readonly id: Prisma.FieldRef<"Tenant", 'String'>
   readonly pharmacyName: Prisma.FieldRef<"Tenant", 'String'>
   readonly tenantType: Prisma.FieldRef<"Tenant", 'String'>
-  readonly logoUrl: Prisma.FieldRef<"Tenant", 'String'>
+  readonly brandShortName: Prisma.FieldRef<"Tenant", 'String'>
+  readonly brandTagline: Prisma.FieldRef<"Tenant", 'String'>
+  readonly brandDescription: Prisma.FieldRef<"Tenant", 'String'>
+  readonly logoIconUrl: Prisma.FieldRef<"Tenant", 'String'>
+  readonly logoHorizontalUrl: Prisma.FieldRef<"Tenant", 'String'>
+  readonly logoStackedUrl: Prisma.FieldRef<"Tenant", 'String'>
   readonly primaryColor: Prisma.FieldRef<"Tenant", 'String'>
+  readonly accentColor: Prisma.FieldRef<"Tenant", 'String'>
+  readonly surfaceColor: Prisma.FieldRef<"Tenant", 'String'>
+  readonly invoiceHeaderText: Prisma.FieldRef<"Tenant", 'String'>
+  readonly invoicePaperDefault: Prisma.FieldRef<"Tenant", 'String'>
+  readonly showLogoOnInvoice: Prisma.FieldRef<"Tenant", 'Boolean'>
+  readonly upiId: Prisma.FieldRef<"Tenant", 'String'>
+  readonly supportEmail: Prisma.FieldRef<"Tenant", 'String'>
+  readonly websiteUrl: Prisma.FieldRef<"Tenant", 'String'>
+  readonly hoursHeadline: Prisma.FieldRef<"Tenant", 'String'>
+  readonly hoursNote: Prisma.FieldRef<"Tenant", 'String'>
+  readonly brandingUpdatedAt: Prisma.FieldRef<"Tenant", 'DateTime'>
   readonly invoiceFooterText: Prisma.FieldRef<"Tenant", 'String'>
   readonly invoiceTermsText: Prisma.FieldRef<"Tenant", 'String'>
   readonly staffDiscountCapPercent: Prisma.FieldRef<"Tenant", 'Decimal'>
   readonly managerPinHash: Prisma.FieldRef<"Tenant", 'String'>
   readonly nearExpiryWindowDays: Prisma.FieldRef<"Tenant", 'Int'>
+  readonly offlineSyncMaxHours: Prisma.FieldRef<"Tenant", 'Int'>
+  readonly wholesaleBillingEnabled: Prisma.FieldRef<"Tenant", 'Boolean'>
+  readonly salesReturnWindowDays: Prisma.FieldRef<"Tenant", 'Int'>
   readonly licenseExpiryWindowDays: Prisma.FieldRef<"Tenant", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Tenant", 'DateTime'>
 }
@@ -6255,6 +14321,30 @@ export type Tenant$whatsappLogsArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
+ * Tenant.smsLogs
+ */
+export type Tenant$smsLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SmsLog
+   */
+  select?: Prisma.SmsLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SmsLog
+   */
+  omit?: Prisma.SmsLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SmsLogInclude<ExtArgs> | null
+  where?: Prisma.SmsLogWhereInput
+  orderBy?: Prisma.SmsLogOrderByWithRelationInput | Prisma.SmsLogOrderByWithRelationInput[]
+  cursor?: Prisma.SmsLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SmsLogScalarFieldEnum | Prisma.SmsLogScalarFieldEnum[]
+}
+
+/**
  * Tenant.emailLogs
  */
 export type Tenant$emailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6276,6 +14366,318 @@ export type Tenant$emailLogsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.EmailLogScalarFieldEnum | Prisma.EmailLogScalarFieldEnum[]
+}
+
+/**
+ * Tenant.taxSlabs
+ */
+export type Tenant$taxSlabsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TaxSlab
+   */
+  select?: Prisma.TaxSlabSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TaxSlab
+   */
+  omit?: Prisma.TaxSlabOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaxSlabInclude<ExtArgs> | null
+  where?: Prisma.TaxSlabWhereInput
+  orderBy?: Prisma.TaxSlabOrderByWithRelationInput | Prisma.TaxSlabOrderByWithRelationInput[]
+  cursor?: Prisma.TaxSlabWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaxSlabScalarFieldEnum | Prisma.TaxSlabScalarFieldEnum[]
+}
+
+/**
+ * Tenant.hsnTaxMappings
+ */
+export type Tenant$hsnTaxMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HsnTaxMapping
+   */
+  select?: Prisma.HsnTaxMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HsnTaxMapping
+   */
+  omit?: Prisma.HsnTaxMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HsnTaxMappingInclude<ExtArgs> | null
+  where?: Prisma.HsnTaxMappingWhereInput
+  orderBy?: Prisma.HsnTaxMappingOrderByWithRelationInput | Prisma.HsnTaxMappingOrderByWithRelationInput[]
+  cursor?: Prisma.HsnTaxMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HsnTaxMappingScalarFieldEnum | Prisma.HsnTaxMappingScalarFieldEnum[]
+}
+
+/**
+ * Tenant.expenseCategories
+ */
+export type Tenant$expenseCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExpenseCategory
+   */
+  select?: Prisma.ExpenseCategorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExpenseCategory
+   */
+  omit?: Prisma.ExpenseCategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExpenseCategoryInclude<ExtArgs> | null
+  where?: Prisma.ExpenseCategoryWhereInput
+  orderBy?: Prisma.ExpenseCategoryOrderByWithRelationInput | Prisma.ExpenseCategoryOrderByWithRelationInput[]
+  cursor?: Prisma.ExpenseCategoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExpenseCategoryScalarFieldEnum | Prisma.ExpenseCategoryScalarFieldEnum[]
+}
+
+/**
+ * Tenant.expenses
+ */
+export type Tenant$expensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Expense
+   */
+  select?: Prisma.ExpenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Expense
+   */
+  omit?: Prisma.ExpenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExpenseInclude<ExtArgs> | null
+  where?: Prisma.ExpenseWhereInput
+  orderBy?: Prisma.ExpenseOrderByWithRelationInput | Prisma.ExpenseOrderByWithRelationInput[]
+  cursor?: Prisma.ExpenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExpenseScalarFieldEnum | Prisma.ExpenseScalarFieldEnum[]
+}
+
+/**
+ * Tenant.promiseOrders
+ */
+export type Tenant$promiseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromiseOrder
+   */
+  select?: Prisma.PromiseOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PromiseOrder
+   */
+  omit?: Prisma.PromiseOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromiseOrderInclude<ExtArgs> | null
+  where?: Prisma.PromiseOrderWhereInput
+  orderBy?: Prisma.PromiseOrderOrderByWithRelationInput | Prisma.PromiseOrderOrderByWithRelationInput[]
+  cursor?: Prisma.PromiseOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromiseOrderScalarFieldEnum | Prisma.PromiseOrderScalarFieldEnum[]
+}
+
+/**
+ * Tenant.salesReturns
+ */
+export type Tenant$salesReturnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalesReturn
+   */
+  select?: Prisma.SalesReturnSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SalesReturn
+   */
+  omit?: Prisma.SalesReturnOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalesReturnInclude<ExtArgs> | null
+  where?: Prisma.SalesReturnWhereInput
+  orderBy?: Prisma.SalesReturnOrderByWithRelationInput | Prisma.SalesReturnOrderByWithRelationInput[]
+  cursor?: Prisma.SalesReturnWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalesReturnScalarFieldEnum | Prisma.SalesReturnScalarFieldEnum[]
+}
+
+/**
+ * Tenant.cashUps
+ */
+export type Tenant$cashUpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CashUp
+   */
+  select?: Prisma.CashUpSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CashUp
+   */
+  omit?: Prisma.CashUpOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CashUpInclude<ExtArgs> | null
+  where?: Prisma.CashUpWhereInput
+  orderBy?: Prisma.CashUpOrderByWithRelationInput | Prisma.CashUpOrderByWithRelationInput[]
+  cursor?: Prisma.CashUpWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CashUpScalarFieldEnum | Prisma.CashUpScalarFieldEnum[]
+}
+
+/**
+ * Tenant.stockAdjustments
+ */
+export type Tenant$stockAdjustmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockAdjustment
+   */
+  select?: Prisma.StockAdjustmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockAdjustment
+   */
+  omit?: Prisma.StockAdjustmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockAdjustmentInclude<ExtArgs> | null
+  where?: Prisma.StockAdjustmentWhereInput
+  orderBy?: Prisma.StockAdjustmentOrderByWithRelationInput | Prisma.StockAdjustmentOrderByWithRelationInput[]
+  cursor?: Prisma.StockAdjustmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockAdjustmentScalarFieldEnum | Prisma.StockAdjustmentScalarFieldEnum[]
+}
+
+/**
+ * Tenant.heldSales
+ */
+export type Tenant$heldSalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HeldSale
+   */
+  select?: Prisma.HeldSaleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HeldSale
+   */
+  omit?: Prisma.HeldSaleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HeldSaleInclude<ExtArgs> | null
+  where?: Prisma.HeldSaleWhereInput
+  orderBy?: Prisma.HeldSaleOrderByWithRelationInput | Prisma.HeldSaleOrderByWithRelationInput[]
+  cursor?: Prisma.HeldSaleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HeldSaleScalarFieldEnum | Prisma.HeldSaleScalarFieldEnum[]
+}
+
+/**
+ * Tenant.stockCounts
+ */
+export type Tenant$stockCountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockCount
+   */
+  select?: Prisma.StockCountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockCount
+   */
+  omit?: Prisma.StockCountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockCountInclude<ExtArgs> | null
+  where?: Prisma.StockCountWhereInput
+  orderBy?: Prisma.StockCountOrderByWithRelationInput | Prisma.StockCountOrderByWithRelationInput[]
+  cursor?: Prisma.StockCountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockCountScalarFieldEnum | Prisma.StockCountScalarFieldEnum[]
+}
+
+/**
+ * Tenant.notes
+ */
+export type Tenant$notesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Note
+   */
+  select?: Prisma.NoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Note
+   */
+  omit?: Prisma.NoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NoteInclude<ExtArgs> | null
+  where?: Prisma.NoteWhereInput
+  orderBy?: Prisma.NoteOrderByWithRelationInput | Prisma.NoteOrderByWithRelationInput[]
+  cursor?: Prisma.NoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NoteScalarFieldEnum | Prisma.NoteScalarFieldEnum[]
+}
+
+/**
+ * Tenant.roles
+ */
+export type Tenant$rolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Role
+   */
+  select?: Prisma.RoleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Role
+   */
+  omit?: Prisma.RoleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoleInclude<ExtArgs> | null
+  where?: Prisma.RoleWhereInput
+  orderBy?: Prisma.RoleOrderByWithRelationInput | Prisma.RoleOrderByWithRelationInput[]
+  cursor?: Prisma.RoleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoleScalarFieldEnum | Prisma.RoleScalarFieldEnum[]
+}
+
+/**
+ * Tenant.saltAliases
+ */
+export type Tenant$saltAliasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SaltAlias
+   */
+  select?: Prisma.SaltAliasSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SaltAlias
+   */
+  omit?: Prisma.SaltAliasOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SaltAliasInclude<ExtArgs> | null
+  where?: Prisma.SaltAliasWhereInput
+  orderBy?: Prisma.SaltAliasOrderByWithRelationInput | Prisma.SaltAliasOrderByWithRelationInput[]
+  cursor?: Prisma.SaltAliasWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SaltAliasScalarFieldEnum | Prisma.SaltAliasScalarFieldEnum[]
 }
 
 /**

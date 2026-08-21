@@ -38,6 +38,40 @@ export const WhatsAppStatus = {
 export type WhatsAppStatus = (typeof WhatsAppStatus)[keyof typeof WhatsAppStatus]
 
 
+export const PriceBasis = {
+  mrp: 'mrp',
+  ptr: 'ptr'
+} as const
+
+export type PriceBasis = (typeof PriceBasis)[keyof typeof PriceBasis]
+
+
+export const PromiseOrderStatus = {
+  open: 'open',
+  fulfilled: 'fulfilled',
+  cancelled: 'cancelled'
+} as const
+
+export type PromiseOrderStatus = (typeof PromiseOrderStatus)[keyof typeof PromiseOrderStatus]
+
+
+export const SmsMessageType = {
+  receipt: 'receipt',
+  statement: 'statement',
+  reminder: 'reminder'
+} as const
+
+export type SmsMessageType = (typeof SmsMessageType)[keyof typeof SmsMessageType]
+
+
+export const SmsStatus = {
+  sent: 'sent',
+  failed: 'failed'
+} as const
+
+export type SmsStatus = (typeof SmsStatus)[keyof typeof SmsStatus]
+
+
 export const EmailStatus = {
   sent: 'sent',
   failed: 'failed',
@@ -47,9 +81,65 @@ export const EmailStatus = {
 export type EmailStatus = (typeof EmailStatus)[keyof typeof EmailStatus]
 
 
+export const NoteShift = {
+  morning: 'morning',
+  evening: 'evening',
+  night: 'night'
+} as const
+
+export type NoteShift = (typeof NoteShift)[keyof typeof NoteShift]
+
+
+export const NoteCategory = {
+  to_order: 'to_order',
+  to_call: 'to_call',
+  handover: 'handover',
+  stock: 'stock',
+  payment: 'payment',
+  instruction: 'instruction',
+  question: 'question',
+  general: 'general'
+} as const
+
+export type NoteCategory = (typeof NoteCategory)[keyof typeof NoteCategory]
+
+
+export const RefundMethod = {
+  cash: 'cash',
+  upi: 'upi',
+  card: 'card',
+  credit_account: 'credit_account'
+} as const
+
+export type RefundMethod = (typeof RefundMethod)[keyof typeof RefundMethod]
+
+
+export const StockCountStatus = {
+  in_progress: 'in_progress',
+  completed: 'completed',
+  cancelled: 'cancelled'
+} as const
+
+export type StockCountStatus = (typeof StockCountStatus)[keyof typeof StockCountStatus]
+
+
+export const StockAdjustmentReason = {
+  expired: 'expired',
+  damaged: 'damaged',
+  lost: 'lost',
+  found: 'found',
+  sample: 'sample',
+  recount: 'recount'
+} as const
+
+export type StockAdjustmentReason = (typeof StockAdjustmentReason)[keyof typeof StockAdjustmentReason]
+
+
 export const CustomerLedgerEntryType = {
   sale: 'sale',
-  payment: 'payment'
+  payment: 'payment',
+  return: 'return',
+  adjustment: 'adjustment'
 } as const
 
 export type CustomerLedgerEntryType = (typeof CustomerLedgerEntryType)[keyof typeof CustomerLedgerEntryType]

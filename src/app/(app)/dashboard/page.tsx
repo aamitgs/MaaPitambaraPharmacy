@@ -1,19 +1,104 @@
 import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
+import { format, formatDistanceToNow } from "date-fns";
 import { getDashboardData } from "@/lib/actions/dashboard";
+import { getBranding } from "@/lib/branding";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { SalesTrendChart } from "@/components/dashboard/sales-trend-chart";
+import { CounterPanel } from "@/components/dashboard/counter-panel";
+import { QuickTiles } from "@/components/dashboard/quick-tiles";
+import { TopBarPortal } from "@/components/topbar-portal";
 import { cn } from "@/lib/utils";
-import { AlertTriangle, Clock, IndianRupee, PackageX, Receipt } from "lucide-react";
+import {
+  AlertTriangle,
+  ArrowDownRight,
+  ArrowUpRight,
+  ChevronRight,
+  Clock,
+  DatabaseBackup,
+  HandCoins,
+  IndianRupee,
+  PackageX,
+  Receipt,
+} from "lucide-react";
+
+const PAYMENT_LABELS: Record<string, string> = {
+  cash: "Cash",
+  upi: "UPI",
+  card: "Card",
+  credit: "Credit",
+};
+
+/** Small KPI tile. `tone` colours only the number, never the label. */
+function StatTile({
+  href,
+  label,
+  value,
+  hint,
+  icon: Icon,
+  tone = "neutral",
+}: {
+  href: string;
+  label: string;
+  value: string;
+  hint: string;
+  icon: React.ComponentType<{ className?: string }>;
+  tone?: "neutral" | "warning" | "critical";
+}) {
+  return (
+    <Link href={href} className="group">
+      <Card className="h-full transition-shadow group-hover:shadow-md">
+        <CardContent className="p-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-medium text-muted-foreground">{label}</span>
+            <Icon className="h-4 w-4 text-brand-gold" />
+          </div>
+          <div
+            className={cn(
+              "mt-2 text-xl font-semibold tabular-nums",
+              tone === "warning" && "text-warning-foreground",
+              tone === "critical" && "text-destructive"
+            )}
+          >
+            {value}
+          </div>
+          <p className="mt-0.5 text-xs text-muted-foreground">{hint}</p>
+        </CardContent>
+      </Card>
+    </Link>
+  );
+}
 
 export default async function DashboardPage() {
-  const data = await getDashboardData();
+  const [data, branding] = await Promise.all([getDashboardData(), getBranding()]);
+
+  const delta = data.todaySalesTotal - data.yesterdaySalesTotal;
+  const deltaPct =
+    data.yesterdaySalesTotal > 0 ? (delta / data.yesterdaySalesTotal) * 100 : null;
 
   return (
     <div className="space-y-4 p-6">
-      <div>
-        <h1 className="text-lg font-semibold">{data.pharmacyName}</h1>
-        <p className="text-sm text-muted-foreground">Today at a glance</p>
+      {/* No page header row: the pharmacy name is already in the sidebar and
+          the date is already in the top bar's clock. Only the one control
+          that was unique here moves up into the shared row. */}
+      <TopBarPortal>
+        <CounterPanel hours={branding.hours} />
+      </TopBarPortal>
+
+      {/* Sticky rail: -mx-6 + px-6 lets it span the page's padding so the
+          content scrolling under it is covered, and top-0 sticks it to the
+          shell's scroll container rather than the window. */}
+      <div className="sticky top-0 z-20 -mx-6 border-b bg-background/95 px-6 py-3 supports-backdrop-filter:bg-background/75 supports-backdrop-filter:backdrop-blur">
+        <QuickTiles
+          role={data.role}
+          alertCount={data.lowStockCount + data.nearExpiryCount + data.licenseExpiryCount}
+          lowStockCount={data.lowStockCount}
+          nearExpiryCount={data.nearExpiryCount}
+          openPurchaseOrderCount={data.openPurchaseOrderCount}
+          todayInvoiceCount={data.todaySalesCount}
+          supplierOutstanding={data.supplierOutstandingTotal}
+          backupStale={data.backupStatus.isStale}
+        />
       </div>
 
       {data.backupStatus.isStale && (
@@ -57,117 +142,183 @@ export default async function DashboardPage() {
         </Alert>
       )}
 
-      <div className="grid grid-cols-5 gap-4">
-        <Card>
-          <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Today&apos;s sales
-            </CardTitle>
-            <Receipt className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-semibold tabular-nums">
+      <div className="grid grid-cols-3 gap-4">
+        {/* The headline number gets its own card and the brand's maroon —
+            everything else on the screen is support for it. */}
+        <Card className="border-brand-maroon/20 bg-brand-maroon/[0.03]">
+          <CardContent className="p-5">
+            <div className="flex items-center justify-between">
+              {/* "Takings", not "sales": this is net of refunds, so it is the
+                  figure the drawer should actually match at cash-up. */}
+              <span className="text-xs font-medium text-muted-foreground">
+                Today&apos;s takings
+              </span>
+              <Receipt className="h-4 w-4 text-brand-maroon" />
+            </div>
+            <div className="mt-2 text-4xl font-semibold tracking-tight tabular-nums text-brand-maroon">
               ₹{data.todaySalesTotal.toFixed(2)}
             </div>
-            <p className="text-xs text-muted-foreground">
-              {data.todaySalesCount} invoice{data.todaySalesCount === 1 ? "" : "s"}
+            <p className="mt-1 text-xs text-muted-foreground">
+              {data.todaySalesCount} invoice{data.todaySalesCount === 1 ? "" : "s"} today
             </p>
+            {data.todayRefundTotal > 0 && (
+              <div className="mt-3 space-y-1 border-t pt-2 text-xs">
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Billed</span>
+                  <span className="tabular-nums">₹{data.todayBilledTotal.toFixed(2)}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">
+                    Refunded ({data.todayRefundCount})
+                  </span>
+                  <span className="tabular-nums text-destructive">
+                    −₹{data.todayRefundTotal.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+            )}
+            <div className="mt-4 space-y-1 border-t pt-3 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-muted-foreground">vs yesterday</span>
+                <span
+                  className={cn(
+                    "inline-flex items-center gap-1 font-medium tabular-nums",
+                    delta > 0 && "text-success",
+                    delta < 0 && "text-destructive"
+                  )}
+                >
+                  {delta !== 0 &&
+                    (delta > 0 ? (
+                      <ArrowUpRight className="h-3 w-3" />
+                    ) : (
+                      <ArrowDownRight className="h-3 w-3" />
+                    ))}
+                  {delta === 0
+                    ? "no change"
+                    : `₹${Math.abs(delta).toFixed(2)}${
+                        deltaPct === null ? "" : ` (${Math.abs(deltaPct).toFixed(0)}%)`
+                      }`}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-muted-foreground">Month to date</span>
+                <span className="font-medium tabular-nums">
+                  ₹{data.monthToDateTotal.toFixed(2)}
+                </span>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
-        <Link href="/alerts">
-          <Card className="transition-colors hover:bg-muted/40">
-            <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                Low stock
-              </CardTitle>
-              <PackageX className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div
-                className={cn(
-                  "text-2xl font-semibold tabular-nums",
-                  data.lowStockCount > 0 && "text-destructive"
-                )}
-              >
-                {data.lowStockCount}
-              </div>
-              <p className="text-xs text-muted-foreground">item{data.lowStockCount === 1 ? "" : "s"} below reorder level</p>
-            </CardContent>
-          </Card>
-        </Link>
+        <Card className="col-span-2">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Takings — last 7 days
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <SalesTrendChart data={data.salesTrend} />
+          </CardContent>
+        </Card>
+      </div>
 
-        <Link href="/alerts">
-          <Card className="transition-colors hover:bg-muted/40">
-            <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                Near expiry
-              </CardTitle>
-              <Clock className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div
-                className={cn(
-                  "text-2xl font-semibold tabular-nums",
-                  data.nearExpiryCount > 0 && "text-warning-foreground"
-                )}
-              >
-                {data.nearExpiryCount}
-              </div>
-              <p className="text-xs text-muted-foreground">
-                batch{data.nearExpiryCount === 1 ? "" : "es"} expiring soon
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
+        <StatTile
+          href="/alerts"
+          label="Low stock"
+          value={String(data.lowStockCount)}
+          hint={`item${data.lowStockCount === 1 ? "" : "s"} below reorder level`}
+          icon={PackageX}
+          tone={data.lowStockCount > 0 ? "critical" : "neutral"}
+        />
+        <StatTile
+          href="/alerts"
+          label="Near expiry"
+          value={String(data.nearExpiryCount)}
+          hint={`batch${data.nearExpiryCount === 1 ? "" : "es"} expiring soon`}
+          icon={Clock}
+          tone={data.nearExpiryCount > 0 ? "warning" : "neutral"}
+        />
+        <StatTile
+          href="/receivables"
+          label="Customers owe you"
+          value={`₹${data.customerOutstandingTotal.toFixed(2)}`}
+          hint={
+            data.customerOverdueTotal > 0
+              ? `₹${data.customerOverdueTotal.toFixed(2)} overdue across ${data.overdueCustomerCount} customer${data.overdueCustomerCount === 1 ? "" : "s"}`
+              : "nothing overdue"
+          }
+          icon={HandCoins}
+          tone={data.customerOverdueTotal > 0 ? "critical" : "neutral"}
+        />
+        <StatTile
+          href="/suppliers"
+          label="Supplier outstanding"
+          value={`₹${data.supplierOutstandingTotal.toFixed(2)}`}
+          hint="owed across all suppliers"
+          icon={IndianRupee}
+          tone={data.supplierOutstandingTotal > 0 ? "critical" : "neutral"}
+        />
+        <StatTile
+          href="/settings"
+          label="Last backup"
+          value={
+            data.backupStatus.lastBackupAt
+              ? formatDistanceToNow(data.backupStatus.lastBackupAt, { addSuffix: true })
+              : "Never"
+          }
+          hint={data.backupStatus.lastBackupStatus ?? "no backups yet"}
+          icon={DatabaseBackup}
+          tone={data.backupStatus.isStale ? "critical" : "neutral"}
+        />
+      </div>
+
+      <div className="grid grid-cols-3 gap-4">
+        <Card className="col-span-3">
+          <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Recent invoices
+            </CardTitle>
+            <Link
+              href="/invoices"
+              className="inline-flex items-center text-xs text-muted-foreground hover:text-foreground"
+            >
+              View all <ChevronRight className="h-3 w-3" />
+            </Link>
+          </CardHeader>
+          <CardContent className="pt-0">
+            {data.recentInvoices.length === 0 ? (
+              <p className="py-6 text-center text-sm text-muted-foreground">
+                No sales yet. Start one from Billing.
               </p>
-            </CardContent>
-          </Card>
-        </Link>
-
-        <Link href="/suppliers">
-          <Card className="transition-colors hover:bg-muted/40">
-            <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                Supplier outstanding
-              </CardTitle>
-              <IndianRupee className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div
-                className={cn(
-                  "text-2xl font-semibold tabular-nums",
-                  data.supplierOutstandingTotal > 0 && "text-destructive"
-                )}
-              >
-                ₹{data.supplierOutstandingTotal.toFixed(2)}
+            ) : (
+              <div className="divide-y">
+                {data.recentInvoices.map((invoice) => (
+                  <Link
+                    key={invoice.id}
+                    href={`/invoices/${invoice.id}/receipt`}
+                    className="flex items-center justify-between py-2 text-sm transition-colors hover:bg-muted/40"
+                  >
+                    <div className="min-w-0">
+                      <div className="font-medium">{invoice.invoiceNo}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {invoice.customerName ?? "Walk-in"} ·{" "}
+                        {PAYMENT_LABELS[invoice.paymentMode] ?? invoice.paymentMode}
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-medium tabular-nums">₹{invoice.total.toFixed(2)}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {format(new Date(invoice.invoiceDate), "dd MMM, h:mm a")}
+                      </div>
+                    </div>
+                  </Link>
+                ))}
               </div>
-              <p className="text-xs text-muted-foreground">owed across all suppliers</p>
-            </CardContent>
-          </Card>
-        </Link>
+            )}
+          </CardContent>
+        </Card>
 
-        <Link href="/settings">
-          <Card className="transition-colors hover:bg-muted/40">
-            <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                Last backup
-              </CardTitle>
-              <Clock className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div
-                className={cn(
-                  "text-2xl font-semibold",
-                  data.backupStatus.isStale && "text-destructive"
-                )}
-              >
-                {data.backupStatus.lastBackupAt
-                  ? formatDistanceToNow(data.backupStatus.lastBackupAt, { addSuffix: true })
-                  : "Never"}
-              </div>
-              <p className="text-xs text-muted-foreground">
-                {data.backupStatus.lastBackupStatus ?? "no backups yet"}
-              </p>
-            </CardContent>
-          </Card>
-        </Link>
       </div>
     </div>
   );

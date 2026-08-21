@@ -16,6 +16,9 @@ export interface EmailMessage {
   to: string;
   subject: string;
   text: string;
+  /** Optional file to attach. Dropped on the mailto: path, which cannot
+   *  carry one — see sendEmailMessage. */
+  attachment?: { filename: string; content: Buffer; contentType: string };
 }
 
 export interface EmailSendResult {
@@ -41,7 +44,12 @@ export async function sendEmailMessage(message: EmailMessage): Promise<EmailSend
   if (!host || !user || !pass || !from) {
     return {
       success: false,
-      note: "Automated email isn't configured, so this opened in your mail app — press send there.",
+      // A mailto: link carries text only — no standard lets a web page
+      // attach a file to the user's mail client — so the bill is downloaded
+      // separately when this path is taken.
+      note: message.attachment
+        ? "Automated email isn't configured — this opened in your mail app and the PDF downloaded separately; attach it there."
+        : "Automated email isn't configured, so this opened in your mail app — press send there.",
       handoffUrl: mailtoLink(message),
     };
   }
@@ -55,7 +63,21 @@ export async function sendEmailMessage(message: EmailMessage): Promise<EmailSend
       secure: port === 465,
       auth: { user, pass },
     });
-    await transport.sendMail({ from, to: message.to, subject: message.subject, text: message.text });
+    await transport.sendMail({
+      from,
+      to: message.to,
+      subject: message.subject,
+      text: message.text,
+      attachments: message.attachment
+        ? [
+            {
+              filename: message.attachment.filename,
+              content: message.attachment.content,
+              contentType: message.attachment.contentType,
+            },
+          ]
+        : undefined,
+    });
     return { success: true };
   } catch (e) {
     return {

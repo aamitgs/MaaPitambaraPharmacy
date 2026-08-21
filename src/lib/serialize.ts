@@ -18,10 +18,11 @@ import type {
 // plain numbers first, or money math downstream silently gets NaN/garbage.
 
 export type PlainItem = Omit<Item, "taxRate"> & { taxRate: number };
-export type PlainBatch = Omit<Batch, "mrp" | "purchaseRate" | "saleRate"> & {
+export type PlainBatch = Omit<Batch, "mrp" | "purchaseRate" | "saleRate" | "ptr"> & {
   mrp: number;
   purchaseRate: number;
   saleRate: number;
+  ptr: number | null;
 };
 
 export function serializeItem(item: Item): PlainItem {
@@ -34,6 +35,7 @@ export function serializeBatch(batch: Batch): PlainBatch {
     mrp: Number(batch.mrp),
     purchaseRate: Number(batch.purchaseRate),
     saleRate: Number(batch.saleRate),
+    ptr: batch.ptr === null ? null : Number(batch.ptr),
   };
 }
 

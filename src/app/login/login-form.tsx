@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { rememberThisDevice } from "@/lib/actions/trusted-device";
+import { TRUST_DAYS } from "@/lib/trusted-device";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +14,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { AlertCircle, Eye, EyeOff, Loader2 } from "lucide-react";
 import { BrandLockup } from "@/components/brand-mark";
+import { humanizeWait } from "@/lib/login-throttle-format";
 
 const ERROR_MESSAGES: Record<string, string> = {
   MFA_REQUIRED: "Enter the 6-digit code from your authenticator app.",
@@ -18,7 +22,13 @@ const ERROR_MESSAGES: Record<string, string> = {
   credentials: "Incorrect email or password.",
 };
 
-export function LoginForm() {
+export function LoginForm({
+  logoSrc,
+  pharmacyName,
+}: {
+  logoSrc: string;
+  pharmacyName: string;
+}) {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
 
@@ -26,6 +36,7 @@ export function LoginForm() {
   const [password, setPassword] = useState("");
   const [totpCode, setTotpCode] = useState("");
   const [needsTotp, setNeedsTotp] = useState(false);
+  const [rememberDevice, setRememberDevice] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -58,11 +69,32 @@ export function LoginForm() {
           setNeedsTotp(true);
           setShowPassword(false);
           setError(null);
+        } else if (code.startsWith("LOCKED:")) {
+          // The wait is carried in the code so the message can be specific;
+          // retrying blind is what makes a lockout feel like a broken app.
+          const seconds = Number(code.split(":")[1]) || 0;
+          setError(
+            `Too many failed attempts. Try again in ${humanizeWait(seconds)}, ` +
+              `or ask the owner to unlock this account.`
+          );
+          if (needsTotp) setTotpCode("");
         } else {
           setError(ERROR_MESSAGES[code] ?? "Sign in failed. Please try again.");
           if (needsTotp) setTotpCode("");
         }
         return;
+      }
+
+      // Only after both factors have passed, and only on the step where a
+      // code was actually entered — a device earns trust by proving the
+      // second factor on it, never by skipping it.
+      if (needsTotp && rememberDevice) {
+        try {
+          await rememberThisDevice();
+        } catch {
+          // Never block a valid sign-in over this; the user is simply asked
+          // for a code again next time.
+        }
       }
 
       // Full reload, not router.push: avoids a stale-session-cookie race
@@ -86,8 +118,8 @@ export function LoginForm() {
             the child rather than items-center on the header. The stacked
             artwork carries its own padding — hence the tight margin below. */}
         <CardHeader className="pt-2 pb-1">
-          <BrandLockup className="mx-auto w-48" />
-          <CardTitle className="sr-only">Maa Pitambara Pharmacy</CardTitle>
+          <BrandLockup src={logoSrc} className="mx-auto w-48" />
+          <CardTitle className="sr-only">{pharmacyName}</CardTitle>
           <CardDescription className="mt-1 text-center">
             Sign in to continue to the counter
           </CardDescription>
@@ -155,6 +187,22 @@ export function LoginForm() {
                     ))}
                   </InputOTPGroup>
                 </InputOTP>
+
+                <label className="flex cursor-pointer items-start gap-2 pt-1">
+                  <Checkbox
+                    checked={rememberDevice}
+                    onCheckedChange={(v) => setRememberDevice(v === true)}
+                    disabled={loading}
+                    className="mt-0.5"
+                  />
+                  <span className="text-sm leading-snug">
+                    Don&apos;t ask for a code on this device for {TRUST_DAYS} days
+                    <span className="block text-xs text-muted-foreground">
+                      Only on a device you control. The password is still required every
+                      time, and you can undo this from Security.
+                    </span>
+                  </span>
+                </label>
               </div>
             )}
 

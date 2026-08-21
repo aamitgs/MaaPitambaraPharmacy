@@ -1,6 +1,6 @@
 "use server";
 
-import { requireRole } from "@/lib/rbac";
+import { requirePermission } from "@/lib/rbac";
 import { prisma } from "@/lib/prisma";
 import { matchItem, normalizeInvoiceDate } from "@/lib/vision/invoice-lines";
 import {
@@ -34,12 +34,12 @@ async function run<T>(fn: () => Promise<T>): Promise<Result<T>> {
 }
 
 export async function readItemPhoto(imagePath: string): Promise<Result<ExtractedItem>> {
-  await requireRole(["owner", "pharmacist"]);
+  await requirePermission("items.manage");
   return run(() => extractItemFromPhoto(imagePath));
 }
 
 export async function readSupplierPhoto(imagePath: string): Promise<Result<ExtractedSupplier>> {
-  await requireRole(["owner", "pharmacist"]);
+  await requirePermission("items.manage");
   return run(() => extractSupplierFromPhoto(imagePath));
 }
 
@@ -73,7 +73,7 @@ export type ScannedGrn = {
 export async function readPurchaseInvoicePhoto(
   imagePath: string
 ): Promise<Result<ScannedGrn>> {
-  const session = await requireRole(["owner", "pharmacist"]);
+  const session = await requirePermission("items.manage");
 
   return run(async () => {
     const [invoice, items] = await Promise.all([

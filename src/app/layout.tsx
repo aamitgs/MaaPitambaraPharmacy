@@ -3,25 +3,34 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "@/components/providers";
-import { BRAND } from "@/lib/brand";
+import { getBranding } from "@/lib/branding";
+import { BrandStyle } from "@/components/brand-style";
 
 const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const fontMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
-export const metadata: Metadata = {
-  // `template` brands every child segment that sets its own title; `default`
-  // covers the segments that don't.
-  title: {
-    default: `${BRAND.name} — Billing`,
-    template: `%s · ${BRAND.name}`,
-  },
-  description: BRAND.description,
-  applicationName: BRAND.name,
-};
+// Resolved per request rather than at build: renaming the pharmacy in
+// /branding has to change the browser tab too, and that string is baked
+// into the HTML head.
+export async function generateMetadata(): Promise<Metadata> {
+  const branding = await getBranding();
+  return {
+    // `template` brands every child segment that sets its own title;
+    // `default` covers the segments that don't.
+    title: {
+      default: `${branding.name} — Billing`,
+      template: `%s · ${branding.name}`,
+    },
+    description: branding.description,
+    applicationName: branding.name,
+    icons: { icon: branding.logo.icon },
+  };
+}
 
-export const viewport: Viewport = {
-  themeColor: BRAND.themeColor,
-};
+export async function generateViewport(): Promise<Viewport> {
+  const branding = await getBranding();
+  return { themeColor: branding.colors.primary };
+}
 
 export default function RootLayout({
   children,
@@ -31,6 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn(fontSans.variable, fontMono.variable)} suppressHydrationWarning>
       <body className="font-sans antialiased">
+        <BrandStyle />
         <Providers>{children}</Providers>
       </body>
     </html>
