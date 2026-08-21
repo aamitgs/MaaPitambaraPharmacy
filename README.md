@@ -323,8 +323,26 @@ reads them yet — per-tenant white-labelling is still out of scope (see
   photos): stored on local disk under `PRESCRIPTION_STORAGE_DIR` (default
   `./storage/prescriptions`), `PURCHASE_INVOICE_STORAGE_DIR` (default
   `./storage/purchase-invoices`) and `ITEM_PHOTO_STORAGE_DIR` (default
-  `./storage/item-photos`), all outside `public/`. Chosen over S3 for simplicity given this app's
-  single-server Docker deployment — swap `src/lib/attachment-storage.ts`
+  `./storage/item-photos`), all outside `public/`. That is the default and
+  suits the single-server in-shop deployment.
+
+  Set `ATTACHMENT_S3_BUCKET` (plus endpoint/region/keys — see `.env.example`)
+  to store uploads in any S3-compatible bucket instead. **This is required on
+  serverless hosts** such as Vercel, whose filesystem is read-only apart from
+  an ephemeral `/tmp`: local writes there are discarded between requests, so
+  an uploaded prescription would appear to save and then vanish — and
+  prescriptions carry a three-year retention obligation. Stored paths are
+  identical under both backends, so the same database row resolves either
+  way. Keep the bucket private; files are still served only through the
+  authenticated `/api/files/...` routes.
+
+  One caveat when hosting behind a serverless platform: upload requests pass
+  through the function, and platforms cap request bodies (Vercel at ~4.5 MB)
+  below this app's own 8 MB limit. Large phone photos will be rejected by the
+  platform before the app sees them; lifting that needs presigned
+  direct-to-bucket uploads, which is not built yet.
+
+  To use a different backend entirely, swap `src/lib/attachment-storage.ts`
   for an S3-compatible client if that ever changes. Each kind has its own
   root rather than sharing one with subdirectories: stored paths are
   relative to the root, so re-parenting them would invalidate every path
