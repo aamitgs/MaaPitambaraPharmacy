@@ -1,5 +1,6 @@
 import "server-only";
 import { cache } from "react";
+import { connection } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { BRAND } from "@/lib/brand";
 
@@ -51,6 +52,14 @@ const DEFAULT_LOGOS = {
 } as const;
 
 export const getBranding = cache(async (): Promise<Branding> => {
+  // Branding is owner-editable at runtime, so it must never be baked into a
+  // build: a rename or a new logo has to show up without a redeploy. This
+  // stops prerendering here, which keeps every consumer — the root layout's
+  // metadata, the PWA manifest, the login screen — rendering per request.
+  // Without it `next build` tries to reach the database from the build
+  // machine, which is how the first deploy failed.
+  await connection();
+
   const tenant = await prisma.tenant.findFirst({
     orderBy: { createdAt: "asc" },
   });
