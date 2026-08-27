@@ -209,8 +209,8 @@ model Item {
   genericName   String?
   manufacturer  String?
   /// Who this pharmacy buys the item from, as distinct from who makes it.
-  /// Null when nobody has set a preferred distributor for this item yet.
-  distributorId String?
+  /// Null when nobody has set a preferred supplier for this item yet.
+  supplierId    String?
   composition   String?
   scheduleClass ScheduleClass @default(none)
   hsnCode       String?
@@ -260,7 +260,7 @@ model Item {
   stockAdjustmentItems StockAdjustmentItem[]
   stockCountLines      StockCountLine[]
   taxSlab              TaxSlab?             @relation(fields: [taxSlabId], references: [id])
-  distributor           Supplier?            @relation(fields: [distributorId], references: [id])
+  supplier              Supplier?            @relation(fields: [supplierId], references: [id])
 
   narcoticRegisterEntries NarcoticRegisterEntry[]
 
@@ -268,7 +268,7 @@ model Item {
   @@index([tenantId])
   @@index([tenantId, name])
   @@index([tenantId, barcode])
-  @@index([distributorId])
+  @@index([supplierId])
   @@map("items")
   promiseOrders        PromiseOrder[]
 
@@ -1450,7 +1450,7 @@ model Supplier {
   grns            Grn[]
   purchaseReturns PurchaseReturn[]
   ledgerEntries   SupplierLedgerEntry[]
-  itemsDistributed Item[]
+  suppliedItems Item[]
 
   @@index([tenantId])
   @@index([tenantId, name])

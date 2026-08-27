@@ -265,7 +265,7 @@ export type SupplierWhereInput = {
   grns?: Prisma.GrnListRelationFilter
   purchaseReturns?: Prisma.PurchaseReturnListRelationFilter
   ledgerEntries?: Prisma.SupplierLedgerEntryListRelationFilter
-  itemsDistributed?: Prisma.ItemListRelationFilter
+  suppliedItems?: Prisma.ItemListRelationFilter
 }
 
 export type SupplierOrderByWithRelationInput = {
@@ -284,7 +284,7 @@ export type SupplierOrderByWithRelationInput = {
   grns?: Prisma.GrnOrderByRelationAggregateInput
   purchaseReturns?: Prisma.PurchaseReturnOrderByRelationAggregateInput
   ledgerEntries?: Prisma.SupplierLedgerEntryOrderByRelationAggregateInput
-  itemsDistributed?: Prisma.ItemOrderByRelationAggregateInput
+  suppliedItems?: Prisma.ItemOrderByRelationAggregateInput
 }
 
 export type SupplierWhereUniqueInput = Prisma.AtLeast<{
@@ -306,7 +306,7 @@ export type SupplierWhereUniqueInput = Prisma.AtLeast<{
   grns?: Prisma.GrnListRelationFilter
   purchaseReturns?: Prisma.PurchaseReturnListRelationFilter
   ledgerEntries?: Prisma.SupplierLedgerEntryListRelationFilter
-  itemsDistributed?: Prisma.ItemListRelationFilter
+  suppliedItems?: Prisma.ItemListRelationFilter
 }, "id">
 
 export type SupplierOrderByWithAggregationInput = {
@@ -358,7 +358,7 @@ export type SupplierCreateInput = {
   grns?: Prisma.GrnCreateNestedManyWithoutSupplierInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutSupplierInput
   ledgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutSupplierInput
-  itemsDistributed?: Prisma.ItemCreateNestedManyWithoutDistributorInput
+  suppliedItems?: Prisma.ItemCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierUncheckedCreateInput = {
@@ -376,7 +376,7 @@ export type SupplierUncheckedCreateInput = {
   grns?: Prisma.GrnUncheckedCreateNestedManyWithoutSupplierInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutSupplierInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutSupplierInput
-  itemsDistributed?: Prisma.ItemUncheckedCreateNestedManyWithoutDistributorInput
+  suppliedItems?: Prisma.ItemUncheckedCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierUpdateInput = {
@@ -394,7 +394,7 @@ export type SupplierUpdateInput = {
   grns?: Prisma.GrnUpdateManyWithoutSupplierNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutSupplierNestedInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutSupplierNestedInput
-  itemsDistributed?: Prisma.ItemUpdateManyWithoutDistributorNestedInput
+  suppliedItems?: Prisma.ItemUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierUncheckedUpdateInput = {
@@ -412,7 +412,7 @@ export type SupplierUncheckedUpdateInput = {
   grns?: Prisma.GrnUncheckedUpdateManyWithoutSupplierNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutSupplierNestedInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutSupplierNestedInput
-  itemsDistributed?: Prisma.ItemUncheckedUpdateManyWithoutDistributorNestedInput
+  suppliedItems?: Prisma.ItemUncheckedUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierCreateManyInput = {
@@ -564,20 +564,20 @@ export type SupplierUncheckedUpdateManyWithoutTenantNestedInput = {
   deleteMany?: Prisma.SupplierScalarWhereInput | Prisma.SupplierScalarWhereInput[]
 }
 
-export type SupplierCreateNestedOneWithoutItemsDistributedInput = {
-  create?: Prisma.XOR<Prisma.SupplierCreateWithoutItemsDistributedInput, Prisma.SupplierUncheckedCreateWithoutItemsDistributedInput>
-  connectOrCreate?: Prisma.SupplierCreateOrConnectWithoutItemsDistributedInput
+export type SupplierCreateNestedOneWithoutSuppliedItemsInput = {
+  create?: Prisma.XOR<Prisma.SupplierCreateWithoutSuppliedItemsInput, Prisma.SupplierUncheckedCreateWithoutSuppliedItemsInput>
+  connectOrCreate?: Prisma.SupplierCreateOrConnectWithoutSuppliedItemsInput
   connect?: Prisma.SupplierWhereUniqueInput
 }
 
-export type SupplierUpdateOneWithoutItemsDistributedNestedInput = {
-  create?: Prisma.XOR<Prisma.SupplierCreateWithoutItemsDistributedInput, Prisma.SupplierUncheckedCreateWithoutItemsDistributedInput>
-  connectOrCreate?: Prisma.SupplierCreateOrConnectWithoutItemsDistributedInput
-  upsert?: Prisma.SupplierUpsertWithoutItemsDistributedInput
+export type SupplierUpdateOneWithoutSuppliedItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.SupplierCreateWithoutSuppliedItemsInput, Prisma.SupplierUncheckedCreateWithoutSuppliedItemsInput>
+  connectOrCreate?: Prisma.SupplierCreateOrConnectWithoutSuppliedItemsInput
+  upsert?: Prisma.SupplierUpsertWithoutSuppliedItemsInput
   disconnect?: Prisma.SupplierWhereInput | boolean
   delete?: Prisma.SupplierWhereInput | boolean
   connect?: Prisma.SupplierWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.SupplierUpdateToOneWithWhereWithoutItemsDistributedInput, Prisma.SupplierUpdateWithoutItemsDistributedInput>, Prisma.SupplierUncheckedUpdateWithoutItemsDistributedInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SupplierUpdateToOneWithWhereWithoutSuppliedItemsInput, Prisma.SupplierUpdateWithoutSuppliedItemsInput>, Prisma.SupplierUncheckedUpdateWithoutSuppliedItemsInput>
 }
 
 export type SupplierCreateNestedOneWithoutPurchaseOrdersInput = {
@@ -650,7 +650,7 @@ export type SupplierCreateWithoutTenantInput = {
   grns?: Prisma.GrnCreateNestedManyWithoutSupplierInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutSupplierInput
   ledgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutSupplierInput
-  itemsDistributed?: Prisma.ItemCreateNestedManyWithoutDistributorInput
+  suppliedItems?: Prisma.ItemCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierUncheckedCreateWithoutTenantInput = {
@@ -667,7 +667,7 @@ export type SupplierUncheckedCreateWithoutTenantInput = {
   grns?: Prisma.GrnUncheckedCreateNestedManyWithoutSupplierInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutSupplierInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutSupplierInput
-  itemsDistributed?: Prisma.ItemUncheckedCreateNestedManyWithoutDistributorInput
+  suppliedItems?: Prisma.ItemUncheckedCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierCreateOrConnectWithoutTenantInput = {
@@ -712,7 +712,7 @@ export type SupplierScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Supplier"> | Date | string
 }
 
-export type SupplierCreateWithoutItemsDistributedInput = {
+export type SupplierCreateWithoutSuppliedItemsInput = {
   id?: string
   name: string
   phone?: string | null
@@ -729,7 +729,7 @@ export type SupplierCreateWithoutItemsDistributedInput = {
   ledgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutSupplierInput
 }
 
-export type SupplierUncheckedCreateWithoutItemsDistributedInput = {
+export type SupplierUncheckedCreateWithoutSuppliedItemsInput = {
   id?: string
   tenantId: string
   name: string
@@ -746,23 +746,23 @@ export type SupplierUncheckedCreateWithoutItemsDistributedInput = {
   ledgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutSupplierInput
 }
 
-export type SupplierCreateOrConnectWithoutItemsDistributedInput = {
+export type SupplierCreateOrConnectWithoutSuppliedItemsInput = {
   where: Prisma.SupplierWhereUniqueInput
-  create: Prisma.XOR<Prisma.SupplierCreateWithoutItemsDistributedInput, Prisma.SupplierUncheckedCreateWithoutItemsDistributedInput>
+  create: Prisma.XOR<Prisma.SupplierCreateWithoutSuppliedItemsInput, Prisma.SupplierUncheckedCreateWithoutSuppliedItemsInput>
 }
 
-export type SupplierUpsertWithoutItemsDistributedInput = {
-  update: Prisma.XOR<Prisma.SupplierUpdateWithoutItemsDistributedInput, Prisma.SupplierUncheckedUpdateWithoutItemsDistributedInput>
-  create: Prisma.XOR<Prisma.SupplierCreateWithoutItemsDistributedInput, Prisma.SupplierUncheckedCreateWithoutItemsDistributedInput>
+export type SupplierUpsertWithoutSuppliedItemsInput = {
+  update: Prisma.XOR<Prisma.SupplierUpdateWithoutSuppliedItemsInput, Prisma.SupplierUncheckedUpdateWithoutSuppliedItemsInput>
+  create: Prisma.XOR<Prisma.SupplierCreateWithoutSuppliedItemsInput, Prisma.SupplierUncheckedCreateWithoutSuppliedItemsInput>
   where?: Prisma.SupplierWhereInput
 }
 
-export type SupplierUpdateToOneWithWhereWithoutItemsDistributedInput = {
+export type SupplierUpdateToOneWithWhereWithoutSuppliedItemsInput = {
   where?: Prisma.SupplierWhereInput
-  data: Prisma.XOR<Prisma.SupplierUpdateWithoutItemsDistributedInput, Prisma.SupplierUncheckedUpdateWithoutItemsDistributedInput>
+  data: Prisma.XOR<Prisma.SupplierUpdateWithoutSuppliedItemsInput, Prisma.SupplierUncheckedUpdateWithoutSuppliedItemsInput>
 }
 
-export type SupplierUpdateWithoutItemsDistributedInput = {
+export type SupplierUpdateWithoutSuppliedItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -779,7 +779,7 @@ export type SupplierUpdateWithoutItemsDistributedInput = {
   ledgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutSupplierNestedInput
 }
 
-export type SupplierUncheckedUpdateWithoutItemsDistributedInput = {
+export type SupplierUncheckedUpdateWithoutSuppliedItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -810,7 +810,7 @@ export type SupplierCreateWithoutPurchaseOrdersInput = {
   grns?: Prisma.GrnCreateNestedManyWithoutSupplierInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutSupplierInput
   ledgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutSupplierInput
-  itemsDistributed?: Prisma.ItemCreateNestedManyWithoutDistributorInput
+  suppliedItems?: Prisma.ItemCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierUncheckedCreateWithoutPurchaseOrdersInput = {
@@ -827,7 +827,7 @@ export type SupplierUncheckedCreateWithoutPurchaseOrdersInput = {
   grns?: Prisma.GrnUncheckedCreateNestedManyWithoutSupplierInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutSupplierInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutSupplierInput
-  itemsDistributed?: Prisma.ItemUncheckedCreateNestedManyWithoutDistributorInput
+  suppliedItems?: Prisma.ItemUncheckedCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierCreateOrConnectWithoutPurchaseOrdersInput = {
@@ -860,7 +860,7 @@ export type SupplierUpdateWithoutPurchaseOrdersInput = {
   grns?: Prisma.GrnUpdateManyWithoutSupplierNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutSupplierNestedInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutSupplierNestedInput
-  itemsDistributed?: Prisma.ItemUpdateManyWithoutDistributorNestedInput
+  suppliedItems?: Prisma.ItemUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierUncheckedUpdateWithoutPurchaseOrdersInput = {
@@ -877,7 +877,7 @@ export type SupplierUncheckedUpdateWithoutPurchaseOrdersInput = {
   grns?: Prisma.GrnUncheckedUpdateManyWithoutSupplierNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutSupplierNestedInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutSupplierNestedInput
-  itemsDistributed?: Prisma.ItemUncheckedUpdateManyWithoutDistributorNestedInput
+  suppliedItems?: Prisma.ItemUncheckedUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierCreateWithoutGrnsInput = {
@@ -894,7 +894,7 @@ export type SupplierCreateWithoutGrnsInput = {
   purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutSupplierInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutSupplierInput
   ledgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutSupplierInput
-  itemsDistributed?: Prisma.ItemCreateNestedManyWithoutDistributorInput
+  suppliedItems?: Prisma.ItemCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierUncheckedCreateWithoutGrnsInput = {
@@ -911,7 +911,7 @@ export type SupplierUncheckedCreateWithoutGrnsInput = {
   purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutSupplierInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutSupplierInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutSupplierInput
-  itemsDistributed?: Prisma.ItemUncheckedCreateNestedManyWithoutDistributorInput
+  suppliedItems?: Prisma.ItemUncheckedCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierCreateOrConnectWithoutGrnsInput = {
@@ -944,7 +944,7 @@ export type SupplierUpdateWithoutGrnsInput = {
   purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutSupplierNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutSupplierNestedInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutSupplierNestedInput
-  itemsDistributed?: Prisma.ItemUpdateManyWithoutDistributorNestedInput
+  suppliedItems?: Prisma.ItemUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierUncheckedUpdateWithoutGrnsInput = {
@@ -961,7 +961,7 @@ export type SupplierUncheckedUpdateWithoutGrnsInput = {
   purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutSupplierNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutSupplierNestedInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutSupplierNestedInput
-  itemsDistributed?: Prisma.ItemUncheckedUpdateManyWithoutDistributorNestedInput
+  suppliedItems?: Prisma.ItemUncheckedUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierCreateWithoutPurchaseReturnsInput = {
@@ -978,7 +978,7 @@ export type SupplierCreateWithoutPurchaseReturnsInput = {
   purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutSupplierInput
   grns?: Prisma.GrnCreateNestedManyWithoutSupplierInput
   ledgerEntries?: Prisma.SupplierLedgerEntryCreateNestedManyWithoutSupplierInput
-  itemsDistributed?: Prisma.ItemCreateNestedManyWithoutDistributorInput
+  suppliedItems?: Prisma.ItemCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierUncheckedCreateWithoutPurchaseReturnsInput = {
@@ -995,7 +995,7 @@ export type SupplierUncheckedCreateWithoutPurchaseReturnsInput = {
   purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutSupplierInput
   grns?: Prisma.GrnUncheckedCreateNestedManyWithoutSupplierInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUncheckedCreateNestedManyWithoutSupplierInput
-  itemsDistributed?: Prisma.ItemUncheckedCreateNestedManyWithoutDistributorInput
+  suppliedItems?: Prisma.ItemUncheckedCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierCreateOrConnectWithoutPurchaseReturnsInput = {
@@ -1028,7 +1028,7 @@ export type SupplierUpdateWithoutPurchaseReturnsInput = {
   purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutSupplierNestedInput
   grns?: Prisma.GrnUpdateManyWithoutSupplierNestedInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutSupplierNestedInput
-  itemsDistributed?: Prisma.ItemUpdateManyWithoutDistributorNestedInput
+  suppliedItems?: Prisma.ItemUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierUncheckedUpdateWithoutPurchaseReturnsInput = {
@@ -1045,7 +1045,7 @@ export type SupplierUncheckedUpdateWithoutPurchaseReturnsInput = {
   purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutSupplierNestedInput
   grns?: Prisma.GrnUncheckedUpdateManyWithoutSupplierNestedInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutSupplierNestedInput
-  itemsDistributed?: Prisma.ItemUncheckedUpdateManyWithoutDistributorNestedInput
+  suppliedItems?: Prisma.ItemUncheckedUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierCreateWithoutLedgerEntriesInput = {
@@ -1062,7 +1062,7 @@ export type SupplierCreateWithoutLedgerEntriesInput = {
   purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutSupplierInput
   grns?: Prisma.GrnCreateNestedManyWithoutSupplierInput
   purchaseReturns?: Prisma.PurchaseReturnCreateNestedManyWithoutSupplierInput
-  itemsDistributed?: Prisma.ItemCreateNestedManyWithoutDistributorInput
+  suppliedItems?: Prisma.ItemCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierUncheckedCreateWithoutLedgerEntriesInput = {
@@ -1079,7 +1079,7 @@ export type SupplierUncheckedCreateWithoutLedgerEntriesInput = {
   purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutSupplierInput
   grns?: Prisma.GrnUncheckedCreateNestedManyWithoutSupplierInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedCreateNestedManyWithoutSupplierInput
-  itemsDistributed?: Prisma.ItemUncheckedCreateNestedManyWithoutDistributorInput
+  suppliedItems?: Prisma.ItemUncheckedCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierCreateOrConnectWithoutLedgerEntriesInput = {
@@ -1112,7 +1112,7 @@ export type SupplierUpdateWithoutLedgerEntriesInput = {
   purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutSupplierNestedInput
   grns?: Prisma.GrnUpdateManyWithoutSupplierNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutSupplierNestedInput
-  itemsDistributed?: Prisma.ItemUpdateManyWithoutDistributorNestedInput
+  suppliedItems?: Prisma.ItemUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierUncheckedUpdateWithoutLedgerEntriesInput = {
@@ -1129,7 +1129,7 @@ export type SupplierUncheckedUpdateWithoutLedgerEntriesInput = {
   purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutSupplierNestedInput
   grns?: Prisma.GrnUncheckedUpdateManyWithoutSupplierNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutSupplierNestedInput
-  itemsDistributed?: Prisma.ItemUncheckedUpdateManyWithoutDistributorNestedInput
+  suppliedItems?: Prisma.ItemUncheckedUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierCreateManyTenantInput = {
@@ -1158,7 +1158,7 @@ export type SupplierUpdateWithoutTenantInput = {
   grns?: Prisma.GrnUpdateManyWithoutSupplierNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUpdateManyWithoutSupplierNestedInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUpdateManyWithoutSupplierNestedInput
-  itemsDistributed?: Prisma.ItemUpdateManyWithoutDistributorNestedInput
+  suppliedItems?: Prisma.ItemUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierUncheckedUpdateWithoutTenantInput = {
@@ -1175,7 +1175,7 @@ export type SupplierUncheckedUpdateWithoutTenantInput = {
   grns?: Prisma.GrnUncheckedUpdateManyWithoutSupplierNestedInput
   purchaseReturns?: Prisma.PurchaseReturnUncheckedUpdateManyWithoutSupplierNestedInput
   ledgerEntries?: Prisma.SupplierLedgerEntryUncheckedUpdateManyWithoutSupplierNestedInput
-  itemsDistributed?: Prisma.ItemUncheckedUpdateManyWithoutDistributorNestedInput
+  suppliedItems?: Prisma.ItemUncheckedUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierUncheckedUpdateManyWithoutTenantInput = {
@@ -1200,7 +1200,7 @@ export type SupplierCountOutputType = {
   grns: number
   purchaseReturns: number
   ledgerEntries: number
-  itemsDistributed: number
+  suppliedItems: number
 }
 
 export type SupplierCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1208,7 +1208,7 @@ export type SupplierCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   grns?: boolean | SupplierCountOutputTypeCountGrnsArgs
   purchaseReturns?: boolean | SupplierCountOutputTypeCountPurchaseReturnsArgs
   ledgerEntries?: boolean | SupplierCountOutputTypeCountLedgerEntriesArgs
-  itemsDistributed?: boolean | SupplierCountOutputTypeCountItemsDistributedArgs
+  suppliedItems?: boolean | SupplierCountOutputTypeCountSuppliedItemsArgs
 }
 
 /**
@@ -1252,7 +1252,7 @@ export type SupplierCountOutputTypeCountLedgerEntriesArgs<ExtArgs extends runtim
 /**
  * SupplierCountOutputType without action
  */
-export type SupplierCountOutputTypeCountItemsDistributedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SupplierCountOutputTypeCountSuppliedItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ItemWhereInput
 }
 
@@ -1273,7 +1273,7 @@ export type SupplierSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   grns?: boolean | Prisma.Supplier$grnsArgs<ExtArgs>
   purchaseReturns?: boolean | Prisma.Supplier$purchaseReturnsArgs<ExtArgs>
   ledgerEntries?: boolean | Prisma.Supplier$ledgerEntriesArgs<ExtArgs>
-  itemsDistributed?: boolean | Prisma.Supplier$itemsDistributedArgs<ExtArgs>
+  suppliedItems?: boolean | Prisma.Supplier$suppliedItemsArgs<ExtArgs>
   _count?: boolean | Prisma.SupplierCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["supplier"]>
 
@@ -1325,7 +1325,7 @@ export type SupplierInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   grns?: boolean | Prisma.Supplier$grnsArgs<ExtArgs>
   purchaseReturns?: boolean | Prisma.Supplier$purchaseReturnsArgs<ExtArgs>
   ledgerEntries?: boolean | Prisma.Supplier$ledgerEntriesArgs<ExtArgs>
-  itemsDistributed?: boolean | Prisma.Supplier$itemsDistributedArgs<ExtArgs>
+  suppliedItems?: boolean | Prisma.Supplier$suppliedItemsArgs<ExtArgs>
   _count?: boolean | Prisma.SupplierCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SupplierIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1343,7 +1343,7 @@ export type $SupplierPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     grns: Prisma.$GrnPayload<ExtArgs>[]
     purchaseReturns: Prisma.$PurchaseReturnPayload<ExtArgs>[]
     ledgerEntries: Prisma.$SupplierLedgerEntryPayload<ExtArgs>[]
-    itemsDistributed: Prisma.$ItemPayload<ExtArgs>[]
+    suppliedItems: Prisma.$ItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1761,7 +1761,7 @@ export interface Prisma__SupplierClient<T, Null = never, ExtArgs extends runtime
   grns<T extends Prisma.Supplier$grnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Supplier$grnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GrnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   purchaseReturns<T extends Prisma.Supplier$purchaseReturnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Supplier$purchaseReturnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseReturnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ledgerEntries<T extends Prisma.Supplier$ledgerEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Supplier$ledgerEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SupplierLedgerEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  itemsDistributed<T extends Prisma.Supplier$itemsDistributedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Supplier$itemsDistributedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  suppliedItems<T extends Prisma.Supplier$suppliedItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Supplier$suppliedItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2298,9 +2298,9 @@ export type Supplier$ledgerEntriesArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * Supplier.itemsDistributed
+ * Supplier.suppliedItems
  */
-export type Supplier$itemsDistributedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Supplier$suppliedItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Item
    */

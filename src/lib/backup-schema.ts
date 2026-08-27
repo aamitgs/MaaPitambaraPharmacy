@@ -22,7 +22,7 @@ export const BACKUP_TABLES = [
   "taxSlabs",
   "taxSlabRates",
   "hsnTaxMappings",
-  // Ahead of items: an item can name a preferred distributor.
+  // Ahead of items: an item can name a preferred supplier.
   "suppliers",
   "items",
   "batches",

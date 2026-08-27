@@ -15,8 +15,8 @@ const itemSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
   genericName: z.string().trim().optional(),
   manufacturer: z.string().trim().optional(),
-  // Empty string from the <select> means "no preferred distributor set".
-  distributorId: z
+  // Empty string from the <select> means "no preferred supplier set".
+  supplierId: z
     .string()
     .trim()
     .optional()
@@ -83,7 +83,7 @@ export async function listItems() {
     where: { tenantId: session.user.tenantId },
     include: {
       batches: { where: branchFilter },
-      distributor: { select: { name: true } },
+      supplier: { select: { name: true } },
     },
     orderBy: { name: "asc" },
   });
@@ -100,7 +100,7 @@ export async function listItems() {
     return {
       ...serializeItem(item),
       batches: item.batches.map(serializeBatch),
-      distributorName: item.distributor?.name ?? null,
+      supplierName: item.supplier?.name ?? null,
       totalQty,
       lowStock: totalQty < item.reorderLevel,
       outOfStock: totalQty === 0,

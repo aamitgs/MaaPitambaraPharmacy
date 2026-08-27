@@ -27,7 +27,7 @@ const formSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
   genericName: z.string().trim().optional(),
   manufacturer: z.string().trim().optional(),
-  distributorId: z.string().optional(),
+  supplierId: z.string().optional(),
   composition: z.string().trim().optional(),
   scheduleClass: z.enum(["none", "H", "H1", "X", "G"]),
   hsnCode: z.string().trim().optional(),
@@ -99,7 +99,7 @@ export function ItemForm({
       name: item?.name ?? "",
       genericName: item?.genericName ?? "",
       manufacturer: item?.manufacturer ?? "",
-      distributorId: item?.distributorId ?? "",
+      supplierId: item?.supplierId ?? "",
       composition: item?.composition ?? "",
       scheduleClass: item?.scheduleClass ?? "none",
       hsnCode: item?.hsnCode ?? "",
@@ -156,13 +156,13 @@ export function ItemForm({
           <Input id="manufacturer" {...form.register("manufacturer")} />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="distributorId">Distributor</Label>
+          <Label htmlFor="supplierId">Supplier</Label>
           <select
-            id="distributorId"
+            id="supplierId"
             className="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 text-sm"
-            {...form.register("distributorId")}
+            {...form.register("supplierId")}
           >
-            <option value="">No preferred distributor</option>
+            <option value="">No preferred supplier</option>
             {suppliers.map((s) => (
               <option key={s.id} value={s.id}>
                 {s.name}

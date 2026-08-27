@@ -187,7 +187,7 @@ export const ItemScalarFieldEnum = {
   name: 'name',
   genericName: 'genericName',
   manufacturer: 'manufacturer',
-  distributorId: 'distributorId',
+  supplierId: 'supplierId',
   composition: 'composition',
   scheduleClass: 'scheduleClass',
   hsnCode: 'hsnCode',

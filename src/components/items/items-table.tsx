@@ -44,9 +44,9 @@ const columns = columnHelper.columns([
       </div>
     ),
   }),
-  columnHelper.accessor("distributorName", {
-    header: "Distributor",
-    cell: ({ row }) => row.original.distributorName || "—",
+  columnHelper.accessor("supplierName", {
+    header: "Supplier",
+    cell: ({ row }) => row.original.supplierName || "—",
   }),
   columnHelper.accessor("manufacturer", {
     header: "Manufacturer",
