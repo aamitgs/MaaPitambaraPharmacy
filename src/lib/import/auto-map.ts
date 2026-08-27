@@ -17,7 +17,11 @@ import type { ColumnMapping } from "./normalize";
 const ALIASES: Partial<Record<ImportFieldKey, string[]>> = {
   name: ["itemname", "productname", "product", "description", "particulars", "medicine", "drugname"],
   genericName: ["generic", "genericname", "molecule"],
-  manufacturer: ["company", "companyname", "mfr", "mfg", "manufacturername", "brand", "supplier"],
+  // "company" stays here, not on supplierName: in every export we've seen
+  // (Marg included), the Company column names who makes the medicine, not
+  // who it's bought from.
+  manufacturer: ["company", "companyname", "mfr", "mfg", "manufacturername", "brand"],
+  supplierName: ["supplier", "suppliername", "distributor", "distributorname", "vendor", "stockist"],
   composition: ["salt", "salts", "saltname", "content", "contents", "formulation", "ingredients"],
   // Deliberately not "category": Marg's Category column holds things like
   // "-BLANK-", and mapping it here turns a clean file into an error on

@@ -8,6 +8,7 @@
 export type ImportFieldKey =
   | "name"
   | "genericName"
+  | "supplierName"
   | "manufacturer"
   | "composition"
   | "scheduleClass"
@@ -40,6 +41,7 @@ export interface ImportFieldDef {
 export const IMPORT_FIELDS: ImportFieldDef[] = [
   { key: "name", label: "Item name", group: "item", required: true, type: "string" },
   { key: "genericName", label: "Generic name", group: "item", required: false, type: "string" },
+  { key: "supplierName", label: "Supplier", group: "item", required: false, type: "string" },
   { key: "manufacturer", label: "Manufacturer", group: "item", required: false, type: "string" },
   { key: "composition", label: "Composition", group: "item", required: false, type: "string" },
   {

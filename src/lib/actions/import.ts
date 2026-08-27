@@ -20,9 +20,20 @@ export async function commitImport(rows: NormalizedRow[]) {
   const { rows: validated } = validateRows(rows);
   const validRows = validated.filter((r) => r.errors.length === 0);
 
+  // Loaded once rather than per row: a supplier name is matched against
+  // whoever is already on file, never created on the fly here — that stays
+  // the supplier import's job, so a typo in an item file can't silently
+  // spawn a duplicate supplier.
+  const suppliers = await prisma.supplier.findMany({
+    where: { tenantId },
+    select: { id: true, name: true },
+  });
+  const supplierByName = new Map(suppliers.map((s) => [s.name.toLowerCase(), s.id]));
+
   let itemsCreated = 0;
   let itemsUpdated = 0;
   let batchesCreated = 0;
+  let suppliersUnmatched = 0;
 
   for (const row of validRows) {
     const raw = row.raw;
@@ -37,8 +48,15 @@ export async function commitImport(rows: NormalizedRow[]) {
 
     const looseSale = raw.allowLooseSale !== undefined ? parseBoolean(raw.allowLooseSale) : null;
 
+    let supplierId: string | undefined;
+    if (raw.supplierName?.trim()) {
+      supplierId = supplierByName.get(raw.supplierName.trim().toLowerCase());
+      if (!supplierId) suppliersUnmatched++;
+    }
+
     const itemData = {
       genericName: raw.genericName,
+      supplierId,
       manufacturer: raw.manufacturer,
       composition: raw.composition,
       scheduleClass,
@@ -59,6 +77,7 @@ export async function commitImport(rows: NormalizedRow[]) {
             tenantId,
             name,
             genericName: raw.genericName,
+            supplierId,
             manufacturer: raw.manufacturer,
             composition: raw.composition,
             scheduleClass,
@@ -102,12 +121,24 @@ export async function commitImport(rows: NormalizedRow[]) {
     action: "item.import",
     entity: "Item",
     entityId: "bulk",
-    after: { itemsCreated, itemsUpdated, batchesCreated, rowsSubmitted: rows.length },
+    after: {
+      itemsCreated,
+      itemsUpdated,
+      batchesCreated,
+      suppliersUnmatched,
+      rowsSubmitted: rows.length,
+    },
   });
 
   revalidatePath("/items");
 
-  return { itemsCreated, itemsUpdated, batchesCreated, skipped: rows.length - validRows.length };
+  return {
+    itemsCreated,
+    itemsUpdated,
+    batchesCreated,
+    suppliersUnmatched,
+    skipped: rows.length - validRows.length,
+  };
 }
 
 export type { ImportFieldKey };

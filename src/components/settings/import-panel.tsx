@@ -180,6 +180,13 @@ export function ImportPanel() {
               </div>
             ))}
           </div>
+          {mapping.supplierName && (
+            <p className="text-xs text-muted-foreground">
+              Supplier is matched by name to a supplier already on file — import your supplier
+              list first if you haven&apos;t. A name that doesn&apos;t match anything is left
+              blank rather than creating a new supplier.
+            </p>
+          )}
 
           <div className="rounded-lg border">
             <button
@@ -351,6 +358,8 @@ export function ImportPanel() {
             {result.itemsUpdated} updated, {result.batchesCreated} batch
             {result.batchesCreated === 1 ? "" : "es"} added.
             {result.skipped > 0 && ` ${result.skipped} row(s) skipped due to errors.`}
+            {result.suppliersUnmatched > 0 &&
+              ` ${result.suppliersUnmatched} supplier name(s) didn't match anyone on file and were left blank.`}
           </AlertDescription>
         </Alert>
       )}
