@@ -21,7 +21,7 @@ import { mapRows, type ColumnMapping } from "@/lib/import/normalize";
 import { autoMapColumns, deriveColumns, type DerivedColumn } from "@/lib/import/auto-map";
 import { validateRows, type ValidationSummary } from "@/lib/import/validate";
 import { commitImport } from "@/lib/actions/import";
-import { AlertCircle, CheckCircle2, Loader2, UploadCloud } from "lucide-react";
+import { AlertCircle, CheckCircle2, ChevronDown, ChevronRight, Loader2, UploadCloud } from "lucide-react";
 import { toast } from "sonner";
 
 type Step = "upload" | "map" | "preview" | "done";
@@ -36,6 +36,11 @@ export function ImportPanel() {
   const [result, setResult] = useState<Awaited<ReturnType<typeof commitImport>> | null>(null);
   const [derived, setDerived] = useState<DerivedColumn[]>([]);
   const [mappedCount, setMappedCount] = useState(0);
+  const [showBatchFields, setShowBatchFields] = useState(false);
+
+  const itemFields = IMPORT_FIELDS.filter((f) => f.group === "item");
+  const batchFields = IMPORT_FIELDS.filter((f) => f.group === "batch");
+  const batchFieldsMapped = batchFields.filter((f) => mapping[f.key]).length;
 
   const summary: ValidationSummary | null = useMemo(() => {
     if (step !== "preview" && step !== "done") return null;
@@ -64,6 +69,12 @@ export function ImportPanel() {
       const autoMapping = autoMapColumns(withDerived, { seed, sample: withDerivedRows.slice(0, 200) });
       setMapping(autoMapping);
       setMappedCount(Object.keys(autoMapping).length);
+      // Open the batch section by default only when the file actually
+      // matched something in it — otherwise it's just noise for a file
+      // that only ever had item columns to begin with.
+      setShowBatchFields(
+        IMPORT_FIELDS.some((f) => f.group === "batch" && autoMapping[f.key])
+      );
       setStep("map");
     } catch (err) {
       toast.error(
@@ -93,6 +104,7 @@ export function ImportPanel() {
     setRawRows([]);
     setMapping({});
     setFileName("");
+    setShowBatchFields(false);
     setResult(null);
   }
 
@@ -141,16 +153,11 @@ export function ImportPanel() {
             </div>
           )}
           <div className="grid grid-cols-2 gap-3 rounded-lg border p-3">
-            {IMPORT_FIELDS.map((field) => (
+            {itemFields.map((field) => (
               <div key={field.key} className="flex items-center justify-between gap-2">
                 <Label className="text-xs">
                   {field.label}
                   {field.required && <span className="text-destructive"> *</span>}
-                  {field.group === "batch" && (
-                    <Badge variant="outline" className="ml-1 text-[9px]">
-                      batch
-                    </Badge>
-                  )}
                 </Label>
                 <Select
                   value={mapping[field.key] ?? "__skip"}
@@ -172,6 +179,63 @@ export function ImportPanel() {
                 </Select>
               </div>
             ))}
+          </div>
+
+          <div className="rounded-lg border">
+            <button
+              type="button"
+              onClick={() => setShowBatchFields((v) => !v)}
+              className="flex w-full items-center justify-between gap-2 p-3 text-left text-sm font-medium"
+            >
+              <span className="flex items-center gap-1.5">
+                {showBatchFields ? (
+                  <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                ) : (
+                  <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                )}
+                Batch &amp; stock columns
+                <Badge variant="outline" className="text-[9px]">optional</Badge>
+                {batchFieldsMapped > 0 && (
+                  <span className="text-xs font-normal text-muted-foreground">
+                    · {batchFieldsMapped} matched
+                  </span>
+                )}
+              </span>
+            </button>
+            {!showBatchFields && (
+              <p className="border-t px-3 pb-3 text-xs text-muted-foreground">
+                Not in this file, and that&apos;s fine — this will import the item catalogue only.
+                Add batch number, expiry and stock later through a GRN or Stock Count, or expand
+                this to map them now if your file has them.
+              </p>
+            )}
+            {showBatchFields && (
+              <div className="grid grid-cols-2 gap-3 border-t p-3">
+                {batchFields.map((field) => (
+                  <div key={field.key} className="flex items-center justify-between gap-2">
+                    <Label className="text-xs">{field.label}</Label>
+                    <Select
+                      value={mapping[field.key] ?? "__skip"}
+                      onValueChange={(v) =>
+                        setMapping((m) => ({ ...m, [field.key]: v === "__skip" ? undefined : v }))
+                      }
+                    >
+                      <SelectTrigger className="h-8 w-44">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="__skip">— Don&apos;t import —</SelectItem>
+                        {headers.map((h) => (
+                          <SelectItem key={h} value={h}>
+                            {h}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           <div className="flex gap-2">
             <Button onClick={() => setStep("preview")} disabled={!mapping.name}>
