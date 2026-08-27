@@ -27,6 +27,7 @@ const formSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
   genericName: z.string().trim().optional(),
   manufacturer: z.string().trim().optional(),
+  distributorId: z.string().optional(),
   composition: z.string().trim().optional(),
   scheduleClass: z.enum(["none", "H", "H1", "X", "G"]),
   hsnCode: z.string().trim().optional(),
@@ -52,10 +53,13 @@ type FormOutput = z.output<typeof formSchema>;
 export function ItemForm({
   item,
   taxSlabs = [],
+  suppliers = [],
 }: {
   item?: PlainItem;
   /** Loaded server-side; empty until the pharmacy defines any. */
   taxSlabs?: { id: string; name: string; currentRate: number | null }[];
+  /** Loaded server-side — who this item can be reordered from. */
+  suppliers?: { id: string; name: string }[];
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -95,6 +99,7 @@ export function ItemForm({
       name: item?.name ?? "",
       genericName: item?.genericName ?? "",
       manufacturer: item?.manufacturer ?? "",
+      distributorId: item?.distributorId ?? "",
       composition: item?.composition ?? "",
       scheduleClass: item?.scheduleClass ?? "none",
       hsnCode: item?.hsnCode ?? "",
@@ -149,6 +154,21 @@ export function ItemForm({
         <div className="space-y-1.5">
           <Label htmlFor="manufacturer">Manufacturer</Label>
           <Input id="manufacturer" {...form.register("manufacturer")} />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="distributorId">Distributor</Label>
+          <select
+            id="distributorId"
+            className="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 text-sm"
+            {...form.register("distributorId")}
+          >
+            <option value="">No preferred distributor</option>
+            {suppliers.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="composition">Composition</Label>

@@ -15,6 +15,12 @@ const itemSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
   genericName: z.string().trim().optional(),
   manufacturer: z.string().trim().optional(),
+  // Empty string from the <select> means "no preferred distributor set".
+  distributorId: z
+    .string()
+    .trim()
+    .optional()
+    .transform((v) => (v ? v : null)),
   composition: z.string().trim().optional(),
   scheduleClass: scheduleClassEnum,
   hsnCode: z.string().trim().optional(),
@@ -75,7 +81,10 @@ export async function listItems() {
 
   const items = await prisma.item.findMany({
     where: { tenantId: session.user.tenantId },
-    include: { batches: { where: branchFilter } },
+    include: {
+      batches: { where: branchFilter },
+      distributor: { select: { name: true } },
+    },
     orderBy: { name: "asc" },
   });
 
@@ -91,6 +100,7 @@ export async function listItems() {
     return {
       ...serializeItem(item),
       batches: item.batches.map(serializeBatch),
+      distributorName: item.distributor?.name ?? null,
       totalQty,
       lowStock: totalQty < item.reorderLevel,
       outOfStock: totalQty === 0,

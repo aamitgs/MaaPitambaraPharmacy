@@ -22,9 +22,10 @@ export const BACKUP_TABLES = [
   "taxSlabs",
   "taxSlabRates",
   "hsnTaxMappings",
+  // Ahead of items: an item can name a preferred distributor.
+  "suppliers",
   "items",
   "batches",
-  "suppliers",
   "loyaltyTiers",
   // Tenant configuration, and restored with the rest: losing it would
   // silently change which medicines the app offers as substitutes for one

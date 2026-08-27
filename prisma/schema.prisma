@@ -208,6 +208,9 @@ model Item {
   name          String
   genericName   String?
   manufacturer  String?
+  /// Who this pharmacy buys the item from, as distinct from who makes it.
+  /// Null when nobody has set a preferred distributor for this item yet.
+  distributorId String?
   composition   String?
   scheduleClass ScheduleClass @default(none)
   hsnCode       String?
@@ -257,6 +260,7 @@ model Item {
   stockAdjustmentItems StockAdjustmentItem[]
   stockCountLines      StockCountLine[]
   taxSlab              TaxSlab?             @relation(fields: [taxSlabId], references: [id])
+  distributor           Supplier?            @relation(fields: [distributorId], references: [id])
 
   narcoticRegisterEntries NarcoticRegisterEntry[]
 
@@ -264,6 +268,7 @@ model Item {
   @@index([tenantId])
   @@index([tenantId, name])
   @@index([tenantId, barcode])
+  @@index([distributorId])
   @@map("items")
   promiseOrders        PromiseOrder[]
 
@@ -1445,6 +1450,7 @@ model Supplier {
   grns            Grn[]
   purchaseReturns PurchaseReturn[]
   ledgerEntries   SupplierLedgerEntry[]
+  itemsDistributed Item[]
 
   @@index([tenantId])
   @@index([tenantId, name])
