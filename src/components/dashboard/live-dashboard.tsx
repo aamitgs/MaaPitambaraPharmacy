@@ -82,7 +82,7 @@ function StatTile({
  *  is live rather than a snapshot from whenever it was opened. */
 function LiveIndicator({ dataUpdatedAt, isFetching }: { dataUpdatedAt: number; isFetching: boolean }) {
   return (
-    <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap text-xs text-muted-foreground">
+    <span className="ml-2 flex shrink-0 items-center gap-1.5 border-l pl-2 text-sm whitespace-nowrap text-muted-foreground">
       <span className="relative flex h-1.5 w-1.5">
         {!isFetching && (
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75" />
@@ -112,10 +112,10 @@ export function LiveDashboard({ initialData }: { initialData: DashboardData }) {
 
   return (
     <div className="space-y-4">
-      {/* Lives in the shared top bar, not this page's own rail — the same
-          spot every page's status controls go, and it stays visible even
-          while scrolled past the quick-tiles row below. */}
-      <TopBarPortal>
+      {/* Right after the clock — the numbers below are only ever as fresh
+          as the moment that clock reads, so the "live" badge belongs next
+          to the time, not off with the page's own action buttons. */}
+      <TopBarPortal target="topbar-clock-status">
         <LiveIndicator dataUpdatedAt={dataUpdatedAt} isFetching={isFetching} />
       </TopBarPortal>
 

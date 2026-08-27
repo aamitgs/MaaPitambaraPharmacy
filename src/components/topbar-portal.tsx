@@ -14,10 +14,21 @@ import { createPortal } from "react-dom";
  * stable, and the null server snapshot keeps hydration clean.
  */
 const subscribe = () => () => {};
-const getHost = () => document.getElementById("topbar-actions");
 const getServerHost = () => null;
 
-export function TopBarPortal({ children }: { children: React.ReactNode }) {
-  const host = useSyncExternalStore(subscribe, getHost, getServerHost);
+export function TopBarPortal({
+  children,
+  target = "topbar-actions",
+}: {
+  children: React.ReactNode;
+  /** Which host slot in the shell to render into — see app-shell.tsx for
+   *  the ids available. Defaults to the general-purpose actions slot. */
+  target?: string;
+}) {
+  const host = useSyncExternalStore(
+    subscribe,
+    () => document.getElementById(target),
+    getServerHost
+  );
   return host ? createPortal(children, host) : null;
 }
