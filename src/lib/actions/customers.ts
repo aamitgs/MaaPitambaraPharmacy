@@ -4,7 +4,7 @@ import { z } from "zod";
 import { localDateWindow } from "@/lib/date-range";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requirePermission, requireSession } from "@/lib/rbac";
+import { canDeleteRecords, requirePermission, requireSession } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 import { normalizePhone } from "@/lib/customer-identity";
 import {
@@ -107,6 +107,47 @@ export async function createCustomer(input: CustomerInput) {
   revalidatePath("/customers");
   revalidatePath("/pos");
   return serializeCustomer(customer);
+}
+
+export async function deleteCustomer(id: string) {
+  const session = await requireSession();
+  if (!canDeleteRecords(session.user.role)) {
+    throw new Error("You don't have permission to delete customers.");
+  }
+
+  const before = await prisma.customer.findFirst({
+    where: { id, tenantId: session.user.tenantId },
+  });
+  if (!before) throw new Error("Customer not found");
+
+  // Same rule as suppliers: a customer with a bill, a payment or a message
+  // against them has to stay findable on those records, so this is refused
+  // rather than risking a foreign-key failure or an erased ledger.
+  const [invoices, ledgerEntries, whatsappLogs] = await Promise.all([
+    prisma.salesInvoice.count({ where: { customerId: id } }),
+    prisma.customerLedgerEntry.count({ where: { customerId: id } }),
+    prisma.whatsAppLog.count({ where: { customerId: id } }),
+  ]);
+  const inUse = invoices + ledgerEntries + whatsappLogs;
+  if (inUse > 0) {
+    throw new Error(
+      `${before.name} has ${inUse} linked record${inUse === 1 ? "" : "s"} (invoices, payments or messages) and cannot be deleted. Consider editing it instead.`
+    );
+  }
+
+  await prisma.customer.delete({ where: { id } });
+
+  await writeAuditLog({
+    tenantId: session.user.tenantId,
+    userId: session.user.id,
+    action: "customer.delete",
+    entity: "Customer",
+    entityId: id,
+    before,
+  });
+
+  revalidatePath("/customers");
+  revalidatePath("/pos");
 }
 
 const paymentSchema = z.object({

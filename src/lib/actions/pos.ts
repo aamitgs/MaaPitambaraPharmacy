@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
 import type { UserRole } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
-import { requireSession, hasPermission } from "@/lib/rbac";
+import { requireSession, hasPermission, canDeleteRecords } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 import {
   computeBilling,
@@ -250,6 +250,42 @@ export async function quickAddDoctor(input: z.infer<typeof quickDoctorSchema>) {
   });
   revalidatePath("/pos");
   return doctor;
+}
+
+export async function deleteDoctor(id: string) {
+  const session = await requireSession();
+  if (!canDeleteRecords(session.user.role)) {
+    throw new Error("You don't have permission to delete doctors.");
+  }
+
+  const before = await prisma.doctor.findFirst({
+    where: { id, tenantId: session.user.tenantId },
+  });
+  if (!before) throw new Error("Doctor not found");
+
+  const [invoices, narcoticEntries] = await Promise.all([
+    prisma.salesInvoice.count({ where: { doctorId: id } }),
+    prisma.narcoticRegisterEntry.count({ where: { doctorId: id } }),
+  ]);
+  const inUse = invoices + narcoticEntries;
+  if (inUse > 0) {
+    throw new Error(
+      `${before.name} has ${inUse} linked record${inUse === 1 ? "" : "s"} (invoices or register entries) and cannot be deleted.`
+    );
+  }
+
+  await prisma.doctor.delete({ where: { id } });
+
+  await writeAuditLog({
+    tenantId: session.user.tenantId,
+    userId: session.user.id,
+    action: "doctor.delete",
+    entity: "Doctor",
+    entityId: id,
+    before,
+  });
+
+  revalidatePath("/doctors");
 }
 
 const saleLineSchema = z.object({

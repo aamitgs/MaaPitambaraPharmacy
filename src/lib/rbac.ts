@@ -34,6 +34,12 @@ export const canEditItemMaster = (role: UserRole) => role === "owner" || role ==
 export const canManageUsers = (role: UserRole) => role === "owner";
 export const canCancelInvoice = (role: UserRole) => role === "owner" || role === "pharmacist";
 export const canManageCompliance = (role: UserRole) => role === "owner" || role === "pharmacist";
+// Deleting a customer or supplier record is narrower than editing one:
+// counter staff can add and edit customers day-to-day (customers.manage),
+// but removing a record outright wants the same second pair of eyes as
+// writing off stock — so this stays owner/pharmacist regardless of what
+// customers.manage itself grants.
+export const canDeleteRecords = (role: UserRole) => role === "owner" || role === "pharmacist";
 
 /**
  * Fine-grained gate, replacing the role-list checks. Two deliberate

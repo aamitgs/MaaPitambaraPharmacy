@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Users } from "lucide-react";
-import { listCustomers } from "@/lib/actions/customers";
+import { listCustomers, deleteCustomer } from "@/lib/actions/customers";
 import { getDuplicateCustomers } from "@/lib/actions/customer-merge";
 import { Button } from "@/components/ui/button";
 import { CustomerForm } from "@/components/customers/customer-form";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { DeleteRowButton } from "@/components/delete-row-button";
 
 export default async function CustomersPage() {
   const [customers, duplicates] = await Promise.all([listCustomers(), getDuplicateCustomers()]);
@@ -40,6 +41,7 @@ export default async function CustomersPage() {
               <TableHead>Phone</TableHead>
               <TableHead>Credit account</TableHead>
               <TableHead className="text-right">Outstanding</TableHead>
+              <TableHead />
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -66,11 +68,14 @@ export default async function CustomersPage() {
                       "₹0.00"
                     )}
                   </TableCell>
+                  <TableCell className="text-right">
+                    <DeleteRowButton label={c.name} id={c.id} action={deleteCustomer} />
+                  </TableCell>
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={4} className="h-24 text-center text-muted-foreground">
+                <TableCell colSpan={5} className="h-24 text-center text-muted-foreground">
                   No customers yet.
                 </TableCell>
               </TableRow>

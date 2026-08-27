@@ -122,6 +122,45 @@ export async function updateSupplier(id: string, input: SupplierInput) {
   return serializeSupplier(supplier);
 }
 
+export async function deleteSupplier(id: string) {
+  const session = await requirePermission("purchasing.manage");
+
+  const before = await prisma.supplier.findFirst({
+    where: { id, tenantId: session.user.tenantId },
+  });
+  if (!before) throw new Error("Supplier not found");
+
+  // A supplier with real history — an order, a delivery, a return, a
+  // payment — has to stay findable on those records forever. Deleting it
+  // would either fail on the foreign key or (for the cascading ledger)
+  // silently erase the payment trail, so this is refused rather than risked.
+  const [orders, grns, returns, ledgerEntries] = await Promise.all([
+    prisma.purchaseOrder.count({ where: { supplierId: id } }),
+    prisma.grn.count({ where: { supplierId: id } }),
+    prisma.purchaseReturn.count({ where: { supplierId: id } }),
+    prisma.supplierLedgerEntry.count({ where: { supplierId: id } }),
+  ]);
+  const inUse = orders + grns + returns + ledgerEntries;
+  if (inUse > 0) {
+    throw new Error(
+      `${before.name} has ${inUse} linked record${inUse === 1 ? "" : "s"} (orders, deliveries, returns or payments) and cannot be deleted. Consider editing it instead.`
+    );
+  }
+
+  await prisma.supplier.delete({ where: { id } });
+
+  await writeAuditLog({
+    tenantId: session.user.tenantId,
+    userId: session.user.id,
+    action: "supplier.delete",
+    entity: "Supplier",
+    entityId: id,
+    before,
+  });
+
+  revalidatePath("/suppliers");
+}
+
 const paymentSchema = z.object({
   amount: z.coerce.number().positive(),
   note: z.string().trim().optional(),

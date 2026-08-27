@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import type { PlainSupplier } from "@/lib/serialize";
+import { deleteSupplier } from "@/lib/actions/suppliers";
+import { DeleteRowButton } from "@/components/delete-row-button";
 
 const features = tableFeatures({});
 const columnHelper = createColumnHelper<typeof features, PlainSupplier>();
@@ -64,12 +66,15 @@ const columns = columnHelper.columns([
     id: "actions",
     header: "",
     cell: ({ row }) => (
-      <Link
-        href={`/suppliers/${row.original.id}/edit`}
-        className="text-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
-      >
-        Edit
-      </Link>
+      <div className="flex items-center justify-end gap-3">
+        <Link
+          href={`/suppliers/${row.original.id}/edit`}
+          className="text-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+        >
+          Edit
+        </Link>
+        <DeleteRowButton label={row.original.name} id={row.original.id} action={deleteSupplier} />
+      </div>
     ),
   }),
 ]);

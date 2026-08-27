@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { requireSession } from "@/lib/rbac";
 import { DoctorForm } from "@/components/customers/doctor-form";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { deleteDoctor } from "@/lib/actions/pos";
+import { DeleteRowButton } from "@/components/delete-row-button";
 
 export default async function DoctorsPage() {
   const session = await requireSession();
@@ -29,6 +31,8 @@ export default async function DoctorsPage() {
               <TableHead>Name</TableHead>
               <TableHead>Registration no.</TableHead>
               <TableHead>Clinic</TableHead>
+              <TableHead>Phone</TableHead>
+              <TableHead />
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -38,11 +42,23 @@ export default async function DoctorsPage() {
                   <TableCell className="font-medium">{d.name}</TableCell>
                   <TableCell>{d.registrationNo || "—"}</TableCell>
                   <TableCell>{d.clinicName || "—"}</TableCell>
+                  <TableCell>
+                    {d.phone ? (
+                      <a href={`tel:${d.phone}`} className="hover:underline">
+                        {d.phone}
+                      </a>
+                    ) : (
+                      "—"
+                    )}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <DeleteRowButton label={d.name} id={d.id} action={deleteDoctor} />
+                  </TableCell>
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={3} className="h-24 text-center text-muted-foreground">
+                <TableCell colSpan={5} className="h-24 text-center text-muted-foreground">
                   No doctors yet.
                 </TableCell>
               </TableRow>
