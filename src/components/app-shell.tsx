@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import { CurrentTime } from "@/components/current-time";
 import { GlobalSearch } from "@/components/search/global-search";
 import { NotesPanel } from "@/components/notes/notes-panel";
-import { StickerIcon } from "@/components/ui/sticker-icon";
 import {
   LayoutDashboard,
   ScanBarcode,
@@ -305,14 +304,14 @@ export function AppShell({
                 href={item.href}
                 aria-label={collapsed ? item.label : undefined}
                 className={cn(
-                  "group flex items-center gap-2.5 rounded-md py-1.5 text-sm transition-colors",
-                  collapsed ? "justify-center px-1.5" : "px-1.5",
+                  "flex items-center gap-2 rounded-md py-1.5 text-sm transition-colors",
+                  collapsed ? "justify-center px-2" : "px-2.5",
                   active
                     ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
                     : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                 )}
               >
-                <StickerIcon icon={Icon} seed={item.label} active={active} className="h-8 w-8" />
+                <Icon className="h-4 w-4 shrink-0" />
                 {!collapsed && item.label}
               </Link>
             );

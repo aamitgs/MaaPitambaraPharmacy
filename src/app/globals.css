@@ -121,17 +121,6 @@
     --sidebar-accent-foreground: oklch(0.369 0.119 2.4);
     --sidebar-border: oklch(0.905 0.016 75);
     --sidebar-ring: oklch(0.369 0.119 2.4);
-
-    /* Sticker nav icon accents — decorative only (star/blob accent on the
-       icon card), never used for text or surfaces. Gold and maroon reuse the
-       brand pair; teal/sky/terracotta extend it the same way chart-5 already
-       does, so 46 nav items read as distinct without leaving the palette. */
-    --sticker-teal: oklch(0.6 0.09 165);
-    --sticker-teal-light: oklch(0.75 0.08 165);
-    --sticker-sky: oklch(0.62 0.12 235);
-    --sticker-sky-light: oklch(0.78 0.09 235);
-    --sticker-terracotta: oklch(0.6 0.08 30);
-    --sticker-terracotta-light: oklch(0.75 0.08 30);
 }
 
 .dark {
@@ -180,13 +169,6 @@
     --sidebar-accent-foreground: oklch(0.96 0.008 80);
     --sidebar-border: oklch(1 0 0 / 12%);
     --sidebar-ring: oklch(0.5 0.15 4);
-
-    --sticker-teal: oklch(0.72 0.11 165);
-    --sticker-teal-light: oklch(0.84 0.09 165);
-    --sticker-sky: oklch(0.74 0.13 235);
-    --sticker-sky-light: oklch(0.86 0.09 235);
-    --sticker-terracotta: oklch(0.7 0.1 30);
-    --sticker-terracotta-light: oklch(0.82 0.09 30);
 }
 
 @layer base {
