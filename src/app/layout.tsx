@@ -6,6 +6,7 @@ import { Providers } from "@/components/providers";
 import { getBranding } from "@/lib/branding";
 import { BrandStyle } from "@/components/brand-style";
 import { ServiceWorker } from "@/components/service-worker";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const fontMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -44,6 +45,7 @@ export default function RootLayout({
         <BrandStyle />
         <ServiceWorker />
         <Providers>{children}</Providers>
+        <SpeedInsights />
       </body>
     </html>
   );

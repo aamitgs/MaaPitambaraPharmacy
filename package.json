@@ -2,7 +2,7 @@
   "name": "maa-pitambara-pharmacy",
   "version": "0.1.0",
   "private": true,
-  "description": "Maa Pitambara Pharmacy \u2014 counter billing, inventory & GST compliance",
+  "description": "Maa Pitambara Pharmacy — counter billing, inventory & GST compliance",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -27,6 +27,7 @@
     "@tanstack/react-query": "^5.101.4",
     "@tanstack/react-table": "^9.1.2",
     "@types/nodemailer": "^8.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
