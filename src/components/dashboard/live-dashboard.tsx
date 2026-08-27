@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { SalesTrendChart } from "@/components/dashboard/sales-trend-chart";
 import { QuickTiles } from "@/components/dashboard/quick-tiles";
+import { TopBarPortal } from "@/components/topbar-portal";
 import { cn } from "@/lib/utils";
 import {
   AlertTriangle,
@@ -111,25 +112,27 @@ export function LiveDashboard({ initialData }: { initialData: DashboardData }) {
 
   return (
     <div className="space-y-4">
+      {/* Lives in the shared top bar, not this page's own rail — the same
+          spot every page's status controls go, and it stays visible even
+          while scrolled past the quick-tiles row below. */}
+      <TopBarPortal>
+        <LiveIndicator dataUpdatedAt={dataUpdatedAt} isFetching={isFetching} />
+      </TopBarPortal>
+
       {/* Sticky rail: -mx-6 + px-6 lets it span the page's padding so the
           content scrolling under it is covered, and top-0 sticks it to the
           shell's scroll container rather than the window. */}
       <div className="sticky top-0 z-20 -mx-6 border-b bg-background/95 px-6 py-3 supports-backdrop-filter:bg-background/75 supports-backdrop-filter:backdrop-blur">
-        <div className="flex items-center gap-3">
-          <div className="min-w-0 flex-1">
-            <QuickTiles
-              role={data.role}
-              alertCount={data.lowStockCount + data.nearExpiryCount + data.licenseExpiryCount}
-              lowStockCount={data.lowStockCount}
-              nearExpiryCount={data.nearExpiryCount}
-              openPurchaseOrderCount={data.openPurchaseOrderCount}
-              todayInvoiceCount={data.todaySalesCount}
-              supplierOutstanding={data.supplierOutstandingTotal}
-              backupStale={data.backupStatus.isStale}
-            />
-          </div>
-          <LiveIndicator dataUpdatedAt={dataUpdatedAt} isFetching={isFetching} />
-        </div>
+        <QuickTiles
+          role={data.role}
+          alertCount={data.lowStockCount + data.nearExpiryCount + data.licenseExpiryCount}
+          lowStockCount={data.lowStockCount}
+          nearExpiryCount={data.nearExpiryCount}
+          openPurchaseOrderCount={data.openPurchaseOrderCount}
+          todayInvoiceCount={data.todaySalesCount}
+          supplierOutstanding={data.supplierOutstandingTotal}
+          backupStale={data.backupStatus.isStale}
+        />
       </div>
 
       {data.backupStatus.isStale && (
