@@ -360,7 +360,7 @@ export function AppShell({
       </aside>
       <main className="flex h-full flex-1 flex-col overflow-hidden bg-background print:h-auto print:w-full print:overflow-visible">
         <div className="flex h-16 shrink-0 items-center justify-between gap-4 border-b px-4 print:hidden">
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-3">
             <Button
               variant="ghost"
               size="icon-sm"

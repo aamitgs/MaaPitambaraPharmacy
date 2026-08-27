@@ -42,7 +42,7 @@ export function CurrentTime() {
   const date = new Date(now);
 
   return (
-    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+    <div className="flex shrink-0 items-center gap-2 text-sm whitespace-nowrap text-muted-foreground">
       <Clock className="h-4 w-4" aria-hidden />
       <span className="hidden sm:inline">{format(date, "EEE, dd MMM yyyy")}</span>
       <span className="font-mono tabular-nums text-foreground">
