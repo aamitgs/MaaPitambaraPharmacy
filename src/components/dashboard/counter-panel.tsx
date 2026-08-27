@@ -29,7 +29,7 @@ export function CounterPanel({
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="outline" size="sm">
-          <Clock className="h-4 w-4" /> Counter hours
+          <Clock className="h-4 w-4 text-chart-3" /> Counter hours
         </Button>
       </SheetTrigger>
       <SheetContent className="gap-0 p-0">

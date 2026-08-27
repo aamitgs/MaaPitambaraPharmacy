@@ -79,7 +79,7 @@ export function NotesPanel({ notes, role }: { notes: NoteItem[]; role: UserRole 
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="outline" size="sm" className="relative">
-          <NotebookPen className="h-4 w-4" /> Notes
+          <NotebookPen className="h-4 w-4 text-chart-5" /> Notes
           {outstanding.length > 0 && (
             <span
               className={cn(

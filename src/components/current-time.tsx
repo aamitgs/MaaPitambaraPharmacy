@@ -43,7 +43,7 @@ export function CurrentTime() {
 
   return (
     <div className="flex shrink-0 items-center gap-2 text-sm whitespace-nowrap text-muted-foreground">
-      <Clock className="h-4 w-4" aria-hidden />
+      <Clock className="h-4 w-4 text-chart-2" aria-hidden />
       <span className="hidden sm:inline">{format(date, "EEE, dd MMM yyyy")}</span>
       <span className="font-mono tabular-nums text-foreground">
         {format(date, "hh:mm:ss a")}
