@@ -375,10 +375,6 @@ export function AppShell({
               )}
             </Button>
             <CurrentTime />
-            {/* A page can portal a status badge in right after the clock —
-                the dashboard's live-update indicator, for one — rather than
-                it competing for space with the actions on the other side. */}
-            <div id="topbar-clock-status" />
           </div>
           {/* Pages render their own actions here through TopBarPortal, so the
               app keeps one header row rather than each screen adding its own. */}

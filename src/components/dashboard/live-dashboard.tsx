@@ -8,7 +8,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { SalesTrendChart } from "@/components/dashboard/sales-trend-chart";
 import { QuickTiles } from "@/components/dashboard/quick-tiles";
-import { TopBarPortal } from "@/components/topbar-portal";
 import { cn } from "@/lib/utils";
 import {
   AlertTriangle,
@@ -77,12 +76,14 @@ function StatTile({
   );
 }
 
-/** A small pulsing dot plus how long ago the numbers below it were last
+/** A small pulsing dot plus how long ago the numbers above it were last
  *  confirmed against the database — the one visible sign that this screen
- *  is live rather than a snapshot from whenever it was opened. */
+ *  is live rather than a snapshot from whenever it was opened. Sits at the
+ *  foot of the page, under what it's describing, rather than competing for
+ *  space in the header. */
 function LiveIndicator({ dataUpdatedAt, isFetching }: { dataUpdatedAt: number; isFetching: boolean }) {
   return (
-    <span className="ml-2 flex shrink-0 items-center gap-1.5 border-l pl-2 text-sm whitespace-nowrap text-muted-foreground">
+    <div className="flex items-center justify-center gap-1.5 py-2 text-xs text-muted-foreground">
       <span className="relative flex h-1.5 w-1.5">
         {!isFetching && (
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75" />
@@ -95,7 +96,7 @@ function LiveIndicator({ dataUpdatedAt, isFetching }: { dataUpdatedAt: number; i
         />
       </span>
       {isFetching ? "Updating…" : `Live · updated ${formatDistanceToNow(dataUpdatedAt, { addSuffix: true })}`}
-    </span>
+    </div>
   );
 }
 
@@ -112,13 +113,6 @@ export function LiveDashboard({ initialData }: { initialData: DashboardData }) {
 
   return (
     <div className="space-y-4">
-      {/* Right after the clock — the numbers below are only ever as fresh
-          as the moment that clock reads, so the "live" badge belongs next
-          to the time, not off with the page's own action buttons. */}
-      <TopBarPortal target="topbar-clock-status">
-        <LiveIndicator dataUpdatedAt={dataUpdatedAt} isFetching={isFetching} />
-      </TopBarPortal>
-
       {/* Sticky rail: -mx-6 + px-6 lets it span the page's padding so the
           content scrolling under it is covered, and top-0 sticks it to the
           shell's scroll container rather than the window. */}
@@ -353,6 +347,8 @@ export function LiveDashboard({ initialData }: { initialData: DashboardData }) {
           </CardContent>
         </Card>
       </div>
+
+      <LiveIndicator dataUpdatedAt={dataUpdatedAt} isFetching={isFetching} />
     </div>
   );
 }
