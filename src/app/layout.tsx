@@ -46,8 +46,14 @@ export default function RootLayout({
         <BrandStyle />
         <ServiceWorker />
         <Providers>{children}</Providers>
-        <SpeedInsights />
-        <Analytics />
+        {/* Vercel-only: the scripts these mount 404 on the self-hosted shop
+            build, which is a real deployment target for this app. */}
+        {process.env.VERCEL && (
+          <>
+            <SpeedInsights />
+            <Analytics />
+          </>
+        )}
       </body>
     </html>
   );
