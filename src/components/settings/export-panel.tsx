@@ -4,6 +4,8 @@ import { Download } from "lucide-react";
 const EXPORTS = [
   { href: "/api/export/items", label: "Item master" },
   { href: "/api/export/batches", label: "Batch / stock" },
+  { href: "/api/export/suppliers", label: "Suppliers" },
+  { href: "/api/export/customers", label: "Customers" },
   { href: "/api/export/sales", label: "Sales register" },
 ] as const;
 

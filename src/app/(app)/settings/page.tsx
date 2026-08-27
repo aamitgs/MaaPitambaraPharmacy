@@ -36,7 +36,8 @@ export default async function SettingsPage() {
       <Tabs defaultValue="backup">
         <TabsList>
           <TabsTrigger value="backup">Backup</TabsTrigger>
-          <TabsTrigger value="data">Import / Export</TabsTrigger>
+          {canImport && <TabsTrigger value="import">Import</TabsTrigger>}
+          <TabsTrigger value="export">Export</TabsTrigger>
           {isOwner && <TabsTrigger value="selling">Stock warnings</TabsTrigger>}
           {isOwner && <TabsTrigger value="integrations">Integrations</TabsTrigger>}
           {isOwner && <TabsTrigger value="retention">Retention</TabsTrigger>}
@@ -50,17 +51,16 @@ export default async function SettingsPage() {
             canRestore={isOwner}
           />
         </TabsContent>
-        <TabsContent value="data" className="space-y-6 pt-4">
-          {canImport && (
-            <>
-              <ImportPanel />
-              <Separator className="max-w-3xl" />
-              <PartyImportPanel kind="supplier" />
-              <Separator className="max-w-3xl" />
-              <PartyImportPanel kind="customer" />
-              <Separator className="max-w-3xl" />
-            </>
-          )}
+        {canImport && (
+          <TabsContent value="import" className="space-y-6 pt-4">
+            <ImportPanel />
+            <Separator className="max-w-3xl" />
+            <PartyImportPanel kind="supplier" />
+            <Separator className="max-w-3xl" />
+            <PartyImportPanel kind="customer" />
+          </TabsContent>
+        )}
+        <TabsContent value="export" className="pt-4">
           <ExportPanel />
         </TabsContent>
         {isOwner && selling && (
