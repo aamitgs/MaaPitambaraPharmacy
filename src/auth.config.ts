@@ -22,6 +22,19 @@ const PUBLIC_ASSETS = new Set([
   "/offline.html",
 ]);
 
+/**
+ * `Number("")` is `0`, not `NaN` — so an env var that's set but blank
+ * silently survives `?? 15` (which only catches null/undefined) and gives
+ * every session cookie a zero-second lifetime. A browser correctly reads
+ * that `Expires` as already past and deletes the cookie on arrival, so
+ * sign-in looks like it succeeds server-side (session row written, JWT
+ * signed) and then silently fails in the browser with no error to show.
+ */
+function readIdleTimeoutMinutes(): number {
+  const raw = Number(process.env.SESSION_IDLE_TIMEOUT_MINUTES);
+  return Number.isFinite(raw) && raw > 0 ? raw : 15;
+}
+
 export const authConfig = {
   // Required behind any proxy we terminate TLS at: Auth.js only trusts the
   // incoming Host header automatically when it can detect a Vercel
@@ -40,7 +53,7 @@ export const authConfig = {
     // Idle-timeout approximation: the cookie's lifetime is the idle window,
     // and it's re-issued (sliding) whenever `updateAge` has elapsed since
     // the last request that touched the session.
-    maxAge: Number(process.env.SESSION_IDLE_TIMEOUT_MINUTES ?? 15) * 60,
+    maxAge: readIdleTimeoutMinutes() * 60,
     updateAge: 60,
   },
   callbacks: {
