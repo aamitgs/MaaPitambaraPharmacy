@@ -3,11 +3,12 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { hasPermission, requirePermission, requireSession } from "@/lib/rbac";
+import { hasPermission, requirePermission, requireSession, UnauthorizedError } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 import { serializeItem, serializeBatch } from "@/lib/serialize";
 import { getBranchFilter, resolveConcreteBranch } from "@/lib/branch-scope";
 import { buildInternalBarcode } from "@/lib/barcode/internal-code";
+import type { DeleteResult } from "@/lib/delete-result";
 
 const scheduleClassEnum = z.enum(["none", "H", "H1", "X", "G"]);
 
@@ -198,13 +199,28 @@ export async function updateItem(id: string, input: ItemInput) {
   return serializeItem(item);
 }
 
-export async function deleteItem(id: string) {
+export async function deleteItem(id: string): Promise<DeleteResult> {
+  try {
+    return await deleteItemInner(id);
+  } catch (err) {
+    // Thrown errors are redacted before a Client Component sees the
+    // message, so anything that reaches here — a permission check
+    // included — has to become a returned message instead. See
+    // src/lib/delete-result.ts.
+    if (err instanceof UnauthorizedError) {
+      return { ok: false, message: "You don't have permission to delete items." };
+    }
+    throw err;
+  }
+}
+
+async function deleteItemInner(id: string): Promise<DeleteResult> {
   const session = await requirePermission("items.manage");
 
   const before = await prisma.item.findFirst({
     where: { id, tenantId: session.user.tenantId },
   });
-  if (!before) throw new Error("Item not found");
+  if (!before) return { ok: false, message: "Item not found." };
 
   // Retiring (setItemActive) is for an item with real history — stock that
   // still has to be found, invoices that still have to make sense. Delete
@@ -247,9 +263,10 @@ export async function deleteItem(id: string) {
     countLines +
     narcoticEntries;
   if (inUse > 0) {
-    throw new Error(
-      `${before.name} has ${inUse} linked record${inUse === 1 ? "" : "s"} (batches, orders, invoices, transfers or counts) and cannot be deleted. Retire it instead.`
-    );
+    return {
+      ok: false,
+      message: `${before.name} has ${inUse} linked record${inUse === 1 ? "" : "s"} (batches, orders, invoices, transfers or counts) and cannot be deleted. Retire it instead.`,
+    };
   }
 
   await prisma.item.delete({ where: { id } });
@@ -264,6 +281,7 @@ export async function deleteItem(id: string) {
   });
 
   revalidatePath("/items");
+  return { ok: true };
 }
 
 export async function createBatch(input: BatchInput) {

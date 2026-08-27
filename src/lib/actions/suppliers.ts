@@ -3,13 +3,14 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { requirePermission, requireSession } from "@/lib/rbac";
+import { requirePermission, requireSession, UnauthorizedError } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
 import {
   serializeSupplier,
   serializeSupplierLedgerEntry,
   type PlainSupplier,
 } from "@/lib/serialize";
+import type { DeleteResult } from "@/lib/delete-result";
 
 const supplierSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
@@ -122,13 +123,28 @@ export async function updateSupplier(id: string, input: SupplierInput) {
   return serializeSupplier(supplier);
 }
 
-export async function deleteSupplier(id: string) {
+export async function deleteSupplier(id: string): Promise<DeleteResult> {
+  try {
+    return await deleteSupplierInner(id);
+  } catch (err) {
+    // Thrown errors are redacted before a Client Component sees the
+    // message, so anything that reaches here — a permission check
+    // included — has to become a returned message instead. See
+    // src/lib/delete-result.ts.
+    if (err instanceof UnauthorizedError) {
+      return { ok: false, message: "You don't have permission to delete suppliers." };
+    }
+    throw err;
+  }
+}
+
+async function deleteSupplierInner(id: string): Promise<DeleteResult> {
   const session = await requirePermission("purchasing.manage");
 
   const before = await prisma.supplier.findFirst({
     where: { id, tenantId: session.user.tenantId },
   });
-  if (!before) throw new Error("Supplier not found");
+  if (!before) return { ok: false, message: "Supplier not found." };
 
   // A supplier with real history — an order, a delivery, a return, a
   // payment — has to stay findable on those records forever. Deleting it
@@ -142,9 +158,10 @@ export async function deleteSupplier(id: string) {
   ]);
   const inUse = orders + grns + returns + ledgerEntries;
   if (inUse > 0) {
-    throw new Error(
-      `${before.name} has ${inUse} linked record${inUse === 1 ? "" : "s"} (orders, deliveries, returns or payments) and cannot be deleted. Consider editing it instead.`
-    );
+    return {
+      ok: false,
+      message: `${before.name} has ${inUse} linked record${inUse === 1 ? "" : "s"} (orders, deliveries, returns or payments) and cannot be deleted. Consider editing it instead.`,
+    };
   }
 
   await prisma.supplier.delete({ where: { id } });
@@ -159,6 +176,7 @@ export async function deleteSupplier(id: string) {
   });
 
   revalidatePath("/suppliers");
+  return { ok: true };
 }
 
 const paymentSchema = z.object({

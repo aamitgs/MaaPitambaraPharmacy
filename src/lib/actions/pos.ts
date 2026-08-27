@@ -35,6 +35,7 @@ import { resolveTaxRate } from "@/lib/tax/resolve";
 import { rateFor, effectiveBasis } from "@/lib/pricing";
 import { computeCustomerOutstandingBalances } from "@/lib/actions/customers";
 import { format } from "date-fns";
+import type { DeleteResult } from "@/lib/delete-result";
 
 const REQUIRES_PRESCRIPTION: readonly string[] = ["H", "H1", "X"];
 
@@ -252,16 +253,21 @@ export async function quickAddDoctor(input: z.infer<typeof quickDoctorSchema>) {
   return doctor;
 }
 
-export async function deleteDoctor(id: string) {
+export async function deleteDoctor(id: string): Promise<DeleteResult> {
+  // Thrown errors are redacted before a Client Component sees the message
+  // (see src/lib/delete-result.ts), so every refusal below is a return,
+  // not a throw — requireSession() is the one exception left able to
+  // throw, for the same "shouldn't happen" reason every other action
+  // leaves it unguarded.
   const session = await requireSession();
   if (!canDeleteRecords(session.user.role)) {
-    throw new Error("You don't have permission to delete doctors.");
+    return { ok: false, message: "You don't have permission to delete doctors." };
   }
 
   const before = await prisma.doctor.findFirst({
     where: { id, tenantId: session.user.tenantId },
   });
-  if (!before) throw new Error("Doctor not found");
+  if (!before) return { ok: false, message: "Doctor not found." };
 
   const [invoices, narcoticEntries] = await Promise.all([
     prisma.salesInvoice.count({ where: { doctorId: id } }),
@@ -269,9 +275,10 @@ export async function deleteDoctor(id: string) {
   ]);
   const inUse = invoices + narcoticEntries;
   if (inUse > 0) {
-    throw new Error(
-      `${before.name} has ${inUse} linked record${inUse === 1 ? "" : "s"} (invoices or register entries) and cannot be deleted.`
-    );
+    return {
+      ok: false,
+      message: `${before.name} has ${inUse} linked record${inUse === 1 ? "" : "s"} (invoices or register entries) and cannot be deleted.`,
+    };
   }
 
   await prisma.doctor.delete({ where: { id } });
@@ -286,6 +293,7 @@ export async function deleteDoctor(id: string) {
   });
 
   revalidatePath("/doctors");
+  return { ok: true };
 }
 
 const saleLineSchema = z.object({

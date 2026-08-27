@@ -12,6 +12,7 @@ import {
   serializeCustomerLedgerEntry,
   type PlainCustomer,
 } from "@/lib/serialize";
+import type { DeleteResult } from "@/lib/delete-result";
 
 /**
  * Customer.outstandingBalance is a cache column, never trusted. The real
@@ -109,16 +110,21 @@ export async function createCustomer(input: CustomerInput) {
   return serializeCustomer(customer);
 }
 
-export async function deleteCustomer(id: string) {
+export async function deleteCustomer(id: string): Promise<DeleteResult> {
+  // Thrown errors are redacted before a Client Component sees the message
+  // (see src/lib/delete-result.ts), so every refusal below is a return,
+  // not a throw — requireSession() is the one exception left able to
+  // throw, for the same "shouldn't happen" reason every other action
+  // leaves it unguarded.
   const session = await requireSession();
   if (!canDeleteRecords(session.user.role)) {
-    throw new Error("You don't have permission to delete customers.");
+    return { ok: false, message: "You don't have permission to delete customers." };
   }
 
   const before = await prisma.customer.findFirst({
     where: { id, tenantId: session.user.tenantId },
   });
-  if (!before) throw new Error("Customer not found");
+  if (!before) return { ok: false, message: "Customer not found." };
 
   // Same rule as suppliers: a customer with a bill, a payment or a message
   // against them has to stay findable on those records, so this is refused
@@ -130,9 +136,10 @@ export async function deleteCustomer(id: string) {
   ]);
   const inUse = invoices + ledgerEntries + whatsappLogs;
   if (inUse > 0) {
-    throw new Error(
-      `${before.name} has ${inUse} linked record${inUse === 1 ? "" : "s"} (invoices, payments or messages) and cannot be deleted. Consider editing it instead.`
-    );
+    return {
+      ok: false,
+      message: `${before.name} has ${inUse} linked record${inUse === 1 ? "" : "s"} (invoices, payments or messages) and cannot be deleted. Consider editing it instead.`,
+    };
   }
 
   await prisma.customer.delete({ where: { id } });
@@ -148,6 +155,7 @@ export async function deleteCustomer(id: string) {
 
   revalidatePath("/customers");
   revalidatePath("/pos");
+  return { ok: true };
 }
 
 const paymentSchema = z.object({

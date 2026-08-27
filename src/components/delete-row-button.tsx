@@ -15,6 +15,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import type { DeleteResult } from "@/lib/delete-result";
 
 /**
  * The confirm-then-delete link used across the master-data list tables
@@ -39,7 +40,7 @@ export function DeleteRowButton({
    * at render with "Functions cannot be passed directly to Client
    * Components".
    */
-  action: (id: string) => Promise<unknown>;
+  action: (id: string) => Promise<DeleteResult>;
 }) {
   const [open, setOpen] = useState(false);
   const [pending, startTransition] = useTransition();
@@ -48,12 +49,19 @@ export function DeleteRowButton({
   function confirm() {
     startTransition(async () => {
       try {
-        await action(id);
-        toast.success(`${label} deleted`);
-        setOpen(false);
-        router.refresh();
-      } catch (err) {
-        toast.error(err instanceof Error ? err.message : "Could not delete");
+        const result = await action(id);
+        if (result.ok) {
+          toast.success(`${label} deleted`);
+          setOpen(false);
+          router.refresh();
+        } else {
+          toast.error(result.message);
+        }
+      } catch {
+        // A genuinely unexpected failure (network drop, DB down) — the
+        // real message never reaches here (see DeleteResult above), so
+        // there's nothing more specific to show.
+        toast.error("Something went wrong. Try again.");
       }
     });
   }
