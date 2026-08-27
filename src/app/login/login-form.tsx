@@ -67,6 +67,14 @@ export function LoginForm({
         password,
         totpCode: needsTotp ? (codeOverride ?? totpCode) : "",
         redirect: false,
+        // Matches the callback-url cookie /api/auth/csrf already set (the
+        // bare origin), so Auth.js sees no change and skips rewriting that
+        // cookie. Otherwise this response carries two Set-Cookie headers,
+        // and Vercel's edge brotli-compresses the pair into one the browser
+        // can't parse back apart — silently dropping the session cookie.
+        // The actual post-login destination is still `callbackUrl` below,
+        // handled entirely by our own redirect once signIn() resolves.
+        callbackUrl: window.location.origin,
       });
 
       if (result?.error) {
