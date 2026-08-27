@@ -184,6 +184,74 @@ export async function updateItem(id: string, input: ItemInput) {
   return serializeItem(item);
 }
 
+export async function deleteItem(id: string) {
+  const session = await requirePermission("items.manage");
+
+  const before = await prisma.item.findFirst({
+    where: { id, tenantId: session.user.tenantId },
+  });
+  if (!before) throw new Error("Item not found");
+
+  // Retiring (setItemActive) is for an item with real history — stock that
+  // still has to be found, invoices that still have to make sense. Delete
+  // is the other case: an item that was never actually used, most often one
+  // that arrived via a bulk import and turned out unwanted. Every relation
+  // below is checked rather than just "batches", because a purchase order
+  // line can name an item before any batch of it has ever been received.
+  const [
+    batches,
+    salesLines,
+    poLines,
+    grnLines,
+    purchaseReturnLines,
+    salesReturnLines,
+    transferLines,
+    adjustmentLines,
+    countLines,
+    narcoticEntries,
+  ] = await Promise.all([
+    prisma.batch.count({ where: { itemId: id } }),
+    prisma.salesInvoiceItem.count({ where: { itemId: id } }),
+    prisma.purchaseOrderItem.count({ where: { itemId: id } }),
+    prisma.grnItem.count({ where: { itemId: id } }),
+    prisma.purchaseReturnItem.count({ where: { itemId: id } }),
+    prisma.salesReturnItem.count({ where: { itemId: id } }),
+    prisma.stockTransferItem.count({ where: { itemId: id } }),
+    prisma.stockAdjustmentItem.count({ where: { itemId: id } }),
+    prisma.stockCountLine.count({ where: { itemId: id } }),
+    prisma.narcoticRegisterEntry.count({ where: { itemId: id } }),
+  ]);
+  const inUse =
+    batches +
+    salesLines +
+    poLines +
+    grnLines +
+    purchaseReturnLines +
+    salesReturnLines +
+    transferLines +
+    adjustmentLines +
+    countLines +
+    narcoticEntries;
+  if (inUse > 0) {
+    throw new Error(
+      `${before.name} has ${inUse} linked record${inUse === 1 ? "" : "s"} (batches, orders, invoices, transfers or counts) and cannot be deleted. Retire it instead.`
+    );
+  }
+
+  await prisma.item.delete({ where: { id } });
+
+  await writeAuditLog({
+    tenantId: session.user.tenantId,
+    userId: session.user.id,
+    action: "item.delete",
+    entity: "Item",
+    entityId: id,
+    before,
+  });
+
+  revalidatePath("/items");
+}
+
 export async function createBatch(input: BatchInput) {
   const session = await requirePermission("items.manage");
   const parsed = batchSchema.parse(input);

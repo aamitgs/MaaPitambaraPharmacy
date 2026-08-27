@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import type { ItemWithFlags } from "./types";
+import { deleteItem } from "@/lib/actions/items";
+import { DeleteRowButton } from "@/components/delete-row-button";
 
 // No sorting/column-filtering feature needed — search is a plain substring
 // match applied to `data` below, so the table itself only needs the core
@@ -121,6 +123,21 @@ const columns = columnHelper.columns([
         <Badge className="bg-success/15 text-success hover:bg-success/15">OK</Badge>
       );
     },
+  }),
+  columnHelper.display({
+    id: "actions",
+    header: "",
+    cell: ({ row }) => (
+      <div className="flex items-center justify-end gap-3">
+        <Link
+          href={`/items/${row.original.id}/edit`}
+          className="text-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+        >
+          Edit
+        </Link>
+        <DeleteRowButton label={row.original.name} id={row.original.id} action={deleteItem} />
+      </div>
+    ),
   }),
 ]);
 
