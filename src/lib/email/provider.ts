@@ -54,7 +54,10 @@ export async function sendEmailMessage(message: EmailMessage): Promise<EmailSend
     };
   }
 
-  const port = Number(process.env.SMTP_PORT ?? 587);
+  // Number("") is 0, not NaN, so a blank-but-set env var would otherwise
+  // silently produce an invalid port instead of falling back to 587.
+  const parsedPort = Number(process.env.SMTP_PORT);
+  const port = Number.isFinite(parsedPort) && parsedPort > 0 ? parsedPort : 587;
   try {
     const transport = nodemailer.createTransport({
       host,
