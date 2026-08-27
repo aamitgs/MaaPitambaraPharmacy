@@ -106,7 +106,11 @@ export async function getItem(id: string) {
   const item = await prisma.item.findFirst({
     where: { id, tenantId: session.user.tenantId },
     include: {
-      batches: { where: branchFilter, orderBy: { expiryDate: "asc" }, include: { branch: { select: { name: true } } } },
+      batches: {
+        where: branchFilter,
+        orderBy: [{ rackLocation: { sort: "asc", nulls: "last" } }, { expiryDate: "asc" }],
+        include: { branch: { select: { name: true } } },
+      },
     },
   });
   if (!item) return null;
