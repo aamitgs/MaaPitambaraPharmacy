@@ -40,6 +40,10 @@ jobs:
       NEXTAUTH_SECRET: "ci-placeholder-secret-not-used-in-production"
       AUTH_SECRET: "ci-placeholder-secret-not-used-in-production"
       PHARMACY_TIMEZONE: "Asia/Kolkata"
+      # 32 random bytes, hex-encoded — backup-crypto.ts requires this to be
+      # present and well-formed even for the pure encrypt/decrypt round-trip
+      # unit test, which doesn't touch real backups and doesn't self-skip.
+      BACKUP_ENCRYPTION_KEY: "e003c3c307ad1e336b5f69d77dea2ec17349b2645555e6d4e13e91a40f809330"
 
     steps:
       - uses: actions/checkout@v4
