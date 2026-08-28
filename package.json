@@ -4,6 +4,7 @@
   "private": true,
   "description": "Maa Pitambara Pharmacy — counter billing, inventory & GST compliance",
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
