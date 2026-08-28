@@ -5,7 +5,6 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requirePermission } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
-import type { SchemeDef } from "@/lib/scheme-engine";
 
 const schemeConfigSchema = z.object({
   percent: z.coerce.number().min(0).max(100).optional(),
@@ -74,19 +73,6 @@ export async function listSchemes() {
   return schemes.map(serializeScheme);
 }
 
-/** Active, in-date schemes only — what the POS billing screen auto-applies against the cart. */
-export async function listActiveSchemesForBilling(tenantId: string): Promise<SchemeDef[]> {
-  const now = new Date();
-  const schemes = await prisma.scheme.findMany({
-    where: { tenantId, active: true, validFrom: { lte: now }, validTo: { gte: now } },
-  });
-  return schemes.map((s) => ({
-    id: s.id,
-    name: s.name,
-    type: s.type as "percent_off" | "buy_x_get_y",
-    config: s.config as SchemeDef["config"],
-  }));
-}
 
 export async function createScheme(input: SchemeInput) {
   const session = await requirePermission("promotions.manage");

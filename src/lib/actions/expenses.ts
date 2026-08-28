@@ -34,7 +34,7 @@ const DEFAULT_CATEGORIES: { name: string; isRecurring: boolean }[] = [
   { name: "Other", isRecurring: false },
 ];
 
-export async function ensureExpenseCategories(tenantId: string) {
+async function ensureExpenseCategories(tenantId: string) {
   const count = await prisma.expenseCategory.count({ where: { tenantId } });
   if (count > 0) return;
   await prisma.expenseCategory.createMany({

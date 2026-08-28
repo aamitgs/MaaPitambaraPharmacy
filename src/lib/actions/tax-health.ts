@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { localDateWindow } from "@/lib/date-range";
 import { requirePermission } from "@/lib/rbac";
 import { resolveTaxRate, isMixedRateHsn, mixedRateReason } from "@/lib/tax/resolve";
-import { loadTaxContext } from "@/lib/actions/tax-slabs";
+import { loadTaxContext } from "@/lib/tax/context";
 
 /**
  * What would embarrass you at filing time.

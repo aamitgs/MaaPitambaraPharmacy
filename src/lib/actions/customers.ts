@@ -13,23 +13,7 @@ import {
   type PlainCustomer,
 } from "@/lib/serialize";
 import type { DeleteResult } from "@/lib/delete-result";
-
-/**
- * Customer.outstandingBalance is a cache column, never trusted. The real
- * balance is always the sum of this customer's ledger entries (credit
- * sales positive, payments negative) — mirrors computeOutstandingBalances
- * in suppliers.ts.
- */
-export async function computeCustomerOutstandingBalances(tenantId: string, customerIds?: string[]) {
-  const grouped = await prisma.customerLedgerEntry.groupBy({
-    by: ["customerId"],
-    where: { tenantId, ...(customerIds ? { customerId: { in: customerIds } } : {}) },
-    _sum: { amount: true },
-  });
-  const balances = new Map<string, number>();
-  for (const g of grouped) balances.set(g.customerId, Number(g._sum.amount ?? 0));
-  return balances;
-}
+import { computeCustomerOutstandingBalances } from "@/lib/customer-balances";
 
 export async function listCustomers(): Promise<PlainCustomer[]> {
   const session = await requireSession();

@@ -4,16 +4,8 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requirePermission, requireSession } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
-import { compositionKey, type AliasMap } from "@/lib/composition";
-
-/** The pharmacy's own salt spellings, ready to pass to the matcher. */
-export async function loadAliases(tenantId: string): Promise<AliasMap> {
-  const rows = await prisma.saltAlias.findMany({
-    where: { tenantId },
-    select: { alias: true, canonical: true },
-  });
-  return new Map(rows.map((r) => [r.alias, r.canonical]));
-}
+import { compositionKey } from "@/lib/composition";
+import { loadAliases } from "@/lib/salt-aliases";
 
 export type CompositionIssue = {
   itemId: string;

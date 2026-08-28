@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { requireSession } from "@/lib/rbac";
 import { getBackupStatus } from "@/lib/actions/backup";
 import { getAlerts } from "@/lib/actions/alerts";
-import { getReceivablesSummary } from "@/lib/actions/receivables";
+import { getReceivablesSummary } from "@/lib/receivables-summary";
 import { getBranchFilter } from "@/lib/branch-scope";
 
 export async function getDashboardData() {

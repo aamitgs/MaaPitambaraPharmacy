@@ -8,7 +8,7 @@ import { writeAuditLog } from "@/lib/audit";
 import { getBranchFilter, resolveConcreteBranch } from "@/lib/branch-scope";
 import { suggestReorderQty, DEFAULT_COVER_DAYS } from "@/lib/reorder";
 import { compositionKey } from "@/lib/composition";
-import { loadAliases } from "@/lib/actions/composition-health";
+import { loadAliases } from "@/lib/salt-aliases";
 
 /**
  * What to buy, and from whom.

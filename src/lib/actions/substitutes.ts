@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { requireSession } from "@/lib/rbac";
 import { getBranchFilter } from "@/lib/branch-scope";
 import { compositionKey } from "@/lib/composition";
-import { loadAliases } from "@/lib/actions/composition-health";
+import { loadAliases } from "@/lib/salt-aliases";
 import { isBatchExpired } from "@/lib/expiry";
 
 export type SubstituteOption = {

@@ -17,7 +17,7 @@ import {
 import { serializeItem, serializeBatch } from "@/lib/serialize";
 import { resolveConcreteBranch } from "@/lib/branch-scope";
 import { applySchemes } from "@/lib/scheme-engine";
-import { listActiveSchemesForBilling } from "@/lib/actions/schemes";
+import { listActiveSchemesForBilling } from "@/lib/scheme-billing";
 import {
   sellPacks,
   sellLooseUnits,
@@ -30,10 +30,10 @@ import { validateCoupon } from "@/lib/actions/coupons";
 
 import { runEinvoiceAttempt, runEwayBillAttemptForInvoice } from "@/lib/gsp/engine";
 import { isBatchExpired } from "@/lib/expiry";
-import { loadTaxContext } from "@/lib/actions/tax-slabs";
+import { loadTaxContext } from "@/lib/tax/context";
 import { resolveTaxRate } from "@/lib/tax/resolve";
 import { rateFor, effectiveBasis } from "@/lib/pricing";
-import { computeCustomerOutstandingBalances } from "@/lib/actions/customers";
+import { computeCustomerOutstandingBalances } from "@/lib/customer-balances";
 import { format } from "date-fns";
 import type { DeleteResult } from "@/lib/delete-result";
 

@@ -5,7 +5,8 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requirePermission } from "@/lib/rbac";
 import { writeAuditLog } from "@/lib/audit";
-import { resolveTaxRate, type SlabLookup, type ResolvedRate } from "@/lib/tax/resolve";
+import { resolveTaxRate, type ResolvedRate } from "@/lib/tax/resolve";
+import { loadTaxContext } from "@/lib/tax/context";
 
 /**
  * The GST slab master.
@@ -269,30 +270,6 @@ export async function setItemTaxSlab(itemId: string, slabId: string | null) {
 
   revalidatePath("/items");
   revalidatePath("/tax-slabs");
-}
-
-/** Everything the resolver needs, loaded once. */
-export async function loadTaxContext(tenantId: string) {
-  const [slabs, mappings] = await Promise.all([
-    prisma.taxSlab.findMany({
-      where: { tenantId, isActive: true },
-      include: { rates: true },
-    }),
-    prisma.hsnTaxMapping.findMany({ where: { tenantId } }),
-  ]);
-
-  const slabsById = new Map<string, SlabLookup>(
-    slabs.map((s) => [
-      s.id,
-      {
-        id: s.id,
-        name: s.name,
-        rates: s.rates.map((r) => ({ rate: Number(r.rate), effectiveFrom: r.effectiveFrom })),
-      },
-    ])
-  );
-  const hsnToSlabId = new Map(mappings.map((m) => [m.hsnCode, m.slabId]));
-  return { slabsById, hsnToSlabId };
 }
 
 /** Resolves one item's rate, for previews and checks. */
