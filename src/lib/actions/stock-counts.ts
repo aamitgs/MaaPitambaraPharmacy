@@ -105,17 +105,24 @@ export async function saveStockCountProgress(input: z.infer<typeof saveSchema>) 
   if (!count) throw new Error("Count not found");
   if (count.status !== "in_progress") throw new Error("That count is already closed");
 
-  await prisma.$transaction(
+  const results = await prisma.$transaction(
     parsed.counts.map((c) =>
-      prisma.stockCountLine.update({
-        where: { id: c.lineId },
+      prisma.stockCountLine.updateMany({
+        // Scoped to countId too, not just lineId — the count above only
+        // proved parsed.countId belongs to this tenant, not that each
+        // client-supplied lineId belongs to that count.
+        where: { id: c.lineId, countId: parsed.countId },
         data: { countedQty: c.countedQty },
       })
     )
   );
+  const saved = results.reduce((sum, r) => sum + r.count, 0);
+  if (saved !== parsed.counts.length) {
+    throw new Error("One of these lines does not belong to this count");
+  }
 
   revalidatePath(`/stock-counts/${parsed.countId}`);
-  return { saved: parsed.counts.length };
+  return { saved };
 }
 
 export async function getStockCount(id: string) {

@@ -162,7 +162,7 @@ export async function createGrn(input: GrnInput) {
     const itemNames = new Map(
       (
         await prisma.item.findMany({
-          where: { id: { in: parsed.items.map((i) => i.itemId) } },
+          where: { id: { in: parsed.items.map((i) => i.itemId) }, tenantId: session.user.tenantId },
           select: { id: true, name: true },
         })
       ).map((i) => [i.id, i.name])

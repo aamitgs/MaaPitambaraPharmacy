@@ -211,6 +211,14 @@ export async function createPurchaseOrderFromSuggestions(
   });
   if (!supplier) throw new Error("Supplier not found");
 
+  const itemIds = [...new Set(parsed.items.map((i) => i.itemId))];
+  const ownedItemCount = await prisma.item.count({
+    where: { id: { in: itemIds }, tenantId },
+  });
+  if (ownedItemCount !== itemIds.length) {
+    throw new Error("One of the items in this purchase order was not found");
+  }
+
   const po = await prisma.purchaseOrder.create({
     data: {
       tenantId,

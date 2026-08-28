@@ -16,6 +16,7 @@ const STATUS_LABEL: Record<PendingSale["status"], string> = {
   conflict: "Conflict — needs review",
   failed: "Failed — will retry",
   stale: "Held — too old to post by itself",
+  needs_signoff: "Needs pharmacist sign-off",
 };
 
 const STATUS_COLOR: Record<PendingSale["status"], string> = {
@@ -25,6 +26,7 @@ const STATUS_COLOR: Record<PendingSale["status"], string> = {
   conflict: "bg-destructive/15 text-destructive",
   failed: "bg-destructive/10 text-destructive",
   stale: "bg-warning/25 text-warning-foreground",
+  needs_signoff: "bg-destructive/15 text-destructive",
 };
 
 /**
@@ -40,6 +42,7 @@ export function OfflineBanner({
   onRetrySync,
   onDiscard,
   onPostAnyway,
+  onSignoff,
 }: {
   isOnline: boolean;
   syncing: boolean;
@@ -49,6 +52,9 @@ export function OfflineBanner({
   /// Posts one held sale despite its age — a deliberate, per-sale decision,
   /// never a bulk "sync everything anyway" button.
   onPostAnyway: (localId: string) => void;
+  /// Opens the pharmacist sign-off dialog for one queued sale — the current
+  /// session couldn't sign it off itself when sync ran.
+  onSignoff: (localId: string) => void;
 }) {
   const [open, setOpen] = useState(false);
   const unsynced = pendingSales.filter((s) => s.status !== "synced");
@@ -108,7 +114,8 @@ export function OfflineBanner({
                       </span>
                       {(sale.status === "conflict" ||
                         sale.status === "failed" ||
-                        sale.status === "stale") && (
+                        sale.status === "stale" ||
+                        sale.status === "needs_signoff") && (
                         <Button
                           size="icon-sm"
                           variant="ghost"
@@ -137,6 +144,16 @@ export function OfflineBanner({
                         onClick={() => onPostAnyway(sale.localId)}
                       >
                         Post it anyway
+                      </Button>
+                    )}
+                    {sale.status === "needs_signoff" && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="mt-1.5 h-7 w-full text-xs"
+                        onClick={() => onSignoff(sale.localId)}
+                      >
+                        Verify pharmacist sign-off
                       </Button>
                     )}
                     {sale.invoiceNo && (

@@ -331,6 +331,11 @@ const completeSaleSchema = z.object({
   // lets a retried sync short-circuit to the already-created invoice
   // instead of double-billing if the client never saw the first response.
   offlineClientId: z.string().optional(),
+  // When set (offline sync only), the moment the sale was actually rung up
+  // on the till, not when it happened to reach the server. Used for the
+  // invoice's date and document-numbering period so a sale made on the
+  // 31st doesn't get filed under the GST period it synced into on the 1st.
+  queuedAt: z.coerce.date().optional(),
   lines: z.array(saleLineSchema).min(1, "Cart is empty"),
 });
 
@@ -623,9 +628,13 @@ export async function completeSale(input: CompleteSaleInput) {
   await checkDiscountCap(tenantId, session.user.role, billDiscountPercent, parsed.managerPin);
 
   const now = new Date();
+  // Backdate only to a genuine offline queue timestamp, and only into the
+  // past — a bogus or clock-skewed future value would just misfile the
+  // invoice, so it's not trusted for that direction.
+  const saleDate = parsed.queuedAt && parsed.queuedAt.getTime() <= now.getTime() ? parsed.queuedAt : now;
 
   const result = await prisma.$transaction(async (tx) => {
-    const invoiceNo = await nextDocumentNumber(tx, tenantId, "INV", now);
+    const invoiceNo = await nextDocumentNumber(tx, tenantId, "INV", saleDate);
 
     const invoice = await tx.salesInvoice.create({
       data: {
@@ -638,6 +647,7 @@ export async function completeSale(input: CompleteSaleInput) {
         patientPhone: parsed.patientPhone || null,
         patientAddress: parsed.patientAddress || null,
         invoiceNo,
+        invoiceDate: saleDate,
         offlineClientId: parsed.offlineClientId || null,
         subtotal: billing.subtotal,
         taxAmount: billing.taxAmount,

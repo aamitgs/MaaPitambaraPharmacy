@@ -52,7 +52,14 @@ export type PendingSaleStatus =
   | "failed"
   /// Queued too long ago to post by itself. Never discarded — the sale
   /// really happened — but it waits for someone to look at it.
-  | "stale";
+  | "stale"
+  /// This sale needs a pharmacist/owner to sign off (a Schedule H/H1/X
+  /// item) but whoever is signed in now, when it's finally syncing, isn't
+  /// one — e.g. a shift change happened while it sat in the queue. Kept
+  /// distinct from "failed" so it gets its own recovery action instead of
+  /// a bare discard, since discarding it drops the narcotics register
+  /// entry for medicine that has already left the shelf.
+  | "needs_signoff";
 
 export interface PendingSale {
   localId: string;

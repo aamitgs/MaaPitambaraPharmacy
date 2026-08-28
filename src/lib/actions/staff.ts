@@ -294,8 +294,11 @@ export async function deleteRole(id: string, reauth: StepUp) {
 
 /** Used by the sign-in flow to keep deactivated staff out. */
 export async function isUserActive(userId: string) {
-  await requireSession();
-  const user = await prisma.user.findUnique({ where: { id: userId }, select: { isActive: true } });
+  const session = await requireSession();
+  const user = await prisma.user.findUnique({
+    where: { id: userId, tenantId: session.user.tenantId },
+    select: { isActive: true },
+  });
   return user?.isActive ?? false;
 }
 

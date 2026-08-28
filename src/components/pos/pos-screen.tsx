@@ -10,8 +10,8 @@ import { applySchemes } from "@/lib/scheme-engine";
 import { completeSale, getPosData, verifyManagerPin, verifyPharmacistCredentials } from "@/lib/actions/pos";
 import { validateCoupon } from "@/lib/actions/coupons";
 import { useOnlineStatus } from "@/hooks/use-online-status";
-import { saveCache, loadCache, queueSale, listPendingSales, discardSale, newOfflineClientId } from "@/lib/offline/queue";
-import { syncPendingSales } from "@/lib/offline/sync";
+import { saveCache, loadCache, queueSale, listPendingSales, discardSale, newOfflineClientId, updateSaleStatus } from "@/lib/offline/queue";
+import { syncPendingSales, SIGNOFF_REQUIRED_MESSAGE } from "@/lib/offline/sync";
 import { buildOfflineReceiptData } from "@/lib/offline/receipt";
 import type { PendingSale, ReceiptHeader, PosCacheRecord } from "@/lib/offline/db";
 import type { ReceiptData } from "@/lib/actions/invoices";
@@ -90,6 +90,10 @@ export function PosScreen({
     submitting: boolean;
   }>({ open: false, error: null, submitting: false });
   const pharmacistReauthRef = useRef<{ email: string; password: string } | undefined>(undefined);
+  // Set when the signoff dialog is verifying a *queued* offline sale rather
+  // than the live cart — completeSale re-runs directly against that sale's
+  // stored payload instead of the current cart on success.
+  const [queueSignoffTarget, setQueueSignoffTarget] = useState<string | null>(null);
 
   const isOnline = useOnlineStatus();
   /**
@@ -140,6 +144,10 @@ export function PosScreen({
         if (summary.synced > 0) toast.success(`${summary.synced} offline bill${summary.synced === 1 ? "" : "s"} synced`);
         if (summary.conflicts > 0) toast.error(`${summary.conflicts} offline bill${summary.conflicts === 1 ? "" : "s"} need review — stock changed while offline`);
         if (summary.failed > 0) toast.error(`${summary.failed} offline bill${summary.failed === 1 ? "" : "s"} failed to sync — will retry`);
+        if (summary.needsSignoff > 0)
+          toast.error(
+            `${summary.needsSignoff} offline bill${summary.needsSignoff === 1 ? "" : "s"} need${summary.needsSignoff === 1 ? "s" : ""} a pharmacist to verify and sign off — open the queue`
+          );
         if (summary.stale > 0)
           toast.warning(
             `${summary.stale} bill${summary.stale === 1 ? " has" : "s have"} been queued too long to post automatically — open the queue to review`
@@ -209,8 +217,55 @@ export function PosScreen({
   }, [isOnline]);
 
   async function handleDiscardQueued(localId: string) {
+    const sale = pendingSales.find((s) => s.localId === localId);
+    if (sale?.status === "needs_signoff") {
+      // This medicine has already left the shelf — discarding here means
+      // no invoice and no narcotics register entry ever gets written for
+      // it, not just that a pending sync goes away.
+      const confirmed = window.confirm(
+        "This sale hasn't been signed off or posted yet. Discarding it permanently drops the sale " +
+          "and, if it contains a Schedule H/H1/X item, the narcotics register entry for medicine " +
+          "that has already been handed to the customer. Only discard if you're certain it should " +
+          "never be recorded. Continue?"
+      );
+      if (!confirmed) return;
+    }
     await discardSale(localId);
     await refreshPendingSales();
+  }
+
+  function handleOpenQueuedSignoff(localId: string) {
+    setQueueSignoffTarget(localId);
+    setSignoffDialog({ open: true, error: null, submitting: false });
+  }
+
+  async function handleQueuedSignoffSubmit(localId: string, email: string, password: string) {
+    const sale = pendingSales.find((s) => s.localId === localId);
+    if (!sale) {
+      setQueueSignoffTarget(null);
+      setSignoffDialog({ open: false, error: null, submitting: false });
+      return;
+    }
+    setSignoffDialog((d) => ({ ...d, submitting: true, error: null }));
+    try {
+      const result = await completeSale({
+        ...sale.payload,
+        pharmacistReauth: { email, password },
+        queuedAt: new Date(sale.createdAt),
+      });
+      await updateSaleStatus(localId, "synced", { invoiceNo: result.invoiceNo });
+      await refreshPendingSales();
+      setQueueSignoffTarget(null);
+      setSignoffDialog({ open: false, error: null, submitting: false });
+      toast.success(`Offline bill synced — ${result.invoiceNo}`);
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "Could not verify sign-off";
+      setSignoffDialog({
+        open: true,
+        submitting: false,
+        error: message === SIGNOFF_REQUIRED_MESSAGE ? "Incorrect pharmacist email or password." : message,
+      });
+    }
   }
 
   const effectiveItems = restored?.items ?? items;
@@ -567,7 +622,7 @@ export function PosScreen({
     } catch (e) {
       if (e instanceof Error && e.message === "MANAGER_PIN_REQUIRED") {
         setPinDialog({ open: true, pending: null, error: null, forFinalSubmit: true });
-      } else if (e instanceof Error && e.message === "PHARMACIST_SIGNOFF_REQUIRED") {
+      } else if (e instanceof Error && e.message === SIGNOFF_REQUIRED_MESSAGE) {
         const retry = pharmacistReauthRef.current !== undefined;
         pharmacistReauthRef.current = undefined;
         setSignoffDialog({
@@ -589,6 +644,10 @@ export function PosScreen({
   }
 
   async function handleSignoffSubmit(email: string, password: string) {
+    if (queueSignoffTarget) {
+      await handleQueuedSignoffSubmit(queueSignoffTarget, email, password);
+      return;
+    }
     setSignoffDialog((d) => ({ ...d, submitting: true, error: null }));
     const result = await verifyPharmacistCredentials(email, password);
     if (!result) {
@@ -669,6 +728,7 @@ export function PosScreen({
         onRetrySync={() => void handleSync()}
         onDiscard={(localId) => void handleDiscardQueued(localId)}
         onPostAnyway={(localId) => void handleSync([localId])}
+        onSignoff={handleOpenQueuedSignoff}
       />
       <div className="flex-1 space-y-4 overflow-y-auto p-4">
         <SearchPanel items={effectiveItems} onSelect={handleAddItem} inputRef={searchInputRef} />
@@ -780,7 +840,10 @@ export function PosScreen({
 
       <PharmacistSignoffDialog
         open={signoffDialog.open}
-        onOpenChange={(open) => setSignoffDialog((d) => ({ ...d, open }))}
+        onOpenChange={(open) => {
+          setSignoffDialog((d) => ({ ...d, open }));
+          if (!open) setQueueSignoffTarget(null);
+        }}
         onSubmit={handleSignoffSubmit}
         error={signoffDialog.error}
         submitting={signoffDialog.submitting}
