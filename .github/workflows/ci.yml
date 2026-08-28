@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    # Several integration tests run against a real database rather than a
+    # mock — see vitest.config.mts. They self-skip when the database isn't
+    # reachable, so CI provides one to get real coverage instead of a green
+    # run that quietly skipped everything.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: pharmacy
+          POSTGRES_PASSWORD: pharmacy
+          POSTGRES_DB: pharmacy
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U pharmacy"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      DATABASE_URL: "postgresql://pharmacy:pharmacy@localhost:5432/pharmacy?schema=public"
+      NEXTAUTH_URL: "http://localhost:3000"
+      # CI-only placeholders — never the real secrets, which live outside
+      # this repo. Nothing here needs to be a genuine credential: nothing
+      # in the build or test run authenticates against a real deployment.
+      NEXTAUTH_SECRET: "ci-placeholder-secret-not-used-in-production"
+      AUTH_SECRET: "ci-placeholder-secret-not-used-in-production"
+      PHARMACY_TIMEZONE: "Asia/Kolkata"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Regenerates the Prisma client from schema.prisma so CI catches drift
+      # against the copy committed under src/generated/prisma, then applies
+      # the committed migrations to the service database.
+      - run: npx prisma generate
+      - run: npx prisma migrate deploy
+      - run: npm run db:seed
+
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
