@@ -67,8 +67,21 @@ export interface BillingResult {
   total: number;
 }
 
-function round2(n: number): number {
+export function round2(n: number): number {
   return Math.round((n + Number.EPSILON) * 100) / 100;
+}
+
+/**
+ * Splits a tax total into its CGST/SGST halves the same way each invoice
+ * line does: round one half, then let the other absorb whatever paisa that
+ * rounding left over. `taxAmount / 2` and `taxAmount - taxAmount / 2` are
+ * algebraically identical, so computing both independently silently prints
+ * the same rounded figure twice and leaves the printed CGST+SGST one paisa
+ * off from the tax actually folded into the total.
+ */
+export function splitCgstSgst(taxAmount: number): { cgst: number; sgst: number } {
+  const cgst = round2(taxAmount / 2);
+  return { cgst, sgst: round2(taxAmount - cgst) };
 }
 
 export function computeBilling(

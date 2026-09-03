@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Phone, Smartphone } from "lucide-react";
 import type { ReceiptData } from "@/lib/actions/invoices";
+import { splitCgstSgst } from "@/lib/billing";
 
 const PAYMENT_LABELS: Record<string, string> = {
   cash: "Cash",
@@ -25,6 +26,7 @@ export function ReceiptView({
 }) {
   const wide = layout === "wide";
   const isThermal = !wide;
+  const { cgst, sgst } = splitCgstSgst(data.taxAmount);
   /**
    * Both numbers on one line — the header has been squeezed hard for item
    * space and a second phone row would give some of it back. Landline
@@ -172,7 +174,7 @@ export function ReceiptView({
            Rule 46 wants the tax amounts shown against the goods, so they stay
            on the bill rather than moving entirely into the totals. */
         <div>
-          <div className="grid grid-cols-[0.5fr_3.1fr_1.7fr_1.6fr_1fr_0.7fr_1.2fr_1.2fr_0.8fr_1.6fr] gap-x-1.5 border-y border-black/60 py-1 text-[10px] font-bold">
+          <div className="grid grid-cols-[0.5fr_3.1fr_1.7fr_1.6fr_1fr_0.7fr_1.2fr_1.6fr] gap-x-1.5 border-y border-black/60 py-1 text-[10px] font-bold">
             <span>#</span>
             <span>Product</span>
             <span>Pack</span>
@@ -180,13 +182,11 @@ export function ReceiptView({
             <span>Exp.</span>
             <span className="text-right">Qty</span>
             <span className="text-right">MRP</span>
-            <span className="text-right">Rate</span>
-            <span className="text-right">GST%</span>
             <span className="text-right">Amount</span>
           </div>
           {data.items.map((line, i) => (
             <div key={line.id} className="border-b border-dashed border-black/25 py-0.5 text-[10px]">
-              <div className="grid grid-cols-[0.5fr_3.1fr_1.7fr_1.6fr_1fr_0.7fr_1.2fr_1.2fr_0.8fr_1.6fr] gap-x-1.5">
+              <div className="grid grid-cols-[0.5fr_3.1fr_1.7fr_1.6fr_1fr_0.7fr_1.2fr_1.6fr] gap-x-1.5">
                 <span className="tabular-nums">{i + 1}</span>
                 <span className="font-medium">{line.itemName}</span>
                 {/* A size down: "10 tablets" is the common case and needs one
@@ -209,8 +209,6 @@ export function ReceiptView({
                 <span className="text-right tabular-nums">
                   {line.mrp === null ? "—" : line.mrp.toFixed(2)}
                 </span>
-                <span className="text-right tabular-nums">{line.rate.toFixed(2)}</span>
-                <span className="text-right tabular-nums">{line.taxRate}</span>
                 <span className="text-right font-medium tabular-nums">
                   {line.lineTotal.toFixed(2)}
                 </span>
@@ -292,11 +290,11 @@ export function ReceiptView({
         </div>
         <div className="flex justify-between">
           <span>CGST</span>
-          <span className="tabular-nums">₹{(data.taxAmount / 2).toFixed(2)}</span>
+          <span className="tabular-nums">₹{cgst.toFixed(2)}</span>
         </div>
         <div className="flex justify-between">
           <span>SGST</span>
-          <span className="tabular-nums">₹{(data.taxAmount - data.taxAmount / 2).toFixed(2)}</span>
+          <span className="tabular-nums">₹{sgst.toFixed(2)}</span>
         </div>
         {data.roundOffAmount !== 0 && (
           <div className="flex justify-between">

@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getBranding } from "@/lib/branding";
 import QRCode from "qrcode";
 import type { Prisma } from "@/generated/prisma/client";
+import { splitCgstSgst } from "@/lib/billing";
 
 /**
  * Builds everything a bill needs to render, from a single invoice.
@@ -118,8 +119,7 @@ export async function buildReceiptData(where: Prisma.SalesInvoiceWhereInput) {
       const taxRate = Number(line.taxRate);
       const taxableValue = qty * rate - discountAmount;
       const taxAmount = (taxableValue * taxRate) / 100;
-      const cgstAmount = taxAmount / 2;
-      const sgstAmount = taxAmount - cgstAmount;
+      const { cgst: cgstAmount, sgst: sgstAmount } = splitCgstSgst(taxAmount);
       return {
         id: line.id,
         itemName: line.item.name,

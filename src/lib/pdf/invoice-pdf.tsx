@@ -1,5 +1,6 @@
 import { Document, Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer";
 import type { ReceiptData } from "@/lib/actions/invoices";
+import { splitCgstSgst } from "@/lib/billing";
 
 const PAYMENT_LABELS: Record<string, string> = {
   cash: "Cash",
@@ -58,7 +59,7 @@ const s = StyleSheet.create({
 });
 
 // Column widths as flex ratios, mirroring the on-screen A5 table.
-const COLS = [0.5, 3.1, 1.7, 1.6, 1, 0.7, 1.2, 1.2, 0.8, 1.6];
+const COLS = [0.5, 3.1, 1.7, 1.6, 1, 0.7, 1.2, 1.6];
 const money = (n: number) => n.toFixed(2);
 
 export function InvoicePdf({ data, logo }: { data: ReceiptData; logo?: string }) {
@@ -66,6 +67,7 @@ export function InvoicePdf({ data, logo }: { data: ReceiptData; logo?: string })
     Boolean
   );
   const contacts = [data.branch.landline, data.branch.phone].filter(Boolean);
+  const { cgst, sgst } = splitCgstSgst(data.taxAmount);
 
   return (
     <Document title={`Invoice ${data.invoiceNo}`}>
@@ -119,7 +121,7 @@ export function InvoicePdf({ data, logo }: { data: ReceiptData; logo?: string })
         <View style={s.rule} />
 
         <View style={s.th}>
-          {["#", "Product", "Pack", "Batch", "Exp.", "Qty", "MRP", "Rate", "GST%", "Amount"].map(
+          {["#", "Product", "Pack", "Batch", "Exp.", "Qty", "MRP", "Amount"].map(
             (h, i) => (
               <Text
                 key={h}
@@ -158,10 +160,8 @@ export function InvoicePdf({ data, logo }: { data: ReceiptData; logo?: string })
             <Text style={{ flex: COLS[6], textAlign: "right" }}>
               {line.mrp === null ? "-" : money(line.mrp)}
             </Text>
-            <Text style={{ flex: COLS[7], textAlign: "right" }}>{money(line.rate)}</Text>
-            <Text style={{ flex: COLS[8], textAlign: "right" }}>{line.taxRate}</Text>
             <Text
-              style={{ flex: COLS[9], textAlign: "right", fontFamily: "Helvetica-Bold" }}
+              style={{ flex: COLS[7], textAlign: "right", fontFamily: "Helvetica-Bold" }}
             >
               {money(line.lineTotal)}
             </Text>
@@ -181,11 +181,11 @@ export function InvoicePdf({ data, logo }: { data: ReceiptData; logo?: string })
           )}
           <View style={s.totalsRow}>
             <Text>CGST</Text>
-            <Text>Rs. {money(data.taxAmount / 2)}</Text>
+            <Text>Rs. {money(cgst)}</Text>
           </View>
           <View style={s.totalsRow}>
             <Text>SGST</Text>
-            <Text>Rs. {money(data.taxAmount - data.taxAmount / 2)}</Text>
+            <Text>Rs. {money(sgst)}</Text>
           </View>
           {data.roundOffAmount !== 0 && (
             <View style={s.totalsRow}>

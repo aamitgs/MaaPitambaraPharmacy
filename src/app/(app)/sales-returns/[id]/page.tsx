@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
 import { getSalesReturn } from "@/lib/actions/sales-returns";
+import { splitCgstSgst } from "@/lib/billing";
 import { PrintButton } from "@/components/reports/print-button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ChevronLeft, ExternalLink } from "lucide-react";
@@ -18,6 +19,7 @@ export default async function SalesReturnPage({ params }: { params: Promise<{ id
   const { id } = await params;
   const data = await getSalesReturn(id);
   if (!data) notFound();
+  const { cgst, sgst } = splitCgstSgst(data.taxAmount);
 
   return (
     <div className="space-y-4 p-6">
@@ -99,13 +101,11 @@ export default async function SalesReturnPage({ params }: { params: Promise<{ id
           </div>
           <div className="flex justify-between">
             <span>CGST</span>
-            <span className="tabular-nums">₹{(data.taxAmount / 2).toFixed(2)}</span>
+            <span className="tabular-nums">₹{cgst.toFixed(2)}</span>
           </div>
           <div className="flex justify-between">
             <span>SGST</span>
-            <span className="tabular-nums">
-              ₹{(data.taxAmount - data.taxAmount / 2).toFixed(2)}
-            </span>
+            <span className="tabular-nums">₹{sgst.toFixed(2)}</span>
           </div>
           <div className="flex justify-between border-t pt-1 font-bold">
             <span>Refunded</span>
