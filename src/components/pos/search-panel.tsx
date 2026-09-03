@@ -185,6 +185,11 @@ export function SearchPanel({
                 </div>
                 <div className="shrink-0 text-right">
                   <div className="font-medium tabular-nums">₹{fefo?.saleRate.toFixed(2)}</div>
+                  {fefo && fefo.mrp !== fefo.saleRate && (
+                    <div className="text-xs text-muted-foreground line-through">
+                      ₹{fefo.mrp.toFixed(2)}
+                    </div>
+                  )}
                   <div className="text-xs text-muted-foreground">{totalQty} in stock</div>
                 </div>
               </button>

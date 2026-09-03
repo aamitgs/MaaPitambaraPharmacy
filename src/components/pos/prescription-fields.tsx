@@ -35,6 +35,7 @@ export function PrescriptionFields({
   patientAddress,
   onPatientAddressChange,
   onDoctorCreated,
+  required,
 }: {
   doctors: PosDoctor[];
   doctorId: string | null;
@@ -48,6 +49,9 @@ export function PrescriptionFields({
   patientAddress: string;
   onPatientAddressChange: (v: string) => void;
   onDoctorCreated: (doctor: PosDoctor) => void;
+  /** Schedule H/H1/X items make doctor + patient name mandatory to check
+   *  out; otherwise the fields are shown but optional. */
+  required: boolean;
 }) {
   const [quickAddOpen, setQuickAddOpen] = useState(false);
   const [newDoctorName, setNewDoctorName] = useState("");
@@ -78,16 +82,30 @@ export function PrescriptionFields({
   }
 
   return (
-    <div className="rounded-lg border border-warning/40 bg-warning/10 p-3">
-      <p className="mb-2 text-xs font-medium text-warning-foreground">
-        Prescription required — this cart contains a Schedule H/H1/X item.
+    <div
+      className={
+        required
+          ? "rounded-lg border border-warning/40 bg-warning/10 p-3"
+          : "rounded-lg border p-3"
+      }
+    >
+      <p
+        className={
+          required
+            ? "mb-2 text-xs font-medium text-warning-foreground"
+            : "mb-2 text-xs font-medium text-muted-foreground"
+        }
+      >
+        {required
+          ? "Prescription required — this cart contains a Schedule H/H1/X item."
+          : "Doctor & patient details (optional)"}
       </p>
       {/* One row, 12 columns: address takes the most, age the least — it's
           two digits, so it sits last rather than pushing the wider fields
           around. */}
       <div className="grid grid-cols-12 gap-3">
         <div className="col-span-3 space-y-1">
-          <Label className="text-xs">Doctor</Label>
+          <Label className="text-xs">Doctor{required ? " *" : ""}</Label>
           <div className="flex gap-1">
             <Select value={doctorId ?? undefined} onValueChange={onDoctorChange}>
               <SelectTrigger className="h-8">
@@ -113,7 +131,7 @@ export function PrescriptionFields({
           </div>
         </div>
         <div className="col-span-2 space-y-1">
-          <Label className="text-xs">Patient name</Label>
+          <Label className="text-xs">Patient name{required ? " *" : ""}</Label>
           <Input
             className="h-8"
             value={patientName}

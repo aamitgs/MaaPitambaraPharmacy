@@ -426,6 +426,7 @@ export function PosScreen({
       expiryDate: fefo.expiryDate.toISOString(),
       availableQty: fefo.currentQty,
       rate: fefo.saleRate,
+      mrp: fefo.mrp,
       unitsPerPack: item.unitsPerPack,
       looseUnits: fefo.looseUnits,
       ptr: fefo.ptr === null || fefo.ptr === undefined ? null : Number(fefo.ptr),
@@ -528,6 +529,7 @@ export function PosScreen({
       expiryDate: batch.expiryDate.toISOString(),
       availableQty: batch.currentQty,
       rate: batch.saleRate,
+      mrp: batch.mrp,
     });
   }
 
@@ -733,22 +735,23 @@ export function PosScreen({
       <div className="flex-1 space-y-4 overflow-y-auto p-4">
         <SearchPanel items={effectiveItems} onSelect={handleAddItem} inputRef={searchInputRef} />
 
-        {needsPrescription && (
-          <div className="space-y-2">
-            <PrescriptionFields
-              doctors={doctorList}
-              doctorId={store.doctorId}
-              onDoctorChange={store.setDoctor}
-              patientName={store.patientName}
-              onPatientNameChange={store.setPatientName}
-              patientAge={store.patientAge}
-              onPatientAgeChange={store.setPatientAge}
-              patientPhone={store.patientPhone}
-              onPatientPhoneChange={store.setPatientPhone}
-              patientAddress={store.patientAddress}
-              onPatientAddressChange={store.setPatientAddress}
-              onDoctorCreated={(d) => setDoctorList((prev) => [...prev, d])}
-            />
+        <div className="space-y-2">
+          <PrescriptionFields
+            doctors={doctorList}
+            doctorId={store.doctorId}
+            onDoctorChange={store.setDoctor}
+            patientName={store.patientName}
+            onPatientNameChange={store.setPatientName}
+            patientAge={store.patientAge}
+            onPatientAgeChange={store.setPatientAge}
+            patientPhone={store.patientPhone}
+            onPatientPhoneChange={store.setPatientPhone}
+            patientAddress={store.patientAddress}
+            onPatientAddressChange={store.setPatientAddress}
+            onDoctorCreated={(d) => setDoctorList((prev) => [...prev, d])}
+            required={needsPrescription}
+          />
+          {needsPrescription && (
             <div className="flex items-center justify-between rounded-lg border p-3">
               <PrescriptionUpload
                 path={store.prescriptionImagePath}
@@ -760,8 +763,8 @@ export function PosScreen({
                   : "A pharmacist will need to sign off before this sale completes."}
               </p>
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
         <CartTable
           lines={store.lines}

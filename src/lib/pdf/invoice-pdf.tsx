@@ -115,6 +115,7 @@ export function InvoicePdf({ data, logo }: { data: ReceiptData; logo?: string })
           <Text>Payment: {PAYMENT_LABELS[data.paymentMode] ?? data.paymentMode}</Text>
           <Text>{new Date(data.invoiceDate).toLocaleString("en-IN")}</Text>
         </View>
+        {data.customer && <Text>Customer: {data.customer.name}</Text>}
         <View style={s.rule} />
 
         <View style={s.th}>

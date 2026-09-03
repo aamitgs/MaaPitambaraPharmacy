@@ -73,6 +73,7 @@ export function CartTable({
             <th className="px-3 py-2 text-left font-medium">Item</th>
             <th className="px-3 py-2 text-left font-medium">Batch / Expiry</th>
             <th className="w-20 px-3 py-2 text-right font-medium">Qty</th>
+            <th className="w-24 px-3 py-2 text-right font-medium">MRP</th>
             <th className="w-24 px-3 py-2 text-right font-medium">Rate</th>
             <th className="w-24 px-3 py-2 text-right font-medium">Disc %</th>
             <th className="w-20 px-3 py-2 text-right font-medium">Tax %</th>
@@ -220,6 +221,9 @@ export function CartTable({
                       ₹{effectiveRate.toFixed(2)} each · {maxQty} available
                     </div>
                   )}
+                </td>
+                <td className="px-3 py-2 text-right align-top tabular-nums text-muted-foreground">
+                  ₹{line.mrp.toFixed(2)}
                 </td>
                 <td className="px-3 py-2 text-right align-top tabular-nums">
                   ₹{line.rate.toFixed(2)}

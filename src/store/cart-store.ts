@@ -14,6 +14,8 @@ export interface CartLine {
   expiryDate: string;
   availableQty: number;
   rate: number;
+  /** The batch's MRP, shown alongside the selling rate for reference. */
+  mrp: number;
   qty: number;
   discountPercent: number;
   /** True when this line is loose units out of a pack, not whole packs. */
@@ -81,7 +83,14 @@ interface CartState {
   setLineDiscount: (lineId: string, percent: number) => void;
   overrideBatch: (
     lineId: string,
-    batch: { batchId: string; batchNo: string; expiryDate: string; availableQty: number; rate: number }
+    batch: {
+      batchId: string;
+      batchNo: string;
+      expiryDate: string;
+      availableQty: number;
+      rate: number;
+      mrp: number;
+    }
   ) => void;
   removeLine: (lineId: string) => void;
   undoRemove: () => void;
@@ -183,6 +192,7 @@ export const useCartStore = create<CartState>((set, get) => ({
               expiryDate: batch.expiryDate,
               availableQty: batch.availableQty,
               rate: batch.rate,
+              mrp: batch.mrp,
               qty: Math.min(l.qty, batch.availableQty),
             }
           : l
