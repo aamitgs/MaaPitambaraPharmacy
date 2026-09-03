@@ -337,17 +337,17 @@ export function PosScreen({
   const needsPrescription = store.lines.some((l) => REQUIRES_PRESCRIPTION.has(l.scheduleClass));
 
   // With a single doctor on file there is nothing to choose, so pick them
-  // as soon as a prescription item enters the cart rather than making the
-  // counter open a list of one. Deliberately *not* done when several
-  // doctors exist: the doctor is written onto the invoice and the
-  // Schedule X register, so a guess would put a wrong name on a legal
-  // record. Writes to the store, not just the Select, so the sale actually
+  // as soon as the doctor field is empty rather than making the counter
+  // open a list of one. Deliberately *not* done when several doctors
+  // exist: the doctor is written onto the invoice and the Schedule X
+  // register, so a guess would put a wrong name on a legal record.
+  // Writes to the store, not just the Select, so the sale actually
   // carries the id.
   const setDoctor = store.setDoctor;
   useEffect(() => {
-    if (!needsPrescription || store.doctorId || doctorList.length !== 1) return;
+    if (store.doctorId || doctorList.length !== 1) return;
     setDoctor(doctorList[0].id);
-  }, [needsPrescription, store.doctorId, doctorList, setDoctor]);
+  }, [store.doctorId, doctorList, setDoctor]);
 
   /**
    * How much more this customer may owe. Null when there is no credit
