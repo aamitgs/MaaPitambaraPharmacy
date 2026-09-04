@@ -189,8 +189,12 @@ export async function createSalesReturn(input: z.infer<typeof createSchema>) {
     const rate = Number(sold.rate);
     const taxRate = Number(sold.taxRate);
     // Priced off the original line, not today's rate: a refund returns what
-    // the customer actually paid.
-    const taxable = round2(line.qty * rate);
+    // the customer actually paid. `sold.discountAmount` is the discount for
+    // the whole original line (item + scheme + bill-discount share), so a
+    // partial return prorates it by the fraction of units coming back —
+    // otherwise a discounted sale refunds at the pre-discount rate.
+    const discountShare = round2((Number(sold.discountAmount) * line.qty) / sold.qty);
+    const taxable = round2(line.qty * rate - discountShare);
     const tax = round2((taxable * taxRate) / 100);
     return { sold, line, rate, taxRate, taxable, tax, lineTotal: round2(taxable + tax) };
   });

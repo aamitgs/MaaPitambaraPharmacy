@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { localDateWindow } from "@/lib/date-range";
 import { requirePermission } from "@/lib/rbac";
 import { getBranchFilter } from "@/lib/branch-scope";
+import { splitCgstSgst } from "@/lib/billing";
 
 export interface HsnSummaryRow {
   hsnCode: string;
@@ -49,21 +50,22 @@ export async function getHsnSummary(from: string, to: string): Promise<HsnSummar
     },
   });
 
-  const groups = new Map<string, HsnSummaryRow>();
+  // Grouped on a single running taxAmount, not two independently-tracked
+  // CGST/SGST halves: `taxAmount / 2` and `taxAmount - taxAmount / 2` are
+  // the same number, so carrying them separately just rounds the identical
+  // figure the same way twice instead of splitting the group's odd paisa
+  // between them the way `splitCgstSgst` does once, at output.
+  const groups = new Map<string, Omit<HsnSummaryRow, "cgstAmount" | "sgstAmount">>();
   for (const line of lines) {
     const hsnCode = line.item.hsnCode || "—";
     const taxRate = Number(line.taxRate);
     const taxableValue = line.qty * Number(line.rate) - Number(line.discountAmount);
     const taxAmount = (taxableValue * taxRate) / 100;
-    const cgstAmount = taxAmount / 2;
-    const sgstAmount = taxAmount - cgstAmount;
     const key = `${hsnCode}|${taxRate}`;
 
     const existing = groups.get(key);
     if (existing) {
       existing.taxableValue += taxableValue;
-      existing.cgstAmount += cgstAmount;
-      existing.sgstAmount += sgstAmount;
       existing.taxAmount += taxAmount;
       existing.totalValue += taxableValue + taxAmount;
     } else {
@@ -71,8 +73,6 @@ export async function getHsnSummary(from: string, to: string): Promise<HsnSummar
         hsnCode,
         taxRate,
         taxableValue,
-        cgstAmount,
-        sgstAmount,
         taxAmount,
         totalValue: taxableValue + taxAmount,
       });
@@ -80,13 +80,17 @@ export async function getHsnSummary(from: string, to: string): Promise<HsnSummar
   }
 
   return Array.from(groups.values())
-    .map((r) => ({
-      ...r,
-      taxableValue: round2(r.taxableValue),
-      cgstAmount: round2(r.cgstAmount),
-      sgstAmount: round2(r.sgstAmount),
-      taxAmount: round2(r.taxAmount),
-      totalValue: round2(r.totalValue),
-    }))
+    .map((r) => {
+      const taxAmount = round2(r.taxAmount);
+      const { cgst, sgst } = splitCgstSgst(taxAmount);
+      return {
+        ...r,
+        taxableValue: round2(r.taxableValue),
+        cgstAmount: cgst,
+        sgstAmount: sgst,
+        taxAmount,
+        totalValue: round2(r.totalValue),
+      };
+    })
     .sort((a, b) => a.hsnCode.localeCompare(b.hsnCode) || a.taxRate - b.taxRate);
 }

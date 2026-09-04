@@ -5,6 +5,7 @@ import { localDateWindow } from "@/lib/date-range";
 import { requirePermission } from "@/lib/rbac";
 import { placeOfSupplyFromGstin } from "@/lib/gst-state-codes";
 import { getBranchFilter } from "@/lib/branch-scope";
+import { splitCgstSgst } from "@/lib/billing";
 
 function round2(n: number) {
   return Math.round(n * 100) / 100;
@@ -116,14 +117,21 @@ export async function getGstr1HsnSummary(from: string, to: string): Promise<Gstr
     },
   });
 
-  const groups = new Map<string, Gstr1HsnRow>();
+  // Accumulated as one unrounded taxAmount per group, not as two
+  // independently-tracked CGST/SGST halves: `taxAmount / 2` and
+  // `taxAmount - taxAmount / 2` are the same number, so tracking them
+  // separately just carries the identical figure through twice and rounds
+  // it the same way both times, instead of splitting the final total's odd
+  // paisa the way `splitCgstSgst` does once, at output.
+  const groups = new Map<
+    string,
+    Omit<Gstr1HsnRow, "centralTaxAmount" | "stateTaxAmount"> & { taxAmount: number }
+  >();
   for (const line of lines) {
     const hsnCode = line.item.hsnCode || "—";
     const taxRate = Number(line.taxRate);
     const taxableValue = line.qty * Number(line.rate) - Number(line.discountAmount);
     const taxAmount = (taxableValue * taxRate) / 100;
-    const cgstAmount = taxAmount / 2;
-    const sgstAmount = taxAmount - cgstAmount;
     const key = `${hsnCode}|${taxRate}`;
 
     const existing = groups.get(key);
@@ -131,8 +139,7 @@ export async function getGstr1HsnSummary(from: string, to: string): Promise<Gstr
       existing.totalQuantity += line.qty;
       existing.totalValue += taxableValue + taxAmount;
       existing.taxableValue += taxableValue;
-      existing.centralTaxAmount += cgstAmount;
-      existing.stateTaxAmount += sgstAmount;
+      existing.taxAmount += taxAmount;
     } else {
       groups.set(key, {
         hsnCode,
@@ -142,21 +149,23 @@ export async function getGstr1HsnSummary(from: string, to: string): Promise<Gstr
         totalValue: taxableValue + taxAmount,
         taxableValue,
         integratedTaxAmount: 0,
-        centralTaxAmount: cgstAmount,
-        stateTaxAmount: sgstAmount,
         cessAmount: 0,
+        taxAmount,
       });
     }
   }
 
   return Array.from(groups.values())
-    .map((r) => ({
-      ...r,
-      totalValue: round2(r.totalValue),
-      taxableValue: round2(r.taxableValue),
-      centralTaxAmount: round2(r.centralTaxAmount),
-      stateTaxAmount: round2(r.stateTaxAmount),
-    }))
+    .map(({ taxAmount, ...r }) => {
+      const { cgst, sgst } = splitCgstSgst(round2(taxAmount));
+      return {
+        ...r,
+        totalValue: round2(r.totalValue),
+        taxableValue: round2(r.taxableValue),
+        centralTaxAmount: cgst,
+        stateTaxAmount: sgst,
+      };
+    })
     .sort((a, b) => a.hsnCode.localeCompare(b.hsnCode));
 }
 
@@ -196,25 +205,31 @@ export async function getGstr3bSummary(from: string, to: string): Promise<Gstr3b
         returnedAt: { gte: fromDate, lte: toDate },
       },
     },
-    select: { qty: true, rate: true, taxRate: true },
+    select: { taxRate: true, lineTotal: true },
   });
 
   let taxableTotal = 0;
-  let cgstTotal = 0;
-  let sgstTotal = 0;
+  // One running tax total, split into CGST/SGST once at the end via
+  // splitCgstSgst — accumulating `taxAmount / 2` and `taxAmount -
+  // taxAmount / 2` as two separate running totals carries the same number
+  // through twice (they're algebraically identical) and rounds it the same
+  // way both times, instead of the two halves reconciling to the total.
+  let taxTotal = 0;
   let nilRatedTotal = 0;
 
   for (const line of returnLines) {
     const taxRate = Number(line.taxRate);
-    const taxableValue = line.qty * Number(line.rate);
+    // Derived from the stored, discount-adjusted lineTotal — a return
+    // line's `rate` is the original sale's pre-discount unit rate, so
+    // `qty * rate` overstates a discounted sale's refunded tax/taxable.
+    const lineTotal = Number(line.lineTotal);
     if (taxRate === 0) {
-      nilRatedTotal -= taxableValue;
+      nilRatedTotal -= lineTotal;
       continue;
     }
-    const taxAmount = (taxableValue * taxRate) / 100;
+    const taxableValue = round2(lineTotal / (1 + taxRate / 100));
     taxableTotal -= taxableValue;
-    cgstTotal -= taxAmount / 2;
-    sgstTotal -= taxAmount - taxAmount / 2;
+    taxTotal -= round2(lineTotal - taxableValue);
   }
 
   for (const line of lines) {
@@ -226,17 +241,18 @@ export async function getGstr3bSummary(from: string, to: string): Promise<Gstr3b
     }
     const taxAmount = (taxableValue * taxRate) / 100;
     taxableTotal += taxableValue;
-    cgstTotal += taxAmount / 2;
-    sgstTotal += taxAmount - taxAmount / 2;
+    taxTotal += taxAmount;
   }
+
+  const { cgst, sgst } = splitCgstSgst(round2(taxTotal));
 
   return [
     {
       natureOfSupplies: "(a) Outward taxable supplies (other than zero rated, nil rated and exempted)",
       totalTaxableValue: round2(taxableTotal),
       integratedTax: 0,
-      centralTax: round2(cgstTotal),
-      stateTax: round2(sgstTotal),
+      centralTax: cgst,
+      stateTax: sgst,
       cess: 0,
     },
     {
@@ -301,10 +317,12 @@ export async function getGstr1CreditNotes(
   const session = await requirePermission("compliance.manage");
   const { fromDate, toDate } = dateWindow(from, to);
 
+  const branchFilter = await getBranchFilter(session.user.tenantId, session.user.role);
   const returns = await prisma.salesReturn.findMany({
     where: {
       tenantId: session.user.tenantId,
       returnedAt: { gte: fromDate, lte: toDate },
+      ...branchFilter,
     },
     orderBy: { returnedAt: "asc" },
     include: {
@@ -323,8 +341,12 @@ export async function getGstr1CreditNotes(
     const byRate = new Map<number, { taxable: number; tax: number }>();
     for (const line of note.items) {
       const rate = Number(line.taxRate);
-      const taxable = line.qty * Number(line.rate);
-      const tax = (taxable * rate) / 100;
+      // Derived from the stored, discount-adjusted lineTotal rather than
+      // re-multiplying qty * rate — the latter ignores whatever discount
+      // applied to the original sale line and overstates the note.
+      const lineTotal = Number(line.lineTotal);
+      const taxable = round2(lineTotal / (1 + rate / 100));
+      const tax = round2(lineTotal - taxable);
       const bucket = byRate.get(rate) ?? { taxable: 0, tax: 0 };
       bucket.taxable += taxable;
       bucket.tax += tax;
@@ -332,6 +354,7 @@ export async function getGstr1CreditNotes(
     }
 
     for (const [rate, bucket] of [...byRate.entries()].sort((a, b) => a[0] - b[0])) {
+      const { cgst, sgst } = splitCgstSgst(round2(bucket.tax));
       rows.push({
         noteNumber: note.returnNo,
         noteDate: note.returnedAt.toISOString().slice(0, 10),
@@ -341,8 +364,8 @@ export async function getGstr1CreditNotes(
         placeOfSupply,
         rate,
         taxableValue: round2(bucket.taxable),
-        centralTax: round2(bucket.tax / 2),
-        stateTax: round2(bucket.tax - bucket.tax / 2),
+        centralTax: cgst,
+        stateTax: sgst,
       });
     }
   }
